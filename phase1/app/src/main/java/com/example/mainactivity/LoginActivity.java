@@ -17,7 +17,7 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * A UserManager.
      */
-    private UserManager users;
+    private UserManager usermanager;
 
     /**
      * The current player of the game.
@@ -38,19 +38,20 @@ public class LoginActivity extends AppCompatActivity {
     public void setSignInListener() {
         Button signIn = findViewById(R.id.login);
         signIn.setOnClickListener((v) -> {
-            TextView prompt_text = findViewById(R.id.prompt_text);
-            String userName = ((EditText)findViewById(R.id.username)).getText().toString();
-            String passWord = ((EditText)findViewById(R.id.password)).getText().toString();
+            TextView prompt_text = findViewById(R.id.login_title);
+            EditText username = findViewById(R.id.username);
+            EditText password = findViewById(R.id.password);
+            TextView sucess = findViewById(R.id.registersucess);
 
-            try {
-                activePlayer = users.authenticate(userName, passWord);
+            try{
+                usermanager.authenticate(username.getText().toString(), password.getText().toString());
             }
             catch (AuthenticatorException e){
-                prompt_text.setText("Password is incorrect.");
+                password.setError("Password is incorrect.");
                 return;
             }
             catch (AccountsException e) {
-                prompt_text.setText("Username is not found.");
+                username.setError("Username is not found.");
                 return;
             }
             prompt_text.setText("Sign In Successfully!");

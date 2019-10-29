@@ -9,7 +9,7 @@
     tools:context=".LoginActivity">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/login_title"
         android:layout_width="197dp"
         android:layout_height="61dp"
         android:layout_marginStart="102dp"
