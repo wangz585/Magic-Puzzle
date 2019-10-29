@@ -25,6 +25,10 @@ public class RegisterActivity extends AppCompatActivity {
         usermanager = LoginActivity.userManager;
         setRegisterListener();
     }
+
+
+
+
     /**
      * Activate the Register button.
      */
@@ -43,9 +47,12 @@ public class RegisterActivity extends AppCompatActivity {
                 username.setError("Sorry this username has been registered")
                 return;
             }
-            if (username.getText().length()== 0 || password.getText().length() ==0) {
-                password.setError("Both Fields cannot be empty.");
-                username.setError("Both Fields cannot be empty");
+            if (username.getText().length()== 0 ) {
+
+                username.setError("Please fill in the username");
+            }
+            if (password.getText().length() ==0){
+                password.setError("Please fill in the password.");
             }
 
             sucess.setText("Register Successfully!");
@@ -53,6 +60,5 @@ public class RegisterActivity extends AppCompatActivity {
             startActivity(tmp);
 
         });
-    }
     }
 }
