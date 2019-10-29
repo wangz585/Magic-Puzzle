@@ -59,4 +59,17 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+
+    /**
+     * Activate the signUp button.
+     */
+    public void setRegisterListener(){
+        Button register = findViewById(R.id.register);
+        register.setOnClickListener((v) -> {
+            Intent tmp = new Intent(this, RegisterActivity.class);
+            startActivity(tmp);
+        });
+
+    }
+
 }

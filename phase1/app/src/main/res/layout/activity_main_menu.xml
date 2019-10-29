@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".LoginActivity">
+    tools:context=".MainMenuActivity">
 
 
     <TextView
@@ -55,7 +55,7 @@
         app:srcCompat="@drawable/chess" />
 
     <ImageView
-        android:id="@+id/imageView_word"
+        android:id="@+id/imageView_king"
         android:layout_width="120dp"
         android:layout_height="91dp"
         android:layout_marginStart="147dp"
@@ -107,7 +107,6 @@
         android:layout_marginEnd="144dp"
         android:text="Guess Word"
         android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView_word"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
