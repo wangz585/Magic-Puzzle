@@ -4,8 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.Switch;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 
 public class MainMenuActivity extends AppCompatActivity {
 
@@ -14,21 +20,39 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         logOutListener();
+        Switch sbutton = findViewById(R.id.background);
+        onSwitchClicked(sbutton);
     }
     private GameManager gameManager;
 
+    /**
+     * Activate the buttons for switching the background.
+     */
 
+    public void onSwitchClicked(View v){
+        //Is the switch on?
+        boolean on = ((Switch) v).isChecked();
+        ConstraintLayout layout = findViewById(R.id.mainlayout);
+        if(on)
+        {
+            layout.setBackground(ContextCompat.getDrawable(this, R.drawable.nightmountainbg));
+        }
+        else{
+            layout.setBackground(ContextCompat.getDrawable(this, R.drawable.background));
+        }
+
+        }
     /**
      * Activate the buttons for each game.
      */
     private void addGameButtonListeners() {
-        ImageButton wordguess = findViewById(R.id.wordguess);
+        ImageView wordguess = findViewById(R.id.wordguess);
         wordguess.setOnClickListener(v -> enterGame("guess_word"));
 
-        ImageButton crazymatch = findViewById(R.id.crazymatch);
+        ImageView crazymatch = findViewById(R.id.crazymatch);
         crazymatch.setOnClickListener(v -> enterGame("crazymatch"));
 
-        ImageButton chess = findViewById(R.id.chess);
+        ImageView chess = findViewById(R.id.chess);
         chess.setOnClickListener(v -> enterGame("chess"));
     }
 

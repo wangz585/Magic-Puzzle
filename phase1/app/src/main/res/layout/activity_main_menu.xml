@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/relativeLayout"
+    android:id="@+id/mainlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
@@ -33,30 +33,28 @@
         android:layout_width="119dp"
         android:layout_height="49dp"
         android:layout_marginStart="17dp"
-        android:layout_marginTop="64dp"
         android:layout_marginEnd="117dp"
+        android:layout_marginBottom="112dp"
         android:background="@drawable/buttonshape"
         android:text="Log Out"
         android:textColor="#0055D4"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.835"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/crazymatch" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/crazymatch"
         android:layout_width="120dp"
         android:layout_height="91dp"
         android:layout_marginStart="155dp"
+        android:layout_marginTop="368dp"
         android:layout_marginEnd="155dp"
-        android:layout_marginBottom="238dp"
         android:contentDescription="TODO"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.421"
+        app:layout_constraintHorizontal_bias="0.368"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="1.0"
         app:srcCompat="@drawable/planet" />
 
     <ImageView
@@ -64,11 +62,11 @@
         android:layout_width="120dp"
         android:layout_height="91dp"
         android:layout_marginStart="147dp"
-        android:layout_marginTop="168dp"
+        android:layout_marginTop="244dp"
         android:layout_marginEnd="144dp"
         android:contentDescription="chess"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/chess" />
@@ -78,7 +76,7 @@
         android:layout_width="120dp"
         android:layout_height="91dp"
         android:layout_marginStart="147dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="116dp"
         android:layout_marginEnd="144dp"
         android:contentDescription="word"
         app:layout_constraintEnd_toEndOf="parent"
@@ -133,6 +131,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="0.916" />
+
+    <Switch
+        android:id="@+id/background"
+        android:layout_width="349dp"
+        android:layout_height="49dp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="122dp"
+        android:layout_marginEnd="122dp"
+        android:backgroundTint="#00180101"
+        android:buttonTint="#160202"
+        android:checked="true"
+        android:foregroundTint="#250101"
+        android:showText="false"
+        android:text="Menu Background: Night"
+        android:textColor="#161515"
+        android:textSize="22sp"
+        android:textStyle="bold|italic"
+        android:theme="@style/SCBSwitch"
+        android:thumbTint="#00FAF2F2"
+        android:trackTint="#C01E1E"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.417"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:checked="false"
+        tools:layout_editor_absoluteY="108dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
