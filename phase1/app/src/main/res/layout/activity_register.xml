@@ -10,10 +10,10 @@
 
     <EditText
         android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="96dp"
-        android:layout_marginBottom="400dp"
+        android:layout_width="226dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="88dp"
+        android:layout_marginBottom="396dp"
         android:autofillHints=""
         android:drawableStart="@drawable/ic_action_password"
         android:ems="10"
@@ -27,10 +27,11 @@
 
     <EditText
         android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="96dp"
-        android:drawableStart="@drawable/ic_action_user"
+        android:layout_width="226dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="88dp"
+        android:drawableStart="@drawable/ic_action_name"
+        android:drawableTint="#000000"
         android:ems="10"
         android:hint="          Username"
         android:importantForAutofill="no"
@@ -38,14 +39,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.301"
+        app:layout_constraintVertical_bias="0.336"
         tools:ignore="LabelFor" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="154dp"
         android:layout_height="204dp"
-        android:layout_marginStart="136dp"
+        android:layout_marginStart="128dp"
         android:layout_marginTop="36dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -128,13 +129,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_paul" />
 
+
     <TextView
         android:id="@+id/registersucess"
         android:layout_width="197dp"
         android:layout_height="61dp"
         android:layout_marginStart="102dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="112dp"
+        android:orientation="horizontal"
         android:text="Sign Up"
         android:textAlignment="center"
         android:textAllCaps="true"
@@ -142,12 +145,9 @@
         android:textSize="36sp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="horizontal"
-        />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
     <RadioGroup
         android:id="@+id/radio"
@@ -207,5 +207,16 @@
             android:textSize="18sp" />
 
     </RadioGroup>
+
+    <EditText
+        android:id="@+id/nickname"
+        android:layout_width="227dp"
+        android:layout_height="48dp"
+        android:drawableStart="@drawable/ic_action_nick_name"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="          Nick Name"
+        tools:layout_editor_absoluteX="95dp"
+        tools:layout_editor_absoluteY="166dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
