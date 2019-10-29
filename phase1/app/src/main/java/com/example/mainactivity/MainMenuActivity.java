@@ -3,15 +3,12 @@ package com.example.mainactivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.view.View;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
-import androidx.core.view.ViewCompat;
 
 public class MainMenuActivity extends AppCompatActivity {
 
@@ -22,13 +19,13 @@ public class MainMenuActivity extends AppCompatActivity {
         logOutListener();
         Switch sbutton = findViewById(R.id.background);
         onSwitchClicked(sbutton);
+        addGameButtonListeners();
     }
     private GameManager gameManager;
 
     /**
      * Activate the buttons for switching the background.
      */
-
     public void onSwitchClicked(View v){
         //Is the switch on?
         boolean on = ((Switch) v).isChecked();
