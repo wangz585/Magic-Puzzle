@@ -41,7 +41,6 @@ public class LoginActivity extends AppCompatActivity {
             TextView prompt_text = findViewById(R.id.login_title);
             EditText username = findViewById(R.id.username);
             EditText password = findViewById(R.id.password);
-            TextView sucess = findViewById(R.id.registersucess);
 
             try{
                 usermanager.authenticate(username.getText().toString(), password.getText().toString());

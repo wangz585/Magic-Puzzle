@@ -11,21 +11,40 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="167dp"
-        android:layout_height="46dp"
+        android:layout_width="288dp"
+        android:layout_height="59dp"
         android:layout_marginStart="187dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="166dp"
         android:text="Puzzle Mazing"
-        android:textSize="25sp"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#246DAC"
+        android:textSize="36sp"
+        android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.688"
+        app:layout_constraintHorizontal_bias="0.547"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/logout"
+        style="@android:style/Widget.DeviceDefault.Button.Small"
+        android:layout_width="119dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="117dp"
+        android:background="@drawable/buttonshape"
+        android:text="Log Out"
+        android:textColor="#0055D4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.835"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/crazymatch" />
 
     <ImageView
-        android:id="@+id/imageView_ball"
+        android:id="@+id/crazymatch"
         android:layout_width="120dp"
         android:layout_height="91dp"
         android:layout_marginStart="155dp"
@@ -41,7 +60,7 @@
         app:srcCompat="@drawable/planet" />
 
     <ImageView
-        android:id="@+id/imageView_chess"
+        android:id="@+id/chess"
         android:layout_width="120dp"
         android:layout_height="91dp"
         android:layout_marginStart="147dp"
@@ -55,7 +74,7 @@
         app:srcCompat="@drawable/chess" />
 
     <ImageView
-        android:id="@+id/imageView_king"
+        android:id="@+id/wordguess"
         android:layout_width="120dp"
         android:layout_height="91dp"
         android:layout_marginStart="147dp"
@@ -69,48 +88,51 @@
         app:srcCompat="@drawable/guess" />
 
     <TextView
-        android:id="@+id/chess"
+        android:id="@+id/chess_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
         android:layout_marginTop="231dp"
         android:layout_marginEnd="144dp"
         android:text="Chess"
+        android:textColor="#000407"
         android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView_chess"
+        app:layout_constraintBottom_toTopOf="@+id/chess"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-        android:id="@+id/crazymatch"
+        android:id="@+id/text_crazy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
         android:layout_marginTop="231dp"
         android:layout_marginEnd="144dp"
         android:text="Crazy Match"
+        android:textColor="#F44336"
         android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView_ball"
+        app:layout_constraintBottom_toTopOf="@+id/crazymatch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/word"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="144dp"
-        android:layout_marginTop="231dp"
         android:layout_marginEnd="144dp"
+        android:layout_marginBottom="14dp"
         android:text="Guess Word"
+        android:textColor="#009688"
         android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/wordguess"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
