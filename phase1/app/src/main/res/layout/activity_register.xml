@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/registerlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".RegisterActivity">
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="226dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="372dp"
+        android:autofillHints=""
+        android:drawableStart="@drawable/ic_action_password"
+        android:ems="10"
+        android:hint="          Password"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:ignore="LabelFor" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="226dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginRight="84dp"
+        android:drawableStart="@drawable/ic_action_name"
+        android:drawableTint="#000000"
+        android:ems="10"
+        android:hint="          Username"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.336"
+        tools:ignore="LabelFor" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="144dp"
+        android:layout_height="169dp"
+        android:layout_marginStart="132dp"
+        android:layout_marginLeft="132dp"
+        android:layout_marginTop="104dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/crown" />
+
+    <ImageView
+        android:id="@+id/imageView_king"
+        android:layout_width="120dp"
+        android:layout_height="91dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="296dp"
+        android:layout_marginBottom="1dp"
+        android:contentDescription="@android:string/autofill"
+        app:layout_constraintBottom_toTopOf="@+id/radio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:srcCompat="@drawable/king" />
+
+    <ImageView
+        android:id="@+id/imageView_paul"
+        android:layout_width="130dp"
+        android:layout_height="99dp"
+        android:layout_marginTop="8dp"
+        android:contentDescription="@android:string/autofill"
+        app:layout_constraintBottom_toTopOf="@+id/radio"
+        app:layout_constraintEnd_toStartOf="@+id/imageView_ali"
+        app:layout_constraintStart_toEndOf="@+id/imageView_king"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:srcCompat="@drawable/prince_paul" />
+
+    <ImageView
+        android:id="@+id/imageView_ali"
+        android:layout_width="120dp"
+        android:layout_height="91dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:contentDescription="@android:string/autofill"
+        app:layout_constraintBottom_toTopOf="@+id/imageView_paul"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.786"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/prince_ali" />
+
+    <ImageView
+        android:id="@+id/imageView_knight"
+        android:layout_width="120dp"
+        android:layout_height="91dp"
+        android:layout_marginStart="312dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="9dp"
+        android:contentDescription="@android:string/autofill"
+        app:layout_constraintBottom_toTopOf="@+id/radio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:srcCompat="@drawable/knight" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="465dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginBottom="8dp"
+        android:text="              Please select the target you want to rescue"
+        android:textColor="#222930"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/wordguess"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password"
+        app:layout_constraintVertical_bias="0.358" />
+
+    <Button
+        android:id="@+id/register"
+        style="@android:style/Widget.DeviceDefault.Button.Small"
+        android:layout_width="175dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="17dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginEnd="117dp"
+        android:background="@drawable/buttonshape"
+        android:text="Create Account"
+        android:textColor="#0055D4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_paul" />
+
+
+    <TextView
+        android:id="@+id/registersucess"
+        android:layout_width="197dp"
+        android:layout_height="61dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="112dp"
+        android:orientation="horizontal"
+        android:text="Sign Up"
+        android:textAlignment="center"
+        android:textAllCaps="true"
+        android:textColor="#246DAC"
+        android:textSize="36sp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radio"
+        android:layout_width="413dp"
+        android:layout_height="38dp"
+        android:layout_marginBottom="31dp"
+        app:layout_constraintBottom_toTopOf="@+id/register"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_king"
+        app:layout_constraintVertical_bias="1.0"
+        android:orientation="horizontal"
+        >
+
+        <RadioButton
+            android:id="@+id/kings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="#E9E0E0"
+            android:text="King"
+            android:textColor="#FFFF"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/pauls"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginBottom="36dp"
+            android:buttonTint="#E9E0E0"
+            android:text="Prince Paul"
+            android:textColor="#FFFF"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/alis"
+            android:layout_width="wrap_content"
+            android:layout_height="38dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginBottom="36dp"
+            android:buttonTint="#E9E0E0"
+            android:text="Prince Ali"
+            android:textColor="#FFFF"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/knights"
+            android:layout_width="124dp"
+            android:layout_height="38dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginBottom="36dp"
+            android:layout_weight="1"
+            android:buttonTint="#E9E0E0"
+            android:text="Knight"
+            android:textColor="#FFFF"
+            android:textSize="18sp" />
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/nickname"
+        android:layout_width="227dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="6dp"
+        android:drawableStart="@drawable/ic_action_nick_name"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="          Nick Name"
+        app:layout_constraintBottom_toTopOf="@+id/password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
