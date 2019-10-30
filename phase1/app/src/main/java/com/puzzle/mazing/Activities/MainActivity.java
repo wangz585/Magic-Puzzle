@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.puzzle.mazing.R;
 import com.puzzle.mazing.Network.Http;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 import okhttp3.Call;
@@ -24,7 +27,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         httpTextView = findViewById(R.id.text_view_result);
-        Http.get("https://apis.puzzlemazing.online/test/get", new Callback() {
+
+        JSONObject obj = new JSONObject();
+        try {
+            obj.put("data", "testing-data-here");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        Http.post("https://apis.puzzlemazing.online/test/post", obj, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
@@ -32,13 +42,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                final int myResponseCode = response.code();
+                final String res = response.body().string();
 
                 MainActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        String display = "Status Code is:" + myResponseCode;
-                        httpTextView.setText(display);
+                        httpTextView.setText(res);
                     }
                 });
             }
