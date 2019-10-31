@@ -28,4 +28,8 @@
     <string name="nick_name">Nick Name</string>
     <string name="crown_icon">Crown Icon</string>
     <string name="please_select_the_target_you_want_to_rescue">Please select the target you want to rescue</string>
+    <string name="rule">Rule</string>
+    <string name="newgame">newgame</string>
+    <string name="back">back</string>
+    <string name="loadgame">loadgame</string>
 </resources>
