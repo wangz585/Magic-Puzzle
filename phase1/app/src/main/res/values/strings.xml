@@ -7,4 +7,25 @@
     <string name="login">login</string>
     <string name="register">Register here</string>
     <string name="signin">Button</string>
+    <string name="log_in">Log In</string>
+    <string name="username">Username</string>
+    <string name="princess_photo">Princess Photo</string>
+    <string name="puzzle_mazing">Puzzle Mazing</string>
+    <string name="log_out">Log Out</string>
+    <string name="crazy_match_game_icon">Crazy Match Game Icon</string>
+    <string name="chess_game_icon">Chess Game Icon</string>
+    <string name="chess">Chess</string>
+    <string name="word">word</string>
+    <string name="crazy_match">Crazy Match</string>
+    <string name="guess_word">Guess Word</string>
+    <string name="menu_background_night">Menu Background: Night</string>
+    <string name="knight">Knight</string>
+    <string name="prince_ali">Prince Ali</string>
+    <string name="king">King</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="create_account">Create Account</string>
+    <string name="prince_paul">Prince Paul</string>
+    <string name="nick_name">Nick Name</string>
+    <string name="crown_icon">Crown Icon</string>
+    <string name="please_select_the_target_you_want_to_rescue">Please select the target you want to rescue</string>
 </resources>
