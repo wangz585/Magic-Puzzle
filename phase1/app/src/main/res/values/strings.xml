@@ -32,5 +32,7 @@
     <string name="newgame">newgame</string>
     <string name="back">back</string>
     <string name="loadgame">loadgame</string>
-    <string name="score">Score:</string>>
+    <string name="restart">restart</string>
+    <string name="nextlevel">nextlevel</string>
+    <string name= "score">score</string>
 </resources>
