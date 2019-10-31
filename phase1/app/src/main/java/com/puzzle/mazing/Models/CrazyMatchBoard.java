@@ -1,16 +1,29 @@
 package com.puzzle.mazing.Models;
 
+import android.view.View;
+import android.widget.ImageView;
+
 import com.puzzle.mazing.Models.Animal;
 import com.puzzle.mazing.R;
 
 public class CrazyMatchBoard {
 
     private Animal[] animals;
+    private ImageView[] buttonPos;
 
 
-    public CrazyMatchBoard(){
+    public CrazyMatchBoard(ImageView[] buttonPos){
         setZoo();
+        setButtonPos(buttonPos);
 
+    }
+
+    public void setButtonPos(ImageView[] buttonPos) {
+        this.buttonPos = buttonPos;
+    }
+
+    public ImageView[] getButtonPos() {
+        return buttonPos;
     }
 
     private void setZoo(){
@@ -41,7 +54,7 @@ public class CrazyMatchBoard {
         return animals;
     }
 
-    public int[] getdrawables(){
+    public int[] getDrawables(){
         int [] k = new int[12];
         for(int i = 0; i<animals.length; i++){
             k[i] = animals[i].getDrawable();
@@ -49,4 +62,5 @@ public class CrazyMatchBoard {
         }
         return k;
     }
+
 }

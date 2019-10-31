@@ -23,13 +23,13 @@ import androidx.appcompat.app.AppCompatActivity;
 public class CrazyMatchActivity extends AppCompatActivity {
     TextView score;
 
-    ImageView[] IMGS = new ImageView[12];
+    ImageView[] buttonPos = new ImageView[12];
 
     Integer[] cardArray = {101, 102, 103, 104, 105, 106, 201, 202, 203, 204, 205, 206};
 
     private Animal[] animals;
     private CrazyMatchManager matchManager = new CrazyMatchManager();
-    int[] drawable = matchManager.getBoard().getdrawables();
+    int[] drawable;
 
 
     int firstCard, secondCard;
@@ -48,36 +48,19 @@ public class CrazyMatchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_matching);
         score = findViewById(R.id.score);
 
-        animals = matchManager.getBoard().getAnimals();
+
         setPos();
+        matchManager.restart(buttonPos);
+        animals = matchManager.getBoard().getAnimals();
+        setAnimalPos();
+        drawable = matchManager.getBoard().getDrawables();
         setImageOnClickListener();
         Collections.shuffle(Collections.singletonList(drawable));
 
     }
+    private void setImageOnClickListener() {
 
-    private void setPos() {
-        IMGS[0] = findViewById(R.id.iv_11);
-        IMGS[1] = findViewById(R.id.iv_12);
-        IMGS[2] = findViewById(R.id.iv_13);
-        IMGS[3] = findViewById(R.id.iv_14);
-        IMGS[4] = findViewById(R.id.iv_21);
-        IMGS[5] = findViewById(R.id.iv_22);
-        IMGS[6] = findViewById(R.id.iv_23);
-        IMGS[7] = findViewById(R.id.iv_24);
-        IMGS[8] = findViewById(R.id.iv_31);
-        IMGS[9] = findViewById(R.id.iv_32);
-        IMGS[10] = findViewById(R.id.iv_33);
-        IMGS[11] = findViewById(R.id.iv_34);
-        for (int i =0; i<IMGS.length; i++){
-            animals[i].setView(IMGS[i]);
-            IMGS[i].setTag(i);
-
-        }
-    }
-
-    public void setImageOnClickListener() {
-
-        for (final ImageView card : IMGS) {
+        for (final ImageView card : buttonPos) {
             card.setOnClickListener(v -> {
                 int k = (int)v.getTag();
                 update(card, k);
@@ -88,19 +71,41 @@ public class CrazyMatchActivity extends AppCompatActivity {
 
     }
 
+    private void setPos() {
+        buttonPos[0] = findViewById(R.id.iv_11);
+        buttonPos[1] = findViewById(R.id.iv_12);
+        buttonPos[2] = findViewById(R.id.iv_13);
+        buttonPos[3] = findViewById(R.id.iv_14);
+        buttonPos[4] = findViewById(R.id.iv_21);
+        buttonPos[5] = findViewById(R.id.iv_22);
+        buttonPos[6] = findViewById(R.id.iv_23);
+        buttonPos[7] = findViewById(R.id.iv_24);
+        buttonPos[8] = findViewById(R.id.iv_31);
+        buttonPos[9] = findViewById(R.id.iv_32);
+        buttonPos[10] = findViewById(R.id.iv_33);
+        buttonPos[11] = findViewById(R.id.iv_34);
+
+    }
+    private  void setAnimalPos(){
+        for (int i =0; i<buttonPos.length; i++){
+            animals[i].setView(buttonPos[i]);
+            buttonPos[i].setTag(i);
+
+        }
+    }
+
+
+
 
     private void update(ImageView iv, int card) {
 
+        // flip the image, change the default image into corresponding animal 
         iv.setImageResource(drawable[card]);
-
-
-
 
         if (cardNumber == 1) {
             firstCard = cardArray[card];
             if (firstCard > 200) {
                 firstCard = firstCard - 100;
-
             }
             cardNumber = 2;
             clickedFirst = card;
@@ -116,7 +121,7 @@ public class CrazyMatchActivity extends AppCompatActivity {
             cardNumber = 1;
             clickedSecond = card;
 
-            for (ImageView image : IMGS) {
+            for (ImageView image : buttonPos) {
                 image.setEnabled(false);
             }
             Handler handler = new Handler();
@@ -130,12 +135,12 @@ public class CrazyMatchActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     public void calculate() {
         if (firstCard == secondCard) {
-            for (int i = 0; i < IMGS.length; i++){
+            for (int i = 0; i < buttonPos.length; i++){
                 if (clickedFirst == i) {
-                    IMGS[i].setVisibility(View.INVISIBLE);
+                    buttonPos[i].setVisibility(View.INVISIBLE);
                 }
                 if (clickedSecond == i) {
-                    IMGS[i].setVisibility(View.INVISIBLE);
+                    buttonPos[i].setVisibility(View.INVISIBLE);
                 }
             }
 
@@ -145,33 +150,17 @@ public class CrazyMatchActivity extends AppCompatActivity {
             }
         } else {
 
-            for (ImageView k : IMGS) {
+            for (ImageView k : buttonPos) {
                 k.setImageResource(R.drawable.planet);
             }
         }
-        for (ImageView k : IMGS) {
+        for (ImageView k : buttonPos) {
             k.setEnabled(true);
         }
         checkEnd();
     }
-
-
-    private boolean check_invisible(){
-        return IMGS[0].getVisibility() == View.INVISIBLE &&
-                IMGS[1].getVisibility() == View.INVISIBLE &&
-                IMGS[2].getVisibility() == View.INVISIBLE &&
-                IMGS[3].getVisibility() == View.INVISIBLE &&
-                IMGS[4].getVisibility() == View.INVISIBLE &&
-                IMGS[5].getVisibility() == View.INVISIBLE &&
-                IMGS[6].getVisibility() == View.INVISIBLE &&
-                IMGS[7].getVisibility() == View.INVISIBLE &&
-                IMGS[8].getVisibility() == View.INVISIBLE &&
-                IMGS[9].getVisibility() == View.INVISIBLE &&
-                IMGS[10].getVisibility() == View.INVISIBLE &&
-                IMGS[11].getVisibility() == View.INVISIBLE ;
-    }
-    private void checkEnd() {
-        if (check_invisible()) {
+    public void checkEnd() {
+        if (matchManager.End()) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CrazyMatchActivity.this);
             alertDialogBuilder.setMessage("Game OVER \n Player:" + playerPoints).setCancelable(false)
                     .setPositiveButton("New", (dialog, which) -> {
@@ -183,6 +172,8 @@ public class CrazyMatchActivity extends AppCompatActivity {
             alertDialog.show();
         }
     }
+
+
 }
 
 
