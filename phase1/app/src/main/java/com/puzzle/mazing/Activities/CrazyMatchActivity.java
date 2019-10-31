@@ -1,5 +1,6 @@
 package com.puzzle.mazing.Activities;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -115,20 +116,14 @@ public class CrazyMatchActivity extends AppCompatActivity {
                 image.setEnabled(false);
             }
             Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-
-                    calculate();
-
-                }
-            }, 1000);
+            handler.postDelayed(this::calculate, 1000);
 
         }
 
 
     }
 
+    @SuppressLint("SetTextI18n")
     public void calculate() {
         if (firstCard == secondCard) {
             for (int i = 0; i < IMGS.length; i++){
@@ -158,8 +153,8 @@ public class CrazyMatchActivity extends AppCompatActivity {
 
 
     private boolean check_invisible(){
-        if (IMGS[0].getVisibility() == View.INVISIBLE && IMGS[1].getVisibility() == View.INVISIBLE &&
-                IMGS[1].getVisibility() == View.INVISIBLE &&IMGS[1].getVisibility() == View.INVISIBLE &&
+        return IMGS[0].getVisibility() == View.INVISIBLE &&
+                IMGS[1].getVisibility() == View.INVISIBLE &&
                 IMGS[2].getVisibility() == View.INVISIBLE &&
                 IMGS[3].getVisibility() == View.INVISIBLE &&
                 IMGS[4].getVisibility() == View.INVISIBLE &&
@@ -169,28 +164,17 @@ public class CrazyMatchActivity extends AppCompatActivity {
                 IMGS[8].getVisibility() == View.INVISIBLE &&
                 IMGS[9].getVisibility() == View.INVISIBLE &&
                 IMGS[10].getVisibility() == View.INVISIBLE &&
-                IMGS[11].getVisibility() == View.INVISIBLE ){
-            return true;
-        }
-        return false;
+                IMGS[11].getVisibility() == View.INVISIBLE ;
     }
     private void checkEnd() {
         if (check_invisible()) {
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CrazyMatchActivity.this);
             alertDialogBuilder.setMessage("Game OVER \n Player:" + playerPoints).setCancelable(false)
-                    .setPositiveButton("New", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            Intent intent = new Intent(getApplicationContext(), CrazyMatchActivity.class);
-                            startActivity(intent);
-                            finish();
-                        }
-                    }).setNegativeButton("Exit", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    finish();
-                }
-            });
+                    .setPositiveButton("New", (dialog, which) -> {
+                        Intent intent = new Intent(getApplicationContext(), CrazyMatchActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }).setNegativeButton("Exit", (dialog, which) -> finish());
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
         }
