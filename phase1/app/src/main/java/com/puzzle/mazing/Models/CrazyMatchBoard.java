@@ -3,18 +3,17 @@ package com.puzzle.mazing.Models;
 import com.puzzle.mazing.Models.Animal;
 import com.puzzle.mazing.R;
 
-public class MatchBoard {
+public class CrazyMatchBoard {
 
     private Animal[] animals;
 
 
-    public MatchBoard(){
+    public CrazyMatchBoard(){
         setZoo();
 
     }
 
     private void setZoo(){
-
         Animal chicken1 = new Animal(R.drawable.chicken,0, "chicken");
         Animal chicken2 = new Animal(R.drawable.chicken, 6,"chicken");
         Animal cow1 = new Animal(R.drawable.cow,1,"cow");
@@ -40,5 +39,14 @@ public class MatchBoard {
 
     public Animal[] getAnimals() {
         return animals;
+    }
+
+    public int[] getdrawables(){
+        int [] k = new int[12];
+        for(int i = 0; i<animals.length; i++){
+            k[i] = animals[i].getDrawable();
+
+        }
+        return k;
     }
 }
