@@ -11,7 +11,7 @@ public class RegisterActivity extends AppCompatActivity {
 
   /** A UserManager */
   //    private UserManager usermanager;
-  RadioGroup target = findViewById(R.id.radio);
+  //RadioGroup target = findViewById(R.id.radio);
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {

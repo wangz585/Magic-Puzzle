@@ -21,6 +21,13 @@
     <activity android:name=".Activities.RegisterActivity" >
     </activity>
     <activity android:name=".Activities.MainMenuActivity" >    </activity>
+    <activity android:name=".Activities.CrazyMatchActivity" >
+    <intent-filter>
+      <action android:name="android.intent.action.VIEW" />
+      <category android:name="android.intent.category.LAUNCHER" />
+    </intent-filter>
+    </activity>
+
   </application>
 
 </manifest>
