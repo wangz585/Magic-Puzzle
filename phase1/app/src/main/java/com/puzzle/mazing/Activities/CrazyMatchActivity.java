@@ -73,7 +73,7 @@ public class CrazyMatchActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     int k = (int)v.getTag();
-                    doStuff(card, k);
+                    update(card, k);
 
 
                 }
@@ -84,7 +84,7 @@ public class CrazyMatchActivity extends AppCompatActivity {
     }
 
 
-    private void doStuff(ImageView iv, int card) {
+    private void update(ImageView iv, int card) {
 
         iv.setImageResource(drawable[card]);
 
