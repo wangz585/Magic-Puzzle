@@ -2,11 +2,14 @@ package com.puzzle.mazing.Network;
 
 import org.json.JSONObject;
 
+import java.io.IOException;
+
 import okhttp3.Callback;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class Http {
   private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -18,11 +21,27 @@ public class Http {
    * @param done Callback Object used after request completes
    */
   public static void get(String url, Callback done) {
-    Request request = new Request.Builder()
-            .url(url)
-            .build();
+    Request request = buildGetRequest(url);
 
     client.newCall(request).enqueue(done);
+  }
+
+
+  /**
+   * Perform GET request synchronously
+   * @param url destination URL
+   * @return Response object
+   * @throws IOException when request cannot deliver
+   */
+  public static Response syncGet(String url) throws IOException {
+    Request request = buildGetRequest(url);
+
+    return client.newCall(request).execute();
+  }
+
+
+  private static Request buildGetRequest(String url) {
+    return new Request.Builder().url(url).build();
   }
 
   /**
@@ -33,13 +52,25 @@ public class Http {
    */
   public static void post(String url, JSONObject body, Callback done) {
     String bodyString = body.toString();
-    RequestBody requestBody = RequestBody.create(JSON, bodyString);
+    Request request = buildPostRequest(url, bodyString);
 
-    Request request = new Request.Builder()
+    client.newCall(request).enqueue(done);
+  }
+
+
+  public static Response syncPost(String url, JSONObject body) throws IOException {
+    String bodyString = body.toString();
+    Request request = buildPostRequest(url, bodyString);
+
+    return client.newCall(request).execute();
+  }
+
+
+  private static Request buildPostRequest(String url, String bodyString) {
+    RequestBody requestBody = RequestBody.create(JSON, bodyString);
+    return new Request.Builder()
             .url(url)
             .post(requestBody)
             .build();
-
-    client.newCall(request).enqueue(done);
   }
 }
