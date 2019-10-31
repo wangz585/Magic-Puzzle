@@ -1,4 +1,4 @@
-package com.puzzle.mazing.Games;
+package com.puzzle.mazing.Models;
 
 import java.util.HashMap;
 
