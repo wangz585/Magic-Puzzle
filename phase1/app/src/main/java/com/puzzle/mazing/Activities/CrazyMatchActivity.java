@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.puzzle.mazing.DataAccess.CrazyMatchManager;
+import com.puzzle.mazing.Models.Animal;
+import com.puzzle.mazing.Models.CrazyMatchBoard;
 import com.puzzle.mazing.R;
 
 import java.util.Arrays;
@@ -21,12 +24,13 @@ public class CrazyMatchActivity extends AppCompatActivity {
     TextView score;
 
     ImageView[] IMGS = new ImageView[12];
-    int image_index = 0;
 
     Integer[] cardArray = {101, 102, 103, 104, 105, 106, 201, 202, 203, 204, 205, 206};
-    int[] drawable = {R.drawable.chicken, R.drawable.cow, R.drawable.fox, R.drawable.reindeer,
-            R.drawable.snail, R.drawable.owl,R.drawable.chicken, R.drawable.cow, R.drawable.fox, R.drawable.reindeer,
-            R.drawable.snail, R.drawable.owl};
+
+    private Animal[] animals;
+    private CrazyMatchManager matchManager = new CrazyMatchManager();
+    int[] drawable = matchManager.getBoard().getdrawables();
+
 
     int firstCard, secondCard;
     int clickedFirst, clickedSecond;
@@ -35,20 +39,23 @@ public class CrazyMatchActivity extends AppCompatActivity {
     int turn = 1;
     int playerPoints = 0;
 
-    @Override
 
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_matching);
-
         score = findViewById(R.id.score);
-        setId();
+
+        animals = matchManager.getBoard().getAnimals();
+        setPos();
         setImageOnClickListener();
-        Collections.shuffle(Arrays.asList(drawable));
+        Collections.shuffle(Collections.singletonList(drawable));
 
     }
 
-    private void setId() {
+    private void setPos() {
         IMGS[0] = findViewById(R.id.iv_11);
         IMGS[1] = findViewById(R.id.iv_12);
         IMGS[2] = findViewById(R.id.iv_13);
@@ -62,6 +69,7 @@ public class CrazyMatchActivity extends AppCompatActivity {
         IMGS[10] = findViewById(R.id.iv_33);
         IMGS[11] = findViewById(R.id.iv_34);
         for (int i =0; i<IMGS.length; i++){
+            animals[i].setView(IMGS[i]);
             IMGS[i].setTag(i);
 
         }
@@ -70,17 +78,13 @@ public class CrazyMatchActivity extends AppCompatActivity {
     public void setImageOnClickListener() {
 
         for (final ImageView card : IMGS) {
-            card.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    int k = (int)v.getTag();
-                    update(card, k);
+            card.setOnClickListener(v -> {
+                int k = (int)v.getTag();
+                update(card, k);
 
 
-                }
             });
         }
-        image_index = 0;
 
     }
 
