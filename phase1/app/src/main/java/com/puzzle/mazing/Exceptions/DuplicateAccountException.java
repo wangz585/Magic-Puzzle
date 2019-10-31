@@ -1,12 +1,8 @@
 package com.puzzle.mazing.Exceptions;
 
-
-/**
- * A DuplicateAccountException Class.
- */
+/** A DuplicateAccountException Class. */
 public class DuplicateAccountException extends Exception {
-    public DuplicateAccountException(){
-        super();
-    }
+  public DuplicateAccountException() {
+    super();
+  }
 }
-
