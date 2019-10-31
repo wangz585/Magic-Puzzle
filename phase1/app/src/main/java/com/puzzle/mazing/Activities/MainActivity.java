@@ -5,18 +5,19 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.puzzle.mazing.Network.Http;
+import com.puzzle.mazing.DataAccess.UserManager;
+import com.puzzle.mazing.Exceptions.IncorrectCredentialException;
 import com.puzzle.mazing.R;
 
-import java.io.IOException;
+import org.json.JSONException;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
 
   private TextView httpTextView;
+
+  private UserManager userManager;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -24,27 +25,7 @@ public class MainActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
 
     httpTextView = findViewById(R.id.text_view_result);
-    Http.get(
-        "https://apis.puzzlemazing.online/test/get",
-        new Callback() {
-          @Override
-          public void onFailure(Call call, IOException e) {
-            e.printStackTrace();
-          }
 
-          @Override
-          public void onResponse(Call call, Response response) throws IOException {
-            final int myResponseCode = response.code();
 
-            MainActivity.this.runOnUiThread(
-                new Runnable() {
-                  @Override
-                  public void run() {
-                    String display = "Status Code is:" + myResponseCode;
-                    httpTextView.setText(display);
-                  }
-                });
-          }
-        });
   }
 }
