@@ -1,14 +1,13 @@
-package com.puzzle.mazing;
+package com.puzzle.mazing.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Switch;
-import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
+
+import com.puzzle.mazing.R;
 
 public class MainMenuActivity extends AppCompatActivity {
 

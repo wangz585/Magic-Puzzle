@@ -1,4 +1,4 @@
-package com.puzzle.mazing;
+package com.puzzle.mazing.Exceptions;
 
 
 /**

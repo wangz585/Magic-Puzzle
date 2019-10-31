@@ -1,15 +1,12 @@
-package com.puzzle.mazing;
+package com.puzzle.mazing.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 
-import android.accounts.AccountsException;
-import android.accounts.AuthenticatorException;
 import android.content.Intent;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+
+import com.puzzle.mazing.R;
 
 public class LoginActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.puzzle.mazing;
+package com.puzzle.mazing.Activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -15,6 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.puzzle.mazing.R;
 
 public class RegisterActivity extends AppCompatActivity {
 
