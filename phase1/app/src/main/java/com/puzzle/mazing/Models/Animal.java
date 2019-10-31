@@ -10,7 +10,7 @@ public class Animal {
     /**
      * The appearance of the animal
      */
-    private int appearance;
+    private int drawable;
     /**
      * The visibility of the animal
      */
@@ -21,15 +21,15 @@ public class Animal {
     private String Species;
 
     Animal(int appearance, int Order, String species){
-        this.appearance = appearance;
+        this.drawable = appearance;
         this.order = Order;
         this.Species = species;
-        this.visibility = view.getVisibility() == View.VISIBLE;
+        this.visibility = false;
 
 
     }
 
-    public void setvisibility(boolean visible) {
+    public void setVisibility(boolean visible) {
 
         
         if (visible){
@@ -67,8 +67,8 @@ public class Animal {
         this.view = id;
     }
 
-    public int getAppearance() {
-        return appearance;
+    public int getDrawable() {
+        return drawable;
     }
 
     public ImageView getView() {
