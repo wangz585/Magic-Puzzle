@@ -1,5 +1,7 @@
 package com.puzzle.mazing.DataAccess;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.puzzle.mazing.Exceptions.IncorrectCredentialException;
@@ -10,6 +12,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.Serializable;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -85,9 +88,5 @@ public class UserManager {
 
     public User getActiveUser() {
         return activeUser;
-    }
-
-    public void setActiveUser(User activeUser) {
-        this.activeUser = activeUser;
     }
 }

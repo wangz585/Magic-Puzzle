@@ -1,8 +1,13 @@
 package com.puzzle.mazing.Models;
 
-public class User {
+import android.view.View;
+
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String email;
     private String nickname;
+    private String target;
 
     /**
      * JSON web token authenticating user to the current game session
@@ -50,5 +55,8 @@ public class User {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public void setTarget(View viewById) {
     }
 }
