@@ -82,9 +82,11 @@ public class LoginActivity extends AppCompatActivity {
                     password.setError("Password is incorrect.");
                     return;
                 }
-
-                prompt_text.setText("Sign In Successfully!");
                 Intent tmp = new Intent(this, MainMenuActivity.class);
+                Gson gson = new Gson();
+                String gameManager_json = gson.toJson(userManager);
+                tmp.putExtra("userManager", gameManager_json);
+                prompt_text.setText("Sign In Successfully!");
                 startActivity(tmp);
             });
         }
