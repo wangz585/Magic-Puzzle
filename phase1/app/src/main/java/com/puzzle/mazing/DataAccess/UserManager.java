@@ -38,28 +38,29 @@ public class UserManager {
 
 
     /**
-     * Authenticates user by email and password, updates activeUser if successful
+     * Authenticates user by email and password
      *
      * @param email    email of user
      * @param password unencrypted user password
-     * @throws IOException                  when network request cannot be completed
-     * @throws JSONException                when response cannot be parsed
-     * @throws IncorrectCredentialException when user credentials are incorrect
+     * @param done Callback object after the authentication process completes
      */
-    public void authenticate(String email, String password)
-            throws IOException, JSONException, IncorrectCredentialException {
+    public void authenticate(String email, String password, Callback done) {
         String signInUrl = "https://apis.puzzlemazing.online/sign-in";
         JSONObject body = jsonWithEmailAndPassword(email, password);
-        Response response = Http.syncPost(signInUrl, body);
+        Http.post(signInUrl, body, done);
+    }
 
-        if (!response.isSuccessful()) {
-            throw new IncorrectCredentialException();
-        }
 
-        JSONObject responseObject = Http.parseResponseBody(response);
-        String userToken = Http.getJSONAttribute(responseObject, "token");
-        String nickname = Http.getJSONAttribute(responseObject, "nickname");
-        activeUser = new User(email, nickname, userToken);
+    /**
+     * Register user by email and password
+     * @param email email of user
+     * @param password password of user
+     * @param done Callback object after the register process completes
+     */
+    public void register(String email, String password, Callback done) {
+        String signUpUrl = "https://apis.puzzlemazing.online/sign-up";
+        JSONObject body = jsonWithEmailAndPassword(email, password);
+        Http.post(signUpUrl, body, done);
     }
 
 
@@ -88,5 +89,9 @@ public class UserManager {
 
     public User getActiveUser() {
         return activeUser;
+    }
+
+    public void setActiveUser(User activeUser) {
+        this.activeUser = activeUser;
     }
 }
