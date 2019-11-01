@@ -50,17 +50,33 @@ public class MainMenuActivity extends AppCompatActivity {
        * Activate the buttons for each game.
        */
       private void addGameButtonListeners() {
-//          ImageView wordguess = findViewById(R.id.wordguess);
-//          wordguess.setOnClickListener(v -> enterGame("guess_word", ));
-//
-////          ImageView crazymatch = findViewById(R.id.crazymatch);
-////          crazymatch.setOnClickListener(v -> enterGame("crazymatch"));
-////
-////          ImageView chess = findViewById(R.id.chess);
-////          chess.setOnClickListener(v -> enterGame("chess"));
+          ImageView wordguess = findViewById(R.id.wordguess);
+          wordguess.setOnClickListener(v -> enterGame("guess_word"));
+
+          ImageView crazymatch = findViewById(R.id.crazymatch);
+          crazymatch.setOnClickListener(v -> enterGame("crazymatch"));
+
+          ImageView chess = findViewById(R.id.chess);
+          chess.setOnClickListener(v -> enterGame("chess"));
     }
 
-      /**
+    private void enterGame(String gameID) {
+          if (gameID.equals("guess_word")) {
+              Intent tmp = new Intent(this, LoginActivity.class);
+              startActivity(tmp);
+          }
+          else if (gameID.equals("crazymatch")){
+              Intent tmp = new Intent(this, LoginActivity.class);
+              startActivity(tmp);
+          }
+          else {
+              Intent tmp = new Intent(this, LoginActivity.class);
+              startActivity(tmp);
+          }
+          // In fact, GameId Should be the same as the page name to make it easier to implement.
+    }
+
+    /**
        * Switch to the correponding game.
        * @param gameId a string referring to the type of game.
        */

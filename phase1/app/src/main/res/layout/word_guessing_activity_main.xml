@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.WordGuessingMainActivity">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-3dp"
+        android:layout_marginLeft="-3dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginBottom="0dp"
+        android:contentDescription="@string/backgound"
+        android:scaleType="centerCrop"
+        android:src="@drawable/wordguessingbackground"
+        android:theme="@style/Animation.AppCompat.Tooltip" />
+
+    <TextView
+        android:id="@+id/textViewTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/time_remaining"
+        android:textSize="36sp"
+        app:drawableTint="#00A82626"
+        app:fontFamily="cursive" />
+
+    <TextView
+        android:id="@+id/textViewTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginLeft="30dp"
+        android:layout_toEndOf="@id/textViewTime"
+        android:layout_toRightOf="@id/textViewTime"
+        android:textSize="36sp"
+        android:visibility="visible"
+        app:fontFamily="cursive"
+        tools:text="1:00"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/countdown_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="75dp"
+        android:layout_marginLeft="75dp"
+        android:layout_marginBottom="65dp"
+        android:text="@string/start" />
+
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="109dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="227dp"
+        android:layout_marginLeft="227dp"
+        android:layout_marginEnd="75dp"
+        android:layout_marginRight="75dp"
+        android:layout_marginBottom="65dp"
+        android:text="@string/submit"
+        android:visibility="visible"
+        tools:visibility="visible" />
+
+    <EditText
+        android:id="@+id/missChar3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="189dp"
+        android:layout_marginEnd="80dp"
+        android:layout_marginRight="50dp"
+        android:layout_marginBottom="321dp"
+        android:ems="1"
+        android:importantForAutofill="no"
+        android:inputType="textNoSuggestions"
+        android:maxLength="1"
+        android:textSize="30sp"
+        android:typeface="normal" />
+
+    <EditText
+        android:id="@+id/missChar2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/shownChar3"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="-10dp"
+        android:layout_toStartOf="@+id/shownChar3"
+        android:layout_toLeftOf="@+id/shownChar3"
+        android:ems="1"
+        android:importantForAutofill="no"
+        android:inputType="textNoSuggestions"
+        android:maxLength="1"
+        android:textSize="30sp" />
+
+    <EditText
+        android:id="@+id/missChar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/shownChar2"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="-10dp"
+        android:layout_toStartOf="@+id/shownChar2"
+        android:layout_toLeftOf="@+id/shownChar2"
+        android:ems="1"
+        android:importantForAutofill="no"
+        android:inputType="textNoSuggestions"
+        android:maxLength="1"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/shownChar1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/missChar1"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toStartOf="@+id/missChar1"
+        android:layout_toLeftOf="@+id/missChar1"
+        android:textSize="30sp"
+        android:visibility="visible"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/shownChar2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/missChar2"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toStartOf="@+id/missChar2"
+        android:layout_toLeftOf="@+id/missChar2"
+        android:textSize="30sp"
+        android:visibility="visible"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/shownChar3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/missChar3"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="10dp"
+        android:layout_toStartOf="@+id/missChar3"
+        android:layout_toLeftOf="@+id/missChar3"
+        android:textSize="30sp"
+        android:visibility="visible"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/back_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="115dp"
+        android:layout_marginLeft="115dp"
+        android:layout_marginEnd="134dp"
+        android:layout_marginRight="134dp"
+        android:layout_marginBottom="6dp"
+        android:text="@string/back_to_main_page" />
+
+    <TextView
+        android:id="@+id/Hint"
+        android:layout_width="108dp"
+        android:layout_height="58dp"
+        android:layout_above="@+id/missChar2"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginBottom="-54dp"
+        android:textColor="#3F51B5"
+        android:textSize="32sp"
+        tools:text="Hint" />
+
+
+</RelativeLayout>

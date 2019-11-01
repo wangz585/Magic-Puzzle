@@ -35,4 +35,9 @@
     <string name="restart">restart</string>
     <string name="nextlevel">nextlevel</string>
     <string name= "score">score</string>
+    <string name="time_remaining">time_remaining</string>
+    <string name="backgound">backgound</string>
+    <string name="start">start</string>
+    <string name="back_to_main_page">back_to_main_page</string>
+    <string name="submit">submit</string>
 </resources>
