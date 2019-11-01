@@ -10,8 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.puzzle.mazing.DataAccess.WordGuessingGameManager;
 import com.puzzle.mazing.R;
-import com.puzzle.mazing.Game.WordGuessing.WordGuessingGameManager;
 
 import java.io.IOException;
 
@@ -28,9 +28,7 @@ public class WordGuessingMainActivity extends AppCompatActivity {
     private EditText missingChar3;
     private TextView hintSpot;
     private WordGuessingGameManager myWordGuessingGameManager;
-    private AlertDialog.Builder alertDialogBuilder =
-            new AlertDialog.Builder(WordGuessingMainActivity.this);
-
+    private AlertDialog.Builder alertDialogBuilder;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +49,8 @@ public class WordGuessingMainActivity extends AppCompatActivity {
         missingChar2 = findViewById(R.id.missChar2);
         missingChar3 = findViewById(R.id.missChar3);
         hintSpot = findViewById(R.id.Hint);
+        AlertDialog.Builder alertDialogBuilder =
+                new AlertDialog.Builder(WordGuessingMainActivity.this);
 
         try {
             myWordGuessingGameManager = new WordGuessingGameManager(countdownButton, missingChar1, missingChar2, missingChar3,
