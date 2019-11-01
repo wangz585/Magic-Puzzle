@@ -1,24 +1,16 @@
 package com.puzzle.mazing.DataAccess;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.util.Log;
-
-import com.puzzle.mazing.Exceptions.IncorrectCredentialException;
 import com.puzzle.mazing.Models.User;
 import com.puzzle.mazing.Network.Http;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.io.Serializable;
 
-import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.Response;
 
-public class UserManager {
+public class UserManager implements Serializable {
     private User activeUser;
 
 
@@ -42,7 +34,7 @@ public class UserManager {
      *
      * @param email    email of user
      * @param password unencrypted user password
-     * @param done Callback object after the authentication process completes
+     * @param done     Callback object after the authentication process completes
      */
     public void authenticate(String email, String password, Callback done) {
         String signInUrl = "https://apis.puzzlemazing.online/sign-in";
@@ -53,9 +45,10 @@ public class UserManager {
 
     /**
      * Register user by email and password
-     * @param email email of user
+     *
+     * @param email    email of user
      * @param password password of user
-     * @param done Callback object after the register process completes
+     * @param done     Callback object after the register process completes
      */
     public void register(String email, String password, Callback done) {
         String signUpUrl = "https://apis.puzzlemazing.online/sign-up";

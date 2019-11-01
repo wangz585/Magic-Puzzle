@@ -26,17 +26,16 @@
         tools:ignore="LabelFor" />
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/email"
         android:layout_width="226dp"
         android:layout_height="56dp"
         android:layout_marginEnd="84dp"
-        android:layout_marginRight="84dp"
         android:drawableStart="@drawable/ic_action_name"
         android:drawableTint="#000000"
         android:ems="10"
-        android:hint="@string/username"
+        android:hint="@string/email"
         android:importantForAutofill="no"
-        android:inputType="textPassword"
+        android:inputType="textEmailAddress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -49,7 +48,7 @@
         android:layout_height="169dp"
         android:layout_marginStart="132dp"
         android:layout_marginTop="104dp"
-        android:contentDescription="@string/crown_icon"
+        android:contentDescription="@string/crownIcon"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/crown" />
@@ -100,7 +99,7 @@
         android:id="@+id/imageView_knight"
         android:layout_width="120dp"
         android:layout_height="91dp"
-        android:layout_marginStart="312dp"
+        android:layout_marginStart="310dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="9dp"
         android:contentDescription="@android:string/autofill"
@@ -112,16 +111,17 @@
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="465dp"
-        android:layout_height="64dp"
+        android:layout_width="0dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="21dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/please_select_the_target_you_want_to_rescue"
+        android:layout_marginEnd="10dp"
+        android:text="@string/selectTargetToRescue"
         android:textColor="#222930"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password"
-        app:layout_constraintVertical_bias="0.358" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <Button
         android:id="@+id/register"
@@ -132,7 +132,7 @@
         android:layout_marginTop="68dp"
         android:layout_marginEnd="117dp"
         android:background="@drawable/buttonshape"
-        android:text="@string/create_account"
+        android:text="@string/createAccount"
         android:textColor="#0055D4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.96"
@@ -148,7 +148,7 @@
         android:layout_marginTop="36dp"
         android:layout_marginEnd="112dp"
         android:orientation="horizontal"
-        android:text="@string/sign_up"
+        android:text="@string/signUp"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="#246DAC"
@@ -189,7 +189,7 @@
             android:layout_marginStart="5dp"
             android:layout_marginBottom="36dp"
             android:buttonTint="#E9E0E0"
-            android:text="@string/prince_paul"
+            android:text="@string/princePaul"
             android:textColor="#FFFF"
             android:textSize="18sp" />
 
@@ -200,7 +200,7 @@
             android:layout_marginStart="13dp"
             android:layout_marginBottom="36dp"
             android:buttonTint="#E9E0E0"
-            android:text="@string/prince_ali"
+            android:text="@string/princeAli"
             android:textColor="#FFFF"
             android:textSize="18sp" />
 
@@ -228,12 +228,20 @@
         android:drawableStart="@drawable/ic_action_nick_name"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/nick_name"
+        android:text="@string/nickName"
         app:layout_constraintBottom_toTopOf="@+id/password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView"
         app:layout_constraintVertical_bias="0.0"
         android:autofillHints="" />
+
+    <TextView
+        android:id="@+id/promptText"
+        android:layout_width="wrap_content"
+        android:layout_height="19dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/registersucess" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

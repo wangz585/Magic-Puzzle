@@ -10,20 +10,19 @@
     tools:context=".Activities.LoginActivity">
 
     <TextView
-        android:id="@+id/login_title"
         android:layout_width="197dp"
         android:layout_height="61dp"
         android:layout_marginStart="102dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="112dp"
-        android:text="@string/log_in"
+        android:text="@string/welcome"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="#246DAC"
         android:textSize="36sp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,20 +44,22 @@
         tools:ignore="LabelFor" />
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="96dp"
         android:drawableStart="@drawable/ic_action_nick_name"
         android:ems="10"
-        android:hint="@string/username"
+        android:hint="@string/email"
         android:importantForAutofill="no"
-        android:inputType="textPassword"
+        android:inputType="textEmailAddress"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.47"
-        tools:ignore="LabelFor" />
+        tools:ignore="LabelFor"
+        tools:visibility="visible" />
 
     <Button
         android:id="@+id/login"
@@ -97,11 +98,12 @@
 
     <TextView
         android:id="@+id/prompt_text"
-        android:layout_width="337dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="24dp"
+        android:layout_width="404dp"
+        android:layout_height="56dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="23dp"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="#F4EEEE"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

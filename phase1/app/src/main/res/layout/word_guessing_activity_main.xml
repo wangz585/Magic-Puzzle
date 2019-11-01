@@ -22,7 +22,7 @@
         android:layout_marginEnd="1dp"
         android:layout_marginRight="1dp"
         android:layout_marginBottom="0dp"
-        android:contentDescription="@string/backgound"
+        android:contentDescription="@string/background"
         android:scaleType="centerCrop"
         android:src="@drawable/wordguessingbackground"
         android:theme="@style/Animation.AppCompat.Tooltip" />
@@ -31,7 +31,7 @@
         android:id="@+id/textViewTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/time_remaining"
+        android:text="@string/timeRemaining"
         android:textSize="36sp"
         app:drawableTint="#00A82626"
         app:fontFamily="cursive" />
@@ -189,7 +189,7 @@
         android:layout_marginEnd="134dp"
         android:layout_marginRight="134dp"
         android:layout_marginBottom="6dp"
-        android:text="@string/back_to_main_page" />
+        android:text="@string/backToMainPage" />
 
     <TextView
         android:id="@+id/Hint"
