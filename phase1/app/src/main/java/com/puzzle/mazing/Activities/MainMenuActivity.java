@@ -62,15 +62,15 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private void enterGame(String gameID) {
           if (gameID.equals("guess_word")) {
-              Intent tmp = new Intent(this, LoginActivity.class);
+              Intent tmp = new Intent(this, WordGuessingMainActivity.class);
               startActivity(tmp);
           }
           else if (gameID.equals("crazymatch")){
-              Intent tmp = new Intent(this, LoginActivity.class);
+              Intent tmp = new Intent(this, CrazyMatchActivity.class);
               startActivity(tmp);
           }
           else {
-              Intent tmp = new Intent(this, LoginActivity.class);
+              Intent tmp = new Intent(this, CrazyMatchActivity.class);
               startActivity(tmp);
           }
           // In fact, GameId Should be the same as the page name to make it easier to implement.
