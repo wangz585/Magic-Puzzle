@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.puzzle.mazing.R;
-import com.puzzle.mazing.Game.WordGuessing.WordGuessingGameManager;
+//import com.puzzle.mazing.Game.WordGuessing.WordGuessingGameManager;
 
 import java.io.IOException;
 
@@ -27,7 +27,7 @@ public class WordGuessingMainActivity extends AppCompatActivity {
     private EditText missingChar2;
     private EditText missingChar3;
     private TextView hintSpot;
-    private WordGuessingGameManager myWordGuessingGameManager;
+    //private WordGuessingGameManager myWordGuessingGameManager;
     private AlertDialog.Builder alertDialogBuilder =
             new AlertDialog.Builder(WordGuessingMainActivity.this);
 
@@ -52,19 +52,19 @@ public class WordGuessingMainActivity extends AppCompatActivity {
         missingChar3 = findViewById(R.id.missChar3);
         hintSpot = findViewById(R.id.Hint);
 
-        try {
+/*        try {
             myWordGuessingGameManager = new WordGuessingGameManager(countdownButton, missingChar1, missingChar2, missingChar3,
                     givenchar1, givenchar2, givenchar3, hintSpot, countdownText, alertDialogBuilder,
                     getApplicationContext());
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
         // Set up a listener for the GameTimer / a trigger to start this level of game
         countdownButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myWordGuessingGameManager.startGame();
+                //myWordGuessingGameManager.startGame();
             }
         });
 
@@ -80,7 +80,7 @@ public class WordGuessingMainActivity extends AppCompatActivity {
         sumbitAnswer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myWordGuessingGameManager.submitAnswer();
+                //myWordGuessingGameManager.submitAnswer();
             }
         });
     }
