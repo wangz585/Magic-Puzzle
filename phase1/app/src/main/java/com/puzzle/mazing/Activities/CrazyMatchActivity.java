@@ -20,7 +20,7 @@ import java.util.Collections;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class CrazyMatchActivity extends AppCompatActivity {
+public class  CrazyMatchActivity extends AppCompatActivity {
     TextView score;
 
     ImageView[] buttonPos = new ImageView[12];

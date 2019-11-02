@@ -45,4 +45,10 @@
     <string name="signUpFail">Did not sign up successfully!</string>
     <string name="invalidInput">The input is invalid!</string>
     <string name="wrongPassword">The password is wrong!</string>
+    <string name="str_movebox_game">BusyWorker</string>
+    <string name="str_start_game">START</string>
+    <string name="str_exit_game">EXIT</string>
+    <string name="select_level">LEVEL</string>
+    <string name="what_you_select">WHAT_YOU_SELECT：</string>
+    <string name="txt_game_over">CONGRATS</string>
 </resources>
