@@ -17,7 +17,7 @@ public class BusyWorkerGameLevelActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_level);
+        setContentView(R.layout.busyworker_activity_game_level);
         GridView gv_levels = findViewById(R.id.gv_levels);
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,
                 R.layout.gv_levels_item_textview, BusyWorkerGameLevels.getLevelList());

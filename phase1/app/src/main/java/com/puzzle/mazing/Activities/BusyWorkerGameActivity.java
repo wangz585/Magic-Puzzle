@@ -3,7 +3,8 @@ package com.puzzle.mazing.Activities;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
-;import com.puzzle.mazing.DataAccess.GameState;
+;import com.puzzle.mazing.DataAccess.BusyWorkerGameView;
+import com.puzzle.mazing.DataAccess.GameState;
 import com.puzzle.mazing.Models.BusyWorkerGameLevels;
 
 

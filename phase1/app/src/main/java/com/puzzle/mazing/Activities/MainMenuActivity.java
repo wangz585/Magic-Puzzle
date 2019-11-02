@@ -70,7 +70,7 @@ public class MainMenuActivity extends AppCompatActivity {
               startActivity(tmp);
           }
           else {
-              Intent tmp = new Intent(this, CrazyMatchActivity.class);
+              Intent tmp = new Intent(this, BusyWorkerGameActivity.class);
               startActivity(tmp);
           }
           // In fact, GameId Should be the same as the page name to make it easier to implement.
