@@ -43,6 +43,19 @@ public class LoginActivity extends AppCompatActivity {
         txtPassword = findViewById(R.id.password);
         setSignInListener();
         setRegisterListener();
+        clearTexts();
+
+    }
+
+    @Override
+    public void onUserInteraction() {
+        promptText.setText("");
+    }
+
+    private void clearTexts() {
+        promptText.setText("");
+        txtEmail.setText("");
+        txtPassword.setText("");
     }
 
     private boolean isValidInput() {

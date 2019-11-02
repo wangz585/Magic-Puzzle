@@ -45,12 +45,25 @@ public class RegisterActivity extends AppCompatActivity {
         promptText = findViewById(R.id.promptText);
         btnSignUp = findViewById(R.id.register);
         setRegisterListener();
+        clearTexts();
+    }
+
+    private void clearTexts() {
+        promptText.setText("");
+        txtNickName.setText(R.string.nickName);
+        txtEmail.setText("");
+        txtPassword.setText("");
     }
 
     boolean isValidInput() {
         return (txtEmail.getText().toString().contains("@") &&
                 txtPassword.getText().toString().length() > 0 &&
                 txtNickName.getText().toString().length() > 0);
+    }
+
+    @Override
+    public void onUserInteraction(){
+        promptText.setText("");
     }
 
     /**
