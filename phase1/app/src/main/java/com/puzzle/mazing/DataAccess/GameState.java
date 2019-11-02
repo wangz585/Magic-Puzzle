@@ -1,6 +1,6 @@
 package com.puzzle.mazing.DataAccess;
 
-import static com.example.flyingbirds.BusyWorkerGameView.CELL_NUM_PER_LINE;
+import static com.puzzle.mazing.DataAccess.BusyWorkerGameView.CELL_NUM_PER_LINE;
 
 /**
 
