@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <color name="colorPrimary">#008577</color>
-  <color name="colorPrimaryDark">#00574B</color>
+  <!--  Theme Color-->
+  <color name="colorPrimary">#3498DB</color>
+  <color name="colorPrimaryDark">#2980B9</color>
   <color name="colorAccent">#D81B60</color>
+
+  <!--  Color Palette-->
+  <color name="clouds">#ECF0F1</color>
+  <color name="silver">#BDC3C7</color>
+  <color name="concrete">#95A5A6</color>
+  <color name="asbestos">#7F8C8D</color>
+  <color name="turquoise">#1ABC9C</color>
+  <color name="greenSea">#16A085</color>
+  <color name="emerald">#2ECC71</color>
+  <color name="nephritis">#27AE60</color>
+  <color name="sunFlower">#F1C40F</color>
+  <color name="orange">#F39C12</color>
+  <color name="carrot">#E67E22</color>
+  <color name="pumpkin">#D35400</color>
+  <color name="red">#E74C3C</color>
+  <color name="pomegranate">#C0392B</color>
+  <color name="amethyst">#9B59B6</color>
+  <color name="wisteria">#8E44AD</color>
+  <color name="wetAsphalt">#34495E</color>
+  <color name="midnightBlue">#2C3E50</color>
 </resources>
