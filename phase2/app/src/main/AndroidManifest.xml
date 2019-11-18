@@ -9,7 +9,10 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
-    <activity android:name=".views.welcome.WelcomeActivity"
+    <activity android:name=".views.welcome.AppInitializeActivity"
+      android:screenOrientation="sensorLandscape"></activity>
+    <activity
+      android:name=".views.welcome.WelcomeActivity"
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

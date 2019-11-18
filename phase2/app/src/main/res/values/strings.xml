@@ -1,3 +1,5 @@
 <resources>
   <string name="app_name">Puzzle Mazing</string>
+
+  <string name="image_description_loading">Loading</string>
 </resources>

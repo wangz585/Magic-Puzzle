@@ -1,7 +1,10 @@
 package com.group0536.puzzlemazing.views.welcome;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.AnimationDrawable;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Window;
@@ -12,6 +15,7 @@ import android.widget.VideoView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.group0536.puzzlemazing.R;
+import com.group0536.puzzlemazing.actions.welcome.AppInitializeActions;
 import com.group0536.puzzlemazing.utils.ActivityUtil;
 
 /**
@@ -58,6 +62,13 @@ public class WelcomeActivity extends AppCompatActivity {
                 R.raw.welcome;
         Uri videoUri = Uri.parse(videoPath);
         vvBackground.setVideoURI(videoUri);
+        vvBackground.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mediaPlayer) {
+                Intent intent = new Intent(WelcomeActivity.this, AppInitializeActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void releaseWelcomeVideo() {
