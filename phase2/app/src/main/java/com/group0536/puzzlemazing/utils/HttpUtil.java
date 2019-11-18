@@ -12,9 +12,13 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class HttpUtil {
+public final class HttpUtil {
     private static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     private static OkHttpClient client = new OkHttpClient();
+
+    private HttpUtil() {
+        throw new UnsupportedOperationException();
+    }
 
     /**
      * Perform GET request
@@ -129,35 +133,5 @@ public class HttpUtil {
                 .build();
     }
 
-
-    /**
-     * Parse response body to JSON object
-     * @param response Response object from network request
-     * @return JSONObject corresponding to the body of Response
-     * @throws IOException if response cannot be processed
-     * @throws JSONException if the body of response cannot be turned to JSON object
-     */
-    public static JSONObject parseResponseBody(Response response) throws IOException,
-            JSONException {
-        String bodyString = response.body().string();
-        return new JSONObject(bodyString);
-    }
-
-
-    /**
-     * get JSON attribute and return its value
-     * @param obj JSON object to be parsed
-     * @param key the attribute to find
-     * @return the value of attribute if it exists, empty string if otherwise.
-     */
-    public static String getJSONAttribute(JSONObject obj, String key) {
-        String result;
-        try {
-            result = obj.getString(key);
-        } catch(JSONException e) {
-            return "";
-        }
-        return result;
-    }
 }
 
