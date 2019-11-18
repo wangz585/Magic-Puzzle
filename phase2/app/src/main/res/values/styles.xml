@@ -2,10 +2,20 @@
 
   <!-- Base application theme. -->
   <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-    <!-- Customize your theme here. -->
+    <!-- Color themes -->
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+
+    <!-- Use full-screen mode -->
+    <item name="android:windowFullscreen">true</item>
+
+    <!-- Window content transition -->
+    <item name="android:windowActivityTransitions">true</item>
+
+    <!-- Transition values for enter and exit -->
+    <item name="android:windowEnterTransition">@android:transition/fade</item>
+    <item name="android:windowExitTransition">@android:transition/fade</item>
   </style>
 
 </resources>
