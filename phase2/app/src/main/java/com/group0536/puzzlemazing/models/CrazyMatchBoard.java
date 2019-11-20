@@ -9,7 +9,7 @@ public class CrazyMatchBoard {
      *
      * @param animals a map stores all animals in the map
      */
-    public CrazyMatchBoard(List<List<Animal>> animals){
+    public CrazyMatchBoard(Animal[][] animals){
         animals = animals;
     }
 

@@ -13,7 +13,9 @@ import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -96,12 +98,56 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
                         }
                     }, 1000);
                 }
-                else{
-                    // do nothing
-                }
+                // do nothing since the user just flip one animal in the board
+                postChange();
+                break;
             case SET_BOARD:
                 // set board
+                setBoard((String)action.getPayloadEntry("level"));
+                postChange();
+                break;
         }
+    }
+
+    private void setBoard(String level) {
+        if(level.equals("LEVEL 1")) {
+            // for level 1, ask the player to match 3 pairs of animal
+            List<Integer> randomAnimals = randomAnimalsGenerator(3);
+            Animal[][] animalsInMatchBoard = new Animal[2][3];
+            for (int i = 0; i < animalsInMatchBoard.length; i++) {
+                Animal[] currentRowOfAnimals = new Animal[3];
+                Collections.shuffle(randomAnimals);
+                for (int j = 0; j < currentRowOfAnimals.length; j++) {
+                    animalsInMatchBoard[i][j] = new Animal(randomAnimals.get(j), i, j);
+                }
+                animalsInMatchBoard[i] = currentRowOfAnimals;
+            }
+            board = new CrazyMatchBoard(animalsInMatchBoard);
+        }
+        else{
+            // for level 2, ask the player to match 6 pairs of animal
+            List<Integer> randomAnimals = randomAnimalsGenerator(6);
+            Animal[][] animalsInMatchBoard = new Animal[3][4];
+            for(int i = 0; i < animalsInMatchBoard.length; i++){
+                Animal[] currentRowOfAnimals = new Animal[4];
+                Collections.shuffle(randomAnimals);
+                for(int j = 0; j < currentRowOfAnimals.length; j++){
+                    animalsInMatchBoard[i][j] = new Animal(randomAnimals.get(j), i, j);
+                }
+                animalsInMatchBoard[i] = currentRowOfAnimals;
+            }
+            board = new CrazyMatchBoard(animalsInMatchBoard);
+        }
+    }
+
+    private List<Integer> randomAnimalsGenerator(int num){
+        Random rand = new Random();
+        List<Integer> randomAnimals = new ArrayList<>();
+        for (int i = 0; i < num; i++) {
+            int randomIndex = rand.nextInt(allAnimals.size());
+            randomAnimals.add(allAnimals.get(randomIndex));
+        }
+        return randomAnimals;
     }
 
     private void clearFlipPair() {
