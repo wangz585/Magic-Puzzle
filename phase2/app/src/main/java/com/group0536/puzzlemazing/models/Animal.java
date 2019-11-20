@@ -1,5 +1,7 @@
 package com.group0536.puzzlemazing.models;
 
+import androidx.annotation.Nullable;
+
 /**
  * An animal in the map
  */
@@ -45,5 +47,24 @@ public class Animal {
     public int[] getPosition(){
         int[] position = new int[] {row, col};
         return position;
+    }
+
+    /**
+     *
+     * @return animalSide
+     */
+    public int getAnimalSide(){
+        return animalSide;
+    }
+
+    /**
+     *
+     * @param obj
+     * @return true iff two animals are the same animal
+     */
+    @Override
+    public boolean equals(@Nullable Object obj) {
+        Animal another_animal = (Animal) obj;
+        return (another_animal.getAnimalSide() == getAnimalSide());
     }
 }
