@@ -35,4 +35,16 @@ public class CrazyMatchBoard {
 
         animals.get(row).set(col, animal);
     }
+
+    /**
+     *
+     * @param animal An animal which is matched and should disappear from the screen
+     */
+    public void crossOutAnimal(Animal animal){
+        int [] position = animal.getPosition();
+        int row = position[0];
+        int col = position[1];
+
+        animals.get(row).set(col, null);
+    }
 }
