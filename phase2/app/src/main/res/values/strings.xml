@@ -2,4 +2,5 @@
   <string name="app_name">Puzzle Mazing</string>
 
   <string name="image_description_loading">Loading</string>
+  <string name="crazy_match_game_ball">Game Ball</string>
 </resources>
