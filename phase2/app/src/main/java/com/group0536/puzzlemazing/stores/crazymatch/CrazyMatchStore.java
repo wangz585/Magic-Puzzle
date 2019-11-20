@@ -1,5 +1,6 @@
 package com.group0536.puzzlemazing.stores.crazymatch;
 
+import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 import com.group0536.puzzlemazing.models.Animal;
@@ -10,6 +11,9 @@ import com.group0536.puzzlemazing.actions.crazymatch.CrazyMatchActions;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
 import com.squareup.otto.Subscribe;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -22,7 +26,26 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
     private int pairsLeft;
     private int stepsTaken;
     private boolean isGameOver;
+    private static List<Integer> allAnimals;
 
+    private static void populateAllAnimals(){
+        allAnimals = new ArrayList<>(Arrays.asList(R.drawable.butterfly,
+                R.drawable.chicken,
+                R.drawable.cow,
+                R.drawable.dog,
+                R.drawable.lizard,
+                R.drawable.fish,
+                R.drawable.fox,
+                R.drawable.frog,
+                R.drawable.ladybug,
+                R.drawable.lion,
+                R.drawable.octopus,
+                R.drawable.owl,
+                R.drawable.reindeer,
+                R.drawable.robin,
+                R.drawable.snail,
+                R.drawable.turkey));
+    }
     protected CrazyMatchStore(Dispatcher dispatcher) {
         super(dispatcher);
         board = null;
