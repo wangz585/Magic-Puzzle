@@ -1,6 +1,8 @@
 <resources>
-  <string name="app_name">Puzzle Mazing</string>
+    <string name="app_name">Puzzle Mazing</string>
 
-  <string name="image_description_loading">Loading</string>
-  <string name="crazy_match_game_ball">Game Ball</string>
+    <string name="image_description_loading">Loading</string>
+    <string name="crazy_match_game_ball">Game Ball</string>
+    <string name="level_one">Level 1</string>
+    <string name="level_two">Level 2</string>
 </resources>
