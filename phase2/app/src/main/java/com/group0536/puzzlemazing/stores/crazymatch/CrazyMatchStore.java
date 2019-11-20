@@ -87,10 +87,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
     }
 
     private void cancelAnimal(Animal crossedOutAnimal) {
-        int[] position = firstFlip.getPosition();
-        int row = position[0];
-        int col = position[1];
-        // set the position of the crossedOutAnimal to be NULL
+        board.crossOutAnimal(crossedOutAnimal);
     }
 
     private void updateScore() {
