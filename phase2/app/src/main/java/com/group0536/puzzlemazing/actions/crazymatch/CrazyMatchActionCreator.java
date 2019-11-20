@@ -4,8 +4,8 @@ import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.ActionCreator;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 
-public class CrazyMatchActionsCreator extends ActionCreator implements CrazyMatchActions {
-    public CrazyMatchActionsCreator(Dispatcher dispatcher) {
+public class CrazyMatchActionCreator extends ActionCreator implements CrazyMatchActions {
+    public CrazyMatchActionCreator(Dispatcher dispatcher) {
         super(dispatcher);
     }
 

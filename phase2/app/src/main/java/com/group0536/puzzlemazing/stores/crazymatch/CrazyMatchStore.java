@@ -2,12 +2,12 @@ package com.group0536.puzzlemazing.stores.crazymatch;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.Action;
+import com.group0536.puzzlemazing.actions.crazymatch.CrazyMatchActions;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 import com.group0536.puzzlemazing.models.Animal;
 import com.group0536.puzzlemazing.models.CrazyMatchBoard;
 import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.stores.Store;
-import com.group0536.puzzlemazing.actions.crazymatch.CrazyMatchActions;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
 import com.squareup.otto.Subscribe;
 
@@ -29,8 +29,9 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
     private int stepsTaken;
     private boolean isGameOver;
     private static List<Integer> allAnimals;
+    private static CrazyMatchStore instance;
 
-    private static void populateAllAnimals(){
+    private static void populateAllAnimals() {
         allAnimals = new ArrayList<>(Arrays.asList(R.drawable.butterfly,
                 R.drawable.chicken,
                 R.drawable.cow,
@@ -48,6 +49,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
                 R.drawable.snail,
                 R.drawable.turkey));
     }
+
     protected CrazyMatchStore(Dispatcher dispatcher) {
         super(dispatcher);
         board = null;
@@ -65,6 +67,13 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         return board;
     }
 
+    public static CrazyMatchStore getInstance(Dispatcher dispatcher) {
+        if (instance == null) {
+            instance = new CrazyMatchStore(dispatcher);
+        }
+        return instance;
+    }
+
     @Override
     protected StoreChangeEvent getChangeEvent() {
         return new CrazyMatchChangeEvent();
@@ -79,22 +88,21 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
                 int col = (int) action.getPayloadEntry("col");
                 flipAnimal(row, col);
                 postChange();
-                if((firstFlip != null) && (secondFlip != null)){
+                if ((firstFlip != null) && (secondFlip != null)) {
                     Timer timer_CheckPairs = new Timer();
-                    timer_CheckPairs.schedule(new TimerTask(){
+                    timer_CheckPairs.schedule(new TimerTask() {
                         @Override
-                        public void run(){
-                        if(isTheSame(firstFlip, secondFlip)){
-                            updateScore();
-                            cancelAnimal(firstFlip);
-                            cancelAnimal(secondFlip);
-                            clearFlipPair();
-                            pairsLeft--;
-                        }
-                        else{
-                            // two flips are not the same
-                            clearFlipPair();
-                        }
+                        public void run() {
+                            if (isTheSame(firstFlip, secondFlip)) {
+                                updateScore();
+                                cancelAnimal(firstFlip);
+                                cancelAnimal(secondFlip);
+                                clearFlipPair();
+                                pairsLeft--;
+                            } else {
+                                // two flips are not the same
+                                clearFlipPair();
+                            }
                         }
                     }, 1000);
                 }
@@ -103,14 +111,14 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
                 break;
             case SET_BOARD:
                 // set board
-                setBoard((String)action.getPayloadEntry("level"));
+                setBoard((String) action.getPayloadEntry("level"));
                 postChange();
                 break;
         }
     }
 
     private void setBoard(String level) {
-        if(level.equals("LEVEL 1")) {
+        if (level.equals("LEVEL 1")) {
             // for level 1, ask the player to match 3 pairs of animal
             List<Integer> randomAnimals = randomAnimalsGenerator(3);
             Animal[][] animalsInMatchBoard = new Animal[2][3];
@@ -123,15 +131,14 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
                 animalsInMatchBoard[i] = currentRowOfAnimals;
             }
             board = new CrazyMatchBoard(animalsInMatchBoard);
-        }
-        else{
+        } else {
             // for level 2, ask the player to match 6 pairs of animal
             List<Integer> randomAnimals = randomAnimalsGenerator(6);
             Animal[][] animalsInMatchBoard = new Animal[3][4];
-            for(int i = 0; i < animalsInMatchBoard.length; i++){
+            for (int i = 0; i < animalsInMatchBoard.length; i++) {
                 Animal[] currentRowOfAnimals = new Animal[4];
                 Collections.shuffle(randomAnimals);
-                for(int j = 0; j < currentRowOfAnimals.length; j++){
+                for (int j = 0; j < currentRowOfAnimals.length; j++) {
                     animalsInMatchBoard[i][j] = new Animal(randomAnimals.get(j), i, j);
                 }
                 animalsInMatchBoard[i] = currentRowOfAnimals;
@@ -140,7 +147,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         }
     }
 
-    private List<Integer> randomAnimalsGenerator(int num){
+    private List<Integer> randomAnimalsGenerator(int num) {
         Random rand = new Random();
         List<Integer> randomAnimals = new ArrayList<>();
         for (int i = 0; i < num; i++) {

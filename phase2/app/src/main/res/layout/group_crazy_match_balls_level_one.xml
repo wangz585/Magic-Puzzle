@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
     android:layout_gravity="center"
+    android:orientation="vertical"
     android:weightSum="2">
 
     <LinearLayout
@@ -14,7 +14,7 @@
         android:weightSum="3">
 
         <ImageButton
-            android:id="@+id/btn_ball_11"
+            android:id="@+id/btn_ball_00"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -24,7 +24,7 @@
             android:src="@drawable/crazy_match_yellow_ball" />
 
         <ImageButton
-            android:id="@+id/btn_ball_12"
+            android:id="@+id/btn_ball_01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -34,7 +34,7 @@
             android:src="@drawable/crazy_match_yellow_ball" />
 
         <ImageButton
-            android:id="@+id/btn_ball_13"
+            android:id="@+id/btn_ball_02"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -53,7 +53,7 @@
         android:weightSum="3">
 
         <ImageButton
-            android:id="@+id/btn_ball_21"
+            android:id="@+id/btn_ball_10"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -63,7 +63,7 @@
             android:src="@drawable/crazy_match_yellow_ball" />
 
         <ImageButton
-            android:id="@+id/btn_ball_22"
+            android:id="@+id/btn_ball_11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -73,7 +73,7 @@
             android:src="@drawable/crazy_match_yellow_ball" />
 
         <ImageButton
-            android:id="@+id/btn_ball_23"
+            android:id="@+id/btn_ball_12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
