@@ -9,7 +9,7 @@ public class CrazyMatchBoard {
      *
      * @param animals a map stores all animals in the map
      */
-    public CrazyMatchBoard(List<List<Animal>> animals){
+    public CrazyMatchBoard(Animal[][] animals){
         animals = animals;
     }
 
@@ -34,5 +34,17 @@ public class CrazyMatchBoard {
         int col = position[1];
 
         animals.get(row).set(col, animal);
+    }
+
+    /**
+     *
+     * @param animal An animal which is matched and should disappear from the screen
+     */
+    public void crossOutAnimal(Animal animal){
+        int [] position = animal.getPosition();
+        int row = position[0];
+        int col = position[1];
+
+        animals.get(row).set(col, null);
     }
 }
