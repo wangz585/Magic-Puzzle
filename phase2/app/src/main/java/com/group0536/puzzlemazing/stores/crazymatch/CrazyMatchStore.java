@@ -1,5 +1,7 @@
 package com.group0536.puzzlemazing.stores.crazymatch;
 
+import android.util.SparseArray;
+
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.crazymatch.CrazyMatchActions;
@@ -29,7 +31,38 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
     private int stepsTaken;
     private boolean isGameOver;
     private static List<Integer> allAnimals;
+    private SparseArray<List<Integer>> levelToDimension;
     private static CrazyMatchStore instance;
+
+    protected CrazyMatchStore(Dispatcher dispatcher) {
+        super(dispatcher);
+        populateAllAnimals();
+        board = null;
+        score = 0;
+        firstFlip = null;
+        secondFlip = null;
+        // TODO: pass in a player
+//        player = player;
+        pairsLeft = 0;
+        stepsTaken = 0;
+        isGameOver = false;
+        setLevelToDimension();
+
+
+    }
+
+    private void setLevelToDimension() {
+        List<Integer> dim1 = new ArrayList<>();
+        dim1.add(2);
+        dim1.add(3);
+        levelToDimension = new SparseArray<>();
+        levelToDimension.put(1, dim1);
+
+        List<Integer> dim2 = new ArrayList<>();
+        dim2.add(2);
+        dim2.add(4);
+        levelToDimension.put(2, dim2);
+    }
 
     private static void populateAllAnimals() {
         allAnimals = new ArrayList<>(Arrays.asList(R.drawable.butterfly,
@@ -50,18 +83,6 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
                 R.drawable.turkey));
     }
 
-    protected CrazyMatchStore(Dispatcher dispatcher) {
-        super(dispatcher);
-        board = null;
-        score = 0;
-        firstFlip = null;
-        secondFlip = null;
-        // TODO: pass in a player
-//        player = player;
-        pairsLeft = 0;
-        stepsTaken = 0;
-        isGameOver = false;
-    }
 
     public CrazyMatchBoard getBoard() {
         return board;
@@ -111,40 +132,28 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
                 break;
             case SET_BOARD:
                 // set board
-                setBoard((String) action.getPayloadEntry("level"));
-                postChange();
+                setBoard((int) action.getPayloadEntry("level"));
+                //postChange();
                 break;
         }
     }
 
-    private void setBoard(String level) {
-        if (level.equals("LEVEL 1")) {
-            // for level 1, ask the player to match 3 pairs of animal
-            List<Integer> randomAnimals = randomAnimalsGenerator(3);
-            Animal[][] animalsInMatchBoard = new Animal[2][3];
-            for (int i = 0; i < animalsInMatchBoard.length; i++) {
-                Animal[] currentRowOfAnimals = new Animal[3];
-                Collections.shuffle(randomAnimals);
-                for (int j = 0; j < currentRowOfAnimals.length; j++) {
-                    animalsInMatchBoard[i][j] = new Animal(randomAnimals.get(j), i, j);
-                }
-                animalsInMatchBoard[i] = currentRowOfAnimals;
+    private void setBoard(int level) {
+        List<Integer> dimension = levelToDimension.get(level);
+        int row = dimension.get(0);
+        int col = dimension.get(1);
+        int numPair = row * col / 2;
+        List<Integer> randomAnimals = randomAnimalsGenerator(numPair);
+        Animal[][] animalsInMatchBoard = new Animal[row][col];
+        for (int i = 0; i < animalsInMatchBoard.length; i++) {
+            Animal[] currentRowOfAnimals = new Animal[numPair];
+            Collections.shuffle(randomAnimals);
+            for (int j = 0; j < currentRowOfAnimals.length; j++) {
+                animalsInMatchBoard[i][j] = new Animal(randomAnimals.get(j), i, j);
             }
-            board = new CrazyMatchBoard(animalsInMatchBoard);
-        } else {
-            // for level 2, ask the player to match 6 pairs of animal
-            List<Integer> randomAnimals = randomAnimalsGenerator(6);
-            Animal[][] animalsInMatchBoard = new Animal[3][4];
-            for (int i = 0; i < animalsInMatchBoard.length; i++) {
-                Animal[] currentRowOfAnimals = new Animal[4];
-                Collections.shuffle(randomAnimals);
-                for (int j = 0; j < currentRowOfAnimals.length; j++) {
-                    animalsInMatchBoard[i][j] = new Animal(randomAnimals.get(j), i, j);
-                }
-                animalsInMatchBoard[i] = currentRowOfAnimals;
-            }
-            board = new CrazyMatchBoard(animalsInMatchBoard);
+            animalsInMatchBoard[i] = currentRowOfAnimals;
         }
+        board = new CrazyMatchBoard(animalsInMatchBoard);
     }
 
     private List<Integer> randomAnimalsGenerator(int num) {

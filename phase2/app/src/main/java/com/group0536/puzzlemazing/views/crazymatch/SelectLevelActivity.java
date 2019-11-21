@@ -1,16 +1,19 @@
 package com.group0536.puzzlemazing.views.crazymatch;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 import com.group0536.puzzlemazing.R;
+import com.group0536.puzzlemazing.actions.crazymatch.CrazyMatchActionCreator;
+import com.group0536.puzzlemazing.stores.crazymatch.CrazyMatchStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
 
 public class SelectLevelActivity extends FluxActivity {
 
-    //private CrazyMatchActionCreator actionCreator;
-    //private CrazyMatchStore store;
+    private CrazyMatchActionCreator actionCreator;
+    private CrazyMatchStore store;
     Button btnLevel1;
     Button btnLevel2;
 
@@ -23,9 +26,9 @@ public class SelectLevelActivity extends FluxActivity {
         btnLevel1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //actionCreator.setBoard(2,3);
-                //Intent intent = new Intent(SelectLevelActivity.this, CrazyMatchGameActivity.class);
-                //startActivity(intent);
+                actionCreator.setBoard(1);
+                Intent intent = new Intent(SelectLevelActivity.this, GameActivityLevelOne.class);
+                startActivity(intent);
             }
         });
         btnLevel2 = findViewById(getResources()
@@ -33,8 +36,8 @@ public class SelectLevelActivity extends FluxActivity {
         btnLevel2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //actionCreator.setBoard(4,4);
-                //Intent intent = new Intent(SelectLevelActivity.this, CrazyMatchGameActivity.class);
+                //actionCreator.setBoard(1);
+                //Intent intent = new Intent(SelectLevelActivity.this, GameActivityLevelTwo.class);
                 //startActivity(intent);
             }
         });
@@ -43,18 +46,18 @@ public class SelectLevelActivity extends FluxActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        //registerStore(store);
+        registerStore(store);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        //registerStore(store);
+        registerStore(store);
     }
 
     @Override
     protected void initFluxComponents() {
-        //store = CrazyMatchStore.getInstance(dispatcher);
-        //actionCreator = new CrazyMatchActionCreator(dispatcher);
+        store = CrazyMatchStore.getInstance(dispatcher);
+        actionCreator = new CrazyMatchActionCreator(dispatcher);
     }
 }
