@@ -23,12 +23,12 @@
     app:layout_constraintVertical_bias="1.0" />
 
   <TextView
-    android:id="@+id/textView"
+    android:id="@+id/tvLoadingMsg"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="15dp"
-    android:layout_marginLeft="15dp"
-    android:textSize="33sp"
+    android:layout_marginBottom="30dp"
+    android:layout_marginStart="30dp"
+    android:textSize="18sp"
     android:textColor="@android:color/background_light"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"

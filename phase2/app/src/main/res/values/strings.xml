@@ -2,4 +2,22 @@
   <string name="app_name">Puzzle Mazing</string>
 
   <string name="image_description_loading">Loading</string>
+
+  <!-- app init -->
+  <string name="app_init_checking_update">Checking for updates&#8230;</string>
+  <string name="app_init_loading_token">Loading saved token&#8230;</string>
+  <string name="app_init_complete_login">Please complete the login form.</string>
+  <string name="app_init_logging_in">Securely logging you in&#8230;</string>
+
+  <string name="app_init_error_checking_update">
+    Update check failed. Your device may be offline or our server
+    may be out of service.
+  </string>
+  <string name="app_init_error_oudated">
+    This application is outdated. Please update to the newest version!
+  </string>
+
+  <!-- dialog buttons -->
+  <string name="dialog_try_again">Try Again</string>
+  <string name="dialog_exit">Exit</string>
 </resources>

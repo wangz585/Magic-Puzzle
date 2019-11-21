@@ -12,7 +12,8 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
     <activity android:name=".views.welcome.AppInitializeActivity"
-      android:screenOrientation="sensorLandscape"></activity>
+      android:screenOrientation="sensorLandscape">
+    </activity>
     <activity
       android:name=".views.welcome.WelcomeActivity"
       android:screenOrientation="sensorLandscape">

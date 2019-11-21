@@ -2,6 +2,7 @@ package com.group0536.puzzlemazing.actions.welcome;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.ActionCreator;
@@ -56,6 +57,24 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
         dispatcher.dispatch(action);
     }
 
+    public void startInitialization() {
+        Action action = new Action.ActionBuilder(START_INITIALIZATION)
+                .build();
+        dispatcher.dispatch(action);
+    }
+
+    public void finishInitialization() {
+        Action action = new Action.ActionBuilder(FINISH_INITIALIZATION)
+                .build();
+        dispatcher.dispatch(action);
+    }
+
+    public void restartInitialization() {
+        Action action = new Action.ActionBuilder(RESTART_INITIALIZATION)
+                .build();
+        dispatcher.dispatch(action);
+    }
+
     public void checkUpdate() {
         serverApi.performUpdateCheck(new Callback() {
             @Override
@@ -83,7 +102,7 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
 
     public void loadSavedToken(Context appContext) {
         SharedPreferences preferences = appContext.getSharedPreferences(PREFIX, 0);
-        String savedToken = preferences.getString(KEY_SAVED_TOKEN, null);
+        String savedToken = preferences.getString(KEY_SAVED_TOKEN, "");
 
         Action action = new Action.ActionBuilder(LOAD_SAVED_TOKEN)
                 .load(KEY_SAVED_TOKEN, savedToken)
@@ -103,7 +122,7 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
                 User user = new User();
                 boolean requestSucceed = response.isSuccessful();
                 if (requestSucceed) {
-                    user = Parser.parseLogInResponseToUser(response);
+                    user = Parser.parseResponseToUser(response);
                 }
 
                 Action action = new Action.ActionBuilder(VERIFY_TOKEN)

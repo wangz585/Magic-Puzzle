@@ -50,7 +50,15 @@ public final class Parser {
         return result;
     }
 
-    public static User parseLogInResponseToUser(Response res) {
+    /**
+     * Parse response object resulted from login or register action to a user object.
+     * An empty user object will be returned together with printed error stack trace if
+     * the response object is invalid.
+     *
+     * @param res response object resulted from login or register action
+     * @return user object resulted from response
+     */
+    public static User parseResponseToUser(Response res) {
         User user = new User();
         try {
             JSONObject body = Parser.parseResponseBody(res);

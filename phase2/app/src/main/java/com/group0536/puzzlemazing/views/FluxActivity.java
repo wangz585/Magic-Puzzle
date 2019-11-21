@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 import com.group0536.puzzlemazing.dispatcher.FluxBus;
 import com.group0536.puzzlemazing.stores.Store;
+import com.squareup.otto.ThreadEnforcer;
 
 /**
  * This is an activity associating with our Flux design pattern.
@@ -25,7 +26,7 @@ public abstract class FluxActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dispatcher = Dispatcher.getDispatcher(new FluxBus());
+        dispatcher = Dispatcher.getDispatcher(new FluxBus(ThreadEnforcer.ANY));
         initFluxComponents();
     }
 
