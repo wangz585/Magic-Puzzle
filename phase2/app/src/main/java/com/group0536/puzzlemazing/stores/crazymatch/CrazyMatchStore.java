@@ -79,27 +79,33 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
                 int col = (int) action.getPayloadEntry("col");
                 flipAnimal(row, col);
                 postChange();
-                if((firstFlip != null) && (secondFlip != null)){
-                    Timer timer_CheckPairs = new Timer();
-                    timer_CheckPairs.schedule(new TimerTask(){
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                if((firstFlip != null) && (secondFlip != null)) {
+                    TimerTask taskDelayed = new TimerTask() {
                         @Override
-                        public void run(){
-                        if(isTheSame(firstFlip, secondFlip)){
-                            updateScore();
-                            cancelAnimal(firstFlip);
-                            cancelAnimal(secondFlip);
-                            clearFlipPair();
-                            pairsLeft--;
+                        public void run() {
+                            if (isTheSame(firstFlip, secondFlip)) {
+                                updateScore();
+                                cancelAnimal(firstFlip);
+                                cancelAnimal(secondFlip);
+                                clearFlipPair();
+                                pairsLeft--;
+                            } else {
+                                // two flips are not the same
+                                clearFlipPair();
+                            }
                         }
-                        else{
-                            // two flips are not the same
-                            clearFlipPair();
-                        }
-                        }
-                    }, 1000);
+                    };
+                    taskDelayed.run();
+                    postChange();
                 }
                 // do nothing since the user just flip one animal in the board
-                postChange();
                 break;
             case SET_BOARD:
                 // set board
