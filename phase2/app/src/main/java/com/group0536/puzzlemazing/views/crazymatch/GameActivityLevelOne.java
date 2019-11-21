@@ -6,8 +6,11 @@ import android.widget.ImageButton;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.crazymatch.CrazyMatchActionCreator;
+import com.group0536.puzzlemazing.models.CrazyMatchBoard;
+import com.group0536.puzzlemazing.stores.crazymatch.CrazyMatchChangeEvent;
 import com.group0536.puzzlemazing.stores.crazymatch.CrazyMatchStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
+import com.squareup.otto.Subscribe;
 
 public class GameActivityLevelOne extends FluxActivity {
     private CrazyMatchStore store;
@@ -46,7 +49,33 @@ public class GameActivityLevelOne extends FluxActivity {
     }
 
     public void ballOnClick(int row, int col) {
-        //actionCreator.flip(row, col);
+        actionCreator.flip(row, col);
+    }
+
+    @Subscribe
+    public void x(CrazyMatchChangeEvent e) {
+        updateUI();
+    }
+
+    /**
+     * Update UI of this activity according to TicTacToeStore
+     */
+    private void updateUI() {
+        updateBoard();
+    }
+
+    private void updateBoard() {
+        CrazyMatchBoard board = store.getBoard();
+        for (int i = 0; i < board.getNumRow(); i++) {
+            for (int j = 0; j < board.getNumColumn(); j++) {
+                ImageButton btn = btnBalls[i][j];
+                if (board.getAnimal(i, j).isFlipped()) {
+                    int animalSide = board.getAnimal(i, j).getAnimalSide();
+                    btn.setImageResource(animalSide);
+                }
+
+            }
+        }
     }
 
     @Override

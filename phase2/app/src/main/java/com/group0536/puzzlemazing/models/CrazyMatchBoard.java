@@ -4,31 +4,39 @@ import java.util.List;
 
 public class CrazyMatchBoard {
     private List<List<Animal>> animals;
+    private int row;
+    private int col;
 
     /**
-     *
      * @param animals a map stores all animals in the map
      */
-    public CrazyMatchBoard(Animal[][] animals){
-        animals = animals;
+    public CrazyMatchBoard(List<List<Animal>> animals) {
+        this.animals = animals;
+        row = animals.size();
+        col = animals.get(0).size();
+    }
+
+    public int getNumRow() {
+        return row;
+    }
+
+    public int getNumColumn() {
+        return col;
     }
 
     /**
-     *
-     * @param row
-     * @param col
+     * @param row  the row of the board
+     * @param col  the column of the board
      * @return the animal at (row, col) in the map
      */
-    public Animal getAnimal(int row, int col){
+    public Animal getAnimal(int row, int col) {
         return animals.get(row).get(col);
     }
 
     /**
-     *
-     * @param animal
-     * Add an new animal into the map at location (row, col)
+     * @param animal Add an new animal into the map at location (row, col)
      */
-    public void insertAnimal(Animal animal){
+    public void insertAnimal(Animal animal) {
         int[] position = animal.getPosition();
         int row = position[0];
         int col = position[1];
@@ -37,11 +45,10 @@ public class CrazyMatchBoard {
     }
 
     /**
-     *
      * @param animal An animal which is matched and should disappear from the screen
      */
-    public void crossOutAnimal(Animal animal){
-        int [] position = animal.getPosition();
+    public void crossOutAnimal(Animal animal) {
+        int[] position = animal.getPosition();
         int row = position[0];
         int col = position[1];
 

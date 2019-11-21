@@ -37,7 +37,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
     protected CrazyMatchStore(Dispatcher dispatcher) {
         super(dispatcher);
         populateAllAnimals();
-        board = null;
+        //board = null;
         score = 0;
         firstFlip = null;
         secondFlip = null;
@@ -109,31 +109,28 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
                 int col = (int) action.getPayloadEntry("col");
                 flipAnimal(row, col);
                 postChange();
-                if ((firstFlip != null) && (secondFlip != null)) {
+                /*if ((firstFlip != null) && (secondFlip != null)) {
                     Timer timer_CheckPairs = new Timer();
                     timer_CheckPairs.schedule(new TimerTask() {
                         @Override
                         public void run() {
-                            if (isTheSame(firstFlip, secondFlip)) {
+                            if (isTheSame()) {
                                 updateScore();
                                 cancelAnimal(firstFlip);
                                 cancelAnimal(secondFlip);
-                                clearFlipPair();
                                 pairsLeft--;
-                            } else {
-                                // two flips are not the same
-                                clearFlipPair();
                             }
+                            clearFlipPair();
+                            postChange();
                         }
                     }, 1000);
-                }
+                }*/
                 // do nothing since the user just flip one animal in the board
-                postChange();
                 break;
             case SET_BOARD:
                 // set board
                 setBoard((int) action.getPayloadEntry("level"));
-                //postChange();
+                postChange();
                 break;
         }
     }
@@ -142,25 +139,35 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         List<Integer> dimension = levelToDimension.get(level);
         int row = dimension.get(0);
         int col = dimension.get(1);
-        int numPair = row * col / 2;
-        List<Integer> randomAnimals = randomAnimalsGenerator(numPair);
-        Animal[][] animalsInMatchBoard = new Animal[row][col];
-        for (int i = 0; i < animalsInMatchBoard.length; i++) {
-            Animal[] currentRowOfAnimals = new Animal[numPair];
-            Collections.shuffle(randomAnimals);
-            for (int j = 0; j < currentRowOfAnimals.length; j++) {
-                animalsInMatchBoard[i][j] = new Animal(randomAnimals.get(j), i, j);
-            }
-            animalsInMatchBoard[i] = currentRowOfAnimals;
-        }
-        board = new CrazyMatchBoard(animalsInMatchBoard);
+        List<List<Animal>> animals = getAnimals(row, col);
+        board = new CrazyMatchBoard(animals);
     }
 
-    private List<Integer> randomAnimalsGenerator(int num) {
+    private List<List<Animal>> getAnimals(int row, int col) {
+        int numPair = row * col / 2;
+        List<Integer> randomAnimals = randomAnimalsGenerator(numPair);
+        Collections.shuffle(randomAnimals);
+        List<List<Animal>> animals = new ArrayList<>();
+
+        int i = 0;
+        for (int j = 0; j < row; j++) {
+            List<Animal> animalsRow = new ArrayList<>();
+            for (int k = 0; k < col; k++) {
+                animalsRow.add(new Animal(randomAnimals.get(i), j, k));
+                i++;
+            }
+            animals.add(animalsRow);
+        }
+
+        return animals;
+    }
+
+    private List<Integer> randomAnimalsGenerator(int numAnimal) {
         Random rand = new Random();
         List<Integer> randomAnimals = new ArrayList<>();
-        for (int i = 0; i < num; i++) {
+        for (int i = 0; i < numAnimal; i++) {
             int randomIndex = rand.nextInt(allAnimals.size());
+            randomAnimals.add(allAnimals.get(randomIndex));
             randomAnimals.add(allAnimals.get(randomIndex));
         }
         return randomAnimals;
@@ -179,13 +186,19 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         // update score
     }
 
-    private boolean isTheSame(Animal firstFlip, Animal secondFlip) {
+    private boolean isTheSame() {
         return firstFlip.equals(secondFlip);
     }
 
     private void flipAnimal(int row, int col) {
-        board.getAnimal(row, col).flipOver();
+        Animal animal = board.getAnimal(row, col);
+        animal.flipOver();
         stepsTaken += 1;
+        if (firstFlip == null) {
+            firstFlip = animal;
+        } else if (secondFlip == null) {
+            secondFlip = animal;
+        }
     }
 
 }
