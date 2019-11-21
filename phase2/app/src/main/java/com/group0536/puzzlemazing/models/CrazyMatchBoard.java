@@ -25,8 +25,8 @@ public class CrazyMatchBoard {
     }
 
     /**
-     * @param row  the row of the board
-     * @param col  the column of the board
+     * @param row the row of the board
+     * @param col the column of the board
      * @return the animal at (row, col) in the map
      */
     public Animal getAnimal(int row, int col) {

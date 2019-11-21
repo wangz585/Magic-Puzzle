@@ -18,8 +18,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class CrazyMatchStore extends Store implements CrazyMatchActions {
     private CrazyMatchBoard board;
