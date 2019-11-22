@@ -1,41 +1,46 @@
 package com.group0536.puzzlemazing.models;
 
+import android.graphics.Point;
+
 public class BusyWorkerMap {
 
     private String[] Background;
-    private int[] WorkerPosition;
-    private int[] FlagPosition;
-    private int[] BoxPosition;
+    private Point initialWorkerPosition;
+    private Point FlagPosition;
+    private Point initialBoxPosition;
+    private Point[] DeadPositions;
+    private Point[] WallPositions;
 
-    public BusyWorkerMap(String[] background, int[] workerLocation, int[] flagLocation, int[] Boxlocation){
-
+    public BusyWorkerMap(String[] background, Point initialWorkerPosition, Point flagPosition, Point initialBoxPosition, Point[] deadPositions, Point[] wallPositions) {
         Background = background;
-        WorkerPosition = workerLocation;
-        FlagPosition = flagLocation;
-        BoxPosition = Boxlocation;
-    }
-
-    public void setWorkerPosition(int[] workerPosition) {
-        WorkerPosition = workerPosition;
-    }
-
-    public void setBoxPosition(int[] boxPosition) {
-        BoxPosition = boxPosition;
+        this.initialWorkerPosition = initialWorkerPosition;
+        FlagPosition = flagPosition;
+        this.initialBoxPosition = initialBoxPosition;
+        DeadPositions = deadPositions;
+        WallPositions = wallPositions;
     }
 
     public String[] getBackground() {
         return Background;
     }
 
-    public int[] getWorkerPosition() {
-        return WorkerPosition;
+    public Point getInitialWorkerPosition() {
+        return initialWorkerPosition;
     }
 
-    public int[] getFlagPosition() {
+    public Point getFlagPosition() {
         return FlagPosition;
     }
 
-    public int[] getBoxPosition() {
-        return BoxPosition;
+    public Point getInitialBoxPosition() {
+        return initialBoxPosition;
+    }
+
+    public Point[] getDeadPositions() {
+        return DeadPositions;
+    }
+
+    public Point[] getWallPositions() {
+        return WallPositions;
     }
 }
