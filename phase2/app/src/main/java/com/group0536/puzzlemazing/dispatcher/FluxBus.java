@@ -1,6 +1,10 @@
 package com.group0536.puzzlemazing.dispatcher;
 
+import android.os.Handler;
+import android.os.Looper;
+
 import com.squareup.otto.Bus;
+import com.squareup.otto.ThreadEnforcer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +23,18 @@ import java.util.List;
  */
 public class FluxBus extends Bus {
     private List<Object> registeredItems;
+    private Handler handler;
 
     public FluxBus() {
         super();
         this.registeredItems = new ArrayList<>();
+        this.handler = new Handler(Looper.getMainLooper());
+    }
+
+    public FluxBus(ThreadEnforcer enforcer) {
+        super(enforcer);
+        this.registeredItems = new ArrayList<>();
+        this.handler = new Handler(Looper.getMainLooper());
     }
 
     @Override

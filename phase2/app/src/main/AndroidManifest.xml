@@ -11,10 +11,19 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
-    <activity android:name=".views.welcome.AppInitializeActivity"
+    <activity
+      android:name=".views.welcome.AppInitializeActivity"
       android:screenOrientation="sensorLandscape"></activity>
     <activity
       android:name=".views.welcome.WelcomeActivity"
+      android:screenOrientation="sensorLandscape">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity
+      android:name=".views.crazymatch.GameActivityLevelOne"
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -23,8 +32,8 @@
       </intent-filter>
     </activity>
     <activity
-        android:name=".views.crazymatch.GameActivityLevelOne"
-        android:screenOrientation="sensorLandscape">
+      android:name=".views.crazymatch.SelectLevelActivity"
+      android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
