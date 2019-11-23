@@ -52,7 +52,9 @@ public class GameActivityLevelOne extends FluxActivity {
     }
 
     public void ballOnClick(int row, int col) {
-        actionCreator.flip(row, col);
+        if (store.canFlip(row, col)) {
+            actionCreator.flip(row, col);
+        }
     }
 
     @Subscribe
@@ -69,26 +71,26 @@ public class GameActivityLevelOne extends FluxActivity {
 
     private void updateBoard() {
         CrazyMatchBoard board = store.getBoard();
-        for (int i = 0; i < board.getNumRow(); i++) {
-            for (int j = 0; j < board.getNumColumn(); j++) {
-                final ImageButton btn = btnBalls[i][j];
-                Animal animal = board.getAnimal(i, j);
-                if (animal == null) {
-                    btn.setVisibility(View.INVISIBLE);
-                    //System.out.println("");
-                } else if (animal.isFlipped()) {
-                    int animalSide = board.getAnimal(i, j).getAnimalSide();
-                    btn.setImageResource(animalSide);
-                } else {
-                    GameActivityLevelOne.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            btn.setImageResource(ballDrawingInt);
-                        }
-                    });
-                }
+            for (int i = 0; i < board.getNumRow(); i++) {
+                for (int j = 0; j < board.getNumColumn(); j++) {
+                    final ImageButton btn = btnBalls[i][j];
+                    Animal animal = board.getAnimal(i, j);
+                    if (animal == null) {
+                        btn.setVisibility(View.INVISIBLE);
+                        //System.out.println("");
+                    } else if (animal.isFlipped()) {
+                        int animalSide = board.getAnimal(i, j).getAnimalSide();
+                        btn.setImageResource(animalSide);
+                    } else {
+                        GameActivityLevelOne.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                btn.setImageResource(ballDrawingInt);
+                            }
+                        });
+                    }
 
-            }
+                }
         }
     }
 

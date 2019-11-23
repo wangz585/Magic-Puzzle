@@ -139,6 +139,11 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         // do nothing since the user just flip one animal in the board
     }
 
+    public boolean canFlip(int row, int col) {
+        return (secondFlip == null && !board.getAnimal(row, col).isFlipped());
+    }
+
+
     public boolean isGameOver() {
         return board.getNumAnimal() == 0;
     }
