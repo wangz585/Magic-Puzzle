@@ -23,7 +23,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".views.crazymatch.GameActivityLevelOne"
+      android:name=".views.crazymatch.GameActivity"
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

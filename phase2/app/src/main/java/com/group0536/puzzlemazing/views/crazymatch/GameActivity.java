@@ -13,7 +13,7 @@ import com.group0536.puzzlemazing.stores.crazymatch.CrazyMatchStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
 import com.squareup.otto.Subscribe;
 
-public class GameActivityLevelOne extends FluxActivity {
+public class GameActivity extends FluxActivity {
     private CrazyMatchStore store;
     private CrazyMatchActionCreator actionCreator;
     private int ballDrawingInt;
@@ -25,12 +25,24 @@ public class GameActivityLevelOne extends FluxActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crazy_match_level_one);
-        ballDrawingInt = R.drawable.crazy_match_ball;
         bindViews();
     }
 
+    /**
+     * Initialize the elements on this view
+     */
     private void bindViews() {
-        btnBalls = new ImageButton[2][3];
+        initializeBalls();
+    }
+
+    /**
+     * Initialize balls
+     */
+    private void initializeBalls() {
+        int numRow = store.getNumberOfRows();
+        int numCol = store.getNumberOfColumns();
+        ballDrawingInt = R.drawable.crazy_match_ball;
+        btnBalls = new ImageButton[numRow][numCol];
         for (int i = 0; i < btnBalls.length; i++) {
             for (int j = 0; j < btnBalls[0].length; j++) {
                 final String btnId = "btn_ball_" + i + j;
@@ -38,23 +50,29 @@ public class GameActivityLevelOne extends FluxActivity {
                         .getIdentifier(btnId, "id", getPackageName());
                 ImageButton btnBall = findViewById(res);
                 btnBalls[i][j] = btnBall;
-
-                final int row = i;
-                final int col = j;
-                btnBall.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        ballOnClick(row, col);
-                    }
-                });
+                setBallOnClickListener(i, j, btnBall);
             }
         }
     }
 
-    public void ballOnClick(int row, int col) {
-        if (store.canFlip(row, col)) {
-            actionCreator.flip(row, col);
-        }
+    /**
+     * Set On Click Listener of btnBall at row i and column j
+     *
+     * @param i       row i position of the button
+     * @param j       column j position of the button
+     * @param btnBall ball button
+     */
+    private void setBallOnClickListener(int i, int j, ImageButton btnBall) {
+        final int row = i;
+        final int col = j;
+        btnBall.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (store.canFlip(row, col)) {
+                    actionCreator.flip(row, col);
+                }
+            }
+        });
     }
 
     @Subscribe
@@ -63,33 +81,34 @@ public class GameActivityLevelOne extends FluxActivity {
     }
 
     /**
-     * Update UI of this activity according to TicTacToeStore
+     * Update UI of this activity according to CrazyMatchStore
      */
     private void updateUI() {
         updateBoard();
     }
 
+
     private void updateBoard() {
         CrazyMatchBoard board = store.getBoard();
-            for (int i = 0; i < board.getNumRow(); i++) {
-                for (int j = 0; j < board.getNumColumn(); j++) {
-                    final ImageButton btn = btnBalls[i][j];
-                    Animal animal = board.getAnimal(i, j);
-                    if (animal == null) {
-                        btn.setVisibility(View.INVISIBLE);
-                    } else if (animal.isFlipped()) {
-                        int animalSide = board.getAnimal(i, j).getAnimalSide();
-                        btn.setImageResource(animalSide);
-                    } else {
-                        GameActivityLevelOne.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                btn.setImageResource(ballDrawingInt);
-                            }
-                        });
-                    }
-
+        for (int i = 0; i < board.getNumberOfRows(); i++) {
+            for (int j = 0; j < board.getNumberOfColumns(); j++) {
+                final ImageButton btn = btnBalls[i][j];
+                Animal animal = board.getAnimal(i, j);
+                if (animal == null) {
+                    btn.setVisibility(View.INVISIBLE);
+                } else if (animal.isFlipped()) {
+                    int animalSide = board.getAnimal(i, j).getAnimalSide();
+                    btn.setImageResource(animalSide);
+                } else {
+                    GameActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            btn.setImageResource(ballDrawingInt);
+                        }
+                    });
                 }
+
+            }
         }
     }
 

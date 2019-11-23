@@ -1,8 +1,6 @@
 package com.group0536.puzzlemazing.stores.crazymatch;
 
 import android.util.SparseArray;
-import android.view.View;
-import android.widget.TextView;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.Action;
@@ -13,14 +11,12 @@ import com.group0536.puzzlemazing.models.CrazyMatchBoard;
 import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
-import com.group0536.puzzlemazing.views.crazymatch.GameActivityLevelOne;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -38,7 +34,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
 
     protected CrazyMatchStore(Dispatcher dispatcher) {
         super(dispatcher);
-        populateAllAnimals();
+        populateAllAnimalDrawables();
         //board = null;
         score = 0;
         firstFlip = null;
@@ -47,8 +43,6 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
 //        player = player;
         stepsTaken = 0;
         setLevelToDimension();
-
-
     }
 
     private void setLevelToDimension() {
@@ -64,7 +58,10 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         levelToDimension.put(2, dim2);
     }
 
-    private static void populateAllAnimals() {
+    /**
+     * Populate the animal drawables. This is all animal drawables that could be used.
+     */
+    private static void populateAllAnimalDrawables() {
         allAnimals = new ArrayList<>(Arrays.asList(R.drawable.butterfly,
                 R.drawable.chicken,
                 R.drawable.cow,
@@ -83,11 +80,21 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
                 R.drawable.turkey));
     }
 
-
+    /**
+     * Get the board of this store
+     *
+     * @return board of this store
+     */
     public CrazyMatchBoard getBoard() {
         return board;
     }
 
+    /**
+     * Get an instance of this store
+     *
+     * @param dispatcher
+     * @return
+     */
     public static CrazyMatchStore getInstance(Dispatcher dispatcher) {
         if (instance == null) {
             instance = new CrazyMatchStore(dispatcher);
@@ -114,6 +121,11 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         }
     }
 
+    /**
+     * Flip the button according to the pay load entry of action
+     *
+     * @param action action Object of the action being processed
+     */
     private void flipButtons(Action action) {
         int row = (int) action.getPayloadEntry("row");
         int col = (int) action.getPayloadEntry("col");
@@ -130,8 +142,8 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
                     secondFlip.flipOver();
                     if (isTheSame()) {
                         updateScore();
-                        cancelAnimal(firstFlip);
-                        cancelAnimal(secondFlip);
+                        removeAnimal(firstFlip);
+                        removeAnimal(secondFlip);
                     }
                     clearFlipPair();
                     postChange();
@@ -142,34 +154,59 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         // do nothing since the user just flip one animal in the board
     }
 
+    /**
+     * Check if the Animal object at (row, col) can be flipped
+     *
+     * @param row The row of the Animal object being checked
+     * @param col The column of the Animal object being checked
+     * @return if the Animal object can be flipped
+     */
     public boolean canFlip(int row, int col) {
         Animal animal = board.getAnimal(row, col);
         return (!isWaiting && animal != null && !animal.isFlipped());
     }
 
 
+    /**
+     * Check if the game is over
+     *
+     * @return if the game is over
+     */
     public boolean isGameOver() {
-        return board.getNumAnimal() == 0;
+        return board.getNumberOfAnimals() == 0;
     }
 
+    /**
+     * Initialize the board of this store
+     *
+     * @param level the level of the game
+     */
     private void initializeBoard(int level) {
         List<Integer> dimension = levelToDimension.get(level);
         int row = dimension.get(0);
         int col = dimension.get(1);
-        List<List<Animal>> animals = getAnimals(row, col);
+        List<List<Animal>> animals = GenerateAnimalsList(row, col);
         board = new CrazyMatchBoard(animals);
     }
 
-    private List<List<Animal>> getAnimals(int row, int col) {
-        int numPair = row * col / 2;
-        List<Integer> randomAnimals = randomAnimalsGenerator(numPair);
+    /**
+     * Get a random list of Animal objects of that contains numRows sublists, each sublist
+     * contains numColumns Animals object
+     *
+     * @param numRows    number of sublists that the returned list contains
+     * @param numColumns number of Animal objects that each sublist contains
+     * @return list of Animal objects
+     */
+    private List<List<Animal>> GenerateAnimalsList(int numRows, int numColumns) {
+        int numPair = numRows * numColumns / 2;
+        List<Integer> randomAnimals = generateRandomAnimalDrawable(numPair);
         Collections.shuffle(randomAnimals);
         List<List<Animal>> animals = new ArrayList<>();
 
         int i = 0;
-        for (int j = 0; j < row; j++) {
+        for (int j = 0; j < numRows; j++) {
             List<Animal> animalsRow = new ArrayList<>();
-            for (int k = 0; k < col; k++) {
+            for (int k = 0; k < numColumns; k++) {
                 animalsRow.add(new Animal(randomAnimals.get(i), j, k));
                 i++;
             }
@@ -179,7 +216,14 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         return animals;
     }
 
-    private List<Integer> randomAnimalsGenerator(int numAnimal) {
+    /**
+     * Generate a random list that contains numAnimal integers, each integer corresponds to
+     * an animal drawable
+     *
+     * @param numAnimal the number of animals
+     * @return list of randomly generated integers
+     */
+    private List<Integer> generateRandomAnimalDrawable(int numAnimal) {
         List<Integer> animalsClone = new ArrayList<>(allAnimals);
 
         Collections.shuffle(animalsClone);
@@ -196,18 +240,38 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         secondFlip = null;
     }
 
-    private void cancelAnimal(Animal crossedOutAnimal) {
-        board.crossOutAnimal(crossedOutAnimal);
+    /**
+     * Remove animal from board
+     *
+     * @param animal an animal object to be removed from board
+     */
+    private void removeAnimal(Animal animal) {
+        board.RemoveAnimal(animal);
     }
 
+    /**
+     * Update the score
+     */
     private void updateScore() {
         // update score
     }
 
+    /**
+     * Check if the two animals being flipped are the same
+     *
+     * @return if the two animals being flipped are the same
+     */
     private boolean isTheSame() {
         return firstFlip.equals(secondFlip);
     }
 
+
+    /**
+     * Flip the animal at (row, col)
+     *
+     * @param row row of the board of this store
+     * @param col column of the board of this store
+     */
     private void flipAnimal(int row, int col) {
         Animal animal = board.getAnimal(row, col);
         animal.flipOver();
@@ -219,4 +283,21 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         }
     }
 
+    /**
+     * Get the number of rows of the board of this store
+     *
+     * @return number of rows
+     */
+    public int getNumberOfRows() {
+        return board.getNumberOfRows();
+    }
+
+    /**
+     * Get the number of columns of the board of this store
+     *
+     * @return number of columns
+     */
+    public int getNumberOfColumns() {
+        return board.getNumberOfColumns();
+    }
 }

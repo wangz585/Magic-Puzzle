@@ -9,7 +9,9 @@ public class CrazyMatchBoard {
     private int numAnimals;
 
     /**
-     * @param animals a map stores all animals in the map
+     * A CrazyMatchBoard object
+     *
+     * @param animals the animals on this board
      */
     public CrazyMatchBoard(List<List<Animal>> animals) {
         this.animals = animals;
@@ -18,25 +20,39 @@ public class CrazyMatchBoard {
         numAnimals = row * col;
     }
 
-    public int getNumRow() {
+    /**
+     * Get the number of rows of this board
+     *
+     * @return number of rows of this board
+     */
+    public int getNumberOfRows() {
         return row;
     }
 
-    public int getNumColumn() {
+    /**
+     * Get the number of columns of this board
+     *
+     * @return number of columns of this board
+     */
+    public int getNumberOfColumns() {
         return col;
     }
 
     /**
-     * @param row the row of the board
-     * @param col the column of the board
-     * @return the animal at (row, col) in the map
+     * Get the animal at (row, col)
+     *
+     * @param row the row of this board
+     * @param col the column of this board
+     * @return the animal at (row, col)
      */
     public Animal getAnimal(int row, int col) {
         return animals.get(row).get(col);
     }
 
     /**
-     * @param animal Add an new animal into the map at location (row, col)
+     * Add animal onto this board
+     *
+     * @param animal animal to be added
      */
     public void insertAnimal(Animal animal) {
         int[] position = animal.getPosition();
@@ -47,18 +63,25 @@ public class CrazyMatchBoard {
     }
 
     /**
-     * @param animal An animal which is matched and should disappear from the screen
+     * Remove animal from the board
+     *
+     * @param animal an animal which is matched and should disappear from the screen
      */
-    public void crossOutAnimal(Animal animal) {
+    public void RemoveAnimal(Animal animal) {
         int[] position = animal.getPosition();
         int row = position[0];
         int col = position[1];
         animals.get(row).set(col, null);
-        numAnimals --;
+        numAnimals--;
 
     }
 
-    public int getNumAnimal() {
+    /**
+     * Get the number of animals on this board
+     *
+     * @return number of animals on this board
+     */
+    public int getNumberOfAnimals() {
         return numAnimals;
     }
 }
