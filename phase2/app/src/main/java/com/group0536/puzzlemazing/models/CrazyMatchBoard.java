@@ -6,6 +6,7 @@ public class CrazyMatchBoard {
     private List<List<Animal>> animals;
     private int row;
     private int col;
+    private int numAnimals;
 
     /**
      * @param animals a map stores all animals in the map
@@ -14,6 +15,7 @@ public class CrazyMatchBoard {
         this.animals = animals;
         row = animals.size();
         col = animals.get(0).size();
+        numAnimals = row * col;
     }
 
     public int getNumRow() {
@@ -51,7 +53,12 @@ public class CrazyMatchBoard {
         int[] position = animal.getPosition();
         int row = position[0];
         int col = position[1];
-
         animals.get(row).set(col, null);
+        numAnimals --;
+
+    }
+
+    public int getNumAnimal() {
+        return numAnimals;
     }
 }

@@ -1,6 +1,8 @@
 package com.group0536.puzzlemazing.stores.crazymatch;
 
 import android.util.SparseArray;
+import android.view.View;
+import android.widget.TextView;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.Action;
@@ -11,6 +13,7 @@ import com.group0536.puzzlemazing.models.CrazyMatchBoard;
 import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
+import com.group0536.puzzlemazing.views.crazymatch.GameActivityLevelOne;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -18,6 +21,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class CrazyMatchStore extends Store implements CrazyMatchActions {
     private CrazyMatchBoard board;
@@ -25,9 +30,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
     private Animal firstFlip;
     private Animal secondFlip;
     private User player;
-    private int pairsLeft;
     private int stepsTaken;
-    private boolean isGameOver;
     private static List<Integer> allAnimals;
     private SparseArray<List<Integer>> levelToDimension;
     private static CrazyMatchStore instance;
@@ -41,9 +44,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         secondFlip = null;
         // TODO: pass in a player
 //        player = player;
-        pairsLeft = 0;
         stepsTaken = 0;
-        isGameOver = false;
         setLevelToDimension();
 
 
@@ -103,37 +104,46 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
     public void onAction(Action action) {
         switch (action.getType()) {
             case FLIP:
-                int row = (int) action.getPayloadEntry("row");
-                int col = (int) action.getPayloadEntry("col");
-                flipAnimal(row, col);
-                postChange();
-                /*if ((firstFlip != null) && (secondFlip != null)) {
-                    Timer timer_CheckPairs = new Timer();
-                    timer_CheckPairs.schedule(new TimerTask() {
-                        @Override
-                        public void run() {
-                            if (isTheSame()) {
-                                updateScore();
-                                cancelAnimal(firstFlip);
-                                cancelAnimal(secondFlip);
-                                pairsLeft--;
-                            }
-                            clearFlipPair();
-                            postChange();
-                        }
-                    }, 1000);
-                }*/
-                // do nothing since the user just flip one animal in the board
+                flipButtons(action);
                 break;
-            case SET_BOARD:
-                // set board
-                setBoard((int) action.getPayloadEntry("level"));
+            case INITIALIZE_BOARD:
+                initializeBoard((int) action.getPayloadEntry("level"));
                 postChange();
                 break;
         }
     }
 
-    private void setBoard(int level) {
+    private void flipButtons(Action action) {
+        int row = (int) action.getPayloadEntry("row");
+        int col = (int) action.getPayloadEntry("col");
+        flipAnimal(row, col);
+        postChange();
+        if ((firstFlip != null) && (secondFlip != null)) {
+            // flick back the animals
+            Timer timerCheckPairs = new Timer();
+            timerCheckPairs.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    firstFlip.flipOver();
+                    secondFlip.flipOver();
+                    if (isTheSame()) {
+                        updateScore();
+                        cancelAnimal(firstFlip);
+                        cancelAnimal(secondFlip);
+                    }
+                    clearFlipPair();
+                    postChange();
+                }
+            }, 1000);
+        }
+        // do nothing since the user just flip one animal in the board
+    }
+
+    public boolean isGameOver() {
+        return board.getNumAnimal() == 0;
+    }
+
+    private void initializeBoard(int level) {
         List<Integer> dimension = levelToDimension.get(level);
         int row = dimension.get(0);
         int col = dimension.get(1);

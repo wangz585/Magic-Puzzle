@@ -6,6 +6,7 @@ import android.widget.ImageButton;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.crazymatch.CrazyMatchActionCreator;
+import com.group0536.puzzlemazing.models.Animal;
 import com.group0536.puzzlemazing.models.CrazyMatchBoard;
 import com.group0536.puzzlemazing.stores.crazymatch.CrazyMatchChangeEvent;
 import com.group0536.puzzlemazing.stores.crazymatch.CrazyMatchStore;
@@ -15,6 +16,7 @@ import com.squareup.otto.Subscribe;
 public class GameActivityLevelOne extends FluxActivity {
     private CrazyMatchStore store;
     private CrazyMatchActionCreator actionCreator;
+    private int ballDrawingInt;
 
     // Components
     private ImageButton[][] btnBalls;
@@ -23,6 +25,7 @@ public class GameActivityLevelOne extends FluxActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crazy_match_level_one);
+        ballDrawingInt = R.drawable.crazy_match_yellow_ball;
         bindViews();
     }
 
@@ -53,7 +56,7 @@ public class GameActivityLevelOne extends FluxActivity {
     }
 
     @Subscribe
-    public void x(CrazyMatchChangeEvent e) {
+    public void update(CrazyMatchChangeEvent e) {
         updateUI();
     }
 
@@ -68,10 +71,21 @@ public class GameActivityLevelOne extends FluxActivity {
         CrazyMatchBoard board = store.getBoard();
         for (int i = 0; i < board.getNumRow(); i++) {
             for (int j = 0; j < board.getNumColumn(); j++) {
-                ImageButton btn = btnBalls[i][j];
-                if (board.getAnimal(i, j).isFlipped()) {
+                final ImageButton btn = btnBalls[i][j];
+                Animal animal = board.getAnimal(i, j);
+                if (animal == null) {
+                    btn.setVisibility(View.INVISIBLE);
+                    //System.out.println("");
+                } else if (animal.isFlipped()) {
                     int animalSide = board.getAnimal(i, j).getAnimalSide();
                     btn.setImageResource(animalSide);
+                } else {
+                    GameActivityLevelOne.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            btn.setImageResource(ballDrawingInt);
+                        }
+                    });
                 }
 
             }
