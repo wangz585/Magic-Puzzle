@@ -34,6 +34,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
     private static List<Integer> allAnimals;
     private SparseArray<List<Integer>> levelToDimension;
     private static CrazyMatchStore instance;
+    private boolean isWaiting;
 
     protected CrazyMatchStore(Dispatcher dispatcher) {
         super(dispatcher);
@@ -121,6 +122,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         if ((firstFlip != null) && (secondFlip != null)) {
             // flick back the animals
             Timer timerCheckPairs = new Timer();
+            isWaiting = true;
             timerCheckPairs.schedule(new TimerTask() {
                 @Override
                 public void run() {
@@ -133,6 +135,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
                     }
                     clearFlipPair();
                     postChange();
+                    isWaiting = false;
                 }
             }, 1000);
         }
@@ -140,7 +143,8 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
     }
 
     public boolean canFlip(int row, int col) {
-        return (secondFlip == null && !board.getAnimal(row, col).isFlipped());
+        Animal animal = board.getAnimal(row, col);
+        return (!isWaiting && animal != null && !animal.isFlipped());
     }
 
 
