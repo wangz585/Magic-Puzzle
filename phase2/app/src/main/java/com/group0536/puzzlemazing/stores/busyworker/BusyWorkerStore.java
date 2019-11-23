@@ -3,14 +3,14 @@ package com.group0536.puzzlemazing.stores.busyworker;
 import android.graphics.Point;
 
 import com.group0536.puzzlemazing.actions.Action;
+import com.group0536.puzzlemazing.actions.busyworker.BusyWorkerActions;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 import com.group0536.puzzlemazing.models.BusyWorkerBitMap;
 import com.group0536.puzzlemazing.models.BusyWorkerMap;
 import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
-import com.group0536.puzzlemazing.stores.crazymatch.CrazyMatchStore;
 
-public class BusyWorkerStore extends Store {
+public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
     private BusyWorkerMap map;
     private BusyWorkerBitMap bitmap;
@@ -30,8 +30,16 @@ public class BusyWorkerStore extends Store {
 
     @Override
     public void onAction(Action action) {
-
-
+        switch(action.getType()){
+            case MOVE:
+                Point touchPosition = (Point)action.getPayloadEntry("position");
+                move(touchPosition);
+                break;
+            case INIT_MAP:
+                int level = (int)action.getPayloadEntry("level");
+                initMap(level);
+                break;
+        }
     }
 
     private void initMap(int level) {
@@ -49,7 +57,7 @@ public class BusyWorkerStore extends Store {
         return false;
     }
 
-    private void movement(Point touchPosition) {
+    private void move(Point touchPosition) {
         String HorizontalDirection = checkHorizontalPosition(touchPosition);
         String VerticalDirection = checkVerticalPosition(touchPosition);
         switch (HorizontalDirection) {
