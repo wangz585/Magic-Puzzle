@@ -26,8 +26,10 @@ public class SelectLevelActivity extends FluxActivity {
         btnLevel1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                actionCreator.setBoard(1);
+                int level = 1;
+                actionCreator.initializeBoard(level);
                 Intent intent = new Intent(SelectLevelActivity.this, GameActivity.class);
+                intent.putExtra("level", level);
                 startActivity(intent);
             }
         });
@@ -36,8 +38,10 @@ public class SelectLevelActivity extends FluxActivity {
         btnLevel2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                actionCreator.setBoard(2);
+                int level = 2;
+                actionCreator.initializeBoard(level);
                 Intent intent = new Intent(SelectLevelActivity.this, GameActivity.class);
+                intent.putExtra("level", level);
                 startActivity(intent);
             }
         });

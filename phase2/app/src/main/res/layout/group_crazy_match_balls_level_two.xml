@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:weightSum="2">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <ImageButton
+            android:id="@+id/btn_ball_00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/crazy_match_game_ball"
+            android:scaleType="centerInside"
+
+            android:src="@drawable/crazy_match_ball" />
+
+        <ImageButton
+            android:id="@+id/btn_ball_01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/crazy_match_game_ball"
+            android:scaleType="centerInside"
+            android:src="@drawable/crazy_match_ball" />
+
+        <ImageButton
+            android:id="@+id/btn_ball_02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/crazy_match_game_ball"
+            android:scaleType="centerInside"
+            android:src="@drawable/crazy_match_ball"/>
+
+        <ImageButton
+            android:id="@+id/btn_ball_03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/crazy_match_game_ball"
+            android:scaleType="centerInside"
+            android:src="@drawable/crazy_match_ball" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <ImageButton
+            android:id="@+id/btn_ball_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/crazy_match_game_ball"
+            android:scaleType="centerInside"
+            android:src="@drawable/crazy_match_ball" />
+
+        <ImageButton
+            android:id="@+id/btn_ball_11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/crazy_match_game_ball"
+            android:scaleType="centerInside"
+            android:src="@drawable/crazy_match_ball" />
+
+        <ImageButton
+            android:id="@+id/btn_ball_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/crazy_match_game_ball"
+            android:scaleType="centerInside"
+            android:src="@drawable/crazy_match_ball"/>
+
+        <ImageButton
+            android:id="@+id/btn_ball_13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@null"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/crazy_match_game_ball"
+            android:scaleType="centerInside"
+            android:src="@drawable/crazy_match_ball"/>
+    </LinearLayout>
+
+
+</LinearLayout>

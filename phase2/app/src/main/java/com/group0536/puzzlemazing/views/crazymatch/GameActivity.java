@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import androidx.annotation.ContentView;
+
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.crazymatch.CrazyMatchActionCreator;
 import com.group0536.puzzlemazing.models.Animal;
@@ -17,6 +19,7 @@ public class GameActivity extends FluxActivity {
     private CrazyMatchStore store;
     private CrazyMatchActionCreator actionCreator;
     private int ballDrawingInt;
+    private int level;
 
     // Components
     private ImageButton[][] btnBalls;
@@ -24,7 +27,8 @@ public class GameActivity extends FluxActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crazy_match_level_one);
+        level = getIntent().getIntExtra("level", 0);
+            setContentView(store.getContentView(1));
         bindViews();
     }
 

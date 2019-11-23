@@ -1,6 +1,9 @@
 package com.group0536.puzzlemazing.stores.crazymatch;
 
 import android.util.SparseArray;
+import android.view.View;
+
+import androidx.annotation.ContentView;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.Action;
@@ -16,6 +19,7 @@ import com.squareup.otto.Subscribe;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -31,17 +35,13 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
     private SparseArray<List<Integer>> levelToDimension;
     private static CrazyMatchStore instance;
     private boolean isWaiting;
+    private CrazyMatchInitController initController = new CrazyMatchInitController();
 
     protected CrazyMatchStore(Dispatcher dispatcher) {
         super(dispatcher);
-        populateAllAnimalDrawables();
-        //board = null;
-        score = 0;
-        firstFlip = null;
-        secondFlip = null;
+        populateAnimalDrawables();
         // TODO: pass in a player
-//        player = player;
-        stepsTaken = 0;
+//        this.player = player;
         setLevelToDimension();
     }
 
@@ -61,7 +61,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
     /**
      * Populate the animal drawables. This is all animal drawables that could be used.
      */
-    private static void populateAllAnimalDrawables() {
+    private static void populateAnimalDrawables() {
         allAnimals = new ArrayList<>(Arrays.asList(R.drawable.butterfly,
                 R.drawable.chicken,
                 R.drawable.cow,
@@ -119,6 +119,11 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
                 postChange();
                 break;
         }
+    }
+
+    public int getContentView(int level) {
+        HashMap<Object, Object> levelData = initController.getLevelData(level);
+        return (int) levelData.get("ContentView");
     }
 
     /**
