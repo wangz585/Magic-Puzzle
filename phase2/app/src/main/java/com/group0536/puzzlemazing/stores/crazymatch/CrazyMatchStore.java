@@ -161,12 +161,13 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
     }
 
     private List<Integer> randomAnimalsGenerator(int numAnimal) {
-        Random rand = new Random();
+        List<Integer> animalsClone = new ArrayList<>(allAnimals);
+
+        Collections.shuffle(animalsClone);
         List<Integer> randomAnimals = new ArrayList<>();
         for (int i = 0; i < numAnimal; i++) {
-            int randomIndex = rand.nextInt(allAnimals.size());
-            randomAnimals.add(allAnimals.get(randomIndex));
-            randomAnimals.add(allAnimals.get(randomIndex));
+            randomAnimals.add(animalsClone.get(i));
+            randomAnimals.add(animalsClone.get(i));
         }
         return randomAnimals;
     }
