@@ -120,6 +120,23 @@ public class GameView extends FluxView {
                 srcRect, destRect, null);
     }
 
+    private void drawWin(Canvas canvas){
+        Paint txtPaint = new Paint();
+        txtPaint.setColor(Color.RED);
+        txtPaint.setTextSize(100.0f);
+        canvas.drawText(getContext().getString(R.string.busy_worker_win),
+                4 * CellWidth, 6 * CellWidth, txtPaint);
+    }
+
+    private void drawLose(Canvas canvas){
+        Paint txtPaint = new Paint();
+        txtPaint.setColor(Color.RED);
+        txtPaint.setTextSize(100.0f);
+        canvas.drawText(getContext().getString(R.string.busy_worker_lose),
+                4 * CellWidth, 6 * CellWidth, txtPaint);
+
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event){
         if (event.getAction() != MotionEvent.ACTION_DOWN) return true;

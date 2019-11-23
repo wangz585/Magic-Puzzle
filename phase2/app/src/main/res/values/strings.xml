@@ -24,4 +24,8 @@
   <string name="crazy_match_game_ball">Game Ball</string>
   <string name="level_one">Level 1</string>
   <string name="level_two">Level 2</string>
+
+  <!-- busy worker -->
+  <string name="busy_worker_win">CONGRATS</string>
+  <string name="busy_worker_lose">YOU LOSE!</string>
 </resources>
