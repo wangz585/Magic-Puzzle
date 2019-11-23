@@ -1,5 +1,6 @@
 package com.group0536.puzzlemazing.stores.busyworker;
 
+import android.content.res.Resources;
 import android.graphics.Point;
 
 import com.group0536.puzzlemazing.actions.Action;
@@ -16,7 +17,6 @@ import java.util.ArrayList;
 public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
     private BusyWorkerMap map;
-    private BusyWorkerBitMap bitmap;
     private static BusyWorkerStore instance;
     private int score;
     private Point currentWorkerPosition;
@@ -24,6 +24,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
     protected BusyWorkerStore(Dispatcher dispatcher) {
         super(dispatcher);
+        score = 0;
     }
 
     @Override
@@ -41,6 +42,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
             case INIT_MAP:
                 int level = (int)action.getPayloadEntry("level");
                 initMap(level);
+                initCurrentPosition();
                 break;
         }
     }
@@ -62,24 +64,32 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
     private void initLabels(String[] rawMap){
         ArrayList<Point> wallPositions = new ArrayList<Point>();
-        for (int row = 0; row < rawMap.length; row++)
-            for (int column = 0; column < rawMap[row].length(); column++){
-                switch(rawMap[row].charAt(column)){
+        for (int y = 0; y < rawMap.length; y++)
+            for (int x = 0; x < rawMap[y].length(); x++){
+                switch(rawMap[y].charAt(x)){
                     case 'W': Point
-                        wallPosition = new Point(column,row);
+                        wallPosition = new Point(x,y);
                         wallPositions.add(wallPosition);
                     case 'B':
-                        Point boxPosition = new Point(column,row);
+                        Point boxPosition = new Point(x,y);
                         map.setInitialBoxPosition(boxPosition);
                     case 'F':
-                        Point flagPosition = new Point(column,row);
+                        Point flagPosition = new Point(x,y);
                         map.setInitialBoxPosition(flagPosition);
                     case 'M':
-                        Point workerPosition = new Point(column,row);
+                        Point workerPosition = new Point(x,y);
                         map.setInitialBoxPosition(workerPosition);
                 }
             }
     }
+
+    private void initCurrentPosition(){
+        currentWorkerPosition.x = map.getInitialWorkerPosition().x;
+        currentWorkerPosition.y = map.getInitialWorkerPosition().y;
+        currentBoxPosition.x = map.getInitialBoxPosition().x;
+        currentBoxPosition.y = map.getInitialBoxPosition().y;
+    }
+
 
     private boolean checkWin() {
         return currentBoxPosition.equals(map.getFlagPosition());
@@ -212,10 +222,6 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
     public BusyWorkerMap getMap() {
         return map;
-    }
-
-    public BusyWorkerBitMap getBitmap() {
-        return bitmap;
     }
 
     public Point getCurrentWorkerPosition() {
