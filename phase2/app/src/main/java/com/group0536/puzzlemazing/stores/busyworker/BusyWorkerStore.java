@@ -170,4 +170,8 @@ public class BusyWorkerStore extends Store {
         }
         return instance;
     }
+
+    public BusyWorkerMap getMap() {
+        return map;
+    }
 }

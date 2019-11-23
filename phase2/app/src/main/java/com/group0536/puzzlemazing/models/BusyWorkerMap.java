@@ -4,6 +4,8 @@ import android.graphics.Point;
 
 public class BusyWorkerMap {
 
+    private int width;
+    private int height;
     private String[] Background;
     private Point initialWorkerPosition;
     private Point FlagPosition;
@@ -42,5 +44,13 @@ public class BusyWorkerMap {
 
     public Point[] getWallPositions() {
         return WallPositions;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
     }
 }
