@@ -174,4 +174,16 @@ public class BusyWorkerStore extends Store {
     public BusyWorkerMap getMap() {
         return map;
     }
+
+    public BusyWorkerBitMap getBitmap() {
+        return bitmap;
+    }
+
+    public Point getCurrentWorkerPosition() {
+        return currentWorkerPosition;
+    }
+
+    public Point getCurrentBoxPosition() {
+        return currentBoxPosition;
+    }
 }

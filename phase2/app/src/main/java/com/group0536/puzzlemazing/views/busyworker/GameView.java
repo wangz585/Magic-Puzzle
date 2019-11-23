@@ -10,11 +10,15 @@ import android.view.MotionEvent;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.busyworker.BusyWorkerActionCreator;
+import com.group0536.puzzlemazing.models.BusyWorkerBitMap;
+import com.group0536.puzzlemazing.models.BusyWorkerMap;
 import com.group0536.puzzlemazing.stores.busyworker.BusyWorkerChangeEvent;
 import com.group0536.puzzlemazing.stores.busyworker.BusyWorkerStore;
 import com.group0536.puzzlemazing.stores.crazymatch.CrazyMatchChangeEvent;
 import com.group0536.puzzlemazing.views.FluxView;
 import com.squareup.otto.Subscribe;
+
+import java.util.Map;
 
 
 public class GameView extends FluxView {
@@ -51,7 +55,6 @@ public class GameView extends FluxView {
         drawBackground(canvas);
         drawSurface(canvas);
         drawGameBoard(canvas);
-
     }
 
     private void drawBackground(Canvas canvas){
@@ -73,7 +76,51 @@ public class GameView extends FluxView {
     }
 
     private void drawGameBoard(Canvas canvas){
+        drawWalls(canvas);
+        drawBox(canvas);
+        drawWorker(canvas);
+        drawFlag(canvas);
 
+    }
+    private void drawWalls(Canvas canvas){
+        Rect srcRect;
+        Rect destRect;
+        BusyWorkerMap map = store.getMap();
+        BusyWorkerBitMap bitMap = store.getBitmap();
+        for (Point wallPosition : map.getWallPositions()){
+            destRect = getRect(wallPosition.x, wallPosition.y);
+            srcRect = new Rect(0, 0,
+                    bitMap.getWallBitmap().getWidth(), bitMap.getWallBitmap().getHeight());
+            canvas.drawBitmap(bitMap.getWallBitmap(),
+                    srcRect, destRect, null);
+        }
+    }
+
+    private void drawBox(Canvas canvas){
+        Point boxPosition = store.getCurrentBoxPosition();
+        Rect destRect = getRect(boxPosition.x, boxPosition.y);
+        Rect srcRect = new Rect(0, 0,
+                store.getBitmap().getBoxBitmap().getWidth(), store.getBitmap().getBoxBitmap().getHeight());
+        canvas.drawBitmap(store.getBitmap().getBoxBitmap(),
+                srcRect, destRect, null);
+    }
+
+    private void drawWorker(Canvas canvas){
+        Point workerPosition = store.getCurrentBoxPosition();
+        Rect destRect = getRect(workerPosition.x, workerPosition.y);
+        Rect srcRect = new Rect(0, 0,
+                store.getBitmap().getWorkerBitmap().getWidth(), store.getBitmap().getWorkerBitmap().getHeight());
+        canvas.drawBitmap(store.getBitmap().getWorkerBitmap(),
+                srcRect, destRect, null);
+    }
+
+    private void drawFlag(Canvas canvas){
+        Point flagPosition = store.getCurrentBoxPosition();
+        Rect destRect = getRect(flagPosition.x, flagPosition.y);
+        Rect srcRect = new Rect(0, 0,
+                store.getBitmap().getFlagBitmap().getWidth(), store.getBitmap().getFlagBitmap().getHeight());
+        canvas.drawBitmap(store.getBitmap().getFlagBitmap(),
+                srcRect, destRect, null);
     }
 
     @Override
@@ -81,7 +128,7 @@ public class GameView extends FluxView {
         if (event.getAction() != MotionEvent.ACTION_DOWN) return true;
         Point position = new Point((int) event.getX(),(int) event.getY());
         actionCreator.move(position);
-        postInvalidate();
+        postInvalidate();  //Update UI
         return true;
     }
 
@@ -100,13 +147,11 @@ public class GameView extends FluxView {
 
     }
 
-    private Rect getRect(int row, int column) {
-        int left = column * CellWidth;
-        int top =  row * CellWidth;
-        int right = (column + 1) * CellWidth;
-        int bottom = (row + 1) * CellWidth;
+    private Rect getRect(int x, int y) {
+        int left = x * CellWidth;
+        int top =  y * CellWidth;
+        int right = (x + 1) * CellWidth;
+        int bottom = (y + 1) * CellWidth;
         return new Rect(left, top, right, bottom);
     }
-
-
 }
