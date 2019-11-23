@@ -14,11 +14,8 @@ import com.group0536.puzzlemazing.models.BusyWorkerBitMap;
 import com.group0536.puzzlemazing.models.BusyWorkerMap;
 import com.group0536.puzzlemazing.stores.busyworker.BusyWorkerChangeEvent;
 import com.group0536.puzzlemazing.stores.busyworker.BusyWorkerStore;
-import com.group0536.puzzlemazing.stores.crazymatch.CrazyMatchChangeEvent;
 import com.group0536.puzzlemazing.views.FluxView;
 import com.squareup.otto.Subscribe;
-
-import java.util.Map;
 
 
 public class GameView extends FluxView {
@@ -80,8 +77,8 @@ public class GameView extends FluxView {
         drawBox(canvas);
         drawWorker(canvas);
         drawFlag(canvas);
-
     }
+
     private void drawWalls(Canvas canvas){
         Rect srcRect;
         Rect destRect;

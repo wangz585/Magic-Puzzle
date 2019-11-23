@@ -7,8 +7,11 @@ import com.group0536.puzzlemazing.actions.busyworker.BusyWorkerActions;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 import com.group0536.puzzlemazing.models.BusyWorkerBitMap;
 import com.group0536.puzzlemazing.models.BusyWorkerMap;
+import com.group0536.puzzlemazing.models.BusyWorkerRawMaps;
 import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
+
+import java.util.ArrayList;
 
 public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
@@ -43,7 +46,41 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
     }
 
     private void initMap(int level) {
+        BusyWorkerMap map = new BusyWorkerMap();
+        this.map = map;
+        String[] rawMap;
+        switch (level) {
+            case 1:
+                rawMap = BusyWorkerRawMaps.LEVEL_1;
+                break;
+            case 2:
+                rawMap = BusyWorkerRawMaps.LEVEL_2;
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + level);
+        }
+        initLabels(rawMap);
+    }
 
+    private void initLabels(String[] rawMap){
+        ArrayList<Point> wallPositions = new ArrayList<Point>();
+        for (int row = 0; row < rawMap.length; row++)
+            for (int column = 0; column < rawMap[row].length(); column++){
+                switch(rawMap[row].charAt(column)){
+                    case 'W':
+                        Point wallPosition = new Point(column,row);
+                        wallPositions.add(wallPosition);
+                    case 'B':
+                        Point boxPosition = new Point(column,row);
+                        map.setInitialBoxPosition(boxPosition);
+                    case 'F':
+                        Point flagPosition = new Point(column,row);
+                        map.setInitialBoxPosition(flagPosition);
+                    case 'M':
+                        Point workerPosition = new Point(column,row);
+                        map.setInitialBoxPosition(workerPosition);
+                }
+            }
     }
 
     private boolean checkWin() {
