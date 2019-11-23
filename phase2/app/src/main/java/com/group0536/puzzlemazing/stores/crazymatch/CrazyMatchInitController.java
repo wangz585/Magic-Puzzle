@@ -15,7 +15,7 @@ class CrazyMatchInitController {
         initializationData.put(1,contentMapLevelOne);
         HashMap<Object, Object> contentMapLevelTwo = new HashMap<>();
         contentMapLevelTwo.put("ContentView", R.layout.activity_crazy_match_level_two);
-        initializationData.put(1,contentMapLevelTwo);
+        initializationData.put(2,contentMapLevelTwo);
     }
 
     HashMap<Object, Object> getLevelData(int level) {

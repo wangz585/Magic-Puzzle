@@ -28,7 +28,7 @@ public class GameActivity extends FluxActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         level = getIntent().getIntExtra("level", 0);
-            setContentView(store.getContentView(1));
+        setContentView(store.getContentView(level));
         bindViews();
     }
 
