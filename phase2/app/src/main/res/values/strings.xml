@@ -21,7 +21,9 @@
   <string name="dialog_try_again">Try Again</string>
   <string name="dialog_exit">Exit</string>
 
+  <!-- crazy match -->
   <string name="crazy_match_game_ball">Game Ball</string>
   <string name="level_one">Level 1</string>
   <string name="level_two">Level 2</string>
+  <string name="crazy_match_title">Crazy Match</string>
 </resources>
