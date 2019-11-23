@@ -26,4 +26,5 @@
   <string name="level_one">Level 1</string>
   <string name="level_two">Level 2</string>
   <string name="crazy_match_title">Crazy Match</string>
+  <string name="display_score">score: %d</string>
 </resources>

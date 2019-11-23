@@ -81,7 +81,7 @@ public class CrazyMatchBoard {
      *
      * @return number of animals on this board
      */
-    public int getNumberOfAnimals() {
+    public int getNumberOfAnimalsLeft() {
         return numAnimals;
     }
 }

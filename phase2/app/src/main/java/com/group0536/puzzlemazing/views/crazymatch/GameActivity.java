@@ -3,8 +3,7 @@ package com.group0536.puzzlemazing.views.crazymatch;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
-
-import androidx.annotation.ContentView;
+import android.widget.TextView;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.crazymatch.CrazyMatchActionCreator;
@@ -23,6 +22,7 @@ public class GameActivity extends FluxActivity {
 
     // Components
     private ImageButton[][] btnBalls;
+    private TextView txtScore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,16 @@ public class GameActivity extends FluxActivity {
      */
     private void bindViews() {
         initializeBalls();
+        initializeScoreText();
+    }
+
+    /**
+     * Initialize the text view displaying the score
+     */
+    private void initializeScoreText() {
+        txtScore = findViewById(R.id.txtScore);
+        String scoreText = getString(R.string.display_score, 0);
+        txtScore.setText(scoreText);
     }
 
     /**
@@ -89,9 +99,26 @@ public class GameActivity extends FluxActivity {
      */
     private void updateUI() {
         updateBoard();
+        updateScore();
     }
 
+    /**
+     * Update the current game's score according to the store
+     */
+    private void updateScore() {
+        int score = store.getScore();
+        final String scoreText = getString(R.string.display_score, score);
+        GameActivity.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                txtScore.setText(scoreText);
+            }
+        });
+    }
 
+    /**
+     * Update the crazy match board according to the store
+     */
     private void updateBoard() {
         CrazyMatchBoard board = store.getBoard();
         for (int i = 0; i < board.getNumberOfRows(); i++) {

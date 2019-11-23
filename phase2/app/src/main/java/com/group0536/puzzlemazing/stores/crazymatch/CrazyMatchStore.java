@@ -1,9 +1,6 @@
 package com.group0536.puzzlemazing.stores.crazymatch;
 
 import android.util.SparseArray;
-import android.view.View;
-
-import androidx.annotation.ContentView;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.Action;
@@ -43,6 +40,38 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         // TODO: pass in a player
 //        this.player = player;
         setLevelToDimension();
+    }
+
+    /**
+     * Get an instance of this store
+     *
+     * @param dispatcher the dispatcher associated
+     * @return an insrance of this store
+     */
+    public static CrazyMatchStore getInstance(Dispatcher dispatcher) {
+        if (instance == null) {
+            instance = new CrazyMatchStore(dispatcher);
+        }
+        return instance;
+    }
+
+    @Override
+    protected StoreChangeEvent getChangeEvent() {
+        return new CrazyMatchChangeEvent();
+    }
+
+    @Override
+    @Subscribe
+    public void onAction(Action action) {
+        switch (action.getType()) {
+            case FLIP:
+                flipButtons(action);
+                break;
+            case INITIALIZE_BOARD:
+                initializeBoard((int) action.getPayloadEntry("level"));
+                postChange();
+                break;
+        }
     }
 
     private void setLevelToDimension() {
@@ -89,38 +118,6 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         return board;
     }
 
-    /**
-     * Get an instance of this store
-     *
-     * @param dispatcher
-     * @return
-     */
-    public static CrazyMatchStore getInstance(Dispatcher dispatcher) {
-        if (instance == null) {
-            instance = new CrazyMatchStore(dispatcher);
-        }
-        return instance;
-    }
-
-    @Override
-    protected StoreChangeEvent getChangeEvent() {
-        return new CrazyMatchChangeEvent();
-    }
-
-    @Override
-    @Subscribe
-    public void onAction(Action action) {
-        switch (action.getType()) {
-            case FLIP:
-                flipButtons(action);
-                break;
-            case INITIALIZE_BOARD:
-                initializeBoard((int) action.getPayloadEntry("level"));
-                postChange();
-                break;
-        }
-    }
-
     public int getContentView(int level) {
         HashMap<Object, Object> levelData = initController.getLevelData(level);
         return (int) levelData.get("ContentView");
@@ -132,6 +129,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
      * @param action action Object of the action being processed
      */
     private void flipButtons(Action action) {
+        stepsTaken++;
         int row = (int) action.getPayloadEntry("row");
         int col = (int) action.getPayloadEntry("col");
         flipAnimal(row, col);
@@ -147,6 +145,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
                     secondFlip.flipOver();
                     if (isTheSame()) {
                         updateScore();
+                        stepsTaken = 0;
                         removeAnimal(firstFlip);
                         removeAnimal(secondFlip);
                     }
@@ -178,7 +177,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
      * @return if the game is over
      */
     public boolean isGameOver() {
-        return board.getNumberOfAnimals() == 0;
+        return board.getNumberOfAnimalsLeft() == 0;
     }
 
     /**
@@ -258,7 +257,16 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
      * Update the score
      */
     private void updateScore() {
-        // update score
+        score += Math.round(35 * board.getNumberOfAnimalsLeft() / stepsTaken);
+    }
+
+    /**
+     * Get the player's score in this game
+     *
+     * @return the player's score in this game
+     */
+    public int getScore() {
+        return score;
     }
 
     /**
