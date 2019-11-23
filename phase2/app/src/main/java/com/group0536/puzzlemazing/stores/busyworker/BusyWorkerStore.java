@@ -48,8 +48,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
     }
 
     private void initMap(int level) {
-        BusyWorkerMap map = new BusyWorkerMap();
-        this.map = map;
+        this.map = new BusyWorkerMap();
         String[] rawMap;
         switch (level) {
             case 1: rawMap = BusyWorkerRawMaps.LEVEL_1;
@@ -60,10 +59,11 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
                 throw new IllegalStateException("Unexpected value: " + level);
         }
         initLabels(rawMap);
+        initCircumference(rawMap);
     }
 
     private void initLabels(String[] rawMap){
-        ArrayList<Point> wallPositions = new ArrayList<Point>();
+        ArrayList<Point> wallPositions = new ArrayList<>();
         for (int y = 0; y < rawMap.length; y++)
             for (int x = 0; x < rawMap[y].length(); x++){
                 switch(rawMap[y].charAt(x)){
@@ -81,6 +81,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
                         map.setInitialBoxPosition(workerPosition);
                 }
             }
+        map.setWallPositions(wallPositions);
     }
 
     private void initCurrentPosition(){
@@ -90,6 +91,10 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         currentBoxPosition.y = map.getInitialBoxPosition().y;
     }
 
+    private void initCircumference(String[] rawMap){
+        map.setWidth(rawMap[1].length());
+        map.setHeight(rawMap.length);
+    }
 
     private boolean checkWin() {
         return currentBoxPosition.equals(map.getFlagPosition());
@@ -131,16 +136,16 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
     private void moveAbove() {
         if (BoxAboveWorker() && !(WallAboveWorker())) {
-            currentBoxPosition.y = currentBoxPosition.y + 1;
-            currentWorkerPosition.y = currentWorkerPosition.y + 1;
-        } else currentWorkerPosition.y = currentWorkerPosition.y + 1;
+            currentBoxPosition.y = currentBoxPosition.y - 1;
+            currentWorkerPosition.y = currentWorkerPosition.y - 1;
+        } else currentWorkerPosition.y = currentWorkerPosition.y - 1;
     }
 
     private void moveBelow() {
         if (BoxBelowWorker() && !(WallBelowWorker())) {
-            currentBoxPosition.y = currentBoxPosition.y - 1;
-            currentWorkerPosition.y = currentWorkerPosition.y - 1;
-        } else currentWorkerPosition.y = currentWorkerPosition.y - 1;
+            currentBoxPosition.y = currentBoxPosition.y + 1;
+            currentWorkerPosition.y = currentWorkerPosition.y + 1;
+        } else currentWorkerPosition.y = currentWorkerPosition.y + 1;
     }
 
     private void moveLeft() {
@@ -159,7 +164,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
     private boolean WallAboveWorker(){
         for (Point wallPosition : map.getWallPositions()) {
-            if (wallPosition.y == currentBoxPosition.y + 1){
+            if (wallPosition.y == currentBoxPosition.y - 1){
                 return true;
             }
         }
@@ -186,7 +191,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
     private boolean WallBelowWorker(){
         for (Point wallPosition : map.getWallPositions()) {
-            if (wallPosition.y == currentBoxPosition.y - 1){
+            if (wallPosition.y == currentBoxPosition.y + 1){
                 return true;
             }
         }
@@ -195,12 +200,12 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
     private boolean BoxAboveWorker() {
         return currentBoxPosition.x == currentWorkerPosition.x &&
-                currentBoxPosition.y == currentWorkerPosition.y + 1;
+                currentBoxPosition.y == currentWorkerPosition.y - 1;
     }
 
     private boolean BoxBelowWorker() {
         return currentBoxPosition.x == currentWorkerPosition.x &&
-                currentBoxPosition.y == currentWorkerPosition.y - 1;
+                currentBoxPosition.y == currentWorkerPosition.y + 1;
     }
 
     private boolean BoxRightToWorker() {

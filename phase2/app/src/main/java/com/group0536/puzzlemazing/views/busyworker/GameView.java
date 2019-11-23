@@ -36,7 +36,7 @@ public class GameView extends FluxView {
     }
 
     @Override
-    protected void onAttachedToWindow(){
+    protected void onAttachedToWindow() {
         super.onAttachedToWindow();
         registerStore(store);
     }
@@ -55,13 +55,13 @@ public class GameView extends FluxView {
         drawGameBoard(canvas);
     }
 
-    private void drawBackground(Canvas canvas){
+    private void drawBackground(Canvas canvas) {
         Paint background = new Paint();
         background.setColor(getResources().getColor(R.color.turquoise));
         canvas.drawRect(0, 0, getWidth(), getHeight(), background);
     }
 
-    private void drawSurface(Canvas canvas){
+    private void drawSurface(Canvas canvas) {
         Paint linePaint = new Paint();
         linePaint.setColor(Color.BLACK);
         for (int row = 0; row <= store.getMap().getWidth(); row++)
@@ -73,18 +73,18 @@ public class GameView extends FluxView {
                     store.getMap().getWidth() * CellWidth, linePaint);
     }
 
-    private void drawGameBoard(Canvas canvas){
+    private void drawGameBoard(Canvas canvas) {
         drawWalls(canvas);
         drawBox(canvas);
         drawWorker(canvas);
         drawFlag(canvas);
     }
 
-    private void drawWalls(Canvas canvas){
+    private void drawWalls(Canvas canvas) {
         Rect srcRect;
         Rect destRect;
         BusyWorkerMap map = store.getMap();
-        for (Point wallPosition : map.getWallPositions()){
+        for (Point wallPosition : map.getWallPositions()) {
             destRect = getRect(wallPosition.x, wallPosition.y);
             srcRect = new Rect(0, 0,
                     BusyWorkerBitMap.getWallBitmap().getWidth(), BusyWorkerBitMap.getWallBitmap().getHeight());
@@ -93,7 +93,7 @@ public class GameView extends FluxView {
         }
     }
 
-    private void drawBox(Canvas canvas){
+    private void drawBox(Canvas canvas) {
         Point boxPosition = store.getCurrentBoxPosition();
         Rect destRect = getRect(boxPosition.x, boxPosition.y);
         Rect srcRect = new Rect(0, 0,
@@ -102,7 +102,7 @@ public class GameView extends FluxView {
                 srcRect, destRect, null);
     }
 
-    private void drawWorker(Canvas canvas){
+    private void drawWorker(Canvas canvas) {
         Point workerPosition = store.getCurrentBoxPosition();
         Rect destRect = getRect(workerPosition.x, workerPosition.y);
         Rect srcRect = new Rect(0, 0,
@@ -111,7 +111,7 @@ public class GameView extends FluxView {
                 srcRect, destRect, null);
     }
 
-    private void drawFlag(Canvas canvas){
+    private void drawFlag(Canvas canvas) {
         Point flagPosition = store.getCurrentBoxPosition();
         Rect destRect = getRect(flagPosition.x, flagPosition.y);
         Rect srcRect = new Rect(0, 0,
@@ -120,7 +120,7 @@ public class GameView extends FluxView {
                 srcRect, destRect, null);
     }
 
-    private void drawWin(Canvas canvas){
+    private void drawWin(Canvas canvas) {
         Paint txtPaint = new Paint();
         txtPaint.setColor(Color.RED);
         txtPaint.setTextSize(100.0f);
@@ -128,7 +128,7 @@ public class GameView extends FluxView {
                 4 * CellWidth, 6 * CellWidth, txtPaint);
     }
 
-    private void drawLose(Canvas canvas){
+    private void drawLose(Canvas canvas) {
         Paint txtPaint = new Paint();
         txtPaint.setColor(Color.RED);
         txtPaint.setTextSize(100.0f);
@@ -138,9 +138,9 @@ public class GameView extends FluxView {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event){
+    public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() != MotionEvent.ACTION_DOWN) return true;
-        Point position = new Point((int) event.getX(),(int) event.getY());
+        Point position = new Point((int) event.getX(), (int) event.getY());
         actionCreator.move(position);
         postInvalidate();  //Update UI
         return true;
@@ -163,7 +163,7 @@ public class GameView extends FluxView {
 
     private Rect getRect(int x, int y) {
         int left = x * CellWidth;
-        int top =  y * CellWidth;
+        int top = y * CellWidth;
         int right = (x + 1) * CellWidth;
         int bottom = (y + 1) * CellWidth;
         return new Rect(left, top, right, bottom);
