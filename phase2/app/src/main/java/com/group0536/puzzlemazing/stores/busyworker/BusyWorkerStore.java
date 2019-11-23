@@ -25,11 +25,12 @@ public class BusyWorkerStore extends Store {
 
     @Override
     protected StoreChangeEvent getChangeEvent() {
-        return null;
+        return new BusyWorkerChangeEvent();
     }
 
     @Override
     public void onAction(Action action) {
+
 
     }
 
