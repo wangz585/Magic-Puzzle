@@ -50,11 +50,9 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         this.map = map;
         String[] rawMap;
         switch (level) {
-            case 1:
-                rawMap = BusyWorkerRawMaps.LEVEL_1;
+            case 1: rawMap = BusyWorkerRawMaps.LEVEL_1;
                 break;
-            case 2:
-                rawMap = BusyWorkerRawMaps.LEVEL_2;
+            case 2: rawMap = BusyWorkerRawMaps.LEVEL_2;
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + level);
@@ -67,8 +65,8 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         for (int row = 0; row < rawMap.length; row++)
             for (int column = 0; column < rawMap[row].length(); column++){
                 switch(rawMap[row].charAt(column)){
-                    case 'W':
-                        Point wallPosition = new Point(column,row);
+                    case 'W': Point
+                        wallPosition = new Point(column,row);
                         wallPositions.add(wallPosition);
                     case 'B':
                         Point boxPosition = new Point(column,row);
@@ -98,18 +96,14 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         String HorizontalDirection = checkHorizontalPosition(touchPosition);
         String VerticalDirection = checkVerticalPosition(touchPosition);
         switch (HorizontalDirection) {
-            case "left":
-                moveLeft();
-            case "right":
-                moveRight();
-                break;
+            case "left": moveLeft();
+            case "right": moveRight();
+            break;
         }
         switch (VerticalDirection) {
-            case "above":
-                moveAbove();
-            case "below":
-                moveBelow();
-                break;
+            case "above": moveAbove();
+            case "below": moveBelow();
+            break;
         }
     }
 

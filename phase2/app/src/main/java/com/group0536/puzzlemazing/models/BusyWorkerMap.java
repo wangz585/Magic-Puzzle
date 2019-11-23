@@ -2,6 +2,8 @@ package com.group0536.puzzlemazing.models;
 
 import android.graphics.Point;
 
+import java.util.ArrayList;
+
 public class BusyWorkerMap {
 
     private int width;
@@ -10,8 +12,8 @@ public class BusyWorkerMap {
     private Point initialWorkerPosition;
     private Point FlagPosition;
     private Point initialBoxPosition;
-    private Point[] DeadPositions;
-    private Point[] WallPositions;
+    private ArrayList<Point> DeadPositions;
+    private ArrayList<Point> WallPositions;
 
     public BusyWorkerMap() {
     }
@@ -30,14 +32,6 @@ public class BusyWorkerMap {
 
     public Point getInitialBoxPosition() {
         return initialBoxPosition;
-    }
-
-    public Point[] getDeadPositions() {
-        return DeadPositions;
-    }
-
-    public Point[] getWallPositions() {
-        return WallPositions;
     }
 
     public int getWidth() {
@@ -72,11 +66,19 @@ public class BusyWorkerMap {
         this.initialBoxPosition = initialBoxPosition;
     }
 
-    public void setDeadPositions(Point[] deadPositions) {
+    public ArrayList<Point> getDeadPositions() {
+        return DeadPositions;
+    }
+
+    public void setDeadPositions(ArrayList<Point> deadPositions) {
         DeadPositions = deadPositions;
     }
 
-    public void setWallPositions(Point[] wallPositions) {
+    public ArrayList<Point> getWallPositions() {
+        return WallPositions;
+    }
+
+    public void setWallPositions(ArrayList<Point> wallPositions) {
         WallPositions = wallPositions;
     }
 }
