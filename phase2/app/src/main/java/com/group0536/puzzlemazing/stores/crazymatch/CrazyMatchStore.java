@@ -18,7 +18,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
-import java.util.TimerTask;
 
 public class CrazyMatchStore extends Store implements CrazyMatchActions {
     private CrazyMatchBoard board;
@@ -108,31 +107,6 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
                 int col = (int) action.getPayloadEntry("col");
                 flipAnimal(row, col);
                 postChange();
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                if((firstFlip != null) && (secondFlip != null)) {
-                    TimerTask taskDelayed = new TimerTask() {
-                        @Override
-                        public void run() {
-                            if (isTheSame(firstFlip, secondFlip)) {
-                                updateScore();
-                                cancelAnimal(firstFlip);
-                                cancelAnimal(secondFlip);
-                                clearFlipPair();
-                                pairsLeft--;
-                            } else {
-                                // two flips are not the same
-                                clearFlipPair();
-                            }
-                        }
-                    };
-                    taskDelayed.run();
-                    postChange();
-                }
                 /*if ((firstFlip != null) && (secondFlip != null)) {
                     Timer timer_CheckPairs = new Timer();
                     timer_CheckPairs.schedule(new TimerTask() {
@@ -210,8 +184,8 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         // update score
     }
 
-    private boolean isTheSame(Animal firstFlip, Animal secondFlip) {
-        return this.firstFlip.equals(this.secondFlip);
+    private boolean isTheSame() {
+        return firstFlip.equals(secondFlip);
     }
 
     private void flipAnimal(int row, int col) {
