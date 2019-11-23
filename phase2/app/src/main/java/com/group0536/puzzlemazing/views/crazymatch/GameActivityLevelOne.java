@@ -25,7 +25,7 @@ public class GameActivityLevelOne extends FluxActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crazy_match_level_one);
-        ballDrawingInt = R.drawable.crazy_match_yellow_ball;
+        ballDrawingInt = R.drawable.crazy_match_ball;
         bindViews();
     }
 
@@ -77,7 +77,6 @@ public class GameActivityLevelOne extends FluxActivity {
                     Animal animal = board.getAnimal(i, j);
                     if (animal == null) {
                         btn.setVisibility(View.INVISIBLE);
-                        //System.out.println("");
                     } else if (animal.isFlipped()) {
                         int animalSide = board.getAnimal(i, j).getAnimalSide();
                         btn.setImageResource(animalSide);
