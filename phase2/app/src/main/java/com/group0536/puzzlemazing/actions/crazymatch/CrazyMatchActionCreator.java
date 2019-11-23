@@ -18,7 +18,7 @@ public class CrazyMatchActionCreator extends ActionCreator implements CrazyMatch
     }
 
     public void setBoard(int level){
-        Action action = new Action.ActionBuilder(SET_BOARD)
+        Action action = new Action.ActionBuilder(INITIALIZE_BOARD)
                 .load("level", level)
                 .build();
         dispatcher.dispatch(action);

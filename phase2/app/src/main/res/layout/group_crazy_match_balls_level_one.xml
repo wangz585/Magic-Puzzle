@@ -18,30 +18,34 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@null"
             android:adjustViewBounds="true"
             android:contentDescription="@string/crazy_match_game_ball"
             android:scaleType="centerInside"
-            android:src="@drawable/crazy_match_yellow_ball" />
+
+            android:src="@drawable/crazy_match_ball" />
 
         <ImageButton
             android:id="@+id/btn_ball_01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@null"
             android:adjustViewBounds="true"
             android:contentDescription="@string/crazy_match_game_ball"
             android:scaleType="centerInside"
-            android:src="@drawable/crazy_match_yellow_ball" />
+            android:src="@drawable/crazy_match_ball" />
 
         <ImageButton
             android:id="@+id/btn_ball_02"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@null"
             android:adjustViewBounds="true"
             android:contentDescription="@string/crazy_match_game_ball"
             android:scaleType="centerInside"
-            android:src="@drawable/crazy_match_yellow_ball" />
+            android:src="@drawable/crazy_match_ball" />
 
     </LinearLayout>
 
@@ -57,30 +61,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@null"
             android:adjustViewBounds="true"
             android:contentDescription="@string/crazy_match_game_ball"
             android:scaleType="centerInside"
-            android:src="@drawable/crazy_match_yellow_ball" />
+            android:src="@drawable/crazy_match_ball" />
 
         <ImageButton
             android:id="@+id/btn_ball_11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@null"
             android:adjustViewBounds="true"
             android:contentDescription="@string/crazy_match_game_ball"
             android:scaleType="centerInside"
-            android:src="@drawable/crazy_match_yellow_ball" />
+            android:src="@drawable/crazy_match_ball" />
 
         <ImageButton
             android:id="@+id/btn_ball_12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:background="@null"
             android:adjustViewBounds="true"
             android:contentDescription="@string/crazy_match_game_ball"
             android:scaleType="centerInside"
-            android:src="@drawable/crazy_match_yellow_ball" />
+            android:src="@drawable/crazy_match_ball" />
     </LinearLayout>
 
 
