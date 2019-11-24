@@ -117,19 +117,21 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         String VerticalDirection = checkVerticalPosition(touchPosition);
         switch (HorizontalDirection) {
             case "left": moveLeft();
+            break;
             case "right": moveRight();
             break;
         }
         switch (VerticalDirection) {
             case "above": moveAbove();
+            break;
             case "below": moveBelow();
             break;
         }
     }
 
     private String checkVerticalPosition(Point touchPosition) {
-        if (touchPosition.y > currentWorkerPosition.y) return "above";
-        else if (touchPosition.y < currentWorkerPosition.y) return "below";
+        if (touchPosition.y < currentWorkerPosition.y) return "above";
+        else if (touchPosition.y > currentWorkerPosition.y) return "below";
         else return "noVerticalMovement";
     }
 
@@ -140,36 +142,41 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
     }
 
     private void moveAbove() {
-        if (BoxAboveWorker() && !(WallAboveWorker())) {
-            currentBoxPosition.y = currentBoxPosition.y - 1;
+        if ((!WallAboveBox()) && BoxAboveWorker()) {
             currentWorkerPosition.y = currentWorkerPosition.y - 1;
-        } else currentWorkerPosition.y = currentWorkerPosition.y - 1;
+            currentBoxPosition.y = currentBoxPosition.y - 1;
+        }
+        else if ((!WallAboveWorker())) currentWorkerPosition.y = currentWorkerPosition.y - 1;
     }
 
     private void moveBelow() {
-        if (BoxBelowWorker() && !(WallBelowWorker())) {
-            currentBoxPosition.y = currentBoxPosition.y + 1;
+        if ((!WallBelowBox()) && BoxBelowWorker()) {
             currentWorkerPosition.y = currentWorkerPosition.y + 1;
-        } else currentWorkerPosition.y = currentWorkerPosition.y + 1;
+            currentBoxPosition.y = currentBoxPosition.y + 1;
+        }
+        else if ((!WallBelowWorker())) currentWorkerPosition.y = currentWorkerPosition.y + 1;
     }
 
     private void moveLeft() {
-        if (BoxLeftToWorker() && !(WallLeftToWorker())) {
-            currentBoxPosition.x = currentBoxPosition.x - 1;
+        if ((!WallLeftToBox()) && BoxLeftToWorker()) {
             currentWorkerPosition.x = currentWorkerPosition.x - 1;
-        } else currentWorkerPosition.x = currentWorkerPosition.x - 1;
+            currentBoxPosition.x = currentBoxPosition.x - 1;
+        }
+        else if ((!WallLeftToWorker())) currentWorkerPosition.x = currentWorkerPosition.x - 1;
     }
 
     private void moveRight() {
-        if (BoxRightToWorker() && !(WallRightToWorker())) {
-            currentBoxPosition.x = currentBoxPosition.x + 1;
+        if ((!WallRightToBox()) && BoxRightToWorker()) {
             currentWorkerPosition.x = currentWorkerPosition.x + 1;
-        } else currentWorkerPosition.x = currentWorkerPosition.x + 1;
+            currentBoxPosition.x = currentBoxPosition.x + 1;
+        }
+        else if ((!WallRightToWorker())) currentWorkerPosition.x = currentWorkerPosition.x + 1;
     }
+
 
     private boolean WallAboveWorker(){
         for (Point wallPosition : map.getWallPositions()) {
-            if (wallPosition.y == currentBoxPosition.y - 1){
+            if (wallPosition.y == currentWorkerPosition.y - 1 && wallPosition.x == currentWorkerPosition.x){
                 return true;
             }
         }
@@ -178,7 +185,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
     private boolean WallLeftToWorker(){
         for (Point wallPosition : map.getWallPositions()) {
-            if (wallPosition.x == currentBoxPosition.x - 1){
+            if (wallPosition.x == currentWorkerPosition.x - 1 && wallPosition.y == currentWorkerPosition.y){
                 return true;
             }
         }
@@ -187,7 +194,43 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
     private boolean WallRightToWorker(){
         for (Point wallPosition : map.getWallPositions()) {
-            if (wallPosition.x == currentBoxPosition.x + 1){
+            if (wallPosition.x == currentWorkerPosition.x + 1 && wallPosition.y == currentWorkerPosition.y){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean WallAboveBox(){
+        for (Point wallPosition : map.getWallPositions()) {
+            if (wallPosition.y == currentBoxPosition.y - 1 && wallPosition.x == currentBoxPosition.x){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean WallBelowBox(){
+        for (Point wallPosition : map.getWallPositions()) {
+            if (wallPosition.y == currentBoxPosition.y + 1 && wallPosition.x == currentBoxPosition.x){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean WallLeftToBox(){
+        for (Point wallPosition : map.getWallPositions()) {
+            if (wallPosition.y == currentBoxPosition.y && wallPosition.x == currentBoxPosition.x - 1){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean WallRightToBox(){
+        for (Point wallPosition : map.getWallPositions()) {
+            if (wallPosition.y == currentBoxPosition.y && wallPosition.x == currentBoxPosition.x + 1){
                 return true;
             }
         }
@@ -196,7 +239,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
     private boolean WallBelowWorker(){
         for (Point wallPosition : map.getWallPositions()) {
-            if (wallPosition.y == currentBoxPosition.y + 1){
+            if (wallPosition.y == currentBoxPosition.y + 1 && wallPosition.x == currentBoxPosition.x){
                 return true;
             }
         }

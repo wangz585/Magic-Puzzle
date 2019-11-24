@@ -140,7 +140,7 @@ public class GameView extends FluxView {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() != MotionEvent.ACTION_DOWN) return true;
-        Point position = new Point((int) event.getX(), (int) event.getY());
+        Point position = new Point((int) event.getX()/CellWidth, (int) event.getY()/CellWidth);
         actionCreator.move(position);
         postInvalidate();  //Update UI
         return true;
