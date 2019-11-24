@@ -10,22 +10,15 @@ public class WordGuessingActionCreator extends ActionCreator implements WordGues
         super(dispatcher);
     }
 
-    public void showHint(){
-        Action action = new Action.ActionBuilder(SHOW_HINT)
-                .build();
-        dispatcher.dispatch(action);
-    }
-
-    public void checkAnswer(String word){
-        Action action = new Action.ActionBuilder(CHECK)
+    public void submitAnswer(String word){
+        Action action = new Action.ActionBuilder(SUBMIT_ANSWER)
                 .load("word", word)
                 .build();
         dispatcher.dispatch(action);
     }
 
-    public void skip(){
-        Action action = new Action.ActionBuilder(SKIP)
-                .build();
+    public void startGame(){
+        Action action = new Action.ActionBuilder(START_GAME).build();
         dispatcher.dispatch(action);
     }
 }
