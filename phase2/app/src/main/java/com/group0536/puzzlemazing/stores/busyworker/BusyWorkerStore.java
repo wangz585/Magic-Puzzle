@@ -27,12 +27,6 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         super(dispatcher);
         score = 0;
     }
-    TimerTask t = new TimerTask() {
-        @Override
-        public void run() {
-            System.out.println("1");
-        }
-    };
 
 
     @Override
@@ -87,6 +81,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
     private void initLabels(String[] rawMap){
         ArrayList<Point> wallPositions = new ArrayList<>();
+        ArrayList<Point> deadPositions = new ArrayList<>();
         for (int y = 0; y < rawMap.length; y++)
             for (int x = 0; x < rawMap[y].length(); x++){
                 switch(rawMap[y].charAt(x)){
@@ -106,9 +101,40 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
                         Point workerPosition = new Point(x,y);
                         map.setInitialWorkerPosition(workerPosition);
                         break;
+                    case ' ':
+                        Point spacePosition = new Point(x,y);
+                        if (checkDeadPosition(rawMap, spacePosition)){
+                            deadPositions.add(spacePosition);
+                        }
                 }
             }
+        map.setDeadPositions(deadPositions);
         map.setWallPositions(wallPositions);
+    }
+
+    private boolean checkDeadPosition(String[] rawMap, Point spacePosition){
+        return (checkAboveLeft(rawMap,spacePosition) || checkBelowLeft(rawMap,spacePosition) ||
+                checkAboveRight(rawMap,spacePosition) || checkBelowRight(rawMap,spacePosition));
+    }
+
+    private boolean checkBelowRight(String[] rawMap, Point spacePosition) {
+        return rawMap[spacePosition.y].charAt(spacePosition.x+1) == 'W' &&
+                rawMap[spacePosition.y+1].charAt(spacePosition.x) == 'W';
+    }
+
+    private boolean checkAboveRight(String[] rawMap, Point spacePosition) {
+        return rawMap[spacePosition.y].charAt(spacePosition.x+1) == 'W' &&
+                rawMap[spacePosition.y-1].charAt(spacePosition.x) == 'W';
+    }
+
+    private boolean checkBelowLeft(String[] rawMap, Point spacePosition) {
+        return rawMap[spacePosition.y].charAt(spacePosition.x-1) == 'W' &&
+                rawMap[spacePosition.y+1].charAt(spacePosition.x) == 'W';
+    }
+
+    private boolean checkAboveLeft(String[] rawMap, Point spacePosition) {
+        return rawMap[spacePosition.y].charAt(spacePosition.x-1) == 'W' &&
+                rawMap[spacePosition.y-1].charAt(spacePosition.x) == 'W';
     }
 
     private void initCurrentPosition(){
@@ -125,7 +151,11 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         return currentBoxPosition.equals(map.getFlagPosition());
     }
 
-    public void checkLose() {
+    public boolean checkLose() {
+        for (Point deadPostion : map.getDeadPositions()){
+            if (deadPostion.equals(currentBoxPosition)) return true;
+        }
+        return false;
     }
 
     private void move(Point touchPosition) {
