@@ -45,11 +45,9 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
     @Subscribe
     public void onAction(Action action) {
         switch (action.getType()) {
-            case SHOW_HINT:
+            case START_GAME:
                 break;
-            case CHECK:
-                break;
-            case SKIP:
+            case SUBMIT_ANSWER:
                 break;
 
         }
