@@ -103,7 +103,7 @@ public class GameView extends FluxView {
     }
 
     private void drawWorker(Canvas canvas) {
-        Point workerPosition = store.getCurrentBoxPosition();
+        Point workerPosition = store.getCurrentWorkerPosition();
         Rect destRect = getRect(workerPosition.x, workerPosition.y);
         Rect srcRect = new Rect(0, 0,
                 BusyWorkerBitMap.getWorkerBitmap().getWidth(), BusyWorkerBitMap.getWorkerBitmap().getHeight());
@@ -112,7 +112,7 @@ public class GameView extends FluxView {
     }
 
     private void drawFlag(Canvas canvas) {
-        Point flagPosition = store.getCurrentBoxPosition();
+        Point flagPosition = store.getMap().getFlagPosition();
         Rect destRect = getRect(flagPosition.x, flagPosition.y);
         Rect srcRect = new Rect(0, 0,
                 BusyWorkerBitMap.getFlagBitmap().getWidth(), BusyWorkerBitMap.getFlagBitmap().getHeight());

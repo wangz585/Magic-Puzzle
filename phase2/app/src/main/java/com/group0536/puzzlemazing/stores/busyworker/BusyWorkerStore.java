@@ -129,13 +129,13 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
     private String checkVerticalPosition(Point touchPosition) {
         if (touchPosition.y > currentWorkerPosition.y) return "above";
-        else if (touchPosition.y == currentWorkerPosition.y) return "below";
+        else if (touchPosition.y < currentWorkerPosition.y) return "below";
         else return "noVerticalMovement";
     }
 
     private String checkHorizontalPosition(Point touchPosition) {
         if (touchPosition.x > currentWorkerPosition.x) return "right";
-        else if (touchPosition.x == currentWorkerPosition.x) return "left";
+        else if (touchPosition.x < currentWorkerPosition.x) return "left";
         else return "noHorizontalMovement";
     }
 
