@@ -1,8 +1,5 @@
 package com.group0536.puzzlemazing.stores.busyworker;
-
-import android.content.res.Resources;
 import android.graphics.Point;
-
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.busyworker.BusyWorkerActions;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
@@ -30,7 +27,6 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         super(dispatcher);
         score = 0;
     }
-
     TimerTask t = new TimerTask() {
         @Override
         public void run() {
@@ -125,15 +121,11 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         map.setHeight(rawMap.length);
     }
 
-    private boolean checkWin() {
+    public boolean checkWin() {
         return currentBoxPosition.equals(map.getFlagPosition());
     }
 
-    private boolean checkLose() {
-        for (Point deadPosition : map.getDeadPositions()) {
-            if (deadPosition.equals(currentBoxPosition)) return true;
-        }
-        return false;
+    public void checkLose() {
     }
 
     private void move(Point touchPosition) {

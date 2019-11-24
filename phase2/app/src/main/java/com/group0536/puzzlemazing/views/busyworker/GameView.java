@@ -150,12 +150,12 @@ public class GameView extends FluxView {
         canvas.drawText(String.valueOf(store.getScore()),5 * CellWidth,19 * CellWidth,txtPaint);
     }
 
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() != MotionEvent.ACTION_DOWN) return true;
         Point position = new Point((int) event.getX()/CellWidth, (int) event.getY()/CellWidth);
         actionCreator.move(position);
-        //postInvalidate();  //Update UI
         return true;
     }
 
