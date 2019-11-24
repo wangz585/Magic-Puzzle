@@ -13,6 +13,8 @@ import com.group0536.puzzlemazing.stores.StoreChangeEvent;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
@@ -21,11 +23,20 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
     private int score;
     private Point currentWorkerPosition;
     private Point currentBoxPosition;
-
+    private Timer timer;
+    
     protected BusyWorkerStore(Dispatcher dispatcher) {
         super(dispatcher);
         score = 0;
     }
+
+    TimerTask t = new TimerTask() {
+        @Override
+        public void run() {
+            System.out.println("1");
+        }
+    };
+
 
     @Override
     protected StoreChangeEvent getChangeEvent() {
@@ -48,6 +59,17 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
                 postChange();
                 break;
         }
+    }
+
+    private void initTimer(){
+        timer = new Timer();
+        TimerTask t = new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("1");
+            }
+        };
+        timer.scheduleAtFixedRate(t,1000,1000);
     }
 
     private void initMap(int level) {
