@@ -9,42 +9,47 @@
 
     <include
 
-        android:id="@+id/balls_group"
-        layout="@layout/group_crazy_match_balls_level_one"
-        android:layout_width="370dp"
-        android:layout_height="250dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="80dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+      android:id="@+id/balls_group"
+      layout="@layout/group_crazy_match_balls_level_one"
+      android:layout_width="370dp"
+      android:layout_height="250dp"
+      android:layout_alignParentBottom="true"
+      android:layout_marginBottom="24dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.5"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/txtScore" />
 
     <TextView
-        android:id="@+id/txtGameTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="monospace"
-        android:text="@string/crazy_match_title"
-        android:textColor="#FFFFFF"
-        android:textSize="42sp"
-        app:layout_constraintBottom_toTopOf="@+id/balls_group"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+      android:id="@+id/txtGameTitle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="24dp"
+      android:fontFamily="monospace"
+      android:text="@string/crazy_match_title"
+      android:textColor="#FFFFFF"
+      android:textSize="42sp"
+      app:layout_constraintBottom_toTopOf="@+id/txtScore"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtScore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="monospace"
-        android:textColor="#FFFFFF"
-        android:textSize="22sp"
-        app:layout_constraintBottom_toTopOf="@+id/balls_group"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="Your Score Here" />
+      android:id="@+id/txtScore"
+      android:layout_width="wrap_content"
+      android:layout_height="0dp"
+      android:fontFamily="monospace"
+      android:gravity="center"
+      android:textColor="#FFFFFF"
+      android:textSize="22sp"
+      app:layout_constraintBottom_toTopOf="@+id/balls_group"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/txtGameTitle"
+      app:layout_constraintVertical_bias="1.0"
+      tools:text="Your Score Here" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

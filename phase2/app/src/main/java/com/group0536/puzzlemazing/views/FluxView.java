@@ -25,11 +25,14 @@ public abstract class FluxView extends View{
         dispatcher.unregister(this);
 
     }
+
+
     @Override
     protected void onAttachedToWindow(){
         super.onAttachedToWindow();
         dispatcher.register(this);
     }
+    
 
     protected void registerStore(Store store) {
         dispatcher.register(store);
