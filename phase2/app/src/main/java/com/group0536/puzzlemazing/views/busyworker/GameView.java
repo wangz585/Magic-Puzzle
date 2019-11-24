@@ -7,8 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.view.MotionEvent;
-import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.busyworker.BusyWorkerActionCreator;
@@ -18,6 +16,8 @@ import com.group0536.puzzlemazing.stores.busyworker.BusyWorkerChangeEvent;
 import com.group0536.puzzlemazing.stores.busyworker.BusyWorkerStore;
 import com.group0536.puzzlemazing.views.FluxView;
 import com.squareup.otto.Subscribe;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class GameView extends FluxView {
@@ -29,6 +29,14 @@ public class GameView extends FluxView {
     public GameView(Context context) {
         super(context);
         BusyWorkerBitMap.initBitmaps(getResources());
+        Timer timer = new Timer();
+        TimerTask t = new TimerTask() {
+            @Override
+            public void run() {
+                postInvalidate();
+            }
+        };
+        timer.scheduleAtFixedRate(t,1000,1000);
     }
 
     @Override
@@ -130,6 +138,7 @@ public class GameView extends FluxView {
         txtPaint.setTextSize(100.0f);
         canvas.drawText(getContext().getString(R.string.busy_worker_time),
                 3 * CellWidth, 15 * CellWidth, txtPaint);
+        canvas.drawText(String.valueOf(store.getTimeUsed()),5 * CellWidth,16 * CellWidth,txtPaint);
     }
 
     private void drawScore(Canvas canvas) {
@@ -146,13 +155,13 @@ public class GameView extends FluxView {
         if (event.getAction() != MotionEvent.ACTION_DOWN) return true;
         Point position = new Point((int) event.getX()/CellWidth, (int) event.getY()/CellWidth);
         actionCreator.move(position);
-        postInvalidate();  //Update UI
+        //postInvalidate();  //Update UI
         return true;
     }
 
     @Override
-    protected void onSizeChanged(int newWidth, int newHeighteight, int oldWidth, int oldHeight) {
-        super.onSizeChanged(newWidth, newHeighteight, oldWidth, oldHeight);
+    protected void onSizeChanged(int newWidth, int newHeight, int oldWidth, int oldHeight) {
+        super.onSizeChanged(newWidth, newHeight, oldWidth, oldHeight);
         CellWidth = newWidth / store.getMap().getWidth();
     }
 
@@ -162,7 +171,7 @@ public class GameView extends FluxView {
     }
 
     private void updateUI() {
-
+        postInvalidate();
     }
 
     private Rect getRect(int x, int y) {

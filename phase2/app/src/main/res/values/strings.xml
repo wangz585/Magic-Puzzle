@@ -31,5 +31,5 @@
   <!-- busy worker -->
   <string name="busy_worker_win">CONGRATS</string>
   <string name="busy_worker_score">Your Current Score:</string>
-  <string name="busy_worker_time">Time Left:</string>
+  <string name="busy_worker_time">Time Used:</string>
 </resources>

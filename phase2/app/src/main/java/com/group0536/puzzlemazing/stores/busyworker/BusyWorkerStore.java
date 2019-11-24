@@ -24,6 +24,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
     private Point currentWorkerPosition;
     private Point currentBoxPosition;
     private Timer timer;
+    private int timeUsed;
 
     protected BusyWorkerStore(Dispatcher dispatcher) {
         super(dispatcher);
@@ -57,6 +58,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
                 initMap(level);
                 initCurrentPosition();
                 postChange();
+                initTimer();
                 break;
         }
     }
@@ -66,7 +68,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         TimerTask t = new TimerTask() {
             @Override
             public void run() {
-                System.out.println("1");
+                timeUsed = timeUsed + 1;
             }
         };
         timer.scheduleAtFixedRate(t,1000,1000);
@@ -309,5 +311,9 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
     public int getScore() {
         return score;
+    }
+
+    public int getTimeUsed() {
+        return timeUsed;
     }
 }
