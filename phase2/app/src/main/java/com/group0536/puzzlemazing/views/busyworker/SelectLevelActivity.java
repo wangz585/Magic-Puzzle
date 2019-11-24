@@ -9,7 +9,6 @@ import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.busyworker.BusyWorkerActionCreator;
 import com.group0536.puzzlemazing.stores.busyworker.BusyWorkerStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
-import com.group0536.puzzlemazing.views.crazymatch.GameActivityLevelOne;
 
 public class SelectLevelActivity extends FluxActivity {
 
@@ -30,7 +29,7 @@ public class SelectLevelActivity extends FluxActivity {
             @Override
             public void onClick(View view) {
                 actionCreator.initMap(1);
-                Intent intent = new Intent(SelectLevelActivity.this, GameActivityLevelOne.class);
+                Intent intent = new Intent(SelectLevelActivity.this, GameActivity.class);
                 startActivity(intent);
             }
         });
@@ -38,7 +37,7 @@ public class SelectLevelActivity extends FluxActivity {
             @Override
             public void onClick(View view) {
                 actionCreator.initMap(2);
-                Intent intent = new Intent(SelectLevelActivity.this, GameActivityLevelOne.class);
+                Intent intent = new Intent(SelectLevelActivity.this, GameActivity.class);
                 startActivity(intent);
             }
         });

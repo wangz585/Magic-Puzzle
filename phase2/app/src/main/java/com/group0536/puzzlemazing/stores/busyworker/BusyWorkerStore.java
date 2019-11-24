@@ -6,11 +6,11 @@ import android.graphics.Point;
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.busyworker.BusyWorkerActions;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
-import com.group0536.puzzlemazing.models.BusyWorkerBitMap;
 import com.group0536.puzzlemazing.models.BusyWorkerMap;
 import com.group0536.puzzlemazing.models.BusyWorkerRawMaps;
 import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
+import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
 
@@ -32,17 +32,20 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         return new BusyWorkerChangeEvent();
     }
 
+    @Subscribe
     @Override
     public void onAction(Action action) {
         switch(action.getType()){
             case MOVE:
                 Point touchPosition = (Point)action.getPayloadEntry("position");
                 move(touchPosition);
+                postChange();
                 break;
             case INIT_MAP:
                 int level = (int)action.getPayloadEntry("level");
                 initMap(level);
                 initCurrentPosition();
+                postChange();
                 break;
         }
     }
@@ -67,28 +70,30 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         for (int y = 0; y < rawMap.length; y++)
             for (int x = 0; x < rawMap[y].length(); x++){
                 switch(rawMap[y].charAt(x)){
-                    case 'W': Point
-                        wallPosition = new Point(x,y);
+                    case 'W':
+                        Point wallPosition = new Point(x,y);
                         wallPositions.add(wallPosition);
+                        break;
                     case 'B':
                         Point boxPosition = new Point(x,y);
                         map.setInitialBoxPosition(boxPosition);
+                        break;
                     case 'F':
                         Point flagPosition = new Point(x,y);
-                        map.setInitialBoxPosition(flagPosition);
+                        map.setFlagPosition(flagPosition);
+                        break;
                     case 'M':
                         Point workerPosition = new Point(x,y);
-                        map.setInitialBoxPosition(workerPosition);
+                        map.setInitialWorkerPosition(workerPosition);
+                        break;
                 }
             }
         map.setWallPositions(wallPositions);
     }
 
     private void initCurrentPosition(){
-        currentWorkerPosition.x = map.getInitialWorkerPosition().x;
-        currentWorkerPosition.y = map.getInitialWorkerPosition().y;
-        currentBoxPosition.x = map.getInitialBoxPosition().x;
-        currentBoxPosition.y = map.getInitialBoxPosition().y;
+        currentWorkerPosition = new Point(map.getInitialWorkerPosition().x,map.getInitialWorkerPosition().y);
+        currentBoxPosition = new Point(map.getInitialBoxPosition().x,map.getInitialBoxPosition().y);
     }
 
     private void initCircumference(String[] rawMap){
