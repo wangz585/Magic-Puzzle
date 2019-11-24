@@ -7,6 +7,8 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.view.MotionEvent;
+import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.busyworker.BusyWorkerActionCreator;
@@ -53,6 +55,8 @@ public class GameView extends FluxView {
         drawBackground(canvas);
         drawSurface(canvas);
         drawGameBoard(canvas);
+        drawScore(canvas);
+        drawTime(canvas);
     }
 
     private void drawBackground(Canvas canvas) {
@@ -120,21 +124,21 @@ public class GameView extends FluxView {
                 srcRect, destRect, null);
     }
 
-    private void drawWin(Canvas canvas) {
+        private void drawTime(Canvas canvas) {
         Paint txtPaint = new Paint();
-        txtPaint.setColor(Color.RED);
+        txtPaint.setColor(Color.BLACK);
         txtPaint.setTextSize(100.0f);
-        canvas.drawText(getContext().getString(R.string.busy_worker_win),
-                4 * CellWidth, 6 * CellWidth, txtPaint);
+        canvas.drawText(getContext().getString(R.string.busy_worker_time),
+                3 * CellWidth, 15 * CellWidth, txtPaint);
     }
 
-    private void drawLose(Canvas canvas) {
+    private void drawScore(Canvas canvas) {
         Paint txtPaint = new Paint();
         txtPaint.setColor(Color.RED);
         txtPaint.setTextSize(100.0f);
-        canvas.drawText(getContext().getString(R.string.busy_worker_lose),
-                4 * CellWidth, 6 * CellWidth, txtPaint);
-
+        canvas.drawText(getContext().getString(R.string.busy_worker_score),
+                1 * CellWidth, 18 * CellWidth, txtPaint);
+        canvas.drawText(String.valueOf(store.getScore()),5 * CellWidth,19 * CellWidth,txtPaint);
     }
 
     @Override

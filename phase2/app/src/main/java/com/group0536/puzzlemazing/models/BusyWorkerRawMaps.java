@@ -55,7 +55,9 @@ public class BusyWorkerRawMaps {
 
             "W          W",
 
-            "WWWWWWWWWWWW"
+            "W          W",
+
+            "WWWWWWWWWWWW",
 
     };
 

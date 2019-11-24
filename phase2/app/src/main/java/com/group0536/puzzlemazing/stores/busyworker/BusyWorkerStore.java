@@ -284,4 +284,8 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
     public Point getCurrentBoxPosition() {
         return currentBoxPosition;
     }
+
+    public int getScore() {
+        return score;
+    }
 }
