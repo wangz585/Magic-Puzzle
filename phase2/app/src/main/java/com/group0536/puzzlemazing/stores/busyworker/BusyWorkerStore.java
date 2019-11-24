@@ -24,7 +24,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
     private Point currentWorkerPosition;
     private Point currentBoxPosition;
     private Timer timer;
-    
+
     protected BusyWorkerStore(Dispatcher dispatcher) {
         super(dispatcher);
         score = 0;
