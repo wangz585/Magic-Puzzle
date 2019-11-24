@@ -80,26 +80,26 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
                     // if the game is finished
                     if(isGameOver()){
                         // time is out, the user cannot longer click the submit button
-
+                        // the user should be able to go to somewhere else
                     }
                     else{
                         // there is time left
                         // clear the user input
                         // give a new word
-
+                        currentWord.setGuessed(true);
+                        currentWord = getANewWord();
                     }
                 }
                 else{
                     // if the answer is not correct
                     // clear over the user input
-
                 }
                 postChange();
                 break;
-//            case INITIALIZE_WORDBANK:
-//                initializeWordBank((int) action.getPayloadEntry("level"));
-//                postChange();
-//                break;
+            case INITIALIZE_WORDBANK:
+                initializeWordBank((int) action.getPayloadEntry("level"));
+                postChange();
+                break;
         }
     }
 
@@ -112,9 +112,10 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
 
         }
         else{
-            // if level is 2
+                // if level is 2
+            }
+
         }
-    }
 
     /**
      *  Check if the user guesses the word correctly
