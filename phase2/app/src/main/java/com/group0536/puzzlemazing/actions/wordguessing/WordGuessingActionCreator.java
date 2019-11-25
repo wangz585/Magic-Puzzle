@@ -11,7 +11,7 @@ public class WordGuessingActionCreator extends ActionCreator implements WordGues
         super(dispatcher);
     }
 
-    public void submitAnswer(String word){
+    public void submitAnswer(CharSequence word){
         Action action = new Action.ActionBuilder(SUBMIT_ANSWER)
                 .load("word", word)
                 .build();

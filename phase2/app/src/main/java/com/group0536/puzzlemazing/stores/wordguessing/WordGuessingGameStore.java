@@ -28,6 +28,7 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
     private Word currentWord;
     private boolean gameOver;
     private int score;
+    private boolean gameStart;
     private ScoreCalculator scoreCalculator;
     private static com.group0536.puzzlemazing.stores.wordguessing.WordGuessingGameStore instance;
 
@@ -48,6 +49,10 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
             instance = new com.group0536.puzzlemazing.stores.wordguessing.WordGuessingGameStore(dispatcher);
         }
         return instance;
+    }
+
+    public boolean isGameStarted() {
+        return gameStart;
     }
 
     @Override
@@ -72,11 +77,12 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
             case START_GAME:
                 Word newWord = getANewWord();
                 setCurrentWord(newWord);
+                gameStart = true;
                 postChange();
                 break;
             case SUBMIT_ANSWER:
                 String wordGuessed = (String) action.getPayloadEntry("word");
-                if(isCorrect(wordGuessed)){
+                if(isCorrect(wordGuessed)) {
                     // if the answer is correct
                     // updateScore();
                 } else{
@@ -100,7 +106,6 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
             case INITIALIZE_WORDBANK:
                 initializeWordBank((int) action.getPayloadEntry("level"),
                         (Context) action.getPayloadEntry("context"));
-                postChange();
                 break;
         }
     }
@@ -143,7 +148,7 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
             if (missingIndex.contains(i)) {
                 initialAppearance.add(word.charAt(i));
             } else {
-                initialAppearance.add(null);
+                initialAppearance.add('_');
             }
 
         }
@@ -154,7 +159,7 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
         List<Integer> missingIndex = new ArrayList<>();
         while (missingIndex.size() < numMissing) {
             int randomIndex = ThreadLocalRandom.current().nextInt(0, wordLength);
-            if (missingIndex.contains(randomIndex)) {
+            if (!missingIndex.contains(randomIndex)) {
                 missingIndex.add(randomIndex);
             }
         }
@@ -199,5 +204,9 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
      */
     public int getScore() {
         return scoreCalculator.getTotalScore();
+    }
+
+    public List<Character> getPuzzle() {
+        return currentWord.getCurrentState();
     }
 }

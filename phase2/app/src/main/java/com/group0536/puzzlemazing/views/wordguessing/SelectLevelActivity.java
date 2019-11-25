@@ -27,9 +27,8 @@ public class SelectLevelActivity extends FluxActivity {
             @Override
             public void onClick(View view) {
                 int level = 1;
-                //actionCreator.initializeWordBank(level);
+                actionCreator.initializeWordBank(level, getApplicationContext());
                 Intent intent = new Intent(SelectLevelActivity.this, GameActivity.class);
-                intent.putExtra("level", level);
                 startActivity(intent);
             }
         });
