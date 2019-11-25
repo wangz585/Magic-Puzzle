@@ -1,0 +1,43 @@
+American--Synonyms: American_English, American_language
+Feminine--Synonyms: womanly
+Internal--Synonyms: intragroup, home, interior, national, inner
+Ordinary--Synonyms: ordinary_bicycle, average
+Physical--Synonyms: forcible, strong-arm
+Innocent--Synonyms: inexperienced_person, guiltless, clean-handed, innocuous, impeccant
+Tropical--Synonyms: tropic, tropic
+Electric--Synonyms: electric_automobile, electric_car, electrical, galvanic, galvanizing
+Pregnant--Synonyms: meaning, significant, fraught
+Positive--Synonyms: positive_degree, convinced, confident, plus, confirming
+Opposite--Synonyms: antonym, opposite_word, reverse, contrary, opposition
+Possible--Synonyms: potential
+Accurate--Synonyms: exact, precise
+Chemical--Synonyms: chemical_substance, chemic
+Caroline--Synonyms: Carolean
+Canadian--Synonyms: Canadian_River
+Straight--Synonyms: heterosexual, heterosexual_person, straight_person, straightaway
+Separate--Synonyms: offprint, reprint, divide, disunite, divide
+Standard--Synonyms: criterion, measure, touchstone, criterion, monetary_standard
+Thankful--Synonyms: grateful
+Fearless--Synonyms: unafraid, audacious, brave, dauntless, hardy
+Original--Synonyms: master, master_copy, archetype, pilot
+Gracious--Synonyms: benignant, courteous, nice
+Filipino--Synonyms: Philippine, Philippine
+Constant--Synonyms: constant_quantity, invariable, changeless, invariant, unvarying
+Biblical--Synonyms: scriptural
+Friendly--Synonyms: favorable, well-disposed
+Delicate--Synonyms: fragile, frail, soft, finespun, ticklish
+National--Synonyms: subject, home, interior, internal
+Powerful--Synonyms: knock-down, potent, brawny, hefty, muscular
+Variable--Synonyms: variable_quantity, variable_star, varying
+Graceful--Synonyms: elegant, refined
+Military--Synonyms: armed_forces, armed_services, military_machine, war_machine
+Relative--Synonyms: relation, congener, congenator, congeneric, comparative
+Northern--Synonyms: northerly, northerly
+Colorful--Synonyms: colourful, colourful, colored, coloured
+Breaking--Synonyms: breakage, break, interrupt, break, break
+Southern--Synonyms: southerly, southerly
+Creative--Synonyms: originative
+Selfless--Synonyms: altruistic
+Insecure--Synonyms: unsafe, unsafe
+Exciting--Synonyms: excite, stimulate, excite, stimulate, excite
+Infinite--Synonyms: space, non-finite, countless, innumerable, innumerous
