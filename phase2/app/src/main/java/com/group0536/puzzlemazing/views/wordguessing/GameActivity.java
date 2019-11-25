@@ -1,6 +1,7 @@
 package com.group0536.puzzlemazing.views.wordguessing;
 
 import android.os.Bundle;
+import android.text.InputFilter;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -47,12 +48,13 @@ public class GameActivity extends FluxActivity {
             @Override
             public void onClick(View view) {
                 if (store.isGameStarted()) {
-                    CharSequence userAnswer = txtPuzzle.getText();
+                    String userAnswer = txtPuzzle.getText().toString();
                     actionCreator.submitAnswer(userAnswer);
                 } else if (store.isGameOver()) {
                     // TODO
                 } else {
                     actionCreator.startGame();
+                    txtPuzzle.setFilters(new InputFilter[] { new InputFilter.LengthFilter(store.getPuzzle().size())});
                 }
             }
         });
@@ -61,9 +63,6 @@ public class GameActivity extends FluxActivity {
 
     private void initializeAnswerText() {
         txtPuzzle = findViewById(R.id.txt_word);
-        txtPuzzle.setAllCaps(true);
-        txtPuzzle.setSingleLine();
-        txtPuzzle.setLetterSpacing(0.5f);
     }
 
 
@@ -102,7 +101,8 @@ public class GameActivity extends FluxActivity {
         for (Character c : puzzle) {
             myPuzzle.append(c);
         }
-        txtPuzzle.setText(myPuzzle);
+        txtPuzzle.setText("");
+        txtPuzzle.setHint(myPuzzle);
     }
 
     private void updateScore() {

@@ -45,4 +45,8 @@ public class Word {
     public List<Character> getCurrentState() {
         return currentState;
     }
+
+    public void setCurrentState(List<Character> newState) {
+        currentState = newState;
+    }
 }

@@ -86,8 +86,7 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
                     // if the answer is correct
                     // updateScore();
                 } else{
-                    // if the answer is not correct
-                    // clear over the user input
+                    currentWord.setCurrentState(currentWord.getInitialState());
                 }
                 // if the game is finished
                 if(isGameOver()){
@@ -98,8 +97,7 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
                     // there is time left
                     // clear the user input
                     // give a new word
-                    currentWord.setGuessed(true);
-                    currentWord = getANewWord();
+                    //currentWord = getANewWord();
                 }
                 postChange();
                 break;
