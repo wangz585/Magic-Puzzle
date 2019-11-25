@@ -51,6 +51,10 @@
         android:name=".views.busyworker.GameActivity"
         android:screenOrientation="sensorPortrait">
     </activity>
+    <activity
+        android:name=".views.busyworker.GameFinishedActivity"
+        android:screenOrientation="sensorPortrait">
+    </activity>
   </application>
 
 </manifest>
