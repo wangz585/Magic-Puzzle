@@ -192,7 +192,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
             currentWorkerPosition.y = currentWorkerPosition.y - 1;
             currentBoxPosition.y = currentBoxPosition.y - 1;
         }
-        else if ((!WallAboveWorker())) currentWorkerPosition.y = currentWorkerPosition.y - 1;
+        else if ((!WallAboveWorker()) && !(BoxAboveWorker())) currentWorkerPosition.y = currentWorkerPosition.y - 1;
     }
 
     private void moveBelow() {
@@ -200,7 +200,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
             currentWorkerPosition.y = currentWorkerPosition.y + 1;
             currentBoxPosition.y = currentBoxPosition.y + 1;
         }
-        else if ((!WallBelowWorker())) currentWorkerPosition.y = currentWorkerPosition.y + 1;
+        else if ((!WallBelowWorker()) && !(BoxBelowWorker())) currentWorkerPosition.y = currentWorkerPosition.y + 1;
     }
 
     private void moveLeft() {
@@ -208,7 +208,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
             currentWorkerPosition.x = currentWorkerPosition.x - 1;
             currentBoxPosition.x = currentBoxPosition.x - 1;
         }
-        else if ((!WallLeftToWorker())) currentWorkerPosition.x = currentWorkerPosition.x - 1;
+        else if ((!WallLeftToWorker()) && !(BoxLeftToWorker())) currentWorkerPosition.x = currentWorkerPosition.x - 1;
     }
 
     private void moveRight() {
@@ -216,7 +216,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
             currentWorkerPosition.x = currentWorkerPosition.x + 1;
             currentBoxPosition.x = currentBoxPosition.x + 1;
         }
-        else if ((!WallRightToWorker())) currentWorkerPosition.x = currentWorkerPosition.x + 1;
+        else if ((!WallRightToWorker()) && !(BoxRightToWorker())) currentWorkerPosition.x = currentWorkerPosition.x + 1;
     }
 
 
@@ -285,7 +285,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
     private boolean WallBelowWorker(){
         for (Point wallPosition : map.getWallPositions()) {
-            if (wallPosition.y == currentBoxPosition.y + 1 && wallPosition.x == currentBoxPosition.x){
+            if (wallPosition.y == currentWorkerPosition.y + 1 && wallPosition.x == currentWorkerPosition.x){
                 return true;
             }
         }

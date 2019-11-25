@@ -38,6 +38,17 @@ public class GameActivity extends FluxActivity {
         checkGameFinished();
     }
 
+    protected void onResume() {
+        super.onResume();
+        registerStore(store);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        registerStore(store);
+    }
+
     private void checkGameFinished(){
         if (store.checkWin() || store.checkLose()){
             Intent intent = new Intent(GameActivity.this, GameFinishedActivity.class);

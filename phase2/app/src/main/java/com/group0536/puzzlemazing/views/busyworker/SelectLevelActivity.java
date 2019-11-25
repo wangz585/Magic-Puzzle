@@ -58,6 +58,6 @@ public class SelectLevelActivity extends FluxActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        registerStore(store);
+        unregisterStore(store);
     }
 }
