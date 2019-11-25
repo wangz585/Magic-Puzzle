@@ -1,44 +1,25 @@
 package com.group0536.puzzlemazing.models.wordguessing;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Word {
     private String spelling;
     private boolean guessed;
-    private List<Character> shownChars;
-    private List<Character> missingChars;
     private String hint;
+    private List<Character> initialState;
+    private List<Character> currentState;
 
-    public Word(String spelling, List<Character> shownChars, List<Character> missingChars, String hint) {
+
+    public Word(String spelling, String hint, List<Character> initialState) {
         this.spelling = spelling;
-        this.shownChars = shownChars;
-        this.missingChars = missingChars;
         this.hint = hint;
-        this.guessed = false;
+        this.initialState = initialState;
+        this.currentState = new ArrayList<>(initialState);
     }
 
     public String getSpelling() {
         return spelling;
-    }
-
-    public void setSpelling(String spelling) {
-        this.spelling = spelling;
-    }
-
-    public List<Character> getShownChars() {
-        return shownChars;
-    }
-
-    public void setShownChars(List<Character> shownChars) {
-        this.shownChars = shownChars;
-    }
-
-    public List<Character> getMissingChars() {
-        return missingChars;
-    }
-
-    public void setMissingChars(List<Character> missingChars) {
-        this.missingChars = missingChars;
     }
 
     public boolean isGuessed() {
@@ -53,7 +34,15 @@ public class Word {
         return hint;
     }
 
-    public void setHint(String hint) {
-        this.hint = hint;
+    public void setCharAt(int index, char character) {
+        currentState.set(index, character);
+    }
+
+    public List<Character> getInitialState() {
+        return initialState;
+    }
+
+    public List<Character> getCurrentState() {
+        return currentState;
     }
 }

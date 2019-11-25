@@ -19,6 +19,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class WordGuessingGameStore extends Store implements WordGuessingActions {
     private WordGuessingInitController initController = new WordGuessingInitController();
@@ -34,11 +35,6 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
         super(dispatcher);
         // TODO: pass in a player
 //        this.player = player;
-        this.currentWord = null;
-        this.gameOver = false;
-        this.wordBank = null;
-        this.score = 0;
-//        this.scoreCalculator = null;
     }
 
     /**
@@ -79,26 +75,25 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
                 postChange();
                 break;
             case SUBMIT_ANSWER:
-                List<Character> userInput = (List<Character>) action.getPayloadEntry("User Input");
-                if(isCorrect(userInput)){
+                String wordGuessed = (String) action.getPayloadEntry("word");
+                if(isCorrect(wordGuessed)){
                     // if the answer is correct
                     // updateScore();
-                    // if the game is finished
-                    if(isGameOver()){
-                        // time is out, the user cannot longer click the submit button
-                        // the user should be able to go to somewhere else
-                    }
-                    else{
-                        // there is time left
-                        // clear the user input
-                        // give a new word
-                        currentWord.setGuessed(true);
-                        currentWord = getANewWord();
-                    }
-                }
-                else{
+                } else{
                     // if the answer is not correct
                     // clear over the user input
+                }
+                // if the game is finished
+                if(isGameOver()){
+                    // time is out, the user cannot longer click the submit button
+                    // the user should be able to go to somewhere else
+                }
+                else{
+                    // there is time left
+                    // clear the user input
+                    // give a new word
+                    currentWord.setGuessed(true);
+                    currentWord = getANewWord();
                 }
                 postChange();
                 break;
@@ -126,12 +121,11 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
                     context.getAssets().open("wordGuessingLevel"+level+".txt")));
             String line;
             while((line = bufferedReader.readLine()) != null){
-                String[] words = line.split("--");
-                List<List<Character>> splicedWord = splitWord(words[0], level);
-                Word newWord = new Word(words[0],
-                        splicedWord.get(0),
-                        splicedWord.get(1),
-                        words[1]);
+                String[] entry = line.split("--");
+                String text = entry[0];
+                String hint = entry[1];
+                List<Character> initialAppearance = getInitialAppearance((int) Math.ceil(text.length()/2), text);
+                Word newWord = new Word(text, hint, initialAppearance);
                 wordsInBank.add(newWord);
             }
         } catch (IOException e) {
@@ -140,53 +134,41 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
         return wordsInBank;
     }
 
-    /**
-     * Split a word into two part: missing chars and shown chars to the user
-      * @param word
-     * @return a list of two list of characters
-     */
-    private List<List<Character>> splitWord(String word, int level) {
-        List<List<Character>> splicedWord = new ArrayList<>();
-        List<Character> shownChars = new ArrayList<>();
-        List<Character> missingChars = new ArrayList<>();
 
-        int wordLength;
-        if(level == 1){
-            wordLength = 6;
-        }
-        else{
-            wordLength = 8;
-        }
+    private List<Character> getInitialAppearance(int numMissing, String word) {
+        int wordLength = word.length();
+        List<Character> initialAppearance = new ArrayList<>();
+        List<Integer> missingIndex = getMissingIndex(numMissing, wordLength );
+        for (int i = 0; i < wordLength; i++) {
+            if (missingIndex.contains(i)) {
+                initialAppearance.add(word.charAt(i));
+            } else {
+                initialAppearance.add(null);
+            }
 
-        for(int i = 0; i < wordLength; i++){
-            if(i % 2 == 0){
-                shownChars.add(word.charAt(i));
-            }
-            else{
-                missingChars.add(word.charAt(i));
-            }
         }
-        splicedWord.add(shownChars);
-        splicedWord.add(missingChars);
-        return splicedWord;
+        return initialAppearance;
     }
+
+    private List<Integer> getMissingIndex(int numMissing, int wordLength) {
+        List<Integer> missingIndex = new ArrayList<>();
+        while (missingIndex.size() < numMissing) {
+            int randomIndex = ThreadLocalRandom.current().nextInt(0, wordLength);
+            if (missingIndex.contains(randomIndex)) {
+                missingIndex.add(randomIndex);
+            }
+        }
+        return missingIndex;
+    }
+
 
     /**
      *  Check if the user guesses the word correctly
-     * @param userInput user's input
+     * @param wordGuessed the word the user guessed
      * @return true if the user guesses the word correctly
      */
-    private boolean isCorrect(List<Character> userInput) {
-        List<Character> missingChars = currentWord.getMissingChars();
-        if(userInput.size() != missingChars.size()){
-            return false;
-        }
-        for (int i = 0; i < userInput.size(); i++){
-            if (!userInput.get(i).equals(missingChars.get(i))){
-                return false;
-            }
-        }
-        return true;
+    private boolean isCorrect(String wordGuessed) {
+        return currentWord.getSpelling().equals(wordGuessed);
     }
 
     /**
@@ -202,15 +184,13 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
      * @return a new word
      */
     private Word getANewWord() {
-        Word newWord = wordBank.getARandomWord();
-        return newWord;
+        return wordBank.getARandomWord();
     }
 
     public int getContentView(int level) {
         HashMap<Object, Object> levelData = initController.getLevelData(level);
         return (int) levelData.get("ContentView");
     }
-
 
     /**
      * Get the player's score in this game
