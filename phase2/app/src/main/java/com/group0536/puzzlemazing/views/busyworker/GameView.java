@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.view.MotionEvent;
+import java.lang.Math;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.busyworker.BusyWorkerActionCreator;
@@ -69,7 +70,7 @@ public class GameView extends FluxView {
         for (int row = 0; row <= store.getMap().getWidth(); row++)
             canvas.drawLine(0, row * CellWidth,
                     getWidth(), row * CellWidth, linePaint);
-        for (int column = 0; column <= store.getMap().getWidth(); column++)
+        for (int column = 0; column <= getWidth()/CellWidth; column++)
             canvas.drawLine(column * CellWidth, 0,
                     column * CellWidth,
                     store.getMap().getWidth() * CellWidth, linePaint);
@@ -152,7 +153,7 @@ public class GameView extends FluxView {
     @Override
     protected void onSizeChanged(int newWidth, int newHeight, int oldWidth, int oldHeight) {
         super.onSizeChanged(newWidth, newHeight, oldWidth, oldHeight);
-        CellWidth = newWidth / store.getMap().getWidth();
+        CellWidth = newHeight /  store.getMap().getHeight();
     }
 
     @Subscribe
