@@ -46,7 +46,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
      * Get an instance of this store
      *
      * @param dispatcher the dispatcher associated
-     * @return an insrance of this store
+     * @return an instance of this store
      */
     public static CrazyMatchStore getInstance(Dispatcher dispatcher) {
         if (instance == null) {

@@ -3,6 +3,7 @@ package com.group0536.puzzlemazing.views.wordguessing;
 import android.os.Bundle;
 import android.text.InputFilter;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -21,7 +22,8 @@ public class GameActivity extends FluxActivity {
 
     // Components
     private ImageButton btnNext;
-    private TextView txtPuzzle;
+    private EditText txtPuzzle;
+    private TextView txtEmoji;
 
     public GameActivity() {
     }
@@ -40,6 +42,7 @@ public class GameActivity extends FluxActivity {
     private void bindViews() {
         initializeNextButton();
         initializeAnswerText();
+        initializeEmojiText();
     }
 
     private void initializeNextButton() {
@@ -54,7 +57,7 @@ public class GameActivity extends FluxActivity {
                     // TODO
                 } else {
                     actionCreator.startGame();
-                    txtPuzzle.setFilters(new InputFilter[] { new InputFilter.LengthFilter(store.getPuzzle().size())});
+                    txtPuzzle.setFilters(new InputFilter[] { new InputFilter.LengthFilter(store.getPuzzleLength())});
                 }
             }
         });
@@ -63,6 +66,10 @@ public class GameActivity extends FluxActivity {
 
     private void initializeAnswerText() {
         txtPuzzle = findViewById(R.id.txt_word);
+    }
+
+    private void initializeEmojiText() {
+        txtEmoji = findViewById(R.id.txt_emoji);
     }
 
 
@@ -103,6 +110,8 @@ public class GameActivity extends FluxActivity {
         }
         txtPuzzle.setText("");
         txtPuzzle.setHint(myPuzzle);
+        txtEmoji.setText(store.getHint());
+
     }
 
     private void updateScore() {

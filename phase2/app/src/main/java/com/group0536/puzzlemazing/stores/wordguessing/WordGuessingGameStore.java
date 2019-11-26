@@ -68,12 +68,22 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
         return gameOver;
     }
 
+
+    public int getPuzzleLength() {
+        return getPuzzle().size();
+    }
+
+
+    public String getHint() {
+        return currentWord.getHint();
+    }
+
     @Override
     @Subscribe
     public void onAction(Action action) {
         switch (action.getType()) {
-//            case TIME_OVER:
-//                setGameOver();
+//          case TIME_OVER:
+//              setGameOver();
             case START_GAME:
                 Word newWord = getANewWord();
                 setCurrentWord(newWord);
@@ -84,11 +94,12 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
                 String wordGuessed = (String) action.getPayloadEntry("word");
                 if(isCorrect(wordGuessed)) {
                     // if the answer is correct
-                    // updateScore();
+                    updateScore();
+                    currentWord = getANewWord();
                 } else{
                     currentWord.setCurrentState(currentWord.getInitialState());
                 }
-                // if the game is finished
+                /*// if the game is finished
                 if(isGameOver()){
                     // time is out, the user cannot longer click the submit button
                     // the user should be able to go to somewhere else
@@ -97,8 +108,8 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
                     // there is time left
                     // clear the user input
                     // give a new word
-                    //currentWord = getANewWord();
-                }
+                    currentWord = getANewWord();
+                }*/
                 postChange();
                 break;
             case INITIALIZE_WORDBANK:
@@ -106,6 +117,11 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
                         (Context) action.getPayloadEntry("context"));
                 break;
         }
+    }
+
+    private void updateScore() {
+        score += 10;
+        // TODO
     }
 
     /**
@@ -171,7 +187,8 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
      * @return true if the user guesses the word correctly
      */
     private boolean isCorrect(String wordGuessed) {
-        return currentWord.getSpelling().equals(wordGuessed);
+        int compare = currentWord.getSpelling().compareToIgnoreCase(wordGuessed);
+        return compare == 0;
     }
 
     /**
