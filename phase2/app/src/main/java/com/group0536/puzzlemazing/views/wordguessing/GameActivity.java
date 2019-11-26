@@ -1,6 +1,7 @@
 package com.group0536.puzzlemazing.views.wordguessing;
 
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.InputFilter;
 import android.view.View;
 import android.widget.EditText;
@@ -24,6 +25,7 @@ public class GameActivity extends FluxActivity {
     private ImageButton btnNext;
     private EditText txtPuzzle;
     private TextView txtEmoji;
+    private TextView countDownTimeLeft;
 
     public GameActivity() {
     }
@@ -43,6 +45,7 @@ public class GameActivity extends FluxActivity {
         initializeNextButton();
         initializeAnswerText();
         initializeEmojiText();
+        initalizeTimeLeft();
     }
 
     private void initializeNextButton() {
@@ -57,11 +60,30 @@ public class GameActivity extends FluxActivity {
                     // TODO
                 } else {
                     actionCreator.startGame();
+                    countDownTimer.start();
                     txtPuzzle.setFilters(new InputFilter[] { new InputFilter.LengthFilter(store.getPuzzleLength())});
                 }
             }
         });
 
+    }
+
+    private CountDownTimer countDownTimer = new CountDownTimer(10000, 1000) {
+        @Override
+        public void onTick(long millisUntilFinished) {
+            String value = String.valueOf((int) (millisUntilFinished / 1000));
+            countDownTimeLeft.setText(String.format("Remaining Time: %ss", value));
+        }
+
+        @Override
+        public void onFinish() {
+            actionCreator.timeOver();
+            btnNext.setEnabled(false);
+        }
+    };
+
+    private void initalizeTimeLeft() {
+        countDownTimeLeft = findViewById(R.id.txt_time);
     }
 
     private void initializeAnswerText() {

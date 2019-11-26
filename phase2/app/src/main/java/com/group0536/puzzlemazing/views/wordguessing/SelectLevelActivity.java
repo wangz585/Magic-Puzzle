@@ -37,11 +37,10 @@ public class SelectLevelActivity extends FluxActivity {
         btnLevel2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /*int level = 2;
-                actionCreator.initializeWordBank(level);
+                int level = 2;
+                actionCreator.initializeWordBank(level, getApplicationContext());
                 Intent intent = new Intent(SelectLevelActivity.this, GameActivity.class);
-                intent.putExtra("level", level);
-                startActivity(intent);*/
+                startActivity(intent);
             }
         });
     }

@@ -30,4 +30,9 @@ public class WordGuessingActionCreator extends ActionCreator implements WordGues
                 .build();
         dispatcher.dispatch(action);
     }
+
+    public void timeOver() {
+        Action action = new Action.ActionBuilder(TIME_OUT).build();
+        dispatcher.dispatch(action);
+    }
 }
