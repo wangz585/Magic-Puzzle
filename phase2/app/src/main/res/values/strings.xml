@@ -21,15 +21,24 @@
   <string name="dialog_try_again">Try Again</string>
   <string name="dialog_exit">Exit</string>
 
-  <!-- crazy match -->
-  <string name="crazy_match_game_ball">Game Ball</string>
+  <!-- game -->
   <string name="level_one">Level 1</string>
   <string name="level_two">Level 2</string>
-  <string name="crazy_match_title">Crazy Match</string>
   <string name="display_score">score: %d</string>
 
   <!-- busy worker -->
   <string name="busy_worker_win">CONGRATS</string>
   <string name="busy_worker_score">Your Current Score:</string>
   <string name="busy_worker_time">Time Left:</string>
+
+  <!-- crazy match -->
+  <string name="crazy_match_game_ball">Game Ball</string>
+  <string name="crazy_match_title">Crazy Match</string>
+
+  <!-- word guessing -->
+  <string name="word_guessing_title">Emoji Word Guessing</string>
+  <string name="submit">Submit</string>
+  <string name="hint">Hint</string>
+  <string name="incorrect_attempt">Not quiet&#8230; Try again.</string>
+
 </resources>
