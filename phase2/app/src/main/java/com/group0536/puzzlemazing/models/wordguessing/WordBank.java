@@ -26,9 +26,18 @@ public class WordBank {
             newWordForGuessing = vocabulary.get(rand.nextInt(vocabulary.size()));
             if (!newWordForGuessing.isGuessed()){
                 isNewWord = true;
-
             }
         }
         return newWordForGuessing;
+    }
+
+    public boolean noMoreWord(){
+        boolean moreWord = true;
+        for(Word word : vocabulary){
+            if(!word.isGuessed()){
+                moreWord = false;
+            }
+        }
+        return moreWord;
     }
 }
