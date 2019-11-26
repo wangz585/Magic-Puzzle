@@ -16,8 +16,6 @@ import com.group0536.puzzlemazing.stores.busyworker.BusyWorkerChangeEvent;
 import com.group0536.puzzlemazing.stores.busyworker.BusyWorkerStore;
 import com.group0536.puzzlemazing.views.FluxView;
 import com.squareup.otto.Subscribe;
-import java.util.Timer;
-import java.util.TimerTask;
 
 
 public class GameView extends FluxView {
@@ -29,14 +27,6 @@ public class GameView extends FluxView {
     public GameView(Context context) {
         super(context);
         BusyWorkerBitMap.initBitmaps(getResources());
-        Timer timer = new Timer();
-        TimerTask t = new TimerTask() {
-            @Override
-            public void run() {
-                postInvalidate();
-            }
-        };
-        timer.scheduleAtFixedRate(t,1000,1000);
     }
 
     @Override

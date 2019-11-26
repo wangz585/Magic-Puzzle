@@ -25,7 +25,6 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
     protected BusyWorkerStore(Dispatcher dispatcher) {
         super(dispatcher);
-        score = 0;
     }
 
 
@@ -41,16 +40,28 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
             case MOVE:
                 Point touchPosition = (Point)action.getPayloadEntry("position");
                 move(touchPosition);
+                updateScore();
                 postChange();
                 break;
             case INIT_MAP:
                 int level = (int)action.getPayloadEntry("level");
                 initMap(level);
                 initCurrentPosition();
-                postChange();
                 initTimer();
+                initScore();
+                postChange();
                 break;
         }
+    }
+
+    private void initScore() {
+        score = 100;
+    }
+
+
+    private void updateScore() {
+        score = score - 1;
+
     }
 
     private void initTimer(){
@@ -59,6 +70,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
             @Override
             public void run() {
                 timeUsed = timeUsed + 1;
+                postChange();
             }
         };
         timer.scheduleAtFixedRate(t,1000,1000);
