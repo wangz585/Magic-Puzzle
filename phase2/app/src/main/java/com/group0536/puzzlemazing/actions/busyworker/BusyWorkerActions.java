@@ -4,5 +4,5 @@ public interface BusyWorkerActions {
 
     String PREFIX = "busy-worker-";
     String MOVE = PREFIX + "move";
-    String INIT_MAP = PREFIX + "init_map";
+    String INIT_MAP = PREFIX + "init-map";
 }

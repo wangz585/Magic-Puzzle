@@ -1,8 +1,5 @@
 package com.group0536.puzzlemazing.stores.busyworker;
-
-import android.content.res.Resources;
 import android.graphics.Point;
-
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.busyworker.BusyWorkerActions;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
@@ -24,18 +21,11 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
     private Point currentWorkerPosition;
     private Point currentBoxPosition;
     private Timer timer;
-    
+    private int timeUsed;
+
     protected BusyWorkerStore(Dispatcher dispatcher) {
         super(dispatcher);
-        score = 0;
     }
-
-    TimerTask t = new TimerTask() {
-        @Override
-        public void run() {
-            System.out.println("1");
-        }
-    };
 
 
     @Override
@@ -50,15 +40,28 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
             case MOVE:
                 Point touchPosition = (Point)action.getPayloadEntry("position");
                 move(touchPosition);
+                updateScore();
                 postChange();
                 break;
             case INIT_MAP:
                 int level = (int)action.getPayloadEntry("level");
                 initMap(level);
                 initCurrentPosition();
+                initTimer();
+                initScore();
                 postChange();
                 break;
         }
+    }
+
+    private void initScore() {
+        score = 100;
+    }
+
+
+    private void updateScore() {
+        score = score - 1;
+
     }
 
     private void initTimer(){
@@ -66,7 +69,8 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         TimerTask t = new TimerTask() {
             @Override
             public void run() {
-                System.out.println("1");
+                timeUsed = timeUsed + 1;
+                postChange();
             }
         };
         timer.scheduleAtFixedRate(t,1000,1000);
@@ -89,6 +93,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
     private void initLabels(String[] rawMap){
         ArrayList<Point> wallPositions = new ArrayList<>();
+        ArrayList<Point> deadPositions = new ArrayList<>();
         for (int y = 0; y < rawMap.length; y++)
             for (int x = 0; x < rawMap[y].length(); x++){
                 switch(rawMap[y].charAt(x)){
@@ -108,9 +113,40 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
                         Point workerPosition = new Point(x,y);
                         map.setInitialWorkerPosition(workerPosition);
                         break;
+                    case ' ':
+                        Point spacePosition = new Point(x,y);
+                        if (checkDeadPosition(rawMap, spacePosition)){
+                            deadPositions.add(spacePosition);
+                        }
                 }
             }
+        map.setDeadPositions(deadPositions);
         map.setWallPositions(wallPositions);
+    }
+
+    private boolean checkDeadPosition(String[] rawMap, Point spacePosition){
+        return (checkAboveLeft(rawMap,spacePosition) || checkBelowLeft(rawMap,spacePosition) ||
+                checkAboveRight(rawMap,spacePosition) || checkBelowRight(rawMap,spacePosition));
+    }
+
+    private boolean checkBelowRight(String[] rawMap, Point spacePosition) {
+        return rawMap[spacePosition.y].charAt(spacePosition.x+1) == 'W' &&
+                rawMap[spacePosition.y+1].charAt(spacePosition.x) == 'W';
+    }
+
+    private boolean checkAboveRight(String[] rawMap, Point spacePosition) {
+        return rawMap[spacePosition.y].charAt(spacePosition.x+1) == 'W' &&
+                rawMap[spacePosition.y-1].charAt(spacePosition.x) == 'W';
+    }
+
+    private boolean checkBelowLeft(String[] rawMap, Point spacePosition) {
+        return rawMap[spacePosition.y].charAt(spacePosition.x-1) == 'W' &&
+                rawMap[spacePosition.y+1].charAt(spacePosition.x) == 'W';
+    }
+
+    private boolean checkAboveLeft(String[] rawMap, Point spacePosition) {
+        return rawMap[spacePosition.y].charAt(spacePosition.x-1) == 'W' &&
+                rawMap[spacePosition.y-1].charAt(spacePosition.x) == 'W';
     }
 
     private void initCurrentPosition(){
@@ -123,13 +159,13 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         map.setHeight(rawMap.length);
     }
 
-    private boolean checkWin() {
+    public boolean checkWin() {
         return currentBoxPosition.equals(map.getFlagPosition());
     }
 
-    private boolean checkLose() {
-        for (Point deadPosition : map.getDeadPositions()) {
-            if (deadPosition.equals(currentBoxPosition)) return true;
+    public boolean checkLose() {
+        for (Point deadPostion : map.getDeadPositions()){
+            if (deadPostion.equals(currentBoxPosition)) return true;
         }
         return false;
     }
@@ -168,7 +204,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
             currentWorkerPosition.y = currentWorkerPosition.y - 1;
             currentBoxPosition.y = currentBoxPosition.y - 1;
         }
-        else if ((!WallAboveWorker())) currentWorkerPosition.y = currentWorkerPosition.y - 1;
+        else if ((!WallAboveWorker()) && !(BoxAboveWorker())) currentWorkerPosition.y = currentWorkerPosition.y - 1;
     }
 
     private void moveBelow() {
@@ -176,7 +212,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
             currentWorkerPosition.y = currentWorkerPosition.y + 1;
             currentBoxPosition.y = currentBoxPosition.y + 1;
         }
-        else if ((!WallBelowWorker())) currentWorkerPosition.y = currentWorkerPosition.y + 1;
+        else if ((!WallBelowWorker()) && !(BoxBelowWorker())) currentWorkerPosition.y = currentWorkerPosition.y + 1;
     }
 
     private void moveLeft() {
@@ -184,7 +220,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
             currentWorkerPosition.x = currentWorkerPosition.x - 1;
             currentBoxPosition.x = currentBoxPosition.x - 1;
         }
-        else if ((!WallLeftToWorker())) currentWorkerPosition.x = currentWorkerPosition.x - 1;
+        else if ((!WallLeftToWorker()) && !(BoxLeftToWorker())) currentWorkerPosition.x = currentWorkerPosition.x - 1;
     }
 
     private void moveRight() {
@@ -192,7 +228,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
             currentWorkerPosition.x = currentWorkerPosition.x + 1;
             currentBoxPosition.x = currentBoxPosition.x + 1;
         }
-        else if ((!WallRightToWorker())) currentWorkerPosition.x = currentWorkerPosition.x + 1;
+        else if ((!WallRightToWorker()) && !(BoxRightToWorker())) currentWorkerPosition.x = currentWorkerPosition.x + 1;
     }
 
 
@@ -261,7 +297,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
     private boolean WallBelowWorker(){
         for (Point wallPosition : map.getWallPositions()) {
-            if (wallPosition.y == currentBoxPosition.y + 1 && wallPosition.x == currentBoxPosition.x){
+            if (wallPosition.y == currentWorkerPosition.y + 1 && wallPosition.x == currentWorkerPosition.x){
                 return true;
             }
         }
@@ -309,5 +345,9 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
     public int getScore() {
         return score;
+    }
+
+    public int getTimeUsed() {
+        return timeUsed;
     }
 }
