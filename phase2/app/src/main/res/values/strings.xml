@@ -47,4 +47,13 @@
   <string name="submit">Submit</string>
   <string name="hint">Hint</string>
   <string name="incorrect_attempt">Not quiet&#8230; Try again.</string>
+
+  <!-- score board -->
+  <string name="score_board_title">Score Board</string>
+  <string name="score_board_user_name">User</string>
+  <string name="score_board_score_type_1">Level 1 Score</string>
+  <string name="score_board_score_type_2">Level 2 Score</string>
+  <string name="score_board_score_type_3">Level 3 Score</string>
+  <string name="score_board_score_type_4">Total Score</string>
+  <string name="score_board_exit">MAIN PAGE</string>
 </resources>
