@@ -82,8 +82,10 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
     @Subscribe
     public void onAction(Action action) {
         switch (action.getType()) {
-//          case TIME_OVER:
-//              setGameOver();
+          case TIME_OUT:
+              setGameOver();
+              postChange();
+              break;
             case START_GAME:
                 Word newWord = getANewWord();
                 setCurrentWord(newWord);
@@ -95,7 +97,13 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
                 if(isCorrect(wordGuessed)) {
                     // if the answer is correct
                     updateScore();
-                    currentWord = getANewWord();
+                    currentWord.setGuessed(true);
+                    if(wordBank.noMoreWord()){
+                        setGameOver();
+                    }
+                    else{
+                        currentWord = getANewWord();
+                    }
                 } else{
                     currentWord.setCurrentState(currentWord.getInitialState());
                 }

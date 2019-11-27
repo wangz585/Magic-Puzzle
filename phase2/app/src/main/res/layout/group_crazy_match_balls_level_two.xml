@@ -22,7 +22,6 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/crazy_match_game_ball"
             android:scaleType="centerInside"
-
             android:src="@drawable/crazy_match_ball" />
 
         <ImageButton
