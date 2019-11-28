@@ -16,88 +16,100 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <TableLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp">
+        android:layout_height="wrap_content">
 
-        <TableRow>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/txtScoreBoardUserName"
-                android:layout_width="wrap_content"
+            <TableLayout
+                android:id="@+id/tableUserScores"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="@string/score_board_user_name"
-                android:textSize="25sp" />
+                android:layout_marginTop="30dp">
 
-            <TextView
-                android:id="@+id/txtScoreBoardScoreType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="25sp" />
-        </TableRow>
+                <TableRow>
 
-        <TableRow>
+                    <TextView
+                        android:id="@+id/txtScoreBoardUserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/score_board_user_name"
+                        android:textSize="25sp" />
 
-            <TextView
-                android:id="@+id/txtUser1Name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="20sp" />
+                    <TextView
+                        android:id="@+id/txtScoreBoardScoreType"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="25sp" />
+                </TableRow>
 
-            <TextView
-                android:id="@+id/txtUser1Score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="20sp" />
-        </TableRow>
+                <TableRow>
 
-        <TableRow>
+                    <TextView
+                        android:id="@+id/txtUser1Name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/txtUser2Name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="20sp" />
+                    <TextView
+                        android:id="@+id/txtUser1Score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="20sp" />
+                </TableRow>
 
-            <TextView
-                android:id="@+id/txtUser2Score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="20sp" />
-        </TableRow>
+                <TableRow>
 
-        <TableRow>
+                    <TextView
+                        android:id="@+id/txtUser2Name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/txtUser3Name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="20sp" />
+                    <TextView
+                        android:id="@+id/txtUser2Score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="20sp" />
+                </TableRow>
 
-            <TextView
-                android:id="@+id/txtUser3Score"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:textSize="20sp" />
-        </TableRow>
-    </TableLayout>
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/txtUser3Name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/txtUser3Score"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:textSize="20sp" />
+                </TableRow>
+            </TableLayout>
+
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/btnBackToMain"

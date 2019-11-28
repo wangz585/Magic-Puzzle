@@ -1,11 +1,14 @@
 package com.group0536.puzzlemazing.views.scoreboard;
 
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.group0536.puzzlemazing.R;
@@ -20,9 +23,9 @@ public class ScoreBoardActivity extends FluxActivity implements AdapterView.OnIt
     private ScoreBoardStore store;
     private Button btnBackToMain;
     private Spinner spinnerScoreType;
-    private List<List<TextView>> usersWithScores;
     private ScoreBoardActionCreator actionCreator;
     private TextView tableScoreType;
+    private TableLayout table;
 
     @Override
     protected void initFluxComponents() {
@@ -40,25 +43,16 @@ public class ScoreBoardActivity extends FluxActivity implements AdapterView.OnIt
     private void bindViews() {
         initializeBackToMain();
         initializeScoreType();
-        initializeUserWithScores();
         initializeTableScoreType();
+        initializeTable();
+    }
+
+    private void initializeTable() {
+        table = findViewById(R.id.tableUserScores);
     }
 
     private void initializeTableScoreType() {
         tableScoreType = findViewById(R.id.txtScoreBoardScoreType);
-    }
-
-    private void initializeUserWithScores() {
-        usersWithScores = new ArrayList<>();
-        for(int row = 0; row < 3; row++){
-            List<TextView> currentRow = new ArrayList<>();
-            String btnId = "txtUser" + (row + 1);
-            int resName = getResources().getIdentifier(btnId+"Name", "id", getPackageName());
-            int resScore = getResources().getIdentifier(btnId+"Score", "id", getPackageName());
-            currentRow.add((TextView) findViewById(resName));
-            currentRow.add((TextView) findViewById(resScore));
-            usersWithScores.add(currentRow);
-        }
     }
 
     private void initializeScoreType() {
@@ -90,12 +84,34 @@ public class ScoreBoardActivity extends FluxActivity implements AdapterView.OnIt
     }
 
     private void upDateUI(String scoreType) {
-//        List<List> usersWithScoresData = store.getUsersWithScores();
-//        for(int row = 0; row < 3; row++){
-//            List currentUser = usersWithScoresData.get(row);
-//            usersWithScores.get(row).get(0).setText((String) currentUser.get(0));
-//            usersWithScores.get(row).get(1).setText((Integer) currentUser.get(1));
-//        }
+        table.removeViews(1, table.getChildCount()-1);
+        /*List<List> usersWithScoresData = store.getUsersWithScores();
+        for(int row = 0; row < 3; row++){
+            List currentUser = usersWithScoresData.get(row);
+            usersWithScores.get(row).get(0).setText((String) currentUser.get(0));
+            usersWithScores.get(row).get(1).setText((Integer) currentUser.get(1));
+        }
+        for(int i = 0; i < usersWithScoresData.size(); i++){
+            TableRow row = new TableRow(this);
+            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+            lp.weight=1f;
+            row.setLayoutParams(lp);
+            row.setWeightSum(2);
+            TextView userName = new TextView(this);
+            userName.setGravity(Gravity.CENTER);
+            userName.setText((String) usersWithScoresData.get(i).get(0));
+            userName.setWidth(10);
+            userName.setLayoutParams(lp);
+            TextView userScore = new TextView(this);
+            userScore.setGravity(Gravity.CENTER);
+            userScore.setText(String.valueOf(usersWithScoresData.get(i).get(1)));
+            userScore.setLayoutParams(lp);
+            row.addView(userName);
+            row.addView(userScore);
+            table.addView(row);
+
+        }
+        */
         String txtIdScoreType = scoreType.substring(8);
         tableScoreType.setText(txtIdScoreType);
     }
