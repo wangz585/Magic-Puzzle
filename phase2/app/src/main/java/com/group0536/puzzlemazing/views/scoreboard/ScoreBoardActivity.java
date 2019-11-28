@@ -27,6 +27,7 @@ public class ScoreBoardActivity extends FluxActivity implements AdapterView.OnIt
     @Override
     protected void initFluxComponents() {
         store = ScoreBoardStore.getInstance(dispatcher);
+        setContentView(R.layout.activity_score_board);
         actionCreator = new ScoreBoardActionCreator(dispatcher);
     }
 
@@ -89,15 +90,14 @@ public class ScoreBoardActivity extends FluxActivity implements AdapterView.OnIt
     }
 
     private void upDateUI(String scoreType) {
-        List<List> usersWithScoresData = store.getUsersWithScores();
-        for(int row = 0; row < 3; row++){
-            List currentUser = usersWithScoresData.get(row);
-            usersWithScores.get(row).get(0).setText((String) currentUser.get(0));
-            usersWithScores.get(row).get(1).setText((Integer) currentUser.get(1));
-        }
-        String txtIdScoreType = scoreType.substring(0, 9);
-        int res = getResources().getIdentifier(txtIdScoreType, "id", getPackageName());
-        tableScoreType.setText(res);
+//        List<List> usersWithScoresData = store.getUsersWithScores();
+//        for(int row = 0; row < 3; row++){
+//            List currentUser = usersWithScoresData.get(row);
+//            usersWithScores.get(row).get(0).setText((String) currentUser.get(0));
+//            usersWithScores.get(row).get(1).setText((Integer) currentUser.get(1));
+//        }
+        String txtIdScoreType = scoreType.substring(8);
+        tableScoreType.setText(txtIdScoreType);
     }
 
     @Override
