@@ -10,6 +10,7 @@ import com.group0536.puzzlemazing.stores.StoreChangeEvent;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -22,6 +23,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
     private Point currentBoxPosition;
     private Timer timer;
     private int timeUsed;
+    private BusyWorkerInitController initController = new BusyWorkerInitController();
 
     protected BusyWorkerStore(Dispatcher dispatcher) {
         super(dispatcher);
@@ -77,16 +79,9 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
     }
 
     private void initMap(int level) {
+        HashMap<Object, String[]> levelData = initController.getLevelData(level);
+        String[] rawMap = (String[])levelData.get("ContentView");
         this.map = new BusyWorkerMap();
-        String[] rawMap;
-        switch (level) {
-            case 1: rawMap = BusyWorkerRawMaps.LEVEL_1;
-                break;
-            case 2: rawMap = BusyWorkerRawMaps.LEVEL_2;
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + level);
-        }
         initLabels(rawMap);
         initCircumference(rawMap);
     }

@@ -15,9 +15,9 @@ public class BusyWorkerBitMap {
 
     public static void initBitmaps(Resources res) {
         WorkerBitmap = BitmapFactory.decodeResource(res, R.drawable.worker);
-        BoxBitmap = BitmapFactory.decodeResource(res, R.drawable.box);
+        BoxBitmap = BitmapFactory.decodeResource(res, R.drawable.skull);
         WallBitmap = BitmapFactory.decodeResource(res, R.drawable.wall);
-        FlagBitmap = BitmapFactory.decodeResource(res, R.drawable.flag);
+        FlagBitmap = BitmapFactory.decodeResource(res, R.drawable.tomb);
     }
 
     public static Bitmap getWorkerBitmap() {
