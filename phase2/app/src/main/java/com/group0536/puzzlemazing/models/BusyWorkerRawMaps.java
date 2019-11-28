@@ -10,21 +10,21 @@ public class BusyWorkerRawMaps {
 
             "W                     W",
 
-            "WWWWWWWWWWWW WWWWWWWWWW",
+            "W WWWW   WWWW   WWWW  W",
+
+            "W    W   W  W      W  W",
+
+            "W WWWW   W  W      W  W",
+
+            "W W      W  W      W  W",
+
+            "W WWWW   WWWW      W  W",
 
             "W                     W",
 
-            "W                     W",
+            "W         B           W",
 
-            "W                     W",
-
-            "W                      W",
-
-            "W                     W",
-
-            "W                     W",
-
-            "W                     W",
+            "W          M          W",
 
             "WWWWWWWWWWWWWWWWWWWWWWW"
 

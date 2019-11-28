@@ -60,7 +60,7 @@ public class GameView extends FluxView {
 
     private void drawBackground(Canvas canvas) {
         Paint background = new Paint();
-        background.setColor(getResources().getColor(R.color.turquoise));
+        background.setColor(getResources().getColor(R.color.silver));
         canvas.drawRect(0, 0, getWidth(), getHeight(), background);
     }
 
