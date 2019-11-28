@@ -10,8 +10,17 @@ import java.util.List;
 
 public class ScoreBoardStore extends Store implements ScoreBoardActions {
     private List<List> usersWithScores;
-    protected ScoreBoardStore(Dispatcher dispatcher) {
+    private static ScoreBoardStore instance;
+
+    private ScoreBoardStore(Dispatcher dispatcher) {
         super(dispatcher);
+    }
+
+    public static ScoreBoardStore getInstance(Dispatcher dispatcher) {
+        if (instance == null) {
+            instance = new ScoreBoardStore(dispatcher);
+        }
+        return instance;
     }
 
     @Override
