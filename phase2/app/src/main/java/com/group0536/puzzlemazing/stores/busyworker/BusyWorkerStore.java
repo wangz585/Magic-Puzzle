@@ -61,7 +61,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
 
     private void updateScore() {
-        score = score - 1;
+        score--;
 
     }
 
@@ -70,7 +70,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         TimerTask t = new TimerTask() {
             @Override
             public void run() {
-                timeUsed = timeUsed + 1;
+                timeUsed++;
                 postChange();
             }
         };
