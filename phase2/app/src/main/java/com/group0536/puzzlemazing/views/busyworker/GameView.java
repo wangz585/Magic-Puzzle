@@ -66,10 +66,12 @@ public class GameView extends FluxView {
     private void drawSurface(Canvas canvas) {
         Paint linePaint = new Paint();
         linePaint.setColor(Color.BLACK);
-        for (int row = 0; row <= store.getMap().getWidth(); row++)
+        int maxRow = store.getMap().getWidth();
+        for (int row = 0; row <= maxRow; row++)
             canvas.drawLine(0, row * CellWidth,
                     getWidth(), row * CellWidth, linePaint);
-        for (int column = 0; column <= getWidth()/CellWidth; column++)
+        int maxCol = getWidth()/CellWidth;
+        for (int column = 0; column <= maxCol; column++)
             canvas.drawLine(column * CellWidth, 0,
                     column * CellWidth,
                     store.getMap().getWidth() * CellWidth, linePaint);
