@@ -1,6 +1,6 @@
-package com.group0536.puzzlemazing.models;
+package com.group0536.puzzlemazing.models.busyworker;
 
-public class BusyWorkerRawMaps {
+public class RawMaps {
 
     public static final String [] LEVEL_1 = {
 

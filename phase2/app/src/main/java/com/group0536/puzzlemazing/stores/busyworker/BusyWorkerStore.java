@@ -3,8 +3,7 @@ import android.graphics.Point;
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.busyworker.BusyWorkerActions;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
-import com.group0536.puzzlemazing.models.BusyWorkerMap;
-import com.group0536.puzzlemazing.models.BusyWorkerRawMaps;
+import com.group0536.puzzlemazing.models.busyworker.Map;
 import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
 import com.squareup.otto.Subscribe;
@@ -16,7 +15,7 @@ import java.util.TimerTask;
 
 public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
-    private BusyWorkerMap map;
+    private Map map;
     private static BusyWorkerStore instance;
     private int score;
     private Point currentWorkerPosition;
@@ -81,7 +80,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
     private void initMap(int level) {
         HashMap<Object, String[]> levelData = initController.getLevelData(level);
         String[] rawMap = (String[])levelData.get("ContentView");
-        this.map = new BusyWorkerMap();
+        this.map = new Map();
         initLabels(rawMap);
         initCircumference(rawMap);
     }
@@ -337,7 +336,7 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
      *
      * @return map in the store
      */
-    public BusyWorkerMap getMap() {
+    public Map getMap() {
         return map;
     }
 

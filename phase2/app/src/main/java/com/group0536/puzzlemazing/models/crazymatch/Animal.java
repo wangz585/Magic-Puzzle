@@ -1,4 +1,4 @@
-package com.group0536.puzzlemazing.models;
+package com.group0536.puzzlemazing.models.crazymatch;
 
 import androidx.annotation.Nullable;
 

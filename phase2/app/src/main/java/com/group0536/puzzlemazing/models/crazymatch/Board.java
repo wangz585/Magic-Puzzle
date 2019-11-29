@@ -1,19 +1,21 @@
-package com.group0536.puzzlemazing.models;
+package com.group0536.puzzlemazing.models.crazymatch;
+
+import com.group0536.puzzlemazing.models.crazymatch.Animal;
 
 import java.util.List;
 
-public class CrazyMatchBoard {
+public class Board {
     private List<List<Animal>> animals;
     private int row;
     private int col;
     private int numAnimals;
 
     /**
-     * A CrazyMatchBoard object
+     * A Board object
      *
      * @param animals the animals on this board
      */
-    public CrazyMatchBoard(List<List<Animal>> animals) {
+    public Board(List<List<Animal>> animals) {
         this.animals = animals;
         row = animals.size();
         col = animals.get(0).size();

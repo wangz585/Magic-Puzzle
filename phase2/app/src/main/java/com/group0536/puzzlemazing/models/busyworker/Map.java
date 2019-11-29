@@ -1,10 +1,10 @@
-package com.group0536.puzzlemazing.models;
+package com.group0536.puzzlemazing.models.busyworker;
 
 import android.graphics.Point;
 
 import java.util.ArrayList;
 
-public class BusyWorkerMap {
+public class Map {
 
     private int width;
     private int height;
@@ -15,7 +15,7 @@ public class BusyWorkerMap {
     private ArrayList<Point> DeadPositions;
     private ArrayList<Point> WallPositions;
 
-    public BusyWorkerMap() {
+    public Map() {
     }
 
     public String[] getBackground() {

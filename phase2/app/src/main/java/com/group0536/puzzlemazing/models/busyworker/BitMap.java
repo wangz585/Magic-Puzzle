@@ -1,4 +1,4 @@
-package com.group0536.puzzlemazing.models;
+package com.group0536.puzzlemazing.models.busyworker;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 
 import com.group0536.puzzlemazing.R;
 
-public class BusyWorkerBitMap {
+public class BitMap {
 
     private static Bitmap WorkerBitmap;
     private static Bitmap BoxBitmap;

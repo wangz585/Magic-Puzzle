@@ -6,8 +6,8 @@ import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.crazymatch.CrazyMatchActions;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
-import com.group0536.puzzlemazing.models.Animal;
-import com.group0536.puzzlemazing.models.CrazyMatchBoard;
+import com.group0536.puzzlemazing.models.crazymatch.Animal;
+import com.group0536.puzzlemazing.models.crazymatch.Board;
 import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
@@ -22,7 +22,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class CrazyMatchStore extends Store implements CrazyMatchActions {
-    private CrazyMatchBoard board;
+    private Board board;
     private int score;
     private Animal firstFlip;
     private Animal secondFlip;
@@ -114,7 +114,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
      *
      * @return board of this store
      */
-    public CrazyMatchBoard getBoard() {
+    public Board getBoard() {
         return board;
     }
 
@@ -190,7 +190,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         int row = dimension.get(0);
         int col = dimension.get(1);
         List<List<Animal>> animals = GenerateAnimalsList(row, col);
-        board = new CrazyMatchBoard(animals);
+        board = new Board(animals);
     }
 
     /**
