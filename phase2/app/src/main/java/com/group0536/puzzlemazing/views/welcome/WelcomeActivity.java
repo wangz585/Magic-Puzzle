@@ -1,22 +1,15 @@
 package com.group0536.puzzlemazing.views.welcome;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.group0536.puzzlemazing.R;
-import com.group0536.puzzlemazing.actions.welcome.AppInitializeActions;
-import com.group0536.puzzlemazing.utils.ActivityUtil;
 
 /**
  * This activity displays Puzzle Mazing logo to player as they
