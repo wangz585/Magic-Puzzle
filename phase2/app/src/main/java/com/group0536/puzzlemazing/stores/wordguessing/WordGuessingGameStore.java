@@ -17,12 +17,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class WordGuessingGameStore extends Store implements WordGuessingActions {
-    private WordGuessingInitController initController = new WordGuessingInitController();
     private User player;
     private WordBank wordBank;
     private Word currentWord;
@@ -129,7 +127,9 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
 
     private void updateScore() {
         score += 10;
-        // TODO
+        // TODO: update the score to the server for this level of game
+        // one game has two levels, two different scores
+
     }
 
     /**
@@ -138,6 +138,9 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
      * @param context
      */
     private void initializeWordBank(int level, Context context) {
+            currentWord = null;
+            score = 0;
+            gameStart = false;
             wordBank = new WordBank(getWordList(level, context));
         }
 
@@ -213,11 +216,6 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
      */
     private Word getANewWord() {
         return wordBank.getARandomWord();
-    }
-
-    public int getContentView(int level) {
-        HashMap<Object, Object> levelData = initController.getLevelData(level);
-        return (int) levelData.get("ContentView");
     }
 
     /**

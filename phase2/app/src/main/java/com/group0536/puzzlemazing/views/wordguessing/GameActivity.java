@@ -68,7 +68,7 @@ public class GameActivity extends FluxActivity {
 
     }
 
-    private CountDownTimer countDownTimer = new CountDownTimer(10000, 1000) {
+    private CountDownTimer countDownTimer = new CountDownTimer(120000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
             String value = String.valueOf((int) (millisUntilFinished / 1000));
