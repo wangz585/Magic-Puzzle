@@ -298,21 +298,37 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         return false;
     }
 
+    /**
+     * Check whether the box is attached above the worker
+     * @return boolean whether the box is attached above the worker
+     */
     private boolean BoxAboveWorker() {
         return currentBoxPosition.x == currentWorkerPosition.x &&
                 currentBoxPosition.y == currentWorkerPosition.y - 1;
     }
 
+    /**
+     * Check whether the box is attached below the worker
+     * @return boolean whether the box is attached below the worker
+     */
     private boolean BoxBelowWorker() {
         return currentBoxPosition.x == currentWorkerPosition.x &&
                 currentBoxPosition.y == currentWorkerPosition.y + 1;
     }
 
+    /**
+     * Check whether the box is attached to the right side the worker
+     * @return boolean whether the box is attached to the right the worker
+     */
     private boolean BoxRightToWorker() {
         return currentBoxPosition.x == currentWorkerPosition.x + 1 &&
                 currentBoxPosition.y == currentWorkerPosition.y;
     }
 
+    /**
+     * Check whether the box is attached to the left side of the worker
+     * @return boolean whether the box is attached to the left the worker
+     */
     private boolean BoxLeftToWorker() {
         return currentBoxPosition.x == currentWorkerPosition.x - 1 &&
                 currentBoxPosition.y == currentWorkerPosition.y;
@@ -349,14 +365,29 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         return currentWorkerPosition;
     }
 
+    /**
+     * Get current position of the box in store
+     *
+     * @return current box_position in the store
+     */
     public Point getCurrentBoxPosition() {
         return currentBoxPosition;
     }
 
+    /**
+     * Get the current store of game BusyWorker
+     *
+     * @return score of the game
+     */
     public int getScore() {
         return score;
     }
 
+    /**
+     * Get total time used in the game
+     *
+     * @return amount of time used in the game
+     */
     public int getTimeUsed() {
         return timeUsed;
     }
