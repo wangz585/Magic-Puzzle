@@ -2,18 +2,21 @@ package com.group0536.puzzlemazing.views.welcome;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.util.Log;
+import android.text.Layout;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.group0536.puzzlemazing.R;
-import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.welcome.AppInitializeActionCreator;
 import com.group0536.puzzlemazing.models.AppInitProgress;
 import com.group0536.puzzlemazing.stores.welcome.AppInitializeStore;
@@ -40,6 +43,7 @@ public class AppInitializeActivity extends FluxActivity {
     ImageView imgLoading;
     AnimationDrawable animLoading;
     TextView tvLoadingMsg;
+    View popUpWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,11 +136,28 @@ public class AppInitializeActivity extends FluxActivity {
 
         if (isEmpty(token)) {
             // TODO prompt login
+            View contentView = this.findViewById(android.R.id.content);
+            popWindow(contentView, R.layout.popup_login);
             setLoadingMessage(R.string.app_init_complete_login);
         } else {
             setLoadingMessage(R.string.app_init_logging_in);
             actionCreator.verifyToken(token);
         }
+    }
+
+    private void popWindow(final View view, int popUpId) {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        popUpWindow = inflater.inflate(popUpId, null);
+
+        int width = (int) (view.getWidth() * 0.6);
+        int height = (int) (view.getHeight() * 0.6);
+        final PopupWindow window = new PopupWindow(popUpWindow, width, height, true);
+        AppInitializeActivity.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                window.showAtLocation(view, Gravity.CENTER, 0, 0);
+            }
+        });
     }
 
     private void setLoadingMessage(final int messageId) {

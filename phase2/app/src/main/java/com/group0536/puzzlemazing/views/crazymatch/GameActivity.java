@@ -72,9 +72,9 @@ public class GameActivity extends FluxActivity {
     /**
      * Set On Click Listener of btnBall at row i and column j
      *
-     * @param i       row i position of the app_log_in_button
-     * @param j       column j position of the app_log_in_button
-     * @param btnBall ball app_log_in_button
+     * @param i       row i position of the game_button
+     * @param j       column j position of the game_button
+     * @param btnBall ball game_button
      */
     private void setBallOnClickListener(int i, int j, ImageButton btnBall) {
         final int row = i;

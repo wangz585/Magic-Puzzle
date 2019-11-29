@@ -124,7 +124,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
     }
 
     /**
-     * Flip the app_log_in_button according to the pay load entry of action
+     * Flip the game_button according to the pay load entry of action
      *
      * @param action action Object of the action being processed
      */
