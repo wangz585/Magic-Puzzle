@@ -39,31 +39,29 @@ public class RawMaps {
      */
     public static final String [] LEVEL_2 = {
 
-            "WWWWWWWWWWWWWWWWWWWWWWWWW",
+            "WWWWWWWWWWWWWWWWWWWWWWW",
 
-            "W           F           W",
+            "W           F         W",
 
-            "W WWWW   WWWW   WWWW    W",
+            "W                     W",
 
-            "W    W      W   W       W",
+            "W WWWW   WWWW   WWWW  W",
 
-            "W    W      W   W       W",
+            "W    W      W   W     W",
 
-            "W WWWW   WWWW   WWWW    W",
+            "W WWWW   WWWW   WWWW  W",
 
-            "W W         W   W  W    W",
+            "W W         W   W  W  W",
 
-            "W WWWW   WWWW   WWWW    W",
+            "W WWWW   WWWW   WWWW  W",
 
-            "W                       W",
+            "W                     W",
 
-            "W         B             W",
+            "W         B           W",
 
-            "W                       W",
+            "W          M          W",
 
-            "W         M             W",
-
-            "WWWWWWWWWWWWWWWWWWWWWWWWW",
+            "WWWWWWWWWWWWWWWWWWWWWWW"
 
     };
 

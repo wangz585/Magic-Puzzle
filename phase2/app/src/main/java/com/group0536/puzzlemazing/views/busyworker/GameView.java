@@ -154,7 +154,7 @@ public class GameView extends FluxView {
     @Override
     protected void onSizeChanged(int newWidth, int newHeight, int oldWidth, int oldHeight) {
         super.onSizeChanged(newWidth, newHeight, oldWidth, oldHeight);
-        CellWidth = newHeight /  store.getMap().getHeight();
+        CellWidth = newHeight / store.getMap().getHeight();
     }
 
     @Subscribe

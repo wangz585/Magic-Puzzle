@@ -30,25 +30,7 @@ public class GameFinishedActivity extends FluxActivity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         setContentView(R.layout.activity_exit);
-        btnmenu = findViewById(getResources()
-                .getIdentifier("btnMenu", "id", getPackageName()));//go to menu
-        btnplayagain = findViewById(getResources()
-                .getIdentifier("btnPlayAgain", "id", getPackageName()));
-        txtscore.setText("Your current score is" + store.getScore());
-        txthighscore.setText("Your current score is" + store.getScore());//get the highest score from server
-        txttime.setText("Your current score is" + store.getScore()); //get the time spent from timer
-        //get the highest score from the server
-        setUpButton();
-    }
 
-    private void setUpButton() {
-        btnplayagain.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(GameFinishedActivity.this, SelectLevelActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override
