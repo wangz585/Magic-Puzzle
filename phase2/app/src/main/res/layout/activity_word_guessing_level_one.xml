@@ -5,7 +5,7 @@
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/crazy_match_background">
+    android:background="@drawable/app_select_level_background">
 
     <EditText
         android:id="@+id/txt_word"
@@ -51,7 +51,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/txt_word"
         app:layout_constraintHorizontal_bias="0.95"
-        app:srcCompat="@drawable/next"
+        app:srcCompat="@drawable/guessing_next"
         android:contentDescription="@string/submit" />
 
     <TextView

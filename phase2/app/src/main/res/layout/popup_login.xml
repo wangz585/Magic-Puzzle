@@ -39,11 +39,11 @@
         android:importantForAutofill="no" />
 
     <Button
-        android:id="@+id/btn_register"
+        android:id="@+id/btnRegister"
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="120dp"
         android:layout_height="40dp"
-        android:background="@drawable/button"
+        android:background="@drawable/game_button"
         android:fontFamily="sans-serif"
         android:text="@string/register"
         android:textColor="#FFFFFF"
@@ -59,7 +59,7 @@
         style="?android:attr/borderlessButtonStyle"
         android:layout_width="120dp"
         android:layout_height="40dp"
-        android:background="@drawable/button"
+        android:background="@drawable/game_button"
         android:fontFamily="sans-serif"
         android:text="@string/login"
         android:textColor="#FFFFFF"

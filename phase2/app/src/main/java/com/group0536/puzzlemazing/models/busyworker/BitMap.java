@@ -1,4 +1,4 @@
-package com.group0536.puzzlemazing.models;
+package com.group0536.puzzlemazing.models.busyworker;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -6,7 +6,7 @@ import android.graphics.BitmapFactory;
 
 import com.group0536.puzzlemazing.R;
 
-public class BusyWorkerBitMap {
+public class BitMap {
 
     private static Bitmap WorkerBitmap;
     private static Bitmap BoxBitmap;
@@ -14,10 +14,10 @@ public class BusyWorkerBitMap {
     private static Bitmap FlagBitmap;
 
     public static void initBitmaps(Resources res) {
-        WorkerBitmap = BitmapFactory.decodeResource(res, R.drawable.worker);
-        BoxBitmap = BitmapFactory.decodeResource(res, R.drawable.box);
-        WallBitmap = BitmapFactory.decodeResource(res, R.drawable.wall);
-        FlagBitmap = BitmapFactory.decodeResource(res, R.drawable.flag);
+        WorkerBitmap = BitmapFactory.decodeResource(res, R.drawable.worker_worker);
+        BoxBitmap = BitmapFactory.decodeResource(res, R.drawable.worker_skull);
+        WallBitmap = BitmapFactory.decodeResource(res, R.drawable.worker_wall);
+        FlagBitmap = BitmapFactory.decodeResource(res, R.drawable.worker_tomb);
     }
 
     public static Bitmap getWorkerBitmap() {

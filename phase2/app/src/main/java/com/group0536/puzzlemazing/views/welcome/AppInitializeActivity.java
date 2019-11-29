@@ -107,7 +107,7 @@ public class AppInitializeActivity extends FluxActivity {
     }
 
     /**
-     * Perform the next required initialization based on the current progress
+     * Perform the guessing_next required initialization based on the current progress
      *
      * @param progress current progress object that does not contain error
      */

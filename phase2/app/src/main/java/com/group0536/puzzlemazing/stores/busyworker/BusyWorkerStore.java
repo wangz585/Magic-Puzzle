@@ -3,25 +3,26 @@ import android.graphics.Point;
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.busyworker.BusyWorkerActions;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
-import com.group0536.puzzlemazing.models.BusyWorkerMap;
-import com.group0536.puzzlemazing.models.BusyWorkerRawMaps;
+import com.group0536.puzzlemazing.models.busyworker.Map;
 import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class BusyWorkerStore extends Store implements BusyWorkerActions {
 
-    private BusyWorkerMap map;
+    private Map map;
     private static BusyWorkerStore instance;
     private int score;
     private Point currentWorkerPosition;
     private Point currentBoxPosition;
     private Timer timer;
     private int timeUsed;
+    private BusyWorkerInitController initController = new BusyWorkerInitController();
 
     protected BusyWorkerStore(Dispatcher dispatcher) {
         super(dispatcher);
@@ -77,16 +78,9 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
     }
 
     private void initMap(int level) {
-        this.map = new BusyWorkerMap();
-        String[] rawMap;
-        switch (level) {
-            case 1: rawMap = BusyWorkerRawMaps.LEVEL_1;
-                break;
-            case 2: rawMap = BusyWorkerRawMaps.LEVEL_2;
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + level);
-        }
+        HashMap<Object, String[]> levelData = initController.getLevelData(level);
+        String[] rawMap = (String[])levelData.get("ContentView");
+        this.map = new Map();
         initLabels(rawMap);
         initCircumference(rawMap);
     }
@@ -324,6 +318,12 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
                 currentBoxPosition.y == currentWorkerPosition.y;
     }
 
+    /**
+     * Get an instance of this store
+     *
+     * @param dispatcher the dispatcher associated
+     * @return an instance of this store
+     */
     public static BusyWorkerStore getInstance(Dispatcher dispatcher) {
         if (instance == null) {
             instance = new BusyWorkerStore(dispatcher);
@@ -331,10 +331,20 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         return instance;
     }
 
-    public BusyWorkerMap getMap() {
+    /**
+     * Get the map in store
+     *
+     * @return map in the store
+     */
+    public Map getMap() {
         return map;
     }
 
+    /**
+     * Get the current worker_worker position in store
+     *
+     * @return current worker_worker position in the store
+     */
     public Point getCurrentWorkerPosition() {
         return currentWorkerPosition;
     }

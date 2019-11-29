@@ -6,8 +6,8 @@ import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.crazymatch.CrazyMatchActions;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
-import com.group0536.puzzlemazing.models.Animal;
-import com.group0536.puzzlemazing.models.CrazyMatchBoard;
+import com.group0536.puzzlemazing.models.crazymatch.Animal;
+import com.group0536.puzzlemazing.models.crazymatch.Board;
 import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
@@ -22,7 +22,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class CrazyMatchStore extends Store implements CrazyMatchActions {
-    private CrazyMatchBoard board;
+    private Board board;
     private int score;
     private Animal firstFlip;
     private Animal secondFlip;
@@ -91,22 +91,22 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
      * Populate the animal drawables. This is all animal drawables that could be used.
      */
     private static void populateAnimalDrawables() {
-        allAnimals = new ArrayList<>(Arrays.asList(R.drawable.butterfly,
-                R.drawable.chicken,
-                R.drawable.cow,
-                R.drawable.dog,
-                R.drawable.lizard,
-                R.drawable.fish,
-                R.drawable.fox,
-                R.drawable.frog,
-                R.drawable.ladybug,
-                R.drawable.lion,
-                R.drawable.octopus,
-                R.drawable.owl,
-                R.drawable.reindeer,
-                R.drawable.robin,
-                R.drawable.snail,
-                R.drawable.turkey));
+        allAnimals = new ArrayList<>(Arrays.asList(R.drawable.match_butterfly,
+                R.drawable.match_chicken,
+                R.drawable.match_cow,
+                R.drawable.match_dog,
+                R.drawable.match_lizard,
+                R.drawable.match_fish,
+                R.drawable.match_fox,
+                R.drawable.match_frog,
+                R.drawable.match_ladybug,
+                R.drawable.match_lion,
+                R.drawable.match_octopus,
+                R.drawable.match_owl,
+                R.drawable.match_reindeer,
+                R.drawable.match_robin,
+                R.drawable.match_snail,
+                R.drawable.match_turkey));
     }
 
     /**
@@ -114,7 +114,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
      *
      * @return board of this store
      */
-    public CrazyMatchBoard getBoard() {
+    public Board getBoard() {
         return board;
     }
 
@@ -124,7 +124,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
     }
 
     /**
-     * Flip the button according to the pay load entry of action
+     * Flip the game_button according to the pay load entry of action
      *
      * @param action action Object of the action being processed
      */
@@ -190,7 +190,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         int row = dimension.get(0);
         int col = dimension.get(1);
         List<List<Animal>> animals = GenerateAnimalsList(row, col);
-        board = new CrazyMatchBoard(animals);
+        board = new Board(animals);
     }
 
     /**

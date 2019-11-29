@@ -7,8 +7,8 @@ import android.widget.TextView;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.crazymatch.CrazyMatchActionCreator;
-import com.group0536.puzzlemazing.models.Animal;
-import com.group0536.puzzlemazing.models.CrazyMatchBoard;
+import com.group0536.puzzlemazing.models.crazymatch.Animal;
+import com.group0536.puzzlemazing.models.crazymatch.Board;
 import com.group0536.puzzlemazing.stores.crazymatch.CrazyMatchChangeEvent;
 import com.group0536.puzzlemazing.stores.crazymatch.CrazyMatchStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
@@ -55,7 +55,7 @@ public class GameActivity extends FluxActivity {
     private void initializeBalls() {
         int numRow = store.getNumberOfRows();
         int numCol = store.getNumberOfColumns();
-        ballDrawingInt = R.drawable.crazy_match_ball;
+        ballDrawingInt = R.drawable.match_ball;
         btnBalls = new ImageButton[numRow][numCol];
         for (int i = 0; i < btnBalls.length; i++) {
             for (int j = 0; j < btnBalls[0].length; j++) {
@@ -72,9 +72,9 @@ public class GameActivity extends FluxActivity {
     /**
      * Set On Click Listener of btnBall at row i and column j
      *
-     * @param i       row i position of the button
-     * @param j       column j position of the button
-     * @param btnBall ball button
+     * @param i       row i position of the game_button
+     * @param j       column j position of the game_button
+     * @param btnBall ball game_button
      */
     private void setBallOnClickListener(int i, int j, ImageButton btnBall) {
         final int row = i;
@@ -120,7 +120,7 @@ public class GameActivity extends FluxActivity {
      * Update the crazy match board according to the store
      */
     private void updateBoard() {
-        CrazyMatchBoard board = store.getBoard();
+        Board board = store.getBoard();
         for (int i = 0; i < board.getNumberOfRows(); i++) {
             for (int j = 0; j < board.getNumberOfColumns(); j++) {
                 final ImageButton btn = btnBalls[i][j];

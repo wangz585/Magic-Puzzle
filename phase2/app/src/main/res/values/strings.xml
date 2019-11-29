@@ -33,7 +33,7 @@
   <string name="level_two">Level 2</string>
   <string name="display_score">score: %d</string>
 
-  <!-- busy worker -->
+  <!-- busy worker_worker -->
   <string name="busy_worker_win">CONGRATS</string>
   <string name="busy_worker_score">Your Current Score:</string>
   <string name="busy_worker_time">Time Left:</string>
@@ -47,4 +47,17 @@
   <string name="submit">Submit</string>
   <string name="hint">Hint</string>
   <string name="incorrect_attempt">Not quiet&#8230; Try again.</string>
+
+  <!-- score board -->
+  <string-array name="scoreTypesForRank">
+    <item>Rank By Level 1 Score</item>
+    <item>Rank By Level 2 Score</item>
+    <item>Rank By Level 3 Score</item>
+    <item>Rank By Level 4 Score</item>
+    <item>Rank By Total  Score</item>
+  </string-array>
+
+  <string name="score_board_title">Score Board</string>
+  <string name="score_board_user_name">User</string>
+  <string name="score_board_exit">MAIN PAGE</string>
 </resources>

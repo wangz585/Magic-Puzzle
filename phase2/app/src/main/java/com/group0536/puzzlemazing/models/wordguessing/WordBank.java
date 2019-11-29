@@ -16,7 +16,7 @@ public class WordBank {
 
     /**
      * Get a word that is not been guessed by the player
-     * @return a word for the player to guess next
+     * @return a word for the player to guess guessing_next
      */
     public Word getARandomWord(){
         Random rand = new Random();
