@@ -74,7 +74,7 @@ public class GameView extends FluxView {
         for (int column = 0; column <= maxCol; column++)
             canvas.drawLine(column * CellWidth, 0,
                     column * CellWidth,
-                    store.getMap().getWidth() * CellWidth, linePaint);
+                    maxRow * CellWidth, linePaint);
     }
 
     private void drawGameBoard(Canvas canvas) {
