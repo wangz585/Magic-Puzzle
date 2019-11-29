@@ -60,11 +60,17 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
     }
 
 
+    /**
+     * Update the score of the player
+     */
     private void updateScore() {
         score--;
 
     }
 
+    /**
+     * Initialize the timer in the game
+     */
     private void initTimer(){
         timer = new Timer();
         TimerTask t = new TimerTask() {
@@ -77,14 +83,26 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         timer.scheduleAtFixedRate(t,1000,1000);
     }
 
+    /**
+     * Initialize the game map of the given level
+     *
+     * @param level the level of the game
+     */
     private void initMap(int level) {
         HashMap<Object, String[]> levelData = initController.getLevelData(level);
-        String[] rawMap = (String[])levelData.get("ContentView");
+        String[] rawMap = levelData.get("ContentView");
         this.map = new Map();
         initLabels(rawMap);
         initCircumference(rawMap);
     }
 
+    /**
+     * Initialize all the game elements in the map
+     *
+     * @param rawMap the string list representing
+     *
+     * the design of the game map
+     */
     private void initLabels(String[] rawMap){
         ArrayList<Point> wallPositions = new ArrayList<>();
         ArrayList<Point> deadPositions = new ArrayList<>();
@@ -118,45 +136,101 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         map.setWallPositions(wallPositions);
     }
 
+    /**
+     * Check whether a position is a dead position in the game map
+     *
+     * @param rawMap the string list representing the design of the game map
+     * @param spacePosition the position of a single point in the game map
+     *
+     * @return whether it is a dead position
+     */
     private boolean checkDeadPosition(String[] rawMap, Point spacePosition){
         return (checkAboveLeft(rawMap,spacePosition) || checkBelowLeft(rawMap,spacePosition) ||
                 checkAboveRight(rawMap,spacePosition) || checkBelowRight(rawMap,spacePosition));
     }
 
+    /**
+     * Check whether a point has walls close to it both on its right and below
+     *
+     * @param rawMap the string list representing the design of the game map
+     * @param spacePosition the point's position in game map
+     *
+     * @return whether the point has walls close to it both on its right and below
+     */
     private boolean checkBelowRight(String[] rawMap, Point spacePosition) {
         return rawMap[spacePosition.y].charAt(spacePosition.x+1) == 'W' &&
                 rawMap[spacePosition.y+1].charAt(spacePosition.x) == 'W';
     }
 
+    /**
+     * Check whether a point has walls close to it both on its right and above
+     *
+     * @param rawMap the string list representing the design of the game map
+     * @param spacePosition the point's position in game map
+     *
+     * @return whether the point has walls close to it both on its right and above
+     */
     private boolean checkAboveRight(String[] rawMap, Point spacePosition) {
         return rawMap[spacePosition.y].charAt(spacePosition.x+1) == 'W' &&
                 rawMap[spacePosition.y-1].charAt(spacePosition.x) == 'W';
     }
 
+    /**
+     * Check whether a point has walls close to it both on its left and below
+     *
+     * @param rawMap the string list representing the design of the game map
+     * @param spacePosition the point's position in game map
+     *
+     * @return whether the point has walls close to it both on its left and below
+     */
     private boolean checkBelowLeft(String[] rawMap, Point spacePosition) {
         return rawMap[spacePosition.y].charAt(spacePosition.x-1) == 'W' &&
                 rawMap[spacePosition.y+1].charAt(spacePosition.x) == 'W';
     }
 
+    /**
+     * Check whether a position has walls close to it both on its left and above
+     *
+     * @param rawMap the string list representing the design of the game map
+     * @param spacePosition the point's position in game map
+     *
+     * @return whether the point has walls close to it both on its left and above
+     */
     private boolean checkAboveLeft(String[] rawMap, Point spacePosition) {
         return rawMap[spacePosition.y].charAt(spacePosition.x-1) == 'W' &&
                 rawMap[spacePosition.y-1].charAt(spacePosition.x) == 'W';
     }
 
+    /**
+     * Set the current position of the worker and the box
+     */
     private void initCurrentPosition(){
         currentWorkerPosition = new Point(map.getInitialWorkerPosition().x,map.getInitialWorkerPosition().y);
         currentBoxPosition = new Point(map.getInitialBoxPosition().x,map.getInitialBoxPosition().y);
     }
 
+    /**
+     * Set the current position of the worker and the box
+     */
     private void initCircumference(String[] rawMap){
         map.setWidth(rawMap[1].length());
         map.setHeight(rawMap.length);
     }
 
+    /**
+     * Check whether the player has win the game
+     *
+     * @return whether win the game or not
+     */
     public boolean checkWin() {
         return currentBoxPosition.equals(map.getFlagPosition());
     }
 
+    /**
+     * Check whether the player lose the game or get stuck in the dead situation
+     *
+     * @return whether lose the game or can not move
+     */
     public boolean checkLose() {
         for (Point deadPostion : map.getDeadPositions()){
             if (deadPostion.equals(currentBoxPosition)) return true;
@@ -164,6 +238,12 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         return false;
     }
 
+    /**
+     * Make the worker move and push the box at the same time(if possible)
+     * when a user touch the screen
+     *
+     * @param touchPosition where the user touch the screen
+     */
     private void move(Point touchPosition) {
         String HorizontalDirection = checkHorizontalPosition(touchPosition);
         String VerticalDirection = checkVerticalPosition(touchPosition);
@@ -181,18 +261,36 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         }
     }
 
+    /**
+     * Check how the worker move vertically
+     *
+     * @param touchPosition where the user touch the screen
+     *
+     * @return a string indicate how the worker move vertically
+     */
     private String checkVerticalPosition(Point touchPosition) {
         if (touchPosition.y < currentWorkerPosition.y) return "above";
         else if (touchPosition.y > currentWorkerPosition.y) return "below";
         else return "noVerticalMovement";
     }
 
+    /**
+     * Check how the worker move horizontally
+     *
+     * @param touchPosition where the user touch the screen
+     *
+     * @return a string indicate how the worker move horizontally
+     */
     private String checkHorizontalPosition(Point touchPosition) {
         if (touchPosition.x > currentWorkerPosition.x) return "right";
         else if (touchPosition.x < currentWorkerPosition.x) return "left";
         else return "noHorizontalMovement";
     }
 
+    /**
+     * Make the worker move one unit upwards
+     * And if there is a box above him, the box is pushed one unit upwards
+     */
     private void moveAbove() {
         if ((!WallAboveBox()) && BoxAboveWorker()) {
             currentWorkerPosition.y = currentWorkerPosition.y - 1;
@@ -201,6 +299,10 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         else if ((!WallAboveWorker()) && !(BoxAboveWorker())) currentWorkerPosition.y = currentWorkerPosition.y - 1;
     }
 
+    /**
+     * Make the worker move one unit downwards
+     * And if there is a box below him, the box is pushed one unit downwards
+     */
     private void moveBelow() {
         if ((!WallBelowBox()) && BoxBelowWorker()) {
             currentWorkerPosition.y = currentWorkerPosition.y + 1;
@@ -209,6 +311,10 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         else if ((!WallBelowWorker()) && !(BoxBelowWorker())) currentWorkerPosition.y = currentWorkerPosition.y + 1;
     }
 
+    /**
+     * Make the worker move one unit to the left
+     * And if there is a box on his left, the box is pushed one unit to the left
+     */
     private void moveLeft() {
         if ((!WallLeftToBox()) && BoxLeftToWorker()) {
             currentWorkerPosition.x = currentWorkerPosition.x - 1;
@@ -217,6 +323,10 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         else if ((!WallLeftToWorker()) && !(BoxLeftToWorker())) currentWorkerPosition.x = currentWorkerPosition.x - 1;
     }
 
+    /**
+     * Make the worker move one unit to the right
+     * And if there is a box on his right, the box is pushed move one unit to the right
+     */
     private void moveRight() {
         if ((!WallRightToBox()) && BoxRightToWorker()) {
             currentWorkerPosition.x = currentWorkerPosition.x + 1;
@@ -226,6 +336,11 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
     }
 
 
+    /**
+     * Check whether there is a wall just above the worker
+     *
+     * @return whether there is a wall just above the worker
+     */
     private boolean WallAboveWorker(){
         for (Point wallPosition : map.getWallPositions()) {
             if (wallPosition.y == currentWorkerPosition.y - 1 && wallPosition.x == currentWorkerPosition.x){
@@ -235,6 +350,26 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         return false;
     }
 
+    /**
+     * Check whether there is a wall just below the worker
+     *
+     * @return whether there is a wall just below the worker
+     */
+    private boolean WallBelowWorker(){
+        for (Point wallPosition : map.getWallPositions()) {
+            if (wallPosition.y == currentWorkerPosition.y + 1 && wallPosition.x == currentWorkerPosition.x){
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * Check whether there is a wall just on the left side of the worker
+     *
+     * @return whether there is a wall just on the left side of the worker
+     */
     private boolean WallLeftToWorker(){
         for (Point wallPosition : map.getWallPositions()) {
             if (wallPosition.x == currentWorkerPosition.x - 1 && wallPosition.y == currentWorkerPosition.y){
@@ -244,6 +379,11 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         return false;
     }
 
+    /**
+     * Check whether there is a wall just on the right side of the worker
+     *
+     * @return whether there is a wall just on the right side of the worker
+     */
     private boolean WallRightToWorker(){
         for (Point wallPosition : map.getWallPositions()) {
             if (wallPosition.x == currentWorkerPosition.x + 1 && wallPosition.y == currentWorkerPosition.y){
@@ -253,6 +393,11 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         return false;
     }
 
+    /**
+     * Check whether there is a wall just above the box
+     *
+     * @return whether there is a wall just above the box
+     */
     private boolean WallAboveBox(){
         for (Point wallPosition : map.getWallPositions()) {
             if (wallPosition.y == currentBoxPosition.y - 1 && wallPosition.x == currentBoxPosition.x){
@@ -262,6 +407,11 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         return false;
     }
 
+    /**
+     * Check whether there is a wall just below the box
+     *
+     * @return whether there is a wall just below the box
+     */
     private boolean WallBelowBox(){
         for (Point wallPosition : map.getWallPositions()) {
             if (wallPosition.y == currentBoxPosition.y + 1 && wallPosition.x == currentBoxPosition.x){
@@ -271,6 +421,11 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         return false;
     }
 
+    /**
+     * Check whether there is a wall just on the left side of the box
+     *
+     * @return whether there is a wall just on the left side of the box
+     */
     private boolean WallLeftToBox(){
         for (Point wallPosition : map.getWallPositions()) {
             if (wallPosition.y == currentBoxPosition.y && wallPosition.x == currentBoxPosition.x - 1){
@@ -280,18 +435,14 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         return false;
     }
 
+    /**
+     * Check whether there is a wall just on the right side of the box
+     *
+     * @return whether there is a wall just on the right side of the box
+     */
     private boolean WallRightToBox(){
         for (Point wallPosition : map.getWallPositions()) {
             if (wallPosition.y == currentBoxPosition.y && wallPosition.x == currentBoxPosition.x + 1){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean WallBelowWorker(){
-        for (Point wallPosition : map.getWallPositions()) {
-            if (wallPosition.y == currentWorkerPosition.y + 1 && wallPosition.x == currentWorkerPosition.x){
                 return true;
             }
         }
