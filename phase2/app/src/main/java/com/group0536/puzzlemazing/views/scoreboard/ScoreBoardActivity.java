@@ -69,7 +69,7 @@ public class ScoreBoardActivity extends FluxActivity implements AdapterView.OnIt
         btnBackToMain.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-//                When this game_button is clicked, got to he main page
+//                TODO: When this game_button is clicked, go to the main page
 //                startActivity(new Intent());
             }
         });

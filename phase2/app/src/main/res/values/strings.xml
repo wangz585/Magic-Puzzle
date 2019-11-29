@@ -60,4 +60,10 @@
   <string name="score_board_title">Score Board</string>
   <string name="score_board_user_name">User</string>
   <string name="score_board_exit">MAIN PAGE</string>
+
+  <!-- main page -->
+  <string name="menu_page_enter">ENTER</string>
+  <string name="menu_page_scoreboard">SCOREBOARD</string>
+  <string name="menu_page_setting">SETTING</string>
+
 </resources>
