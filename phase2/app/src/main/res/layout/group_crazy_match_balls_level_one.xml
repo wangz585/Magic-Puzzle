@@ -23,7 +23,7 @@
             android:contentDescription="@string/crazy_match_game_ball"
             android:scaleType="centerInside"
 
-            android:src="@drawable/crazy_match_ball" />
+            android:src="@drawable/match_ball" />
 
         <ImageButton
             android:id="@+id/btn_ball_01"
@@ -34,7 +34,7 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/crazy_match_game_ball"
             android:scaleType="centerInside"
-            android:src="@drawable/crazy_match_ball" />
+            android:src="@drawable/match_ball" />
 
         <ImageButton
             android:id="@+id/btn_ball_02"
@@ -45,7 +45,7 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/crazy_match_game_ball"
             android:scaleType="centerInside"
-            android:src="@drawable/crazy_match_ball" />
+            android:src="@drawable/match_ball" />
 
     </LinearLayout>
 
@@ -65,7 +65,7 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/crazy_match_game_ball"
             android:scaleType="centerInside"
-            android:src="@drawable/crazy_match_ball" />
+            android:src="@drawable/match_ball" />
 
         <ImageButton
             android:id="@+id/btn_ball_11"
@@ -76,7 +76,7 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/crazy_match_game_ball"
             android:scaleType="centerInside"
-            android:src="@drawable/crazy_match_ball" />
+            android:src="@drawable/match_ball" />
 
         <ImageButton
             android:id="@+id/btn_ball_12"
@@ -87,7 +87,7 @@
             android:adjustViewBounds="true"
             android:contentDescription="@string/crazy_match_game_ball"
             android:scaleType="centerInside"
-            android:src="@drawable/crazy_match_ball" />
+            android:src="@drawable/match_ball" />
     </LinearLayout>
 
 

@@ -109,7 +109,7 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
                 }
                 /*// if the game is finished
                 if(isGameOver()){
-                    // time is out, the user cannot longer click the submit button
+                    // time is out, the user cannot longer click the submit app_log_in_button
                     // the user should be able to go to somewhere else
                 }
                 else{

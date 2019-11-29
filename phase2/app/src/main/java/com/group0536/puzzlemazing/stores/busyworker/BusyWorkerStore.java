@@ -319,6 +319,12 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
                 currentBoxPosition.y == currentWorkerPosition.y;
     }
 
+    /**
+     * Get an instance of this store
+     *
+     * @param dispatcher the dispatcher associated
+     * @return an instance of this store
+     */
     public static BusyWorkerStore getInstance(Dispatcher dispatcher) {
         if (instance == null) {
             instance = new BusyWorkerStore(dispatcher);
@@ -326,10 +332,20 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
         return instance;
     }
 
+    /**
+     * Get the map in store
+     *
+     * @return map in the store
+     */
     public BusyWorkerMap getMap() {
         return map;
     }
 
+    /**
+     * Get the current worker_worker position in store
+     *
+     * @return current worker_worker position in the store
+     */
     public Point getCurrentWorkerPosition() {
         return currentWorkerPosition;
     }

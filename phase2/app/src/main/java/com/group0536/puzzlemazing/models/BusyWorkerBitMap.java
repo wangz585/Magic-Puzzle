@@ -14,10 +14,10 @@ public class BusyWorkerBitMap {
     private static Bitmap FlagBitmap;
 
     public static void initBitmaps(Resources res) {
-        WorkerBitmap = BitmapFactory.decodeResource(res, R.drawable.worker);
-        BoxBitmap = BitmapFactory.decodeResource(res, R.drawable.skull);
-        WallBitmap = BitmapFactory.decodeResource(res, R.drawable.wall);
-        FlagBitmap = BitmapFactory.decodeResource(res, R.drawable.tomb);
+        WorkerBitmap = BitmapFactory.decodeResource(res, R.drawable.worker_worker);
+        BoxBitmap = BitmapFactory.decodeResource(res, R.drawable.worker_skull);
+        WallBitmap = BitmapFactory.decodeResource(res, R.drawable.worker_wall);
+        FlagBitmap = BitmapFactory.decodeResource(res, R.drawable.worker_tomb);
     }
 
     public static Bitmap getWorkerBitmap() {

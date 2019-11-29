@@ -55,7 +55,7 @@ public class GameActivity extends FluxActivity {
     private void initializeBalls() {
         int numRow = store.getNumberOfRows();
         int numCol = store.getNumberOfColumns();
-        ballDrawingInt = R.drawable.crazy_match_ball;
+        ballDrawingInt = R.drawable.match_ball;
         btnBalls = new ImageButton[numRow][numCol];
         for (int i = 0; i < btnBalls.length; i++) {
             for (int j = 0; j < btnBalls[0].length; j++) {
@@ -72,9 +72,9 @@ public class GameActivity extends FluxActivity {
     /**
      * Set On Click Listener of btnBall at row i and column j
      *
-     * @param i       row i position of the button
-     * @param j       column j position of the button
-     * @param btnBall ball button
+     * @param i       row i position of the app_log_in_button
+     * @param j       column j position of the app_log_in_button
+     * @param btnBall ball app_log_in_button
      */
     private void setBallOnClickListener(int i, int j, ImageButton btnBall) {
         final int row = i;

@@ -33,31 +33,31 @@ public class BusyWorkerRawMaps {
 
     public static final String [] LEVEL_2 = {
 
-            "WWWWWWWWWWWW",
+            "WWWWWWWWWWWWWWWWWWWWWWWWW",
 
-            "W          W",
+            "W           F           W",
 
-            "W          W",
+            "W                       W",
 
-            "W   WWFW   W",
+            "W WWWW   WWWW   WWWW    W",
 
-            "W   WWWW   W",
+            "W    W      W   W       W",
 
-            "W          W",
+            "W WWWW   WWWW   WWWW    W",
 
-            "W    B     W",
+            "W W         W   W  W    W",
 
-            "W    M     W",
+            "W WWWW   WWWW   WWWW    W",
 
-            "W          W",
+            "W                       W",
 
-            "W          W",
+            "W         B             W",
 
-            "W          W",
+            "W                       W",
 
-            "W          W",
+            "W         M             W",
 
-            "WWWWWWWWWWWW",
+            "WWWWWWWWWWWWWWWWWWWWWWWWW",
 
     };
 

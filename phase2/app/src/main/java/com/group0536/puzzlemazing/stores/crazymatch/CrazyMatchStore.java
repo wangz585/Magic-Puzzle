@@ -91,22 +91,22 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
      * Populate the animal drawables. This is all animal drawables that could be used.
      */
     private static void populateAnimalDrawables() {
-        allAnimals = new ArrayList<>(Arrays.asList(R.drawable.butterfly,
-                R.drawable.chicken,
-                R.drawable.cow,
-                R.drawable.dog,
-                R.drawable.lizard,
-                R.drawable.fish,
-                R.drawable.fox,
-                R.drawable.frog,
-                R.drawable.ladybug,
-                R.drawable.lion,
-                R.drawable.octopus,
-                R.drawable.owl,
-                R.drawable.reindeer,
-                R.drawable.robin,
-                R.drawable.snail,
-                R.drawable.turkey));
+        allAnimals = new ArrayList<>(Arrays.asList(R.drawable.match_butterfly,
+                R.drawable.match_chicken,
+                R.drawable.match_cow,
+                R.drawable.match_dog,
+                R.drawable.match_lizard,
+                R.drawable.match_fish,
+                R.drawable.match_fox,
+                R.drawable.match_frog,
+                R.drawable.match_ladybug,
+                R.drawable.match_lion,
+                R.drawable.match_octopus,
+                R.drawable.match_owl,
+                R.drawable.match_reindeer,
+                R.drawable.match_robin,
+                R.drawable.match_snail,
+                R.drawable.match_turkey));
     }
 
     /**
@@ -124,7 +124,7 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
     }
 
     /**
-     * Flip the button according to the pay load entry of action
+     * Flip the app_log_in_button according to the pay load entry of action
      *
      * @param action action Object of the action being processed
      */

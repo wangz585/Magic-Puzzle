@@ -33,7 +33,7 @@
   <string name="level_two">Level 2</string>
   <string name="display_score">score: %d</string>
 
-  <!-- busy worker -->
+  <!-- busy worker_worker -->
   <string name="busy_worker_win">CONGRATS</string>
   <string name="busy_worker_score">Your Current Score:</string>
   <string name="busy_worker_time">Time Left:</string>
