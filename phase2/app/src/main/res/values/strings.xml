@@ -60,4 +60,11 @@
   <string name="score_board_title">Score Board</string>
   <string name="score_board_user_name">User</string>
   <string name="score_board_exit">MAIN PAGE</string>
+    <string name="nextlevel">TextView</string>
+  <string name="next_level">next level</string>
+  <string name="time">time</string>
+  <string name="score">score</string>
+    <string name="play_again">play again</string>
+  <string name="menu">menu</string>
+    <string name="highest_score">highest score</string>
 </resources>

@@ -3,8 +3,6 @@ package com.group0536.puzzlemazing.views.busyworker;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.group0536.puzzlemazing.actions.busyworker.BusyWorkerActionCreator;
 import com.group0536.puzzlemazing.stores.busyworker.BusyWorkerChangeEvent;
 import com.group0536.puzzlemazing.stores.busyworker.BusyWorkerStore;
