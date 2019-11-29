@@ -1,4 +1,4 @@
-package com.group0536.puzzlemazing.views.busyworker;
+package com.group0536.puzzlemazing.views.wordguessing;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -8,16 +8,16 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.group0536.puzzlemazing.R;
-import com.group0536.puzzlemazing.actions.busyworker.BusyWorkerActionCreator;
+import com.group0536.puzzlemazing.actions.wordguessing.WordGuessingActionCreator;
 import com.group0536.puzzlemazing.stores.busyworker.BusyWorkerChangeEvent;
-import com.group0536.puzzlemazing.stores.busyworker.BusyWorkerStore;
+import com.group0536.puzzlemazing.stores.wordguessing.WordGuessingGameStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
 import com.squareup.otto.Subscribe;
 
 public class GameFinishedActivity extends FluxActivity {
 
-    private BusyWorkerStore store;
-    private BusyWorkerActionCreator actionCreator;
+    private WordGuessingGameStore store;
+    private WordGuessingActionCreator actionCreator;
 
     private Button btnmenu;
     private Button btnplayagain;
@@ -41,20 +41,19 @@ public class GameFinishedActivity extends FluxActivity {
         setUpButton();
     }
 
+    @Override
+    protected void initFluxComponents() {
+
+    }
+
     private void setUpButton() {
         btnplayagain.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GameFinishedActivity.this, SelectLevelActivity.class);
+                Intent intent = new Intent(com.group0536.puzzlemazing.views.wordguessing.GameFinishedActivity.this, SelectLevelActivity.class);
                 startActivity(intent);
             }
         });
-    }
-
-    @Override
-    protected void initFluxComponents() {
-        store = BusyWorkerStore.getInstance(dispatcher);
-        actionCreator = new BusyWorkerActionCreator(dispatcher);
     }
 
     @Subscribe

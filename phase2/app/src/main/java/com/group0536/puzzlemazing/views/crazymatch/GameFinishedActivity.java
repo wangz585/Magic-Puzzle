@@ -1,4 +1,4 @@
-package com.group0536.puzzlemazing.views.busyworker;
+package com.group0536.puzzlemazing.views.crazymatch;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -9,15 +9,18 @@ import android.widget.TextView;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.busyworker.BusyWorkerActionCreator;
+import com.group0536.puzzlemazing.actions.crazymatch.CrazyMatchActionCreator;
+import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.busyworker.BusyWorkerChangeEvent;
 import com.group0536.puzzlemazing.stores.busyworker.BusyWorkerStore;
+import com.group0536.puzzlemazing.stores.crazymatch.CrazyMatchStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
 import com.squareup.otto.Subscribe;
 
 public class GameFinishedActivity extends FluxActivity {
 
-    private BusyWorkerStore store;
-    private BusyWorkerActionCreator actionCreator;
+    private CrazyMatchStore store;
+    private CrazyMatchActionCreator actionCreator;
 
     private Button btnmenu;
     private Button btnplayagain;
@@ -45,7 +48,7 @@ public class GameFinishedActivity extends FluxActivity {
         btnplayagain.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GameFinishedActivity.this, SelectLevelActivity.class);
+                Intent intent = new Intent(com.group0536.puzzlemazing.views.crazymatch.GameFinishedActivity.this, SelectLevelActivity.class);
                 startActivity(intent);
             }
         });
@@ -53,8 +56,8 @@ public class GameFinishedActivity extends FluxActivity {
 
     @Override
     protected void initFluxComponents() {
-        store = BusyWorkerStore.getInstance(dispatcher);
-        actionCreator = new BusyWorkerActionCreator(dispatcher);
+        store = CrazyMatchStore.getInstance(dispatcher);
+        actionCreator = new CrazyMatchActionCreator(dispatcher);
     }
 
     @Subscribe
