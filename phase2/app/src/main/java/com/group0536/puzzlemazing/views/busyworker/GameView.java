@@ -57,12 +57,22 @@ public class GameView extends FluxView {
         drawTime(canvas);
     }
 
+    /**
+     * Draw the background of BusyWorker
+     *
+     * @param canvas the canvas we draw background on
+     */
     private void drawBackground(Canvas canvas) {
         Paint background = new Paint();
         background.setColor(getResources().getColor(R.color.silver));
         canvas.drawRect(0, 0, getWidth(), getHeight(), background);
     }
 
+    /**
+     * Draw the grid in the game map of BusyWorker
+     *
+     * @param canvas the canvas we draw on
+     */
     private void drawSurface(Canvas canvas) {
         Paint linePaint = new Paint();
         linePaint.setColor(Color.BLACK);
@@ -77,6 +87,11 @@ public class GameView extends FluxView {
                     maxRow * CellWidth, linePaint);
     }
 
+    /**
+     * Draw all the elements in the map
+     *
+     * @param canvas the canvas we draw on
+     */
     private void drawGameBoard(Canvas canvas) {
         drawWalls(canvas);
         drawBox(canvas);
@@ -84,6 +99,11 @@ public class GameView extends FluxView {
         drawFlag(canvas);
     }
 
+    /**
+     * Draw walls in the game map of BusyWorker
+     *
+     * @param canvas the canvas we draw on
+     */
     private void drawWalls(Canvas canvas) {
         Rect srcRect;
         Rect destRect;
@@ -97,6 +117,11 @@ public class GameView extends FluxView {
         }
     }
 
+    /**
+     * Draw the box in the game map of BusyWorker
+     *
+     * @param canvas the canvas we draw on
+     */
     private void drawBox(Canvas canvas) {
         Point boxPosition = store.getCurrentBoxPosition();
         Rect destRect = getRect(boxPosition.x, boxPosition.y);
@@ -106,6 +131,11 @@ public class GameView extends FluxView {
                 srcRect, destRect, null);
     }
 
+    /**
+     * Draw the worker in the game map of BusyWorker
+     *
+     * @param canvas the canvas we draw on
+     */
     private void drawWorker(Canvas canvas) {
         Point workerPosition = store.getCurrentWorkerPosition();
         Rect destRect = getRect(workerPosition.x, workerPosition.y);
@@ -115,6 +145,11 @@ public class GameView extends FluxView {
                 srcRect, destRect, null);
     }
 
+    /**
+     * Draw the flag in the game map of BusyWorker
+     *
+     * @param canvas the canvas we draw on
+     */
     private void drawFlag(Canvas canvas) {
         Point flagPosition = store.getMap().getFlagPosition();
         Rect destRect = getRect(flagPosition.x, flagPosition.y);
@@ -124,7 +159,7 @@ public class GameView extends FluxView {
                 srcRect, destRect, null);
     }
 
-        private void drawTime(Canvas canvas) {
+    private void drawTime(Canvas canvas) {
         Paint txtPaint = new Paint();
         txtPaint.setColor(Color.BLACK);
         txtPaint.setTextSize(100.0f);
@@ -133,6 +168,11 @@ public class GameView extends FluxView {
         canvas.drawText(String.valueOf(store.getTimeUsed()),5 * CellWidth,16 * CellWidth,txtPaint);
     }
 
+    /**
+     * Draw the score of the user get in BusyWorker
+     *
+     * @param canvas the canvas we draw on
+     */
     private void drawScore(Canvas canvas) {
         Paint txtPaint = new Paint();
         txtPaint.setColor(Color.RED);
