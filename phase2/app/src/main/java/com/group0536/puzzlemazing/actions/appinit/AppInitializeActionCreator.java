@@ -1,6 +1,5 @@
 package com.group0536.puzzlemazing.actions.appinit;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -155,7 +154,7 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
                     return;
                 }
 
-                String errorMessage = Resources.getSystem().getString(R.string.login_error);
+                String errorMessage = Resources.getSystem().getString(R.string.app_init_login_error);
                 dispatchErrorAction(LOG_IN, errorMessage);
             }
         });

@@ -20,14 +20,18 @@
     We could not log you in because of a network error. Your device may be offline
     or our server may be out of service.
   </string>
+  <string name="app_init_login_error">
+    We could not log you in at this time.
+  Please double check your username and password.
+  </string>
 
   <!-- app login/register -->
-  <string name="login">Login</string>
-  <string name="register">Register</string>
-  <string name="password">Password</string>
-  <string name="username">Username</string>
-  <string name="login_error">We could not log you in at this time.
-  Please double check your username and password.</string>
+  <string name="app_welcome_login">Login</string>
+  <string name="app_welcome_register">Register</string>
+  <string name="app_welcome_password">Password</string>
+  <string name="app_welcome_username">Username</string>
+  <string name="app_welcome_greeting">Welcome back, </string>
+  <string name="app_welcome_continue">Continue as </string>
 
   <!-- dialog buttons -->
   <string name="dialog_try_again">Try Again</string>
