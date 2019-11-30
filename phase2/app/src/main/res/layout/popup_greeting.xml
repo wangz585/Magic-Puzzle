@@ -8,10 +8,11 @@
     android:background="#CCFFFFFF">
 
     <Button
-      android:id="@+id/btnLogin"
+      android:id="@+id/btnContinue"
       style="?android:attr/borderlessButtonStyle"
       android:layout_width="330dp"
       android:layout_height="60dp"
+      android:layout_marginTop="24dp"
       android:background="@drawable/game_button"
       android:fontFamily="sans-serif"
       android:text="@string/app_welcome_continue"
@@ -20,19 +21,35 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintVertical_bias="0.7" />
+      app:layout_constraintTop_toBottomOf="@+id/tvGreeting"
+      app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-      android:id="@+id/textView"
+      android:id="@+id/tvGreeting"
       android:layout_width="wrap_content"
       android:layout_height="0dp"
+      android:layout_marginTop="108dp"
+      android:gravity="center"
       android:text="@string/app_welcome_greeting"
       android:textSize="33sp"
-      android:gravity="center"
-      app:layout_constraintBottom_toTopOf="@+id/btnLogin"
       app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintHorizontal_bias="0.498"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+      android:id="@+id/btnSwitchAccount"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="16dp"
+      android:text="@string/app_welcome_switch_account"
+      android:textSize="24sp"
+      android:background="@color/colorPrimary"
+      android:textColor="@android:color/background_light"
+      android:padding="8dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/btnContinue" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

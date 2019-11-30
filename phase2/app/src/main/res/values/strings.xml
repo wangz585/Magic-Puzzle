@@ -32,6 +32,7 @@
   <string name="app_welcome_username">Username</string>
   <string name="app_welcome_greeting">Welcome back, </string>
   <string name="app_welcome_continue">Continue as </string>
+  <string name="app_welcome_switch_account">Switch Account</string>
 
   <!-- dialog buttons -->
   <string name="dialog_try_again">Try Again</string>

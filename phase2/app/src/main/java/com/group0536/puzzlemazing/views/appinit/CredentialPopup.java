@@ -31,7 +31,7 @@ class CredentialPopup extends Popup {
         }
     };
 
-    private CredentialPopup(PopupBuilder builder) {
+    private CredentialPopup(CredentialPopupBuilder builder) {
         super(builder);
         bindViews();
         addListeners();
