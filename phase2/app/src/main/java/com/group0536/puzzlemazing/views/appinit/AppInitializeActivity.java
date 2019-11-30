@@ -128,7 +128,7 @@ public class AppInitializeActivity extends FluxActivity {
             promptForCredential();
         } else {
             setLoadingMessage(R.string.app_init_waiting_response);
-
+            promptGreeting(currentUser);
         }
     }
 
@@ -139,6 +139,16 @@ public class AppInitializeActivity extends FluxActivity {
                 .animationStyle(R.style.WindowFade)
                 .build();
         credentialPopup.show(Gravity.CENTER, 0, 0);
+    }
+
+    private void promptGreeting(User currentUser) {
+        GreetingPopup greetingPopup = (GreetingPopup) new GreetingPopup.GreetingPopupBuilder(this)
+                .currentUser(currentUser)
+                .widthPercent(0.6)
+                .heightPercent(0.6)
+                .animationStyle(R.style.WindowFade)
+                .build();
+        greetingPopup.show(Gravity.CENTER, 0, 0);
     }
 
     private void setLoadingMessage(final int messageId) {
