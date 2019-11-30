@@ -58,6 +58,10 @@ public class AppInitProgress {
     }
 
     public boolean hasError() {
-        return errorMessage == null || errorMessage.equals("");
+        return !isEmpty(errorMessage);
+    }
+
+    private boolean isEmpty(String text) {
+        return text == null || text.equals("");
     }
 }

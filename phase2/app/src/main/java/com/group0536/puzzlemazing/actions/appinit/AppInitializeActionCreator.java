@@ -115,10 +115,26 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
         SharedPreferences preferences = appContext.getSharedPreferences(PREFIX, 0);
         String savedToken = preferences.getString(KEY_SAVED_TOKEN, "");
 
-        Action action = new Action.ActionBuilder(LOAD_SAVED_TOKEN)
-                .load(KEY_SAVED_TOKEN, savedToken)
-                .build();
-        dispatcher.dispatch(action);
+        serverApi.performTokenValidation(savedToken, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                dispatchNetworkErrorAction(LOAD_SAVED_TOKEN);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) {
+                boolean requestSucceed = response.isSuccessful();
+                if (requestSucceed) {
+                    User user = Parser.parseResponseToUser(response);
+                    Action action = new Action.ActionBuilder(LOAD_SAVED_TOKEN)
+                            .load(KEY_CURRENT_USER, user)
+                            .build();
+                    dispatcher.dispatch(action);
+                    return;
+                }
+                dispatchErrorAction(LOAD_SAVED_TOKEN, response.message());
+            }
+        });
     }
 
     public void logIn(String username, String password) {
@@ -141,30 +157,6 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
 
                 String errorMessage = Resources.getSystem().getString(R.string.login_error);
                 dispatchErrorAction(LOG_IN, errorMessage);
-            }
-        });
-    }
-
-    public void verifyToken(String token) {
-        serverApi.performTokenValidation(token, new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                dispatchNetworkErrorAction(VERIFY_TOKEN);
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                User user = new User();
-                boolean requestSucceed = response.isSuccessful();
-                if (requestSucceed) {
-                    user = Parser.parseResponseToUser(response);
-                }
-
-                Action action = new Action.ActionBuilder(VERIFY_TOKEN)
-                        .load(KEY_TOKEN_VALIDITY, requestSucceed)
-                        .load(KEY_CURRENT_USER, user)
-                        .build();
-                dispatcher.dispatch(action);
             }
         });
     }

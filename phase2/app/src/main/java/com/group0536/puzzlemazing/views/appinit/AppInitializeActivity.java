@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.appinit.AppInitializeActionCreator;
 import com.group0536.puzzlemazing.models.AppInitProgress;
+import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.stores.appinit.AppInitializeStore;
 import com.group0536.puzzlemazing.stores.appinit.AppInitializeStoreChangeEvent;
 import com.group0536.puzzlemazing.utils.ActivityUtil;
@@ -87,7 +88,7 @@ public class AppInitializeActivity extends FluxActivity {
         }
 
         if (progress.hasError()) {
-            promptErrorMessage(progress.getErrorMessageId());
+            promptErrorMessage(progress.getErrorMessage());
             return;
         }
 
@@ -106,7 +107,7 @@ public class AppInitializeActivity extends FluxActivity {
         } else if (!progress.isLoadSavedTokenDone()) {
             loadSavedToken();
         } else if (!progress.isLogInUserDone()) {
-            logInUser();
+            promptLogIn();
         }
     }
 
@@ -120,19 +121,18 @@ public class AppInitializeActivity extends FluxActivity {
         actionCreator.loadSavedToken(getApplicationContext());
     }
 
-    private void logInUser() {
-        String token = store.getSavedToken();
-
-        if (isEmpty(token)) {
+    private void promptLogIn() {
+        User currentUser = store.getCurrentUser();
+        if (currentUser == null) {
             setLoadingMessage(R.string.app_init_complete_login);
-            promptLogIn();
+            promptForCredential();
         } else {
-            setLoadingMessage(R.string.app_init_logging_in);
-            actionCreator.verifyToken(token);
+            setLoadingMessage(R.string.app_init_waiting_response);
+
         }
     }
 
-    private void promptLogIn() {
+    private void promptForCredential() {
         CredentialPopup credentialPopup = (CredentialPopup) new CredentialPopup.CredentialPopupBuilder(this)
                 .widthPercent(0.6)
                 .heightPercent(0.6)
@@ -155,11 +155,11 @@ public class AppInitializeActivity extends FluxActivity {
      * The dialog allows a user to select try again with the operation in error, or
      * exit the program.
      *
-     * @param messageId the resource id of the error message
+     * @param message the error message to be displayed
      */
-    private void promptErrorMessage(int messageId) {
+    private void promptErrorMessage(String message) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                .setMessage(messageId)
+                .setMessage(message)
                 .setCancelable(false)
                 .setPositiveButton(R.string.dialog_try_again, new DialogInterface.OnClickListener() {
                     @Override

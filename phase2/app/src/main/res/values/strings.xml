@@ -7,7 +7,7 @@
   <string name="app_init_checking_update">Checking for updates&#8230;</string>
   <string name="app_init_loading_token">Loading saved token&#8230;</string>
   <string name="app_init_complete_login">Please complete the login form.</string>
-  <string name="app_init_logging_in">Securely logging you in&#8230;</string>
+  <string name="app_init_waiting_response">Waiting for response&#8230;</string>
 
   <string name="app_init_error_checking_update">
     Update check failed. Your device may be offline or our server

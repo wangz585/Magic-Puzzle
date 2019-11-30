@@ -17,7 +17,6 @@ public class AppInitializeStore extends Store implements AppInitializeActions {
     private AppInitProgress progress;
 
     // other information during app init process
-    private String savedToken;
     private User currentUser;
 
     public static AppInitializeStore getInstance(Dispatcher dispatcher) {
@@ -32,10 +31,6 @@ public class AppInitializeStore extends Store implements AppInitializeActions {
         return progress;
     }
 
-    public String getSavedToken() {
-        return savedToken;
-    }
-
     private AppInitializeStore(Dispatcher dispatcher) {
         super(dispatcher);
         progress = new AppInitProgress();
@@ -44,6 +39,10 @@ public class AppInitializeStore extends Store implements AppInitializeActions {
     @Override
     protected StoreChangeEvent getChangeEvent() {
         return new AppInitializeStoreChangeEvent();
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
     }
 
     @Override
@@ -83,7 +82,7 @@ public class AppInitializeStore extends Store implements AppInitializeActions {
      */
     private void finishInit() {
         progress = null;
-        savedToken = null;
+        currentUser = null;
     }
 
     private void handleUpdateCheckResult(Action action) {
@@ -100,7 +99,9 @@ public class AppInitializeStore extends Store implements AppInitializeActions {
     }
 
     private void loadSavedToken(Action action) {
-        savedToken = (String) action.getPayloadEntry(KEY_SAVED_TOKEN);
+        if (!action.isError()) {
+            currentUser = (User) action.getPayloadEntry(KEY_CURRENT_USER);
+        }
         progress.setLoadSavedTokenDone(true);
     }
 
