@@ -134,18 +134,21 @@ public class AppInitializeActivity extends FluxActivity {
         String token = store.getSavedToken();
 
         if (isEmpty(token)) {
-            Popup credentialPopup = new Popup.PopupBuilder(this, R.layout.popup_credential)
-                    .focusable(false)
-                    .widthPercent(0.6)
-                    .heightPercent(0.6)
-                    .animationStyle(R.style.WindowFade)
-                    .build();
-            credentialPopup.show(Gravity.CENTER, 0, 0);
+            promptLogIn();
             setLoadingMessage(R.string.app_init_complete_login);
         } else {
             setLoadingMessage(R.string.app_init_logging_in);
             actionCreator.verifyToken(token);
         }
+    }
+
+    private void promptLogIn() {
+        CredentialPopup credentialPopup = (CredentialPopup) new CredentialPopup.CredentialPopupBuilder(this)
+                .widthPercent(0.6)
+                .heightPercent(0.6)
+                .animationStyle(R.style.WindowFade)
+                .build();
+        credentialPopup.show(Gravity.CENTER, 0, 0);
     }
 
     private void setLoadingMessage(final int messageId) {
