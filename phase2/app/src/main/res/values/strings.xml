@@ -74,4 +74,11 @@
   <string name="color_theme_1">Color Theme 1</string>
   <string name="color_theme_2">Color Theme 2</string>
 
+  <string name="nextlevel">TextView</string>
+  <string name="next_level">next level</string>
+  <string name="time">time</string>
+  <string name="score">score</string>
+  <string name="play_again">play again</string>
+  <string name="menu">menu</string>
+  <string name="highest_score">highest score</string>
 </resources>
