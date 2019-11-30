@@ -12,7 +12,7 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
     <activity
-      android:name=".views.welcome.AppInitializeActivity"
+      android:name=".views.appinit.AppInitializeActivity"
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -21,7 +21,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".views.welcome.WelcomeActivity"
+      android:name=".views.appinit.WelcomeActivity"
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

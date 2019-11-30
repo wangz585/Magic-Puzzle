@@ -1,4 +1,4 @@
-package com.group0536.puzzlemazing.views.welcome;
+package com.group0536.puzzlemazing.views.appinit;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;

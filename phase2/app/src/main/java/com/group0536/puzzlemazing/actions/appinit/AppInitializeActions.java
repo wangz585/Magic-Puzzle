@@ -1,4 +1,4 @@
-package com.group0536.puzzlemazing.actions.welcome;
+package com.group0536.puzzlemazing.actions.appinit;
 
 public interface AppInitializeActions {
     String PREFIX = "app-init-";
@@ -8,6 +8,7 @@ public interface AppInitializeActions {
     String CHECK_UPDATE = PREFIX + "check-update";
     String LOAD_SAVED_TOKEN = PREFIX + "load-saved-token";
     String VERIFY_TOKEN = PREFIX + "verify-token";
+    String LOG_IN = PREFIX + "login";
 
     // keys
     String KEY_REQUIRE_UPDATE = "require-update";

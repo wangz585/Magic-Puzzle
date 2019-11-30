@@ -1,7 +1,8 @@
-package com.group0536.puzzlemazing.services;
+package com.group0536.puzzlemazing.webapi;
 
 import com.group0536.puzzlemazing.utils.HttpUtil;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import okhttp3.Callback;
@@ -25,7 +26,7 @@ public class ServerApi {
     private ServerApi() {
     }
 
-    public String getDomain(String uri) {
+    public String getURL(String uri) {
         return ROOT_DOMAIN + uri;
     }
 
@@ -38,12 +39,24 @@ public class ServerApi {
      * @param done Callback object used after the request has completed
      */
     public void performUpdateCheck(Callback done) {
-        String url = getDomain("/application/check-update");
+        String url = getURL("/application/check-update");
         HttpUtil.get(url, done);
     }
 
     public void performTokenValidation(String token, Callback done) {
-        String url = getDomain("/sign-in-token");
+        String url = getURL("/sign-in-token");
         HttpUtil.post(url, new JSONObject(), token, done);  // post request with empty body
+    }
+
+    public void performLogIn(String username, String password, Callback done) {
+        String url = getURL("/sign-in");
+        JSONObject body = new JSONObject();
+        try {
+            body.put("username", username);
+            body.put("password", password);
+        } catch(JSONException e) {
+            e.printStackTrace();
+        }
+        HttpUtil.post(url, body, done);
     }
 }

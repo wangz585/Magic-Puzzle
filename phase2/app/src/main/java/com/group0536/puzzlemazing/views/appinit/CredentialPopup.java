@@ -1,13 +1,10 @@
-package com.group0536.puzzlemazing.views.welcome;
+package com.group0536.puzzlemazing.views.appinit;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
-import androidx.annotation.Nullable;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.views.Popup;
@@ -15,19 +12,19 @@ import com.group0536.puzzlemazing.views.Popup;
 class CredentialPopup extends Popup {
     private static final String TAG = "credentialPopup";
     // Components
-    Button btnRegister;
-    Button btnLogIn;
-    EditText txtUsername;
-    EditText txtPassword;
+    private Button btnRegister;
+    private Button btnLogIn;
+    private EditText txtUsername;
+    private EditText txtPassword;
 
     // Listeners
-    View.OnClickListener registerOnClickListener = new View.OnClickListener() {
+    private View.OnClickListener registerOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             Log.d(TAG, "onClick: Register");
         }
     };
-    View.OnClickListener loginOnClickListener = new View.OnClickListener() {
+    private View.OnClickListener loginOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             Log.d(TAG, "onClick: Login");

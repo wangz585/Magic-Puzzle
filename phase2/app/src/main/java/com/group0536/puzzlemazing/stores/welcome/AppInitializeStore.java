@@ -1,10 +1,8 @@
 package com.group0536.puzzlemazing.stores.welcome;
 
-import android.util.Log;
-
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.Action;
-import com.group0536.puzzlemazing.actions.welcome.AppInitializeActions;
+import com.group0536.puzzlemazing.actions.appinit.AppInitializeActions;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 import com.group0536.puzzlemazing.models.AppInitProgress;
 import com.group0536.puzzlemazing.stores.Store;

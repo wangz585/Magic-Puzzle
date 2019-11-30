@@ -1,4 +1,4 @@
-package com.group0536.puzzlemazing.views.welcome;
+package com.group0536.puzzlemazing.views.appinit;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -8,20 +8,16 @@ import android.content.pm.ActivityInfo;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.group0536.puzzlemazing.R;
-import com.group0536.puzzlemazing.actions.welcome.AppInitializeActionCreator;
+import com.group0536.puzzlemazing.actions.appinit.AppInitializeActionCreator;
 import com.group0536.puzzlemazing.models.AppInitProgress;
 import com.group0536.puzzlemazing.stores.welcome.AppInitializeStore;
 import com.group0536.puzzlemazing.stores.welcome.AppInitializeStoreChangeEvent;
 import com.group0536.puzzlemazing.utils.ActivityUtil;
 import com.group0536.puzzlemazing.views.FluxActivity;
-import com.group0536.puzzlemazing.views.Popup;
 import com.squareup.otto.Subscribe;
 
 /**
@@ -32,7 +28,7 @@ import com.squareup.otto.Subscribe;
  * @author Jimmy
  */
 public class AppInitializeActivity extends FluxActivity {
-    private final String TAG = "AppInit";
+    private static final String TAG = "AppInit";
 
     // Flux
     AppInitializeStore store;
@@ -42,7 +38,6 @@ public class AppInitializeActivity extends FluxActivity {
     ImageView imgLoading;
     AnimationDrawable animLoading;
     TextView tvLoadingMsg;
-    View popup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +57,7 @@ public class AppInitializeActivity extends FluxActivity {
     @Override
     protected void initFluxComponents() {
         store = AppInitializeStore.getInstance(dispatcher);
-        actionCreator = new AppInitializeActionCreator(dispatcher);
+        actionCreator = AppInitializeActionCreator.getInstance(dispatcher);
     }
 
     @Override
@@ -82,15 +77,9 @@ public class AppInitializeActivity extends FluxActivity {
         return text == null || text.equals("");
     }
 
+
     @Subscribe
     public void onAppInitializeStoreChange(AppInitializeStoreChangeEvent e) {
-        updateUI();
-    }
-
-    /**
-     * Updates user interface based on the current store information.
-     */
-    private void updateUI() {
         AppInitProgress progress = store.getProgress();
         if (progress == null) {
             System.exit(1);
@@ -104,6 +93,7 @@ public class AppInitializeActivity extends FluxActivity {
 
         performActionByProgress(progress);
     }
+
 
     /**
      * Perform the guessing_next required initialization based on the current progress
@@ -134,8 +124,8 @@ public class AppInitializeActivity extends FluxActivity {
         String token = store.getSavedToken();
 
         if (isEmpty(token)) {
-            promptLogIn();
             setLoadingMessage(R.string.app_init_complete_login);
+            promptLogIn();
         } else {
             setLoadingMessage(R.string.app_init_logging_in);
             actionCreator.verifyToken(token);

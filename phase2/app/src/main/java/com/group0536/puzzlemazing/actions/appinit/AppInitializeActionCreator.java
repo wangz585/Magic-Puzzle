@@ -1,14 +1,16 @@
-package com.group0536.puzzlemazing.actions.welcome;
+package com.group0536.puzzlemazing.actions.appinit;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
+import android.content.res.Resources;
 
+import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.ActionCreator;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 import com.group0536.puzzlemazing.models.User;
-import com.group0536.puzzlemazing.services.ServerApi;
+import com.group0536.puzzlemazing.webapi.ServerApi;
 import com.group0536.puzzlemazing.utils.Parser;
 
 import org.json.JSONException;
@@ -21,11 +23,20 @@ import okhttp3.Callback;
 import okhttp3.Response;
 
 public class AppInitializeActionCreator extends ActionCreator implements AppInitializeActions {
+    private static AppInitializeActionCreator instance;
+
     private ServerApi serverApi;
 
-    public AppInitializeActionCreator(Dispatcher dispatcher) {
+    private AppInitializeActionCreator(Dispatcher dispatcher) {
         super(dispatcher);
         serverApi = ServerApi.getServerApi();
+    }
+
+    public static AppInitializeActionCreator getInstance(Dispatcher dispatcher) {
+        if (instance == null) {
+            instance = new AppInitializeActionCreator(dispatcher);
+        }
+        return instance;
     }
 
     /**
@@ -108,6 +119,30 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
                 .load(KEY_SAVED_TOKEN, savedToken)
                 .build();
         dispatcher.dispatch(action);
+    }
+
+    public void logIn(String username, String password) {
+        serverApi.performLogIn(username, password, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                dispatchNetworkErrorAction(LOG_IN);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    User user = Parser.parseResponseToUser(response);
+                    Action action = new Action.ActionBuilder(LOG_IN)
+                            .load(KEY_CURRENT_USER, user)
+                            .build();
+                    dispatcher.dispatch(action);
+                    return;
+                }
+
+                String errorMessage = Resources.getSystem().getString(R.string.login_error);
+                dispatchErrorAction(LOG_IN, errorMessage);
+            }
+        });
     }
 
     public void verifyToken(String token) {
