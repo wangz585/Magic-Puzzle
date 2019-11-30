@@ -18,18 +18,16 @@ class CredentialPopup extends Popup {
     private EditText txtPassword;
 
     // Listeners
-    private View.OnClickListener registerOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Log.d(TAG, "onClick: Register");
-        }
-    };
-    private View.OnClickListener loginOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Log.d(TAG, "onClick: Login");
-        }
-    };
+    private View.OnClickListener registerOnClickListener;
+    private View.OnClickListener loginOnClickListener;
+
+    public void setRegisterOnClickListener(View.OnClickListener registerOnClickListener) {
+        this.registerOnClickListener = registerOnClickListener;
+    }
+
+    public void setLoginOnClickListener(View.OnClickListener loginOnClickListener) {
+        this.loginOnClickListener = loginOnClickListener;
+    }
 
     private CredentialPopup(CredentialPopupBuilder builder) {
         super(builder);

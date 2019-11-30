@@ -50,6 +50,10 @@ public class Popup {
         });
     }
 
+    public void dismiss() {
+        popupWindow.dismiss();
+    }
+
     /**
      * <p>This is the builder class for a {@link #Popup}, it includes building methods to
      * create, manipulate, and inflate a functioning popup.</p>

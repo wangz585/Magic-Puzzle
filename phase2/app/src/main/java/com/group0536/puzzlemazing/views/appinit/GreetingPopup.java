@@ -2,6 +2,7 @@ package com.group0536.puzzlemazing.views.appinit;
 
 import android.app.Activity;
 import android.content.res.Resources;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -15,6 +16,13 @@ public class GreetingPopup extends Popup {
     private Button btnContinue;
     private Button btnSwitchAccount;
     private TextView tvGreeting;
+
+    // Listeners
+    private View.OnClickListener switchAccountOnClickListener;
+
+    public void setSwitchAccountOnClickListener(View.OnClickListener switchAccountOnClickListener) {
+        this.switchAccountOnClickListener = switchAccountOnClickListener;
+    }
 
     // Data
     private User currentUser;
