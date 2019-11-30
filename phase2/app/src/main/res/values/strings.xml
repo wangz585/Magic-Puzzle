@@ -16,6 +16,10 @@
   <string name="app_init_error_oudated">
     This application is outdated. Please update to the newest version!
   </string>
+  <string name="app_init_error_logging_in">
+    We could not log you in because of a network error. Your device may be offline
+    or our server may be out of service.
+  </string>
 
   <!-- app login/register -->
   <string name="login">Login</string>

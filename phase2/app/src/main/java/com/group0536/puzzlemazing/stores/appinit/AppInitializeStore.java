@@ -1,22 +1,24 @@
-package com.group0536.puzzlemazing.stores.welcome;
+package com.group0536.puzzlemazing.stores.appinit;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.appinit.AppInitializeActions;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 import com.group0536.puzzlemazing.models.AppInitProgress;
+import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
 import com.squareup.otto.Subscribe;
 
 public class AppInitializeStore extends Store implements AppInitializeActions {
     private static AppInitializeStore instance;
-    private final String TAG = "AppInitializeStore";
+    private static final String TAG = "AppInitializeStore";
 
     private AppInitProgress progress;
 
     // other information during app init process
     private String savedToken;
+    private User currentUser;
 
     public static AppInitializeStore getInstance(Dispatcher dispatcher) {
         if (instance == null) {
@@ -61,6 +63,8 @@ public class AppInitializeStore extends Store implements AppInitializeActions {
             case LOAD_SAVED_TOKEN:
                 loadSavedToken(action);
                 break;
+            case LOG_IN:
+                logIn(action);
             case FINISH_INITIALIZATION:
                 finishInit();
                 break;
@@ -98,5 +102,18 @@ public class AppInitializeStore extends Store implements AppInitializeActions {
     private void loadSavedToken(Action action) {
         savedToken = (String) action.getPayloadEntry(KEY_SAVED_TOKEN);
         progress.setLoadSavedTokenDone(true);
+    }
+
+    private void logIn(Action action) {
+        if (action.isError()) {
+            Object errorMessage = action.getPayloadEntry(KEY_ERROR_MESSAGE);
+            if (errorMessage == null) {
+                progress.setErrorMessage(R.string.app_init_error_logging_in);
+            } else {
+                progress.setErrorMessage((String) errorMessage);
+            }
+            return;
+        }
+        currentUser = (User) action.getPayloadEntry(KEY_CURRENT_USER);
     }
 }

@@ -1,5 +1,7 @@
 package com.group0536.puzzlemazing.models;
 
+import android.content.res.Resources;
+
 import com.group0536.puzzlemazing.R;
 
 /**
@@ -14,7 +16,7 @@ public class AppInitProgress {
     private boolean isLogInUserDone;
 
     // errorMessage associating with errors. It is empty if no error occurred.
-    private int errorMessageId;
+    private String errorMessage;
 
     public AppInitProgress() {
     }
@@ -43,15 +45,19 @@ public class AppInitProgress {
         isLogInUserDone = logInUserDone;
     }
 
-    public int getErrorMessageId() {
-        return errorMessageId;
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
     public void setErrorMessage(int errorMessageId) {
-        this.errorMessageId = errorMessageId;
+        errorMessage = Resources.getSystem().getString(errorMessageId);
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     public boolean hasError() {
-        return errorMessageId != 0;
+        return errorMessage == null || errorMessage.equals("");
     }
 }

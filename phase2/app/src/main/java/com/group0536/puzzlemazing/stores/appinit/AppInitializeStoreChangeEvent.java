@@ -1,4 +1,4 @@
-package com.group0536.puzzlemazing.stores.welcome;
+package com.group0536.puzzlemazing.stores.appinit;
 
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
 
