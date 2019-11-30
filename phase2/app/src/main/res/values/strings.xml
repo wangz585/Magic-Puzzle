@@ -23,7 +23,6 @@
   <string name="password">Password</string>
   <string name="user_name">User Name</string>
 
-
   <!-- dialog buttons -->
   <string name="dialog_try_again">Try Again</string>
   <string name="dialog_exit">Exit</string>

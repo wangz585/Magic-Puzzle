@@ -7,12 +7,10 @@ import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.text.Layout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -23,6 +21,7 @@ import com.group0536.puzzlemazing.stores.welcome.AppInitializeStore;
 import com.group0536.puzzlemazing.stores.welcome.AppInitializeStoreChangeEvent;
 import com.group0536.puzzlemazing.utils.ActivityUtil;
 import com.group0536.puzzlemazing.views.FluxActivity;
+import com.group0536.puzzlemazing.views.Popup;
 import com.squareup.otto.Subscribe;
 
 /**
@@ -43,7 +42,7 @@ public class AppInitializeActivity extends FluxActivity {
     ImageView imgLoading;
     AnimationDrawable animLoading;
     TextView tvLoadingMsg;
-    View popUpWindow;
+    View popup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,29 +134,18 @@ public class AppInitializeActivity extends FluxActivity {
         String token = store.getSavedToken();
 
         if (isEmpty(token)) {
-            // TODO prompt login
-            View contentView = this.findViewById(android.R.id.content);
-            popWindow(contentView, R.layout.popup_login);
+            Popup credentialPopup = new Popup.PopupBuilder(this, R.layout.popup_credential)
+                    .focusable(false)
+                    .widthPercent(0.6)
+                    .heightPercent(0.6)
+                    .animationStyle(R.style.WindowFade)
+                    .build();
+            credentialPopup.show(Gravity.CENTER, 0, 0);
             setLoadingMessage(R.string.app_init_complete_login);
         } else {
             setLoadingMessage(R.string.app_init_logging_in);
             actionCreator.verifyToken(token);
         }
-    }
-
-    private void popWindow(final View view, int popUpId) {
-        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        popUpWindow = inflater.inflate(popUpId, null);
-
-        int width = (int) (view.getWidth() * 0.6);
-        int height = (int) (view.getHeight() * 0.6);
-        final PopupWindow window = new PopupWindow(popUpWindow, width, height, true);
-        AppInitializeActivity.this.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                window.showAtLocation(view, Gravity.CENTER, 0, 0);
-            }
-        });
     }
 
     private void setLoadingMessage(final int messageId) {
