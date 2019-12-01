@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.views.animation.AnimationActivity;
 import com.group0536.puzzlemazing.views.menu.MenuPageActivity;
-import com.group0536.puzzlemazing.views.welcome.AppInitializeActivity;
+import com.group0536.puzzlemazing.views.appinit.AppInitializeActivity;
 
 /**
  * An activity after a game has finished
