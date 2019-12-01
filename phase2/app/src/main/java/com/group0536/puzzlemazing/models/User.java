@@ -1,33 +1,23 @@
 package com.group0536.puzzlemazing.models;
 
 public class User {
-    private String email;
-    private String nickname;
+    private String username;
     private String token;
 
     public User() {
     }
 
-    public User(String email, String nickname, String token) {
-        this.email = email;
-        this.nickname = nickname;
+    public User(String username, String token) {
+        this.username = username;
         this.token = token;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getToken() {

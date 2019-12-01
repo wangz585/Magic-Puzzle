@@ -7,7 +7,8 @@
   <string name="app_init_checking_update">Checking for updates&#8230;</string>
   <string name="app_init_loading_token">Loading saved token&#8230;</string>
   <string name="app_init_complete_login">Please complete the login form.</string>
-  <string name="app_init_logging_in">Securely logging you in&#8230;</string>
+  <string name="app_init_waiting_response">Waiting for response&#8230;</string>
+  <string name="app_init_saving_token">Saving your session&#8230;</string>
 
   <string name="app_init_error_checking_update">
     Update check failed. Your device may be offline or our server
@@ -16,13 +17,38 @@
   <string name="app_init_error_oudated">
     This application is outdated. Please update to the newest version!
   </string>
+  <string name="app_init_error_logging_in">
+    We could not complete your log in / register request because of a network error.
+    Your device may be offline or our server may be out of service.
+  </string>
+  <string name="app_init_login_error">
+    We could not log you in at this time.
+    Please double check your username and password.
+  </string>
+  <string name="app_init_register_error">
+    We could not register you at this time.
+  </string>
 
-  <!-- app login/register -->
-  <string name="login">Login</string>
-  <string name="register">Register</string>
-  <string name="password">Password</string>
-  <string name="user_name">User Name</string>
+  <!-- app log in/register -->
+  <string name="app_welcome_login">Login</string>
+  <string name="app_welcome_register">Register</string>
+  <string name="app_welcome_password">Password</string>
+  <string name="app_welcome_username">Username</string>
+  <string name="app_welcome_greeting">Welcome back, %s!</string>
+  <string name="app_welcome_continue">Continue as %s</string>
+  <string name="app_welcome_switch_account">Switch Account</string>
+  <string name="app_welcome_key_user_token">user-token</string>
 
+  <!-- log in/register error messages -->
+  <string name="app_welcome_error_credential_required">
+    Both username and password are required in order to log in or register.
+  </string>
+  <string name="app_welcome_error_username_length">
+    Username must be at least %d characters long.
+  </string>
+  <string name="app_welcome_error_password_length">
+    Password length must be greater than or equal to %d.
+  </string>
 
   <!-- dialog buttons -->
   <string name="dialog_try_again">Try Again</string>
@@ -59,6 +85,7 @@
   <string name="score_board_title">Score Board</string>
   <string name="score_board_user_name">User</string>
   <string name="score_board_exit">MAIN PAGE</string>
+<<<<<<< HEAD
 
   <!-- main page -->
   <string name="menu_page_enter"> - ENTER - </string>
@@ -84,4 +111,13 @@
   <string name="next_challenge">Next</string>
 
 
+=======
+  <string name="nextlevel">TextView</string>
+  <string name="next_level">next level</string>
+  <string name="time">time</string>
+  <string name="score">score</string>
+  <string name="play_again">play again</string>
+  <string name="menu">menu</string>
+  <string name="highest_score">highest score</string>
+>>>>>>> app-init
 </resources>

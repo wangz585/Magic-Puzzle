@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/app_init_background"
-    tools:context=".views.welcome.AppInitializeActivity">
+    tools:context=".views.appinit.AppInitializeActivity">
 
     <ImageView
         android:id="@+id/imgLoading"
