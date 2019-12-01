@@ -198,7 +198,7 @@ public class GameView extends FluxView {
     }
 
     @Subscribe
-    public void x(BusyWorkerChangeEvent e) {
+    public void update(BusyWorkerChangeEvent e) {
         updateUI();
     }
 

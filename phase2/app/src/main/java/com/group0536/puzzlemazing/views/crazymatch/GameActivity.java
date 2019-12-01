@@ -19,6 +19,7 @@ import com.squareup.otto.Subscribe;
 public class GameActivity extends FluxActivity {
     private CrazyMatchStore store;
     private CrazyMatchActionCreator actionCreator;
+    // The id of the ball drawing
     private int ballDrawingInt;
     private int level;
 
@@ -98,6 +99,9 @@ public class GameActivity extends FluxActivity {
         checkGameOver();
     }
 
+    /**
+     * set the game to be over if conditions satisfied
+     */
     private void checkGameOver() {
         if (store.isGameOver()) {
             Intent intent = new Intent(GameActivity.this, GameFinishedActivity.class);

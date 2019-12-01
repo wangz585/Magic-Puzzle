@@ -14,6 +14,9 @@ import com.group0536.puzzlemazing.stores.global.PreferenceStore;
 import com.group0536.puzzlemazing.utils.MusicPlayer;
 import com.group0536.puzzlemazing.views.FluxActivity;
 
+/**
+ * This is an activity responsible for settings
+ */
 public class PreferenceActivity extends FluxActivity {
     private PreferenceActionCreator actionCreator;
     private PreferenceStore store;
@@ -40,21 +43,28 @@ public class PreferenceActivity extends FluxActivity {
         bindViews();
     }
 
+    /**
+     * Initialize the music player responsible for playing the background music
+     */
     private void initializeMusicPlayer() {
         if (backgroundMusicPlayer == null) {
             backgroundMusicPlayer = new MusicPlayer();
         }
     }
 
+    /**
+     * Initialize all the components on this activity
+     */
     private void bindViews() {
-        setAvatarSpinner();
-
-
-        setMusicRadioButton();
+        initializeAvatarSpinner();
+        initializeMusicRadioButton();
 
     }
 
-    private void setMusicRadioButton() {
+    /**
+     * Initialize the radio buttons for choosing background music
+     */
+    private void initializeMusicRadioButton() {
         radioGroupSongs = findViewById(R.id.radioGroupBackgroundMusic);
         radioSoundTrack0 = findViewById(R.id.radioSoundtrack0);
         radioSoundTrack1 = findViewById(R.id.radioSoundtrack1);
@@ -67,6 +77,10 @@ public class PreferenceActivity extends FluxActivity {
         setMusicClickEvent();
     }
 
+    /**
+     * Set the click event for radio button group. When a music is selected, it is played by
+     * the media player
+     */
     private void setMusicClickEvent() {
         radioGroupSongs.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -86,7 +100,10 @@ public class PreferenceActivity extends FluxActivity {
         });
     }
 
-    private void setAvatarSpinner() {
+    /**
+     * Initialize the spinner for choosing avatar
+     */
+    private void initializeAvatarSpinner() {
         spinnerAvatars = findViewById(R.id.spinAvatar);
         ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, store.getAvatars());
         spinnerAvatars.setAdapter(spinnerArrayAdapter);
@@ -96,6 +113,7 @@ public class PreferenceActivity extends FluxActivity {
                 actionCreator.setAvatar(avatarSelected);
             }
 
+            // When no avatar is selected, the default is the first avatar
             public void onNothingSelected(AdapterView<?> parent) {
                 String avatarSelected = parent.getItemAtPosition(0).toString();
                 actionCreator.setAvatar(avatarSelected);
