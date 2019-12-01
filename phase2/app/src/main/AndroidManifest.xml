@@ -71,7 +71,7 @@
       </intent-filter>
     </activity>
     <activity
-        android:name=".views.busyworker.GameFinishedActivity"
+        android:name=".views.GameFinishedActivity"
         android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

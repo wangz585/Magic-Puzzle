@@ -76,11 +76,12 @@
   <string name="color_theme_2">Color Theme 2</string>
   <string name="select_avatar_prompt">Select Your Avatar:</string>
 
-  <string name="nextlevel">TextView</string>
-  <string name="next_level">next level</string>
-  <string name="time">time</string>
-  <string name="score">score</string>
-  <string name="play_again">play again</string>
-  <string name="menu">menu</string>
-  <string name="highest_score">highest score</string>
+  <!-- game finished page -->
+  <string name="next_level">Next Level</string>
+  <string name="time">Time</string>
+  <string name="score">Score</string>
+  <string name="menu">Menu</string>
+  <string name="highest_score">Highest Score</string>
+  <string name="next_challenge">Next Challenge</string>
+
 </resources>

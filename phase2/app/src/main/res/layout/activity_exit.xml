@@ -22,13 +22,13 @@
         android:text="@string/time" />
 
     <Button
-        android:id="@+id/btnPlayAgain"
+        android:id="@+id/btnNextChallenge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/play_again" />
+        android:text="@string/next_challenge" />
 
     <TextView
-        android:id="@+id/highestscore"
+        android:id="@+id/txtHighestScore"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/highest_score" />

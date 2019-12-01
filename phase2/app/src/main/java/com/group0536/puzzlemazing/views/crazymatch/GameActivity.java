@@ -1,5 +1,6 @@
 package com.group0536.puzzlemazing.views.crazymatch;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -12,6 +13,7 @@ import com.group0536.puzzlemazing.models.crazymatch.Board;
 import com.group0536.puzzlemazing.stores.crazymatch.CrazyMatchChangeEvent;
 import com.group0536.puzzlemazing.stores.crazymatch.CrazyMatchStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
+import com.group0536.puzzlemazing.views.GameFinishedActivity;
 import com.squareup.otto.Subscribe;
 
 public class GameActivity extends FluxActivity {
@@ -84,6 +86,10 @@ public class GameActivity extends FluxActivity {
             public void onClick(View view) {
                 if (store.canFlip(row, col)) {
                     actionCreator.flip(row, col);
+                }
+                if (store.isGameOver()) {
+                    Intent intent = new Intent(GameActivity.this, GameFinishedActivity.class);
+                    startActivity(intent);
                 }
             }
         });

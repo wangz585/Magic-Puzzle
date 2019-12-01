@@ -38,9 +38,10 @@ public class AnimationActivity extends AppCompatActivity {
     }
 
     private void initializeActivities() {
-        classes = Arrays.asList((Class) SelectLevelActivity.class);
-        classes = Arrays.asList((Class) SelectLevelActivity.class);
-        classes = Arrays.asList((Class) SelectLevelActivity.class);
+        classes = Arrays.asList((Class)
+                com.group0536.puzzlemazing.views.busyworker.SelectLevelActivity.class,
+                com.group0536.puzzlemazing.views.wordguessing.SelectLevelActivity.class,
+                com.group0536.puzzlemazing.views.crazymatch.SelectLevelActivity.class);
     }
 
     private void bindViews() {
@@ -69,10 +70,10 @@ public class AnimationActivity extends AppCompatActivity {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
                 Intent intent = new Intent(AnimationActivity.this, classes.get(currentVideoIndex));
+                currentVideoIndex++;
                 startActivity(intent);
             }
         });
-        currentVideoIndex++;
     }
 
     private void releaseWelcomeVideo() {
