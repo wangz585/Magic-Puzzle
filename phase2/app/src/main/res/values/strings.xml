@@ -50,10 +50,9 @@
 
   <!-- score board -->
   <string-array name="scoreTypesForRank">
-    <item>Rank By Level 1 Score</item>
-    <item>Rank By Level 2 Score</item>
-    <item>Rank By Level 3 Score</item>
-    <item>Rank By Level 4 Score</item>
+    <item>Rank By Challenge 1 Score</item>
+    <item>Rank By Challenge 2 Score</item>
+    <item>Rank By Challenge 3 Score</item>
     <item>Rank By Total  Score</item>
   </string-array>
 
