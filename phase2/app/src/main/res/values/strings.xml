@@ -62,9 +62,9 @@
   <string name="score_board_exit">MAIN PAGE</string>
 
   <!-- main page -->
-  <string name="menu_page_enter">ENTER</string>
-  <string name="menu_page_scoreboard">SCOREBOARD</string>
-  <string name="menu_page_setting">SETTING</string>
+  <string name="menu_page_enter"> - ENTER - </string>
+  <string name="menu_page_scoreboard"> - SCOREBOARD - </string>
+  <string name="menu_page_setting"> - SETTINGS - </string>
 
   <!-- setting page -->
   <string name="background_music">Background Music</string>
@@ -77,11 +77,12 @@
   <string name="select_avatar_prompt">Select Your Avatar:</string>
 
   <!-- game finished page -->
+  <string name="settings">SETTINGS</string>
   <string name="next_level">Next Level</string>
   <string name="time">Time</string>
   <string name="score">Score</string>
   <string name="menu">Menu</string>
   <string name="highest_score">Highest Score</string>
-  <string name="next_challenge">Next Challenge</string>
+  <string name="next_challenge">Next</string>
 
 </resources>

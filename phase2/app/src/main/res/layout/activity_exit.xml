@@ -1,35 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:background="@drawable/finishgame_background"
     android:layout_height="match_parent">
 
     <Button
         android:id="@+id/btnMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#42FFFFFF"
+        android:textSize="25sp"
+        android:fontFamily="serif"
         android:text="@string/menu" />
 
     <TextView
         android:id="@+id/txtScore"
         android:layout_width="match_parent"
         android:layout_height="106dp"
+        android:textColor="@color/clouds"
+        android:textAlignment="center"
+        android:fontFamily="serif"
+        android:textSize="20sp"
         android:text="@string/score" />
 
     <TextView
         android:id="@+id/txtTime"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/clouds"
+        android:fontFamily="serif"
+        android:textSize="20sp"
+        android:textAlignment="center"
         android:text="@string/time" />
 
     <Button
         android:id="@+id/btnNextChallenge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#42FFFFFF"
+        android:textSize="25sp"
+        android:fontFamily="serif"
         android:text="@string/next_challenge" />
 
     <TextView
         android:id="@+id/txtHighestScore"
         android:layout_width="match_parent"
+        android:textColor="@color/clouds"
+        android:fontFamily="serif"
+        android:textSize="20sp"
+        android:textAlignment="center"
         android:layout_height="wrap_content"
         android:text="@string/highest_score" />
 </LinearLayout>
