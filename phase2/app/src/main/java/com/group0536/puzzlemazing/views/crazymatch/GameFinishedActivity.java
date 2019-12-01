@@ -15,6 +15,7 @@ import com.group0536.puzzlemazing.stores.busyworker.BusyWorkerChangeEvent;
 import com.group0536.puzzlemazing.stores.busyworker.BusyWorkerStore;
 import com.group0536.puzzlemazing.stores.crazymatch.CrazyMatchStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
+import com.group0536.puzzlemazing.views.scoreboard.ScoreBoardActivity;
 import com.squareup.otto.Subscribe;
 
 public class GameFinishedActivity extends FluxActivity {
@@ -22,36 +23,33 @@ public class GameFinishedActivity extends FluxActivity {
     private CrazyMatchStore store;
     private CrazyMatchActionCreator actionCreator;
 
-    private Button btnmenu;
-    private Button btnplayagain;
+    private Button btnMenu;
+    private Button btnPlayAgain;
     private TextView txtscore;
     private TextView txthighscore;
-    private TextView txttime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         setContentView(R.layout.activity_exit);
-        btnmenu = findViewById(getResources()
-                .getIdentifier("btnMenu", "id", getPackageName()));//go to menu
-        btnplayagain = findViewById(getResources()
-                .getIdentifier("btnPlayAgain", "id", getPackageName()));
-        txtscore.setText("Your current score is" + store.getScore());
-        txthighscore.setText("Your current score is" + store.getScore());//get the highest score from server
-        txttime.setText("Your current score is" + store.getScore()); //get the time spent from timer
-        //get the highest score from the server
-        setUpButton();
-    }
-
-    private void setUpButton() {
-        btnplayagain.setOnClickListener(new View.OnClickListener(){
+        btnMenu = findViewById(R.id.btnMenu);
+        btnPlayAgain = findViewById(R.id.btnNextLevel);
+        btnMenu.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(com.group0536.puzzlemazing.views.crazymatch.GameFinishedActivity.this, SelectLevelActivity.class);
+                Intent intent = new Intent(com.group0536.puzzlemazing.views.crazymatch.GameFinishedActivity.this, ScoreBoardActivity.class);
                 startActivity(intent);
             }
         });
+        btnPlayAgain.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(com.group0536.puzzlemazing.views.crazymatch.GameFinishedActivity.this, ScoreBoardActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override

@@ -20,7 +20,6 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
     private int score;
     private Point currentWorkerPosition;
     private Point currentBoxPosition;
-    private Timer timer;
     private int timeUsed;
     private BusyWorkerInitController initController = new BusyWorkerInitController();
 
@@ -48,7 +47,6 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
                 int level = (int)action.getPayloadEntry("level");
                 initMap(level);
                 initCurrentPosition();
-                initTimer();
                 initScore();
                 postChange();
                 break;
@@ -66,21 +64,6 @@ public class BusyWorkerStore extends Store implements BusyWorkerActions {
     private void updateScore() {
         score--;
 
-    }
-
-    /**
-     * Initialize the timer in the game
-     */
-    private void initTimer(){
-        timer = new Timer();
-        TimerTask t = new TimerTask() {
-            @Override
-            public void run() {
-                timeUsed++;
-                postChange();
-            }
-        };
-        timer.scheduleAtFixedRate(t,1000,1000);
     }
 
     /**
