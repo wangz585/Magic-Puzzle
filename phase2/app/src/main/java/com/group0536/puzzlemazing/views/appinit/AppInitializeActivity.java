@@ -227,7 +227,8 @@ public class AppInitializeActivity extends FluxActivity {
             public void onDismiss() {
                 if (greetingPopup.getMode() == GreetingPopup.Mode.SWITCH_ACCOUNT) {
                     actionCreator.clearUser();
-                    Log.d(TAG, "onDismiss: Cleared user");
+                } else {
+                    actionCreator.skipLogIn();
                 }
             }
         });

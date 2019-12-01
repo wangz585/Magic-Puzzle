@@ -68,6 +68,9 @@ public class AppInitializeStore extends Store implements AppInitializeActions {
             case REGISTER:
                 extractUser(action);
                 break;
+            case SKIP_LOG_IN:
+                skipLogIn();
+                break;
             case CLEAR_CURRENT_USER:
                 clearUser();
                 break;
@@ -132,5 +135,11 @@ public class AppInitializeStore extends Store implements AppInitializeActions {
         }
         currentUser = (User) action.getPayloadEntry(KEY_CURRENT_USER);
         progress.setLogInUserDone(true);
+    }
+
+    private void skipLogIn() {
+        if (currentUser != null) {
+            progress.setLogInUserDone(true);
+        }
     }
 }

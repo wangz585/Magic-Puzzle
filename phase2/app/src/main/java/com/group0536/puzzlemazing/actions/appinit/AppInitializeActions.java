@@ -7,9 +7,10 @@ public interface AppInitializeActions {
     String FINISH_INITIALIZATION = PREFIX + "finish";
     String CHECK_UPDATE = PREFIX + "check-update";
     String LOAD_SAVED_TOKEN = PREFIX + "load-saved-token";
-    String LOG_IN = PREFIX + "login";
-    String REGISTER = PREFIX + "register";
     String CLEAR_CURRENT_USER = PREFIX + "clear-current-user";
+    String LOG_IN = PREFIX + "login";
+    String SKIP_LOG_IN = PREFIX + "skip-login";
+    String REGISTER = PREFIX + "register";
 
     // keys
     String KEY_REQUIRE_UPDATE = "require-update";

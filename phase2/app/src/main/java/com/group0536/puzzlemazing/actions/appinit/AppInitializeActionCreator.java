@@ -195,4 +195,10 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
                 .build();
         dispatcher.dispatch(action);
     }
+
+    public void skipLogIn() {
+        Action action = new Action.ActionBuilder(SKIP_LOG_IN)
+                .build();
+        dispatcher.dispatch(action);
+    }
 }
