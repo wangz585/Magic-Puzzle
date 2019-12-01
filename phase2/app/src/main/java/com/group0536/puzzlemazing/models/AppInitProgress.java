@@ -1,8 +1,6 @@
 package com.group0536.puzzlemazing.models;
 
-import android.content.res.Resources;
-
-import com.group0536.puzzlemazing.R;
+import android.content.Context;
 
 /**
  * This class stores the progress during the initialization of application.
@@ -15,10 +13,19 @@ public class AppInitProgress {
     private boolean isLoadSavedTokenDone;
     private boolean isLogInUserDone;
 
-    // errorMessage associating with errors. It is empty if no error occurred.
+    /**
+     * errorMessage associating with errors. It is empty if no error occurred.
+     */
     private String errorMessage;
 
-    public AppInitProgress() {
+    /**
+     * The context where the app initialization is taking place.
+     * This is needed for the access of error message strings.
+     */
+    private Context context;
+
+    public AppInitProgress(Context context) {
+        this.context = context;
     }
 
     public boolean isUpdateCheckDone() {
@@ -50,7 +57,7 @@ public class AppInitProgress {
     }
 
     public void setErrorMessage(int errorMessageId) {
-        errorMessage = Resources.getSystem().getString(errorMessageId);
+        errorMessage = context.getString(errorMessageId);
     }
 
     public void setErrorMessage(String errorMessage) {

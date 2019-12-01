@@ -9,6 +9,7 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.group0536.puzzlemazing.R;
@@ -65,7 +66,7 @@ public class AppInitializeActivity extends FluxActivity {
     protected void onResume() {
         super.onResume();
         registerStore(store);
-        actionCreator.startInitialization();
+        actionCreator.startInitialization(getApplicationContext());
     }
 
     @Override
@@ -133,16 +134,24 @@ public class AppInitializeActivity extends FluxActivity {
     }
 
     private void promptForCredential() {
-        CredentialPopup credentialPopup = (CredentialPopup) new CredentialPopup.CredentialPopupBuilder(this)
-                .widthPercent(0.6)
-                .heightPercent(0.6)
+        final CredentialPopup credentialPopup = (CredentialPopup)
+                new CredentialPopup.CredentialPopupBuilder(this, getApplicationContext())
+                .widthPercent(0.7)
+                .heightPercent(0.7)
                 .animationStyle(R.style.WindowFade)
                 .build();
         credentialPopup.show(Gravity.CENTER, 0, 0);
+        credentialPopup.getPopupWindow().setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                String username = credentialPopup.getUsername();
+            }
+        });
     }
 
     private void promptGreeting(User currentUser) {
-        GreetingPopup greetingPopup = (GreetingPopup) new GreetingPopup.GreetingPopupBuilder(this)
+        GreetingPopup greetingPopup = (GreetingPopup) new GreetingPopup.GreetingPopupBuilder(
+                this, getApplicationContext())
                 .currentUser(currentUser)
                 .widthPercent(0.6)
                 .heightPercent(0.6)
@@ -174,7 +183,7 @@ public class AppInitializeActivity extends FluxActivity {
                 .setPositiveButton(R.string.dialog_try_again, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        actionCreator.restartInitialization();
+                        actionCreator.restartInitialization(getApplicationContext());
                     }
                 })
                 .setNegativeButton(R.string.dialog_exit, new DialogInterface.OnClickListener() {

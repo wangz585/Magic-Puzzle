@@ -13,6 +13,7 @@ public interface AppInitializeActions {
     String KEY_REQUIRE_UPDATE = "require-update";
     String KEY_SAVED_TOKEN = "saved-token";
     String KEY_CURRENT_USER = "current-user";
+    String KEY_CONTEXT = "context";
 
     String KEY_ERROR_MESSAGE = "error-message";
 }

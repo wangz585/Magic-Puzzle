@@ -1,6 +1,7 @@
 package com.group0536.puzzlemazing.views.appinit;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.view.View;
 import android.widget.Button;
@@ -58,8 +59,8 @@ public class GreetingPopup extends Popup {
     public static class GreetingPopupBuilder extends Popup.PopupBuilder {
         private User currentUser;
 
-        public GreetingPopupBuilder(Activity parent) {
-            super(parent, R.layout.popup_greeting);
+        public GreetingPopupBuilder(Activity parent, Context context) {
+            super(parent, R.layout.popup_greeting, context);
         }
 
         /**

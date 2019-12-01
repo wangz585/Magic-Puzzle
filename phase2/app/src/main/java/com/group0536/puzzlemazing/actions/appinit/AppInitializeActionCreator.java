@@ -67,8 +67,13 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
         dispatcher.dispatch(action);
     }
 
-    public void startInitialization() {
+    /**
+     * Create and dispatch action for starting app initialization.
+     * @param context the context where the init process takes place.
+     */
+    public void startInitialization(Context context) {
         Action action = new Action.ActionBuilder(START_INITIALIZATION)
+                .load(KEY_CONTEXT, context)
                 .build();
         dispatcher.dispatch(action);
     }
@@ -79,8 +84,13 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
         dispatcher.dispatch(action);
     }
 
-    public void restartInitialization() {
+    /**
+     * Create and dispatch action to restart the initialization.
+     * @param context the context where the new initialization process will take place.
+     */
+    public void restartInitialization(Context context) {
         Action action = new Action.ActionBuilder(RESTART_INITIALIZATION)
+                .load(KEY_CONTEXT, context)
                 .build();
         dispatcher.dispatch(action);
     }

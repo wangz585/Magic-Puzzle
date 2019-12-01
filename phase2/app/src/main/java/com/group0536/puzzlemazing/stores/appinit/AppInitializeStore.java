@@ -1,5 +1,7 @@
 package com.group0536.puzzlemazing.stores.appinit;
 
+import android.content.Context;
+
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.appinit.AppInitializeActions;
@@ -33,7 +35,6 @@ public class AppInitializeStore extends Store implements AppInitializeActions {
 
     private AppInitializeStore(Dispatcher dispatcher) {
         super(dispatcher);
-        progress = new AppInitProgress();
     }
 
     @Override
@@ -50,11 +51,11 @@ public class AppInitializeStore extends Store implements AppInitializeActions {
     public void onAction(Action action) {
         switch (action.getType()) {
             case START_INITIALIZATION:
-                startInit();
+                startInit(action);
                 break;
             case RESTART_INITIALIZATION:
                 finishInit();
-                startInit();
+                startInit(action);
                 break;
             case CHECK_UPDATE:
                 handleUpdateCheckResult(action);
@@ -71,9 +72,10 @@ public class AppInitializeStore extends Store implements AppInitializeActions {
         postChange();
     }
 
-    private void startInit() {
+    private void startInit(Action action) {
         if (progress == null) {
-            progress = new AppInitProgress();
+            Context context = (Context) action.getPayloadEntry(KEY_CONTEXT);
+            progress = new AppInitProgress(context);
         }
     }
 

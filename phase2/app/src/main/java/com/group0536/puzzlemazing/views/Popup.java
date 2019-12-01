@@ -1,6 +1,7 @@
 package com.group0536.puzzlemazing.views;
 
 import android.app.Activity;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.PopupWindow;
@@ -25,11 +26,14 @@ public class Popup {
     protected PopupWindow popupWindow;
     protected View popupWindowView;
 
+    protected Context context;
+
     protected Popup(PopupBuilder builder) {
         this.parent = builder.parent;
         this.popupWindow = builder.popupWindow;
         this.parentContentView = builder.parentContentView;
         this.popupWindowView = builder.popupWindowView;
+        this.context = builder.context;
     }
 
     /**
@@ -50,8 +54,12 @@ public class Popup {
         });
     }
 
-    public void dismiss() {
-        popupWindow.dismiss();
+    public PopupWindow getPopupWindow() {
+        return popupWindow;
+    }
+
+    public View getPopupWindowView() {
+        return popupWindowView;
     }
 
     /**
@@ -70,6 +78,7 @@ public class Popup {
         private PopupWindow popupWindow;
         private View popupWindowView;
         private LayoutInflater inflater;
+        private final Context context;
 
         /**
          * Initialize a popup builder by providing the mandatory fields.
@@ -77,9 +86,11 @@ public class Popup {
          * @param layoutId the layout resource ID associating with this popup.
          *                 Use {@code R.layout} to access the xml files corresponding
          *                 to layouts.
+         * @param context the context to apply this popup.
          */
-        public PopupBuilder(Activity parent, int layoutId) {
+        public PopupBuilder(Activity parent, int layoutId, Context context) {
             this.parent = parent;
+            this.context = context;
             parentContentView = parent.findViewById(android.R.id.content);
             inflater = (LayoutInflater)
                     parent.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);

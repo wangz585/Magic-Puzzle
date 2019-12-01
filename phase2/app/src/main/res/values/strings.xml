@@ -17,15 +17,15 @@
     This application is outdated. Please update to the newest version!
   </string>
   <string name="app_init_error_logging_in">
-    We could not log you in because of a network error. Your device may be offline
-    or our server may be out of service.
+    We could not log you in because of a network error.
+    Your device may be offline or our server may be out of service.
   </string>
   <string name="app_init_login_error">
     We could not log you in at this time.
-  Please double check your username and password.
+    Please double check your username and password.
   </string>
 
-  <!-- app login/register -->
+  <!-- app log in/register -->
   <string name="app_welcome_login">Login</string>
   <string name="app_welcome_register">Register</string>
   <string name="app_welcome_password">Password</string>
@@ -33,6 +33,17 @@
   <string name="app_welcome_greeting">Welcome back, </string>
   <string name="app_welcome_continue">Continue as </string>
   <string name="app_welcome_switch_account">Switch Account</string>
+
+  <!-- log in/register error messages -->
+  <string name="app_welcome_error_credential_required">
+    Both username and password are required in order to log in or register.
+  </string>
+  <string name="app_welcome_error_username_length">
+    Username must be at least %d characters long.
+  </string>
+  <string name="app_welcome_error_password_length">
+    Password length must be greater than or equal to %d.
+  </string>
 
   <!-- dialog buttons -->
   <string name="dialog_try_again">Try Again</string>
