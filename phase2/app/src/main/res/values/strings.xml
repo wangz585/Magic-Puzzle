@@ -79,10 +79,10 @@
   <!-- game finished page -->
   <string name="settings">SETTINGS</string>
   <string name="next_level">Next Level</string>
-  <string name="time">Time</string>
-  <string name="score">Score</string>
+  <string name="time">Time Used: %d</string>
+  <string name="score">Score: %d</string>
   <string name="menu">Menu</string>
-  <string name="highest_score">Highest Score</string>
   <string name="next_challenge">Next</string>
+
 
 </resources>

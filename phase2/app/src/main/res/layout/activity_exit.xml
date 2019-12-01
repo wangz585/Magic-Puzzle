@@ -41,14 +41,4 @@
         android:textSize="25sp"
         android:fontFamily="serif"
         android:text="@string/next_challenge" />
-
-    <TextView
-        android:id="@+id/txtHighestScore"
-        android:layout_width="match_parent"
-        android:textColor="@color/clouds"
-        android:fontFamily="serif"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:layout_height="wrap_content"
-        android:text="@string/highest_score" />
 </LinearLayout>

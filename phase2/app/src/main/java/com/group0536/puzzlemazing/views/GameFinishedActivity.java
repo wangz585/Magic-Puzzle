@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.views.animation.AnimationActivity;
+import com.group0536.puzzlemazing.views.menu.MenuPageActivity;
 import com.group0536.puzzlemazing.views.welcome.AppInitializeActivity;
 
 public class GameFinishedActivity extends AppInitializeActivity {
@@ -41,8 +42,16 @@ public class GameFinishedActivity extends AppInitializeActivity {
             }
         });
         btnMenu = findViewById(R.id.btnMenu);
+        btnMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(GameFinishedActivity.this, MenuPageActivity.class);
+                startActivity(intent);
+            }
+        });
         txtScore = findViewById(R.id.txtScore);
         txtTimeUsed = findViewById(R.id.txtTime);
-        //txtScore.setText(score);
+        String scoreText = getString(R.string.score, score);
+        txtScore.setText(scoreText);
     }
 }
