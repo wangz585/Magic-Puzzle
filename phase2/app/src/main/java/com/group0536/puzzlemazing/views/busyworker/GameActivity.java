@@ -7,6 +7,7 @@ import com.group0536.puzzlemazing.actions.busyworker.BusyWorkerActionCreator;
 import com.group0536.puzzlemazing.stores.busyworker.BusyWorkerChangeEvent;
 import com.group0536.puzzlemazing.stores.busyworker.BusyWorkerStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
+import com.group0536.puzzlemazing.views.GameFinishedActivity;
 import com.squareup.otto.Subscribe;
 
 public class GameActivity extends FluxActivity {
@@ -28,7 +29,7 @@ public class GameActivity extends FluxActivity {
     }
 
     @Subscribe
-    public void x(BusyWorkerChangeEvent e) {
+    public void update(BusyWorkerChangeEvent e) {
         updateUI();
     }
 
@@ -50,6 +51,8 @@ public class GameActivity extends FluxActivity {
     private void checkGameFinished(){
         if (store.checkWin() || store.checkLose()){
             Intent intent = new Intent(GameActivity.this, GameFinishedActivity.class);
+            intent.putExtra("score", store.getScore());
+            intent.putExtra("challenge", 1);
             startActivity(intent);
         }
     }

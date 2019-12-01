@@ -1,5 +1,6 @@
 package com.group0536.puzzlemazing.views.scoreboard;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.scoreboard.ScoreBoardActionCreator;
 import com.group0536.puzzlemazing.stores.scoreboard.ScoreBoardStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
+import com.group0536.puzzlemazing.views.menu.MenuPageActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,8 +71,9 @@ public class ScoreBoardActivity extends FluxActivity implements AdapterView.OnIt
         btnBackToMain.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-//                When this game_button is clicked, got to he main page
-//                startActivity(new Intent());
+                Intent intent = new Intent(ScoreBoardActivity.this,
+                        MenuPageActivity.class);
+                startActivity(intent);
             }
         });
     }

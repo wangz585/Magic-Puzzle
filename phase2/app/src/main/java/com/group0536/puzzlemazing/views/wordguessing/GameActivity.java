@@ -1,5 +1,6 @@
 package com.group0536.puzzlemazing.views.wordguessing;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.text.InputFilter;
@@ -13,6 +14,7 @@ import com.group0536.puzzlemazing.actions.wordguessing.WordGuessingActionCreator
 import com.group0536.puzzlemazing.stores.wordguessing.WordGuessingChangeEvent;
 import com.group0536.puzzlemazing.stores.wordguessing.WordGuessingGameStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
+import com.group0536.puzzlemazing.views.GameFinishedActivity;
 import com.squareup.otto.Subscribe;
 
 import java.util.List;
@@ -45,7 +47,7 @@ public class GameActivity extends FluxActivity {
         initializeNextButton();
         initializeAnswerText();
         initializeEmojiText();
-        initalizeTimeLeft();
+        initializeTimeLeft();
     }
 
     private void initializeNextButton() {
@@ -57,7 +59,7 @@ public class GameActivity extends FluxActivity {
                     String userAnswer = txtPuzzle.getText().toString();
                     actionCreator.submitAnswer(userAnswer);
                 } else if (store.isGameOver()) {
-                    // TODO
+                    //TODO
                 } else {
                     actionCreator.startGame();
                     countDownTimer.start();
@@ -71,8 +73,15 @@ public class GameActivity extends FluxActivity {
     private CountDownTimer countDownTimer = new CountDownTimer(120000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
-            String value = String.valueOf((int) (millisUntilFinished / 1000));
+            int timeLeft = (int) (millisUntilFinished / 1000);
+            String value = String.valueOf(timeLeft);
             countDownTimeLeft.setText(String.format("Remaining Time: %ss", value));
+            if (timeLeft == 0) {
+                Intent intent = new Intent(GameActivity.this, GameFinishedActivity.class);
+                intent.putExtra("score", store.getScore());
+                intent.putExtra("challenge", 2);
+                startActivity(intent);
+            }
         }
 
         @Override
@@ -82,7 +91,7 @@ public class GameActivity extends FluxActivity {
         }
     };
 
-    private void initalizeTimeLeft() {
+    private void initializeTimeLeft() {
         countDownTimeLeft = findViewById(R.id.txt_time);
     }
 

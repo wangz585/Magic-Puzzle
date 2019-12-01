@@ -60,11 +60,29 @@
   <string name="score_board_title">Score Board</string>
   <string name="score_board_user_name">User</string>
   <string name="score_board_exit">MAIN PAGE</string>
-    <string name="nextlevel">TextView</string>
-  <string name="next_level">next level</string>
-  <string name="time">time</string>
-  <string name="score">score</string>
-    <string name="play_again">play again</string>
-  <string name="menu">menu</string>
-    <string name="highest_score">highest score</string>
+
+  <!-- main page -->
+  <string name="menu_page_enter"> - ENTER - </string>
+  <string name="menu_page_scoreboard"> - SCOREBOARD - </string>
+  <string name="menu_page_setting"> - SETTINGS - </string>
+
+  <!-- setting page -->
+  <string name="background_music">Background Music</string>
+  <string name="soundtrack_0">No Soundtrack</string>
+  <string name="soundtrack_1">Soundtrack 1</string>
+  <string name="soundtrack_2">Soundtrack 2</string>
+  <string name="color_theme">Color Theme</string>
+  <string name="color_theme_1">Color Theme 1</string>
+  <string name="color_theme_2">Color Theme 2</string>
+  <string name="select_avatar_prompt">Select Your Avatar:</string>
+
+  <!-- game finished page -->
+  <string name="settings">SETTINGS</string>
+  <string name="next_level">Next Level</string>
+  <string name="time">Time</string>
+  <string name="score">Score</string>
+  <string name="menu">Menu</string>
+  <string name="highest_score">Highest Score</string>
+  <string name="next_challenge">Next</string>
+
 </resources>

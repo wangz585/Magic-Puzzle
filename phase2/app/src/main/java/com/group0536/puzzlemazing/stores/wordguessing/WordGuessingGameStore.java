@@ -6,7 +6,6 @@ import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.wordguessing.WordGuessingActions;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 import com.group0536.puzzlemazing.models.User;
-import com.group0536.puzzlemazing.models.wordguessing.ScoreCalculator;
 import com.group0536.puzzlemazing.models.wordguessing.Word;
 import com.group0536.puzzlemazing.models.wordguessing.WordBank;
 import com.group0536.puzzlemazing.stores.Store;
@@ -27,7 +26,6 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
     private boolean gameOver;
     private int score;
     private boolean gameStart;
-    private ScoreCalculator scoreCalculator;
     private static com.group0536.puzzlemazing.stores.wordguessing.WordGuessingGameStore instance;
 
     protected WordGuessingGameStore(Dispatcher dispatcher) {
@@ -224,7 +222,7 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
      * @return the player's score in this game
      */
     public int getScore() {
-        return scoreCalculator.getTotalScore();
+        return score;
     }
 
     public List<Character> getPuzzle() {

@@ -21,6 +21,7 @@ public class SelectLevelActivity extends FluxActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crazy_match_select_level);
+
         btnLevel1 = findViewById(getResources()
                 .getIdentifier("btn_level_1", "id", getPackageName()));
         btnLevel1.setOnClickListener(new View.OnClickListener() {
