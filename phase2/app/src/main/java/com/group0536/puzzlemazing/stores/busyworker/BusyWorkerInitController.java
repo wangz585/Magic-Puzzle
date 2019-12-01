@@ -6,7 +6,10 @@ import com.group0536.puzzlemazing.models.busyworker.RawMaps;
 
 import java.util.HashMap;
 
-public class BusyWorkerInitController {
+/**
+ * This is a class responsible for the initialization process of busy worker game
+ */
+class BusyWorkerInitController {
 
     private SparseArray<HashMap<Object, String[]>> initializationData = new SparseArray<>();
 

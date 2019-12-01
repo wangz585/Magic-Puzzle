@@ -11,6 +11,9 @@ import com.squareup.otto.Subscribe;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * A preference store. It handles the logic
+ */
 public class PreferenceStore extends Store implements PreferenceActions {
     private String savedToken;
     private static PreferenceStore instance;
@@ -26,22 +29,43 @@ public class PreferenceStore extends Store implements PreferenceActions {
         initializeAvatarCollection();
     }
 
+    /**
+     * Populate the list of possible avatars
+     */
     private void initializeAvatarCollection() {
         avatars = Arrays.asList("💀", "💩", "🦸", "🕵", "🎅", "🤦", "💂", "👨", "🧛", "🧟");
     }
 
+    /**
+     * Get the list of possible avatars
+     *
+     * @return the list of possible avatars
+     */
     public List<String> getAvatars() {
         return avatars;
     }
 
+    /**
+     * Populate the list of possible background music
+     */
     private void initializeMusicCollection() {
         musicCollection = Arrays.asList(null, R.raw.jingle_bells, R.raw.alphabet_song);
     }
 
+    /**
+     * Get the current background music
+     *
+     * @return current background music
+     */
     public int getBackgroundMusic() {
         return currentMusic;
     }
 
+    /**
+     * Get the index of which avatar is checked in the list
+     *
+     * @return the index of which avatar is checked in the list
+     */
     public int getCheckedIndex() {
         return checkedIndex;
     }
@@ -51,9 +75,15 @@ public class PreferenceStore extends Store implements PreferenceActions {
         return new PreferenceStoreChangeEvent();
     }
 
-    public static com.group0536.puzzlemazing.stores.global.PreferenceStore getInstance(Dispatcher dispatcher) {
+    /**
+     * Get the instance of this store
+     *
+     * @param dispatcher the dispatcher associated with this store
+     * @return the instance of this store
+     */
+    public static PreferenceStore getInstance(Dispatcher dispatcher) {
         if (instance == null) {
-            instance = new com.group0536.puzzlemazing.stores.global.PreferenceStore(dispatcher);
+            instance = new PreferenceStore(dispatcher);
         }
         return instance;
     }
@@ -75,6 +105,11 @@ public class PreferenceStore extends Store implements PreferenceActions {
         }
     }
 
+    /**
+     * Set soundTrack to be the current currentMusic
+     *
+     * @param soundTrack the index of a background music
+     */
     private void setCurrentMusic(int soundTrack) {
         currentMusic = musicCollection.get(soundTrack);
     }

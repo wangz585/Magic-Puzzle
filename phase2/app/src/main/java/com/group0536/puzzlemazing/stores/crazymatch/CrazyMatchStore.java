@@ -6,9 +6,9 @@ import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.crazymatch.CrazyMatchActions;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
+import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.models.crazymatch.Animal;
 import com.group0536.puzzlemazing.models.crazymatch.Board;
-import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
 import com.squareup.otto.Subscribe;
@@ -74,6 +74,9 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         }
     }
 
+    /**
+     * Initialize the HashMap that maps level to the dimension of the game board
+     */
     private void setLevelToDimension() {
         List<Integer> dim1 = new ArrayList<>();
         dim1.add(2);
@@ -134,28 +137,42 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         int col = (int) action.getPayloadEntry("col");
         flipAnimal(row, col);
         postChange();
+        // if two animals are flipped
         if ((firstFlip != null) && (secondFlip != null)) {
-            // flick back the animals
-            Timer timerCheckPairs = new Timer();
-            isWaiting = true;
-            timerCheckPairs.schedule(new TimerTask() {
-                @Override
-                public void run() {
-                    firstFlip.flipOver();
-                    secondFlip.flipOver();
-                    if (isTheSame()) {
-                        updateScore();
-                        stepsTaken = 0;
-                        removeAnimal(firstFlip);
-                        removeAnimal(secondFlip);
-                    }
-                    clearFlipPair();
-                    postChange();
-                    isWaiting = false;
-                }
-            }, 1000);
+            flipBackAnimals();
         }
         // do nothing since the user just flip one animal in the board
+    }
+
+    /**
+     * Flip back the animals
+     */
+    private void flipBackAnimals() {
+        Timer timerCheckPairs = new Timer();
+        isWaiting = true;
+        timerCheckPairs.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                resetAnimals();
+                postChange();
+                isWaiting = false;
+            }
+        }, 1000);
+    }
+
+    /**
+     * Reset the animals and the statistics associated
+     */
+    private void resetAnimals() {
+        firstFlip.flipOver();
+        secondFlip.flipOver();
+        if (isTheSame()) {
+            updateScore();
+            stepsTaken = 0;
+            removeAnimal(firstFlip);
+            removeAnimal(secondFlip);
+        }
+        clearFlipPair();
     }
 
     /**
@@ -206,10 +223,10 @@ public class CrazyMatchStore extends Store implements CrazyMatchActions {
         List<Integer> randomAnimals = generateRandomAnimalDrawable(numPair);
         Collections.shuffle(randomAnimals);
         List<List<Animal>> animals = new ArrayList<>();
-
         int i = 0;
         for (int j = 0; j < numRows; j++) {
             List<Animal> animalsRow = new ArrayList<>();
+            // Generate a random row
             for (int k = 0; k < numColumns; k++) {
                 animalsRow.add(new Animal(randomAnimals.get(i), j, k));
                 i++;
