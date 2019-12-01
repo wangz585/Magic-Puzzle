@@ -68,6 +68,9 @@ public class AppInitializeStore extends Store implements AppInitializeActions {
             case REGISTER:
                 extractUser(action);
                 break;
+            case CLEAR_CURRENT_USER:
+                clearUser();
+                break;
             case FINISH_INITIALIZATION:
                 finishInit();
                 break;
@@ -90,6 +93,10 @@ public class AppInitializeStore extends Store implements AppInitializeActions {
     private void finishInit() {
         Log.d(TAG, "finishInit: is called!!!!!!");
         progress = null;
+        currentUser = null;
+    }
+
+    private void clearUser() {
         currentUser = null;
     }
 

@@ -139,7 +139,6 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
                     return;
                 }
                 dispatchErrorAction(LOAD_SAVED_TOKEN, response.message());
-                Log.d("Network!!!!!!", "onResponse: Failed");
             }
         });
     }
@@ -189,5 +188,11 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
                 dispatchErrorAction(LOG_IN, errorMessage);
             }
         });
+    }
+
+    public void clearUser() {
+        Action action = new Action.ActionBuilder(CLEAR_CURRENT_USER)
+                .build();
+        dispatcher.dispatch(action);
     }
 }

@@ -111,7 +111,7 @@ public class AppInitializeActivity extends FluxActivity {
         if (!progress.isUpdateCheckDone()) {
             checkForUpdate();
         } else if (!progress.isLoadSavedTokenDone()) {
-            loadSavedToken();
+            verifySavedToken();
         } else if (!progress.isLogInUserDone()) {
             promptLogIn();
         } else {
@@ -136,19 +136,32 @@ public class AppInitializeActivity extends FluxActivity {
         actionCreator.checkUpdate();
     }
 
-    private void loadSavedToken() {
+    private void verifySavedToken() {
         setLoadingMessage(R.string.app_init_loading_token);
-        SharedPreferences preferences =
-                getSharedPreferences("app-init", Context.MODE_PRIVATE);
-        String token = preferences.getString(getString(R.string.app_welcome_key_user_token), "");
+        String token = getTokenFromPreferences();
         actionCreator.verifyToken(token);
     }
 
     private void saveUserToken() {
         setLoadingMessage(R.string.app_init_saving_token);
+        String token = store.getCurrentUser().getToken();
+        saveTokenToPreferences(token);
+    }
+
+    /**
+     * Get previously saved user token from shared preferences.
+     * @return previously saved user token
+     */
+    private String getTokenFromPreferences() {
+        SharedPreferences preferences =
+                getSharedPreferences("app-init", Context.MODE_PRIVATE);
+        return preferences.getString(getString(R.string.app_welcome_key_user_token), "");
+    }
+
+    private void saveTokenToPreferences(String token) {
         SharedPreferences preferences = getSharedPreferences("app-init", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        String token = store.getCurrentUser().getToken();
+
         editor.putString(getString(R.string.app_welcome_key_user_token), token);
         editor.apply();
     }
@@ -213,7 +226,8 @@ public class AppInitializeActivity extends FluxActivity {
             @Override
             public void onDismiss() {
                 if (greetingPopup.getMode() == GreetingPopup.Mode.SWITCH_ACCOUNT) {
-
+                    actionCreator.clearUser();
+                    Log.d(TAG, "onDismiss: Cleared user");
                 }
             }
         });
