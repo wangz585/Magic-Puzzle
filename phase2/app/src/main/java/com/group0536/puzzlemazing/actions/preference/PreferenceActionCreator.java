@@ -21,4 +21,11 @@ public class PreferenceActionCreator extends ActionCreator implements Preference
                 .build();
         dispatcher.dispatch(action);
     }
+
+    public void setAvatar(String avatar) {
+        Action action = new Action.ActionBuilder(CLEAR_SOUND)
+                .load("avatarSelected", avatar)
+                .build();
+        dispatcher.dispatch(action);
+    }
 }

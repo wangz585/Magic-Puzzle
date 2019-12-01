@@ -1,8 +1,12 @@
 package com.group0536.puzzlemazing.views.preference;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.preference.PreferenceActionCreator;
@@ -20,6 +24,7 @@ public class PreferenceActivity extends FluxActivity {
     private RadioButton radioSoundTrack0;
     private RadioButton radioSoundTrack1;
     private RadioButton radioSoundtrack2;
+    private Spinner spinnerAvatars;
 
     @Override
     protected void initFluxComponents() {
@@ -42,6 +47,21 @@ public class PreferenceActivity extends FluxActivity {
     }
 
     private void bindViews() {
+        spinnerAvatars = findViewById(R.id.spinAvatar);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, store.getAvatars());
+        spinnerAvatars.setAdapter(spinnerArrayAdapter);
+        spinnerAvatars.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String avatarSelected = parent.getItemAtPosition(position).toString();
+                actionCreator.setAvatar(avatarSelected);
+            }
+            public void onNothingSelected(AdapterView<?> parent) {
+                String avatarSelected = parent.getItemAtPosition(0).toString();
+                actionCreator.setAvatar(avatarSelected);
+            }
+        });
+
+
         radioGroupSongs = findViewById(R.id.radioGroupBackgroundMusic);
         radioSoundTrack0 = findViewById(R.id.radioSoundtrack0);
         radioSoundTrack1 = findViewById(R.id.radioSoundtrack1);

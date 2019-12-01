@@ -17,13 +17,24 @@ public class PreferenceStore extends Store implements PreferenceActions {
     private List<Integer> musicCollection;
     private int currentMusic;
     private int checkedIndex;
+    private List<String> avatars;
+    private String selectedAvatar;
 
     protected PreferenceStore(Dispatcher dispatcher) {
         super(dispatcher);
-        initializeBackgroundMusic();
+        initializeMusicCollection();
+        initializeAvatarCollection();
     }
 
-    private void initializeBackgroundMusic() {
+    private void initializeAvatarCollection() {
+        avatars = Arrays.asList("💀", "💩", "🦸", "🕵", "🎅", "🤦", "💂", "👨", "🧛", "🧟");
+    }
+
+    public List<String> getAvatars() {
+        return avatars;
+    }
+
+    private void initializeMusicCollection() {
         musicCollection = Arrays.asList(null, R.raw.jingle_bells, R.raw.alphabet_song);
     }
 
@@ -57,6 +68,9 @@ public class PreferenceStore extends Store implements PreferenceActions {
                 break;
             case CLEAR_SOUND:
                 currentMusic = 0;
+                break;
+            case SET_AVATAR:
+                selectedAvatar = (String) action.getPayloadEntry("avatarSelected");
                 break;
         }
     }
