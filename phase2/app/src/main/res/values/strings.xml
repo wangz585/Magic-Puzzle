@@ -43,7 +43,7 @@
   <string name="crazy_match_title">Crazy Match</string>
 
   <!-- word guessing -->
-  <string name="word_guessing_title">Emoji Word Guessing</string>
+  <string name="word_guessing_title">Word Guessing</string>
   <string name="submit">Submit</string>
   <string name="hint">Hint</string>
   <string name="incorrect_attempt">Not quiet&#8230; Try again.</string>

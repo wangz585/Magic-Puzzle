@@ -35,7 +35,7 @@ public class GameActivity extends FluxActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_word_guessing_level_one);
+        setContentView(R.layout.activity_word_guessing);
         bindViews();
     }
 
