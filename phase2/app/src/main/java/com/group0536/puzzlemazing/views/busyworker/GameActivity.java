@@ -51,6 +51,8 @@ public class GameActivity extends FluxActivity {
     private void checkGameFinished(){
         if (store.checkWin() || store.checkLose()){
             Intent intent = new Intent(GameActivity.this, GameFinishedActivity.class);
+            intent.putExtra("score", store.getScore());
+            intent.putExtra("challenge", 1);
             startActivity(intent);
         }
     }

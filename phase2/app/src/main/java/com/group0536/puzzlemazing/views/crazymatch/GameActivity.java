@@ -87,10 +87,7 @@ public class GameActivity extends FluxActivity {
                 if (store.canFlip(row, col)) {
                     actionCreator.flip(row, col);
                 }
-                if (store.isGameOver()) {
-                    Intent intent = new Intent(GameActivity.this, GameFinishedActivity.class);
-                    startActivity(intent);
-                }
+
             }
         });
     }
@@ -98,6 +95,16 @@ public class GameActivity extends FluxActivity {
     @Subscribe
     public void update(CrazyMatchChangeEvent e) {
         updateUI();
+        checkGameOver();
+    }
+
+    private void checkGameOver() {
+        if (store.isGameOver()) {
+            Intent intent = new Intent(GameActivity.this, GameFinishedActivity.class);
+            intent.putExtra("score", store.getScore());
+            intent.putExtra("challenge", 3);
+            startActivity(intent);
+        }
     }
 
     /**

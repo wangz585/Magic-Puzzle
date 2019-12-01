@@ -16,7 +16,8 @@ public class GameFinishedActivity extends AppInitializeActivity {
     private Button btnMenu;
     private Button btnNext;
     private TextView txtScore;
-    private TextView txtTime;
+    private TextView txtTimeUsed;
+    private int challenge;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,16 +28,21 @@ public class GameFinishedActivity extends AppInitializeActivity {
     }
 
     private void bindView() {
+        Intent mIntent = getIntent();
+        int score = mIntent.getIntExtra("score", 0);
+        challenge = mIntent.getIntExtra("challenge", 0);
         btnNext = findViewById(R.id.btnNextChallenge);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(GameFinishedActivity.this, AnimationActivity.class);
+                intent.putExtra("challenge", challenge);
                 startActivity(intent);
             }
         });
         btnMenu = findViewById(R.id.btnMenu);
         txtScore = findViewById(R.id.txtScore);
-        txtTime = findViewById(R.id.txt_time);
+        txtTimeUsed = findViewById(R.id.txtTime);
+        //txtScore.setText(score);
     }
 }

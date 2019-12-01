@@ -10,7 +10,6 @@ import android.widget.VideoView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.group0536.puzzlemazing.R;
-import com.group0536.puzzlemazing.views.busyworker.SelectLevelActivity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,7 +19,7 @@ public class AnimationActivity extends AppCompatActivity {
     private VideoView vvBackground;
     private List<Integer> videos;
     private List<Class> classes;
-    private static int currentVideoIndex;
+    private int currentVideoIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +27,15 @@ public class AnimationActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
         setContentView(R.layout.activity_animation);
         bindViews();
+        Intent mIntent = getIntent();
+        currentVideoIndex = mIntent.getIntExtra("challenge", 0);
+        System.out.println("current index " + currentVideoIndex);
         initializeVideos();
         initializeActivities();
     }
 
     private void initializeVideos() {
-        videos = Arrays.asList(R.raw.challenge1, R.raw.challenge2, R.raw.challenge2,
+        videos = Arrays.asList(R.raw.challenge1, R.raw.challenge2, R.raw.challenge3,
                 R.raw.winning);
     }
 
@@ -41,7 +43,8 @@ public class AnimationActivity extends AppCompatActivity {
         classes = Arrays.asList((Class)
                 com.group0536.puzzlemazing.views.busyworker.SelectLevelActivity.class,
                 com.group0536.puzzlemazing.views.wordguessing.SelectLevelActivity.class,
-                com.group0536.puzzlemazing.views.crazymatch.SelectLevelActivity.class);
+                com.group0536.puzzlemazing.views.crazymatch.SelectLevelActivity.class,
+                com.group0536.puzzlemazing.views.scoreboard.ScoreBoardActivity.class);
     }
 
     private void bindViews() {
@@ -58,7 +61,7 @@ public class AnimationActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        releaseWelcomeVideo();
+        releaseVideo();
     }
 
     private void setUpVideo() {
@@ -70,13 +73,12 @@ public class AnimationActivity extends AppCompatActivity {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
                 Intent intent = new Intent(AnimationActivity.this, classes.get(currentVideoIndex));
-                currentVideoIndex++;
                 startActivity(intent);
             }
         });
     }
 
-    private void releaseWelcomeVideo() {
+    private void releaseVideo() {
         vvBackground.stopPlayback();
     }
 }

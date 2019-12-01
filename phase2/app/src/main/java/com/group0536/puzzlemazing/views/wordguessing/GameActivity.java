@@ -59,8 +59,7 @@ public class GameActivity extends FluxActivity {
                     String userAnswer = txtPuzzle.getText().toString();
                     actionCreator.submitAnswer(userAnswer);
                 } else if (store.isGameOver()) {
-                    Intent intent = new Intent(GameActivity.this, GameFinishedActivity.class);
-                    startActivity(intent);
+                    //TODO
                 } else {
                     actionCreator.startGame();
                     countDownTimer.start();
@@ -74,8 +73,15 @@ public class GameActivity extends FluxActivity {
     private CountDownTimer countDownTimer = new CountDownTimer(120000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
-            String value = String.valueOf((int) (millisUntilFinished / 1000));
+            int timeLeft = (int) (millisUntilFinished / 1000);
+            String value = String.valueOf(timeLeft);
             countDownTimeLeft.setText(String.format("Remaining Time: %ss", value));
+            if (timeLeft == 0) {
+                Intent intent = new Intent(GameActivity.this, GameFinishedActivity.class);
+                intent.putExtra("score", store.getScore());
+                intent.putExtra("challenge", 2);
+                startActivity(intent);
+            }
         }
 
         @Override
