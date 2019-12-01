@@ -10,33 +10,52 @@ import com.group0536.puzzlemazing.actions.busyworker.BusyWorkerActionCreator;
 import com.group0536.puzzlemazing.stores.busyworker.BusyWorkerStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
 
+/**
+ * This is an activity that prompts the user to select a game level
+ */
 public class SelectLevelActivity extends FluxActivity {
 
     private BusyWorkerActionCreator actionCreator;
     private BusyWorkerStore store;
+
+    //Components
     Button btnLevel1;
     Button btnLevel2;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crazy_match_select_level);
-        btnLevel1 = findViewById(getResources()
-                .getIdentifier("btn_level_1", "id", getPackageName()));
+        initializeButtonLevel1();
+        initializeButtonLevel2();
+    }
+
+    /**
+     * Initialize the button level 2
+     */
+    private void initializeButtonLevel2() {
         btnLevel2 = findViewById(getResources()
                 .getIdentifier("btn_level_2", "id", getPackageName()));
-        btnLevel1.setOnClickListener(new View.OnClickListener(){
+        btnLevel2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                actionCreator.initMap(1);
+                actionCreator.initMap(2);
                 Intent intent = new Intent(SelectLevelActivity.this, GameActivity.class);
                 startActivity(intent);
             }
         });
-        btnLevel2.setOnClickListener(new View.OnClickListener(){
+    }
+
+    /**
+     * Initialize the button level 1
+     */
+    private void initializeButtonLevel1() {
+        btnLevel1 = findViewById(getResources()
+                .getIdentifier("btn_level_1", "id", getPackageName()));
+        btnLevel1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                actionCreator.initMap(2);
+                actionCreator.initMap(1);
                 Intent intent = new Intent(SelectLevelActivity.this, GameActivity.class);
                 startActivity(intent);
             }

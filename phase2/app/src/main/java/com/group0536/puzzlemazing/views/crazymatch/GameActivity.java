@@ -16,6 +16,9 @@ import com.group0536.puzzlemazing.views.FluxActivity;
 import com.group0536.puzzlemazing.views.GameFinishedActivity;
 import com.squareup.otto.Subscribe;
 
+/**
+ * This is an activity for the crazy match game
+ */
 public class GameActivity extends FluxActivity {
     private CrazyMatchStore store;
     private CrazyMatchActionCreator actionCreator;

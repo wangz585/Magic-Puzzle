@@ -10,6 +10,9 @@ import com.group0536.puzzlemazing.views.FluxActivity;
 import com.group0536.puzzlemazing.views.GameFinishedActivity;
 import com.squareup.otto.Subscribe;
 
+/**
+ * This is an activity for the busy worker game
+ */
 public class GameActivity extends FluxActivity {
 
     private BusyWorkerStore store;
@@ -37,6 +40,7 @@ public class GameActivity extends FluxActivity {
         checkGameFinished();
     }
 
+    @Override
     protected void onResume() {
         super.onResume();
         registerStore(store);
@@ -48,6 +52,9 @@ public class GameActivity extends FluxActivity {
         registerStore(store);
     }
 
+    /**
+     * Check if the game is finished
+     */
     private void checkGameFinished(){
         if (store.checkWin() || store.checkLose()){
             Intent intent = new Intent(GameActivity.this, GameFinishedActivity.class);

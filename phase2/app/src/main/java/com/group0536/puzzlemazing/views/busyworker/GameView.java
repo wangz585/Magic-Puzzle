@@ -18,6 +18,9 @@ import com.group0536.puzzlemazing.views.FluxView;
 import com.squareup.otto.Subscribe;
 
 
+/**
+ * This is a game view class responsible for drawing elements in the game
+ */
 public class GameView extends FluxView {
 
     private BusyWorkerStore store;
@@ -159,13 +162,18 @@ public class GameView extends FluxView {
                 srcRect, destRect, null);
     }
 
+    /**
+     * Draw the time in the game map of BusyWorker
+     *
+     * @param canvas the canvas we draw on
+     */
     private void drawTime(Canvas canvas) {
         Paint txtPaint = new Paint();
         txtPaint.setColor(Color.BLACK);
         txtPaint.setTextSize(100.0f);
         canvas.drawText(getContext().getString(R.string.busy_worker_time),
                 3 * CellWidth, 15 * CellWidth, txtPaint);
-        canvas.drawText(String.valueOf(store.getTimeUsed()),5 * CellWidth,16 * CellWidth,txtPaint);
+        canvas.drawText(String.valueOf(store.getTimeUsed()), 5 * CellWidth, 16 * CellWidth, txtPaint);
     }
 
     /**
@@ -179,14 +187,14 @@ public class GameView extends FluxView {
         txtPaint.setTextSize(100.0f);
         canvas.drawText(getContext().getString(R.string.busy_worker_score),
                 1 * CellWidth, 18 * CellWidth, txtPaint);
-        canvas.drawText(String.valueOf(store.getScore()),5 * CellWidth,19 * CellWidth,txtPaint);
+        canvas.drawText(String.valueOf(store.getScore()), 5 * CellWidth, 19 * CellWidth, txtPaint);
     }
 
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() != MotionEvent.ACTION_DOWN) return true;
-        Point position = new Point((int) event.getX()/CellWidth, (int) event.getY()/CellWidth);
+        Point position = new Point((int) event.getX() / CellWidth, (int) event.getY() / CellWidth);
         actionCreator.move(position);
         return true;
     }
@@ -202,10 +210,20 @@ public class GameView extends FluxView {
         updateUI();
     }
 
+    /**
+     * Update the UI
+     */
     private void updateUI() {
         postInvalidate();
     }
 
+    /**
+     * Get the rectangle whose left up corner is (x,y) and side length of 1
+     *
+     * @param x Coordinate x of the rectangle
+     * @param y Coordinate y of the rectangle
+     * @return the rectangle whose left up corner is (x,y) and side length of 1
+     */
     private Rect getRect(int x, int y) {
         int left = x * CellWidth;
         int top = y * CellWidth;
