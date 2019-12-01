@@ -19,6 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * This is a word guessing game store. It is responsible for all the logic
+ */
 public class WordGuessingGameStore extends Store implements WordGuessingActions {
     private User player;
     private WordBank wordBank;
@@ -40,13 +43,18 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
      * @param dispatcher the dispatcher associated
      * @return an instance of this store
      */
-    public static com.group0536.puzzlemazing.stores.wordguessing.WordGuessingGameStore getInstance(Dispatcher dispatcher) {
+    public static WordGuessingGameStore getInstance(Dispatcher dispatcher) {
         if (instance == null) {
-            instance = new com.group0536.puzzlemazing.stores.wordguessing.WordGuessingGameStore(dispatcher);
+            instance = new WordGuessingGameStore(dispatcher);
         }
         return instance;
     }
 
+    /**
+     * Check if the game has started
+     *
+     * @return if the game has started
+     */
     public boolean isGameStarted() {
         return gameStart;
     }
@@ -56,20 +64,38 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
         return new WordGuessingChangeEvent();
     }
 
-    public void setGameOver() {
+    /**
+     * Set game over
+     */
+    private void setGameOver() {
         gameOver = true;
     }
 
+    /**
+     * Check if the game is over
+     *
+     * @return if the game is over
+     */
     public boolean isGameOver() {
         return gameOver;
     }
 
 
+    /**
+     * Get the length of each puzzle
+     *
+     * @return the length of each puzzle
+     */
     public int getPuzzleLength() {
         return getPuzzle().size();
     }
 
 
+    /**
+     * Get the emoji hint of the current word being guessed
+     *
+     * @return the emoji hint of the current word being guessed
+     */
     public String getHint() {
         return currentWord.getHint();
     }
@@ -78,42 +104,17 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
     @Subscribe
     public void onAction(Action action) {
         switch (action.getType()) {
-          case TIME_OUT:
-              setGameOver();
-              postChange();
-              break;
+            case TIME_OUT:
+                setGameOver();
+                postChange();
+                break;
             case START_GAME:
-                Word newWord = getANewWord();
-                setCurrentWord(newWord);
-                gameStart = true;
+                setUpGame();
                 postChange();
                 break;
             case SUBMIT_ANSWER:
                 String wordGuessed = (String) action.getPayloadEntry("word");
-                if(isCorrect(wordGuessed)) {
-                    // if the answer is correct
-                    updateScore();
-                    currentWord.setGuessed(true);
-                    if(wordBank.noMoreWord()){
-                        setGameOver();
-                    }
-                    else{
-                        currentWord = getANewWord();
-                    }
-                } else{
-                    currentWord.setCurrentState(currentWord.getInitialState());
-                }
-                /*// if the game is finished
-                if(isGameOver()){
-                    // time is out, the user cannot longer click the submit game_button
-                    // the user should be able to go to somewhere else
-                }
-                else{
-                    // there is time left
-                    // clear the user input
-                    // give a new word
-                    currentWord = getANewWord();
-                }*/
+                checkAnswer(wordGuessed);
                 postChange();
                 break;
             case INITIALIZE_WORDBANK:
@@ -121,6 +122,35 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
                         (Context) action.getPayloadEntry("context"));
                 break;
         }
+    }
+
+    /**
+     * Check if wordGuessed is the answer
+     *
+     * @param wordGuessed the word guessed by the user
+     */
+    private void checkAnswer(String wordGuessed) {
+        if (isCorrect(wordGuessed)) {
+            // if the answer is correct
+            updateScore();
+            currentWord.setGuessed(true);
+            if (wordBank.noMoreWord()) {
+                setGameOver();
+            } else {
+                currentWord = getANewWord();
+            }
+        } else {
+            currentWord.setCurrentState(currentWord.getInitialState());
+        }
+    }
+
+    /**
+     * Setting up the game
+     */
+    private void setUpGame() {
+        Word newWord = getANewWord();
+        setCurrentWord(newWord);
+        gameStart = true;
     }
 
     private void updateScore() {
@@ -132,27 +162,36 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
 
     /**
      * Initialize a word bank based on the game level
-     * @param level
-     * @param context
+     *
+     * @param level   The level of the current game
+     * @param context The context
      */
     private void initializeWordBank(int level, Context context) {
-            currentWord = null;
-            score = 0;
-            gameStart = false;
-            wordBank = new WordBank(getWordList(level, context));
-        }
+        currentWord = null;
+        score = 0;
+        gameStart = false;
+        wordBank = new WordBank(getWordList(level, context));
+    }
 
+    /**
+     * Get a list of words, according to level, from context
+     *
+     * @param level   The level of the current game
+     * @param context The context
+     * @return a list of words, according to level, from context
+     */
     private List<Word> getWordList(int level, Context context) {
         List<Word> wordsInBank = new ArrayList<>();
-        try{
+        try {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(
-                    context.getAssets().open("wordGuessingLevel"+level+".txt")));
+                    context.getAssets().open("wordGuessingLevel" + level + ".txt")));
             String line;
-            while((line = bufferedReader.readLine()) != null){
+            while ((line = bufferedReader.readLine()) != null) {
                 String[] entry = line.split("--");
                 String text = entry[0];
                 String hint = entry[1];
-                List<Character> initialAppearance = getInitialAppearance((int) Math.ceil(text.length()/2), text);
+                List<Character> initialAppearance = getInitialAppearance((int)
+                        Math.ceil(text.length() / 2), text);
                 Word newWord = new Word(text, hint, initialAppearance);
                 wordsInBank.add(newWord);
             }
@@ -162,22 +201,34 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
         return wordsInBank;
     }
 
-
+    /**
+     * Get the initial appearance of the puzzle word, which has numMissing missing characters
+     *
+     * @param numMissing the amount of the missing index
+     * @param word       the word being guessed
+     * @return the initial appearance of the puzzle word
+     */
     private List<Character> getInitialAppearance(int numMissing, String word) {
         int wordLength = word.length();
         List<Character> initialAppearance = new ArrayList<>();
-        List<Integer> missingIndex = getMissingIndex(numMissing, wordLength );
+        List<Integer> missingIndex = getMissingIndex(numMissing, wordLength);
         for (int i = 0; i < wordLength; i++) {
             if (missingIndex.contains(i)) {
                 initialAppearance.add(word.charAt(i));
             } else {
                 initialAppearance.add('_');
             }
-
         }
         return initialAppearance;
     }
 
+    /**
+     * Get the index of the numMissing missing characters in a word of length wordLength
+     *
+     * @param numMissing the amount of the missing index
+     * @param wordLength the length of word
+     * @return the index of the missing characters
+     */
     private List<Integer> getMissingIndex(int numMissing, int wordLength) {
         List<Integer> missingIndex = new ArrayList<>();
         while (missingIndex.size() < numMissing) {
@@ -191,7 +242,8 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
 
 
     /**
-     *  Check if the user guesses the word correctly
+     * Check if the user guesses the word correctly
+     *
      * @param wordGuessed the word the user guessed
      * @return true if the user guesses the word correctly
      */
@@ -202,7 +254,8 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
 
     /**
      * Set the current word for guessing so that the store knows which word the player is guessing
-     * @param newWord
+     *
+     * @param newWord the new word being guessed
      */
     private void setCurrentWord(Word newWord) {
         this.currentWord = newWord;
@@ -210,6 +263,7 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
 
     /**
      * Get a new word that is never been guessed from the word bank for the player to guess
+     *
      * @return a new word
      */
     private Word getANewWord() {
@@ -225,6 +279,11 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
         return score;
     }
 
+    /**
+     * Get the current puzzle
+     *
+     * @return the current puzzle
+     */
     public List<Character> getPuzzle() {
         return currentWord.getCurrentState();
     }

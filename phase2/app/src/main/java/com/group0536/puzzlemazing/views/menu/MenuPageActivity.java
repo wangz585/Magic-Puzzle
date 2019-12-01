@@ -8,7 +8,7 @@ import android.widget.Button;
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.ActionCreator;
 import com.group0536.puzzlemazing.actions.menu.MenuPageActionCreator;
-import com.group0536.puzzlemazing.stores.menu.MenuPageStore;
+import com.group0536.puzzlemazing.stores.menu.MenuStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
 import com.group0536.puzzlemazing.views.animation.AnimationActivity;
 import com.group0536.puzzlemazing.views.preference.PreferenceActivity;
@@ -25,11 +25,11 @@ public class MenuPageActivity extends FluxActivity {
     private Button btnSetting;
     private Button btnScoreBoard;
     private ActionCreator actionCreator;
-    private MenuPageStore store;
+    private MenuStore store;
 
     @Override
     protected void initFluxComponents() {
-        store = MenuPageStore.getInstance(dispatcher);
+        store = MenuStore.getInstance(dispatcher);
         setContentView(R.layout.activity_menu_page);
         actionCreator = new MenuPageActionCreator(dispatcher);
 
