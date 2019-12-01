@@ -58,9 +58,8 @@ public class GameActivity extends FluxActivity {
                 if (store.isGameStarted()) {
                     String userAnswer = txtPuzzle.getText().toString();
                     actionCreator.submitAnswer(userAnswer);
-                } else if (store.isGameOver()) {
-                    //TODO
-                } else {
+                }
+                else {
                     actionCreator.startGame();
                     countDownTimer.start();
                     txtPuzzle.setFilters(new InputFilter[] { new InputFilter.LengthFilter(store.getPuzzleLength())});
@@ -126,6 +125,13 @@ public class GameActivity extends FluxActivity {
     @Subscribe
     public void update(WordGuessingChangeEvent e) {
         updateUI();
+        if (store.isGameOver()) {
+            System.out.println("Finished the game");
+            Intent intent = new Intent(GameActivity.this, GameFinishedActivity.class);
+            intent.putExtra("score", store.getScore());
+            intent.putExtra("challenge", 2);
+            startActivity(intent);
+        }
     }
 
     private void updateUI() {
