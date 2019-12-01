@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
@@ -59,14 +60,14 @@ public class AppInitializeActivity extends FluxActivity {
     @Override
     protected void initFluxComponents() {
         store = AppInitializeStore.getInstance(dispatcher);
-        actionCreator = AppInitializeActionCreator.getInstance(dispatcher);
+        actionCreator = AppInitializeActionCreator.getInstance(dispatcher, getApplicationContext());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         registerStore(store);
-        actionCreator.startInitialization(getApplicationContext());
+        actionCreator.startInitialization();
     }
 
     @Override
@@ -109,6 +110,8 @@ public class AppInitializeActivity extends FluxActivity {
             loadSavedToken();
         } else if (!progress.isLogInUserDone()) {
             promptLogIn();
+        } else if (!progress.isSaveUserTokenDone()) {
+            saveUserToken();
         }
     }
 
@@ -119,7 +122,12 @@ public class AppInitializeActivity extends FluxActivity {
 
     private void loadSavedToken() {
         setLoadingMessage(R.string.app_init_loading_token);
-        actionCreator.loadSavedToken(getApplicationContext());
+        actionCreator.loadSavedToken();
+    }
+
+    private void saveUserToken() {
+        setLoadingMessage(R.string.app_init_saving_token);
+        actionCreator.saveUserToken(store.getCurrentUser().getToken());
     }
 
     private void promptLogIn() {
@@ -141,10 +149,26 @@ public class AppInitializeActivity extends FluxActivity {
                 .animationStyle(R.style.WindowFade)
                 .build();
         credentialPopup.show(Gravity.CENTER, 0, 0);
+        handleLogInComplete(credentialPopup);
+    }
+
+    private void handleLogInComplete(final CredentialPopup credentialPopup) {
         credentialPopup.getPopupWindow().setOnDismissListener(new PopupWindow.OnDismissListener() {
             @Override
             public void onDismiss() {
                 String username = credentialPopup.getUsername();
+                String password = credentialPopup.getPassword();
+
+                if (username.isEmpty() || password.isEmpty()) {
+                    credentialPopup.show(Gravity.CENTER, 0, 0);
+                    return;
+                }
+
+                if (credentialPopup.getMode() == CredentialPopup.Mode.LOG_IN) {
+                    actionCreator.logIn(username, password);
+                } else {
+                    actionCreator.register(username, password);
+                }
             }
         });
     }
@@ -183,7 +207,7 @@ public class AppInitializeActivity extends FluxActivity {
                 .setPositiveButton(R.string.dialog_try_again, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        actionCreator.restartInitialization(getApplicationContext());
+                        actionCreator.restartInitialization();
                     }
                 })
                 .setNegativeButton(R.string.dialog_exit, new DialogInterface.OnClickListener() {

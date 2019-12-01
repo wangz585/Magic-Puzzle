@@ -2,6 +2,7 @@ package com.group0536.puzzlemazing.views.appinit;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,10 +23,15 @@ class CredentialPopup extends Popup {
     // Rules
     private static final int MIN_USERNAME_LENGTH = 3;
     private static final int MIN_PASSWORD_LENGTH = 6;
+    enum Mode {
+        LOG_IN,
+        REGISTER
+    }
 
     // Data: to be accessed from other activities
-    private String username;
-    private String password;
+    private String username = "";
+    private String password = "";
+    private Mode mode = Mode.LOG_IN;
 
     String getUsername() {
         return username;
@@ -35,18 +41,32 @@ class CredentialPopup extends Popup {
         return password;
     }
 
+    Mode getMode() {
+        return mode;
+    }
+
     // Listeners
-    private View.OnClickListener registerOnClickListener = new View.OnClickListener() {
+    private View.OnClickListener authenticationButtonOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
             username = txtUsername.getText().toString();
-            password = txtUsername.getText().toString();
-            if(!containsError(username, password)) {
+            password = txtPassword.getText().toString();
+            setModeByButton((Button) view);
+            if (!containsError(username, password)) {
                 popupWindow.dismiss();
             }
         }
     };
-    private View.OnClickListener logInOnClickListener;
+
+    private void setModeByButton(Button btn) {
+        String btnText = btn.getText().toString();
+        String registerString = getString(R.string.app_welcome_register);
+        if (btnText.equals(registerString)) {
+            mode = Mode.REGISTER;
+        } else {
+            mode = Mode.LOG_IN;
+        }
+    }
 
     private CredentialPopup(CredentialPopupBuilder builder) {
         super(builder);
@@ -64,8 +84,8 @@ class CredentialPopup extends Popup {
     }
 
     private void addListeners() {
-        btnRegister.setOnClickListener(registerOnClickListener);
-        btnLogIn.setOnClickListener(logInOnClickListener);
+        btnRegister.setOnClickListener(authenticationButtonOnClickListener);
+        btnLogIn.setOnClickListener(authenticationButtonOnClickListener);
     }
 
     private String getString(int resourceId) {

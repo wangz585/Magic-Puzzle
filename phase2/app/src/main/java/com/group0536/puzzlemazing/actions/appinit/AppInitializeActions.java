@@ -8,6 +8,8 @@ public interface AppInitializeActions {
     String CHECK_UPDATE = PREFIX + "check-update";
     String LOAD_SAVED_TOKEN = PREFIX + "load-saved-token";
     String LOG_IN = PREFIX + "login";
+    String REGISTER = PREFIX + "register";
+    String SAVE_USER_TOKEN = PREFIX + "save-user-token";
 
     // keys
     String KEY_REQUIRE_UPDATE = "require-update";

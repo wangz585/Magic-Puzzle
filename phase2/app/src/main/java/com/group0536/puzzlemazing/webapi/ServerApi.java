@@ -50,6 +50,17 @@ public class ServerApi {
 
     public void performLogIn(String username, String password, Callback done) {
         String url = getURL("/sign-in");
+        JSONObject body = getJSONWithCredential(username, password);
+        HttpUtil.post(url, body, done);
+    }
+
+    public void performRegister(String username, String password, Callback done) {
+        String url = getURL("/sign-up");
+        JSONObject body = getJSONWithCredential(username, password);
+        HttpUtil.post(url, body, done);
+    }
+
+    private JSONObject getJSONWithCredential(String username, String password) {
         JSONObject body = new JSONObject();
         try {
             body.put("username", username);
@@ -57,6 +68,6 @@ public class ServerApi {
         } catch(JSONException e) {
             e.printStackTrace();
         }
-        HttpUtil.post(url, body, done);
+        return body;
     }
 }

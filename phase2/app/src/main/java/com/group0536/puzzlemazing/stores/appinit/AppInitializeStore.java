@@ -1,6 +1,7 @@
 package com.group0536.puzzlemazing.stores.appinit;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.Action;
@@ -64,10 +65,17 @@ public class AppInitializeStore extends Store implements AppInitializeActions {
                 loadSavedToken(action);
                 break;
             case LOG_IN:
-                logIn(action);
+            case REGISTER:
+                extractUser(action);
+                break;
+            case SAVE_USER_TOKEN:
+                handleSaveTokenDone();
+                break;
             case FINISH_INITIALIZATION:
                 finishInit();
                 break;
+            default:
+                return;
         }
         postChange();
     }
@@ -83,6 +91,7 @@ public class AppInitializeStore extends Store implements AppInitializeActions {
      * Release resources when initialization has finished.
      */
     private void finishInit() {
+        Log.d(TAG, "finishInit: is called!!!!!!");
         progress = null;
         currentUser = null;
     }
@@ -107,7 +116,7 @@ public class AppInitializeStore extends Store implements AppInitializeActions {
         progress.setLoadSavedTokenDone(true);
     }
 
-    private void logIn(Action action) {
+    private void extractUser(Action action) {
         if (action.isError()) {
             Object errorMessage = action.getPayloadEntry(KEY_ERROR_MESSAGE);
             if (errorMessage == null) {
@@ -118,5 +127,10 @@ public class AppInitializeStore extends Store implements AppInitializeActions {
             return;
         }
         currentUser = (User) action.getPayloadEntry(KEY_CURRENT_USER);
+        progress.setLogInUserDone(true);
+    }
+
+    private void handleSaveTokenDone() {
+        progress.setSaveUserTokenDone(true);
     }
 }

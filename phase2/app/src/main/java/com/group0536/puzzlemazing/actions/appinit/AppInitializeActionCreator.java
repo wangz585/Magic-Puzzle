@@ -3,6 +3,7 @@ package com.group0536.puzzlemazing.actions.appinit;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.util.Log;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.Action;
@@ -25,15 +26,17 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
     private static AppInitializeActionCreator instance;
 
     private ServerApi serverApi;
+    private Context context;
 
-    private AppInitializeActionCreator(Dispatcher dispatcher) {
+    private AppInitializeActionCreator(Dispatcher dispatcher, Context context) {
         super(dispatcher);
         serverApi = ServerApi.getServerApi();
+        this.context = context;
     }
 
-    public static AppInitializeActionCreator getInstance(Dispatcher dispatcher) {
+    public static AppInitializeActionCreator getInstance(Dispatcher dispatcher, Context context) {
         if (instance == null) {
-            instance = new AppInitializeActionCreator(dispatcher);
+            instance = new AppInitializeActionCreator(dispatcher, context);
         }
         return instance;
     }
@@ -69,9 +72,8 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
 
     /**
      * Create and dispatch action for starting app initialization.
-     * @param context the context where the init process takes place.
      */
-    public void startInitialization(Context context) {
+    public void startInitialization() {
         Action action = new Action.ActionBuilder(START_INITIALIZATION)
                 .load(KEY_CONTEXT, context)
                 .build();
@@ -86,9 +88,8 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
 
     /**
      * Create and dispatch action to restart the initialization.
-     * @param context the context where the new initialization process will take place.
      */
-    public void restartInitialization(Context context) {
+    public void restartInitialization() {
         Action action = new Action.ActionBuilder(RESTART_INITIALIZATION)
                 .load(KEY_CONTEXT, context)
                 .build();
@@ -120,8 +121,8 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
         });
     }
 
-    public void loadSavedToken(Context appContext) {
-        SharedPreferences preferences = appContext.getSharedPreferences(PREFIX, 0);
+    public void loadSavedToken() {
+        SharedPreferences preferences = context.getSharedPreferences(PREFIX, 0);
         String savedToken = preferences.getString(KEY_SAVED_TOKEN, "");
 
         serverApi.performTokenValidation(savedToken, new Callback() {
@@ -146,6 +147,16 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
         });
     }
 
+    public void saveUserToken(String token) {
+        SharedPreferences preferences = context.getSharedPreferences(PREFIX, 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(KEY_SAVED_TOKEN, token);
+        editor.apply();
+        Action action = new Action.ActionBuilder(SAVE_USER_TOKEN)
+                .build();
+        dispatcher.dispatch(action);
+    }
+
     public void logIn(String username, String password) {
         serverApi.performLogIn(username, password, new Callback() {
             @Override
@@ -163,8 +174,31 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
                     dispatcher.dispatch(action);
                     return;
                 }
+                String errorMessage = context.getString(R.string.app_init_login_error);
+                dispatchErrorAction(LOG_IN, errorMessage);
+            }
+        });
+    }
 
-                String errorMessage = Resources.getSystem().getString(R.string.app_init_login_error);
+    public void register(String username, String password) {
+        serverApi.performRegister(username, password, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                dispatchNetworkErrorAction(REGISTER);
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    User user = Parser.parseResponseToUser(response);
+                    Action action = new Action.ActionBuilder(REGISTER)
+                            .load(KEY_CURRENT_USER, user)
+                            .build();
+                    dispatcher.dispatch(action);
+                    return;
+                }
+                String errorPrefix = context.getString(R.string.app_init_login_error);
+                String errorMessage = errorPrefix + response.message();
                 dispatchErrorAction(LOG_IN, errorMessage);
             }
         });
