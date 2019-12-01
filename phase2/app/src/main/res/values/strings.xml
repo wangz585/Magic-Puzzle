@@ -68,6 +68,7 @@
 
   <!-- setting page -->
   <string name="background_music">Background Music</string>
+  <string name="soundtrack_0">No Soundtrack</string>
   <string name="soundtrack_1">Soundtrack 1</string>
   <string name="soundtrack_2">Soundtrack 2</string>
   <string name="color_theme">Color Theme</string>

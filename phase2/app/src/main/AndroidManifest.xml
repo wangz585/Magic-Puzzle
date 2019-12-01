@@ -97,6 +97,15 @@
       </intent-filter>
     </activity>
     <activity
+        android:name=".views.preference.PreferenceActivity"
+        android:screenOrientation="sensorLandscape">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity
         android:name=".views.menu.MenuPageActivity"
         android:screenOrientation="sensorLandscape">
       <intent-filter>
@@ -105,7 +114,6 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
-    <service android:name = ".services.BackgroundMusicService"/>
   </application>
 
 </manifest>

@@ -14,14 +14,24 @@
             android:layout_height="wrap_content"
             android:text="@string/background_music"/>
         <RadioGroup
+            android:id="@+id/radioGroupBackgroundMusic"
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <RadioButton
+                android:id="@+id/radioSoundtrack0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="@string/soundtrack_0" />
+            <RadioButton
+                android:id="@+id/radioSoundtrack1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/soundtrack_1"/>
             <RadioButton
+                android:id="@+id/radioSoundtrack2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/soundtrack_2"/>
@@ -36,10 +46,12 @@
             android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
+
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/color_theme_1"/>
+                android:checked="true"
+                android:text="@string/color_theme_1" />
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

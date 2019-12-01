@@ -8,9 +8,9 @@ import android.widget.Button;
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.ActionCreator;
 import com.group0536.puzzlemazing.actions.menu.MenuPageActionCreator;
-import com.group0536.puzzlemazing.actions.menu.MenuPageActions;
 import com.group0536.puzzlemazing.stores.menu.MenuPageStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
+import com.group0536.puzzlemazing.views.preference.PreferenceActivity;
 import com.group0536.puzzlemazing.views.scoreboard.ScoreBoardActivity;
 
 import java.io.Serializable;
@@ -52,8 +52,9 @@ public class MenuPageActivity extends FluxActivity {
 
             @Override
             public void onClick(View view) {
-//                Intent intent = new Intent(MenuPageActivity.this, SettingPageActivity.class);
-//                intent.putExtra("User", (Serializable) store.getPlayer());
+                Intent intent = new Intent(MenuPageActivity.this, PreferenceActivity.class);
+                intent.putExtra("User", (Serializable) store.getPlayer());
+                MenuPageActivity.this.startActivity(intent);
 
             }
         });
