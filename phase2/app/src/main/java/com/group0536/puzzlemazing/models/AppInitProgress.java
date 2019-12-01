@@ -12,7 +12,6 @@ public class AppInitProgress {
     private boolean isUpdateCheckDone;
     private boolean isLoadSavedTokenDone;
     private boolean isLogInUserDone;
-    private boolean isSaveUserTokenDone;
 
     /**
      * errorMessage associating with errors. It is empty if no error occurred.
@@ -51,14 +50,6 @@ public class AppInitProgress {
 
     public void setLogInUserDone(boolean logInUserDone) {
         isLogInUserDone = logInUserDone;
-    }
-
-    public boolean isSaveUserTokenDone() {
-        return isSaveUserTokenDone;
-    }
-
-    public void setSaveUserTokenDone(boolean saveUserTokenDone) {
-        isSaveUserTokenDone = saveUserTokenDone;
     }
 
     public String getErrorMessage() {

@@ -9,11 +9,9 @@ public interface AppInitializeActions {
     String LOAD_SAVED_TOKEN = PREFIX + "load-saved-token";
     String LOG_IN = PREFIX + "login";
     String REGISTER = PREFIX + "register";
-    String SAVE_USER_TOKEN = PREFIX + "save-user-token";
 
     // keys
     String KEY_REQUIRE_UPDATE = "require-update";
-    String KEY_SAVED_TOKEN = "saved-token";
     String KEY_CURRENT_USER = "current-user";
     String KEY_CONTEXT = "context";
 

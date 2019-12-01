@@ -120,13 +120,8 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
         });
     }
 
-    public void loadSavedToken() {
-        SharedPreferences preferences =
-                context.getSharedPreferences(PREFIX, Context.MODE_PRIVATE);
-        String savedToken = preferences.getString(KEY_SAVED_TOKEN, "");
-        Log.d("savedToken", "loadSavedToken: " + savedToken);
-
-        serverApi.performTokenValidation(savedToken, new Callback() {
+    public void verifyToken(String token) {
+        serverApi.performTokenValidation(token, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 dispatchNetworkErrorAction(LOAD_SAVED_TOKEN);
@@ -147,17 +142,6 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
                 Log.d("Network!!!!!!", "onResponse: Failed");
             }
         });
-    }
-
-    public void saveUserToken(String token) {
-        SharedPreferences preferences =
-                context.getSharedPreferences(PREFIX, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString(KEY_SAVED_TOKEN, token);
-        editor.apply();
-        Action action = new Action.ActionBuilder(SAVE_USER_TOKEN)
-                .build();
-        dispatcher.dispatch(action);
     }
 
     public void logIn(String username, String password) {

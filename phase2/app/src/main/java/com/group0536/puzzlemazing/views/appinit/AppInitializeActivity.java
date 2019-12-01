@@ -114,9 +114,8 @@ public class AppInitializeActivity extends FluxActivity {
             loadSavedToken();
         } else if (!progress.isLogInUserDone()) {
             promptLogIn();
-        } else if (!progress.isSaveUserTokenDone()) {
-            saveUserToken();
         } else {
+            saveUserToken();
             transitToMenu();
         }
     }
@@ -139,12 +138,19 @@ public class AppInitializeActivity extends FluxActivity {
 
     private void loadSavedToken() {
         setLoadingMessage(R.string.app_init_loading_token);
-        actionCreator.loadSavedToken();
+        SharedPreferences preferences =
+                getSharedPreferences("app-init", Context.MODE_PRIVATE);
+        String token = preferences.getString(getString(R.string.app_welcome_key_user_token), "");
+        actionCreator.verifyToken(token);
     }
 
     private void saveUserToken() {
         setLoadingMessage(R.string.app_init_saving_token);
-        actionCreator.saveUserToken(store.getCurrentUser().getToken());
+        SharedPreferences preferences = getSharedPreferences("app-init", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        String token = store.getCurrentUser().getToken();
+        editor.putString(getString(R.string.app_welcome_key_user_token), token);
+        editor.apply();
     }
 
     private void promptLogIn() {

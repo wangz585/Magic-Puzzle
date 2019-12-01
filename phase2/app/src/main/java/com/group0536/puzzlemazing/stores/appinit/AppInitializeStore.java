@@ -68,9 +68,6 @@ public class AppInitializeStore extends Store implements AppInitializeActions {
             case REGISTER:
                 extractUser(action);
                 break;
-            case SAVE_USER_TOKEN:
-                handleSaveTokenDone();
-                break;
             case FINISH_INITIALIZATION:
                 finishInit();
                 break;
@@ -128,9 +125,5 @@ public class AppInitializeStore extends Store implements AppInitializeActions {
         }
         currentUser = (User) action.getPayloadEntry(KEY_CURRENT_USER);
         progress.setLogInUserDone(true);
-    }
-
-    private void handleSaveTokenDone() {
-        progress.setSaveUserTokenDone(true);
     }
 }

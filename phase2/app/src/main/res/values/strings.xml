@@ -37,6 +37,7 @@
   <string name="app_welcome_greeting">Welcome back, %s!</string>
   <string name="app_welcome_continue">Continue as %s</string>
   <string name="app_welcome_switch_account">Switch Account</string>
+  <string name="app_welcome_key_user_token">user-token</string>
 
   <!-- log in/register error messages -->
   <string name="app_welcome_error_credential_required">
