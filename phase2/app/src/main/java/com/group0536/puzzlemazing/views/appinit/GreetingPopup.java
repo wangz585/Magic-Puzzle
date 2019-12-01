@@ -19,14 +19,32 @@ public class GreetingPopup extends Popup {
     private TextView tvGreeting;
 
     // Listeners
-    private View.OnClickListener switchAccountOnClickListener;
+    private View.OnClickListener switchAccountOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            mode = Mode.SWITCH_ACCOUNT;
+            popupWindow.dismiss();
+        }
+    };
+    private View.OnClickListener continueOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            mode = Mode.CONTINUE;
+            popupWindow.dismiss();
+        }
+    };
 
-    public void setSwitchAccountOnClickListener(View.OnClickListener switchAccountOnClickListener) {
-        this.switchAccountOnClickListener = switchAccountOnClickListener;
+    // Data and Rules
+    private User currentUser;
+    private Mode mode;
+    enum Mode {
+        CONTINUE,
+        SWITCH_ACCOUNT
     }
 
-    // Data
-    private User currentUser;
+    Mode getMode() {
+        return mode;
+    }
 
     private GreetingPopup(GreetingPopupBuilder builder) {
         super(builder);
@@ -37,23 +55,24 @@ public class GreetingPopup extends Popup {
     }
 
     private void initViews() {
-        String greetingPrefix = Resources.getSystem().getString(R.string.app_welcome_continue);
-        String greetingMessage = greetingPrefix + currentUser.getNickname();
+        String greetingPrefix = getString(R.string.app_welcome_greeting);
+        String greetingMessage = String.format(greetingPrefix, currentUser.getUsername());
         tvGreeting.setText(greetingMessage);
 
-        String continuePrefix = Resources.getSystem().getString(R.string.app_welcome_continue);
-        String continueMessage = continuePrefix + currentUser.getNickname();
+        String continuePrefix = getString(R.string.app_welcome_continue);
+        String continueMessage = String.format(continuePrefix, currentUser.getUsername());
         btnContinue.setText(continueMessage);
     }
 
     private void bindViews() {
         btnContinue = popupWindowView.findViewById(R.id.btnContinue);
         btnSwitchAccount = popupWindowView.findViewById(R.id.btnSwitchAccount);
-        tvGreeting = popupWindowView.findViewById(R.id.tvLoadingMsg);
+        tvGreeting = popupWindowView.findViewById(R.id.tvGreeting);
     }
 
     private void addListeners() {
-
+        btnContinue.setOnClickListener(continueOnClickListener);
+        btnSwitchAccount.setOnClickListener(switchAccountOnClickListener);
     }
 
     public static class GreetingPopupBuilder extends Popup.PopupBuilder {

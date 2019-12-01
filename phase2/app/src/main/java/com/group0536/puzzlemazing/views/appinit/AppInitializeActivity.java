@@ -3,7 +3,11 @@ package com.group0536.puzzlemazing.views.appinit;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
+import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -112,7 +116,20 @@ public class AppInitializeActivity extends FluxActivity {
             promptLogIn();
         } else if (!progress.isSaveUserTokenDone()) {
             saveUserToken();
+        } else {
+            transitToMenu();
         }
+    }
+
+    private void transitToMenu() {
+        AppInitializeActivity.this.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(AppInitializeActivity.this, MenuActivity.class);
+                startActivity(intent,
+                        ActivityOptions.makeSceneTransitionAnimation(AppInitializeActivity.this).toBundle());
+            }
+        });
     }
 
     private void checkForUpdate() {
@@ -177,11 +194,23 @@ public class AppInitializeActivity extends FluxActivity {
         GreetingPopup greetingPopup = (GreetingPopup) new GreetingPopup.GreetingPopupBuilder(
                 this, getApplicationContext())
                 .currentUser(currentUser)
-                .widthPercent(0.6)
-                .heightPercent(0.6)
+                .widthPercent(0.7)
+                .heightPercent(0.7)
                 .animationStyle(R.style.WindowFade)
                 .build();
         greetingPopup.show(Gravity.CENTER, 0, 0);
+        handleGreetingComplete(greetingPopup);
+    }
+
+    private void handleGreetingComplete(final GreetingPopup greetingPopup) {
+        greetingPopup.getPopupWindow().setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                if (greetingPopup.getMode() == GreetingPopup.Mode.SWITCH_ACCOUNT) {
+
+                }
+            }
+        });
     }
 
     private void setLoadingMessage(final int messageId) {

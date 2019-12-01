@@ -62,8 +62,7 @@ public final class Parser {
         User user = new User();
         try {
             JSONObject body = Parser.parseResponseBody(res);
-            user.setEmail(body.getString("email"));
-            user.setNickname(body.getString("nickname"));
+            user.setUsername(body.getString("username"));
             user.setToken(body.getString("token"));
         } catch (Exception e) {
             e.printStackTrace();

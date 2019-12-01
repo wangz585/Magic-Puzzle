@@ -11,6 +11,8 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
+    <activity android:name=".views.appinit.MenuActivity"
+      android:screenOrientation="sensorLandscape"></activity>
     <activity
       android:name=".views.appinit.AppInitializeActivity"
       android:screenOrientation="sensorLandscape">
@@ -25,6 +27,7 @@
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
+
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
@@ -42,12 +45,13 @@
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
+
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
     <activity
-        android:name=".views.wordguessing.GameActivity"
-        android:screenOrientation="sensorLandscape">
+      android:name=".views.wordguessing.GameActivity"
+      android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
@@ -55,41 +59,44 @@
       </intent-filter>
     </activity>
     <activity
-        android:name=".views.busyworker.SelectLevelActivity"
-        android:screenOrientation="sensorLandscape">
+      android:name=".views.busyworker.SelectLevelActivity"
+      android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-    </activity>
-    <activity
-        android:name=".views.busyworker.GameActivity"
-        android:screenOrientation="sensorLandscape">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-    </activity>
-    <activity
-        android:name=".views.busyworker.GameFinishedActivity"
-        android:screenOrientation="sensorLandscape">
-      <intent-filter>
-        <action android:name="android.intent.action.MAIN" />
-        <category android:name="android.intent.category.LAUNCHER" />
-      </intent-filter>
-    </activity>
-    <activity
-        android:name=".views.scoreboard.ScoreBoardActivity"
-        android:screenOrientation="sensorLandscape">
-    <intent-filter>
-      <action android:name="android.intent.action.MAIN" />
 
-      <category android:name="android.intent.category.LAUNCHER" />
-    </intent-filter>
-  </activity>
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
     <activity
-        android:name=".views.wordguessing.SelectLevelActivity"
-        android:screenOrientation="sensorLandscape">
+      android:name=".views.busyworker.GameActivity"
+      android:screenOrientation="sensorLandscape">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity
+      android:name=".views.busyworker.GameFinishedActivity"
+      android:screenOrientation="sensorLandscape">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity
+      android:name=".views.scoreboard.ScoreBoardActivity"
+      android:screenOrientation="sensorLandscape">
+      <intent-filter>
+        <action android:name="android.intent.action.MAIN" />
+
+        <category android:name="android.intent.category.LAUNCHER" />
+      </intent-filter>
+    </activity>
+    <activity
+      android:name=".views.wordguessing.SelectLevelActivity"
+      android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 

@@ -88,10 +88,6 @@ class CredentialPopup extends Popup {
         btnLogIn.setOnClickListener(authenticationButtonOnClickListener);
     }
 
-    private String getString(int resourceId) {
-        return context.getString(resourceId);
-    }
-
 
     /**
      * Check whether the username and password are of valid format.

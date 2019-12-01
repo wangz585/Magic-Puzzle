@@ -2,7 +2,6 @@ package com.group0536.puzzlemazing.actions.appinit;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.util.Log;
 
 import com.group0536.puzzlemazing.R;
@@ -122,8 +121,10 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
     }
 
     public void loadSavedToken() {
-        SharedPreferences preferences = context.getSharedPreferences(PREFIX, 0);
+        SharedPreferences preferences =
+                context.getSharedPreferences(PREFIX, Context.MODE_PRIVATE);
         String savedToken = preferences.getString(KEY_SAVED_TOKEN, "");
+        Log.d("savedToken", "loadSavedToken: " + savedToken);
 
         serverApi.performTokenValidation(savedToken, new Callback() {
             @Override
@@ -143,12 +144,14 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
                     return;
                 }
                 dispatchErrorAction(LOAD_SAVED_TOKEN, response.message());
+                Log.d("Network!!!!!!", "onResponse: Failed");
             }
         });
     }
 
     public void saveUserToken(String token) {
-        SharedPreferences preferences = context.getSharedPreferences(PREFIX, 0);
+        SharedPreferences preferences =
+                context.getSharedPreferences(PREFIX, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(KEY_SAVED_TOKEN, token);
         editor.apply();

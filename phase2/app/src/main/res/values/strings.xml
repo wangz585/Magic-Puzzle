@@ -34,8 +34,8 @@
   <string name="app_welcome_register">Register</string>
   <string name="app_welcome_password">Password</string>
   <string name="app_welcome_username">Username</string>
-  <string name="app_welcome_greeting">Welcome back, </string>
-  <string name="app_welcome_continue">Continue as </string>
+  <string name="app_welcome_greeting">Welcome back, %s!</string>
+  <string name="app_welcome_continue">Continue as %s</string>
   <string name="app_welcome_switch_account">Switch Account</string>
 
   <!-- log in/register error messages -->
@@ -85,11 +85,11 @@
   <string name="score_board_title">Score Board</string>
   <string name="score_board_user_name">User</string>
   <string name="score_board_exit">MAIN PAGE</string>
-    <string name="nextlevel">TextView</string>
+  <string name="nextlevel">TextView</string>
   <string name="next_level">next level</string>
   <string name="time">time</string>
   <string name="score">score</string>
-    <string name="play_again">play again</string>
+  <string name="play_again">play again</string>
   <string name="menu">menu</string>
-    <string name="highest_score">highest score</string>
+  <string name="highest_score">highest score</string>
 </resources>
