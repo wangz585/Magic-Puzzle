@@ -1,68 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:background="@drawable/settings_background"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:orientation="vertical"
-        android:layout_marginStart="100dp"
-        android:layout_gravity="center_vertical">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.15"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/background_music"/>
+            android:text="@string/background_music"
+            android:textColor="@color/clouds"
+            android:fontFamily="serif"
+            android:textSize="20sp" />
+
         <RadioGroup
             android:id="@+id/radioGroupBackgroundMusic"
-            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/clouds">
 
             <RadioButton
                 android:id="@+id/radioSoundtrack0"
                 android:layout_width="wrap_content"
+                android:fontFamily="serif"
                 android:layout_height="wrap_content"
                 android:checked="true"
-                android:text="@string/soundtrack_0" />
+                android:text="@string/soundtrack_0"
+                android:textColor="@color/clouds" />
+
             <RadioButton
                 android:id="@+id/radioSoundtrack1"
                 android:layout_width="wrap_content"
+                android:fontFamily="serif"
                 android:layout_height="wrap_content"
-                android:text="@string/soundtrack_1"/>
+                android:text="@string/soundtrack_1"
+                android:textColor="@color/clouds" />
+
             <RadioButton
                 android:id="@+id/radioSoundtrack2"
                 android:layout_width="wrap_content"
+                android:fontFamily="serif"
                 android:layout_height="wrap_content"
-                android:text="@string/soundtrack_2"/>
+                android:text="@string/soundtrack_2"
+                android:textColor="@color/clouds" />
         </RadioGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="wrap_content"
+        android:fontFamily="serif"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        android:textColor="@color/clouds"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="@string/color_theme"/>
+            android:text="@string/color_theme"
+            android:fontFamily="serif"
+            android:textColor="@color/clouds"
+            android:textSize="20sp" />
+
         <RadioGroup
-            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:fontFamily="serif"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/clouds">
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="serif"
                 android:checked="true"
-                android:text="@string/color_theme_1" />
+                android:text="@string/color_theme_1"
+                android:textColor="@color/clouds" />
+
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/color_theme_2"/>
+                android:fontFamily="serif"
+                android:text="@string/color_theme_2"
+                android:textColor="@color/clouds" />
         </RadioGroup>
     </LinearLayout>
 
-    <Spinner
-        android:id="@+id/spinAvatar"
-        android:layout_width="300dp"
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:fontFamily="serif"
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        android:textColor="@color/clouds"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:fontFamily="serif"
+            android:layout_height="wrap_content"
+            android:text="@string/select_avatar_prompt"
+            android:textColor="@color/clouds"
+            android:textSize="20sp" />
+
+        <Spinner
+            android:id="@+id/spinAvatar"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:textColor="@color/clouds" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

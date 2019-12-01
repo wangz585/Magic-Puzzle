@@ -47,21 +47,14 @@ public class PreferenceActivity extends FluxActivity {
     }
 
     private void bindViews() {
-        spinnerAvatars = findViewById(R.id.spinAvatar);
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, store.getAvatars());
-        spinnerAvatars.setAdapter(spinnerArrayAdapter);
-        spinnerAvatars.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String avatarSelected = parent.getItemAtPosition(position).toString();
-                actionCreator.setAvatar(avatarSelected);
-            }
-            public void onNothingSelected(AdapterView<?> parent) {
-                String avatarSelected = parent.getItemAtPosition(0).toString();
-                actionCreator.setAvatar(avatarSelected);
-            }
-        });
+        setAvatarSpinner();
 
 
+        setMusicRadioButton();
+
+    }
+
+    private void setMusicRadioButton() {
         radioGroupSongs = findViewById(R.id.radioGroupBackgroundMusic);
         radioSoundTrack0 = findViewById(R.id.radioSoundtrack0);
         radioSoundTrack1 = findViewById(R.id.radioSoundtrack1);
@@ -71,6 +64,10 @@ public class PreferenceActivity extends FluxActivity {
                 .getIdentifier(radioButtonId, "id", getPackageName());
         RadioButton checkedRadioButton = findViewById(res);
         checkedRadioButton.setChecked(true);
+        setMusicClickEvent();
+    }
+
+    private void setMusicClickEvent() {
         radioGroupSongs.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -87,7 +84,23 @@ public class PreferenceActivity extends FluxActivity {
                 }
             }
         });
+    }
 
+    private void setAvatarSpinner() {
+        spinnerAvatars = findViewById(R.id.spinAvatar);
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, store.getAvatars());
+        spinnerAvatars.setAdapter(spinnerArrayAdapter);
+        spinnerAvatars.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String avatarSelected = parent.getItemAtPosition(position).toString();
+                actionCreator.setAvatar(avatarSelected);
+            }
+
+            public void onNothingSelected(AdapterView<?> parent) {
+                String avatarSelected = parent.getItemAtPosition(0).toString();
+                actionCreator.setAvatar(avatarSelected);
+            }
+        });
     }
 
 

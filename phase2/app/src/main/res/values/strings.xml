@@ -74,6 +74,7 @@
   <string name="color_theme">Color Theme</string>
   <string name="color_theme_1">Color Theme 1</string>
   <string name="color_theme_2">Color Theme 2</string>
+  <string name="select_avatar_prompt">Select Your Avatar:</string>
 
   <string name="nextlevel">TextView</string>
   <string name="next_level">next level</string>
