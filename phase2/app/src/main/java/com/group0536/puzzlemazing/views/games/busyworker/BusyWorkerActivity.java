@@ -64,9 +64,7 @@ public class BusyWorkerActivity extends GameActivity {
      */
     private void showGameResult(){
         Intent intent = new Intent(BusyWorkerActivity.this, GameFinishedActivity.class);
-        // TODO Remove the following two lines
         intent.putExtra("score", store.getScore());
-        intent.putExtra("challenge", 1);
         startActivity(intent);
     }
 }

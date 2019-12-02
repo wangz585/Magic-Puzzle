@@ -30,6 +30,7 @@ public class BusyWorkerStore extends GameStore implements BusyWorkerActions {
 
     private BusyWorkerStore(Dispatcher dispatcher) {
         super(dispatcher);
+        user = GameStore.getInstance(dispatcher).getUser();
     }
 
 
@@ -218,7 +219,6 @@ public class BusyWorkerStore extends GameStore implements BusyWorkerActions {
 
     private void reactIfGameEnd() {
         if (isWon()) {
-            User user = GameStore.getInstance(dispatcher).getUser();
             user.setLevel(user.getLevel() + 1);
         }
         isGameOver = isWon() || isLose();

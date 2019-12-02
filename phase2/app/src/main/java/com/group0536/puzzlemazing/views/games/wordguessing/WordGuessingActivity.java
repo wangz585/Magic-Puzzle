@@ -83,12 +83,6 @@ public class WordGuessingActivity extends GameActivity {
             int timeLeft = (int) (millisUntilFinished / 1000);
             String value = String.valueOf(timeLeft);
             countDownTimeLeft.setText(String.format("Remaining Time: %ss", value));
-            if (timeLeft == 0) {
-                Intent intent = new Intent(WordGuessingActivity.this, GameFinishedActivity.class);
-                intent.putExtra("score", store.getScore());
-                intent.putExtra("challenge", 2);
-                startActivity(intent);
-            }
         }
 
         @Override
@@ -134,10 +128,8 @@ public class WordGuessingActivity extends GameActivity {
     public void update(WordGuessingChangeEvent e) {
         updateUI();
         if (store.isGameOver()) {
-            System.out.println("Finished the game");
             Intent intent = new Intent(WordGuessingActivity.this, GameFinishedActivity.class);
             intent.putExtra("score", store.getScore());
-            intent.putExtra("challenge", 2);
             startActivity(intent);
         }
     }

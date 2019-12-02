@@ -26,7 +26,6 @@ public class CrazyMatchStore extends GameStore implements CrazyMatchActions {
     private int score;
     private Animal firstFlip;
     private Animal secondFlip;
-    private User player;
     private int stepsTaken;
     private static List<Integer> allAnimals;
     private SparseArray<List<Integer>> levelToDimension;
@@ -36,24 +35,9 @@ public class CrazyMatchStore extends GameStore implements CrazyMatchActions {
 
     protected CrazyMatchStore(Dispatcher dispatcher) {
         super(dispatcher);
+        user = GameStore.getInstance(dispatcher).getUser();
         populateAnimalDrawables();
         setLevelToDimension();
-    }
-
-    /**
-     * Get the current player
-     * @return current player
-     */
-    public User getPlayer() {
-        return player;
-    }
-
-    /**
-     * Set the current player
-     * @param player current player
-     */
-    public void setPlayer(User player) {
-        this.player = player;
     }
 
     /**
@@ -212,7 +196,11 @@ public class CrazyMatchStore extends GameStore implements CrazyMatchActions {
      * @return if the game is over
      */
     public boolean isGameOver() {
-        return board.getNumberOfAnimalsLeft() == 0;
+        if (board.getNumberOfAnimalsLeft() == 0) {
+            user.setLevel(user.getLevel() + 1);
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -296,9 +284,9 @@ public class CrazyMatchStore extends GameStore implements CrazyMatchActions {
     }
 
     /**
-     * Get the player's score in this game
+     * Get the user's score in this game
      *
-     * @return the player's score in this game
+     * @return the user's score in this game
      */
     public int getScore() {
         return score;

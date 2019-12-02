@@ -61,6 +61,7 @@
   <string name="display_score">score: %d</string>
 
   <!-- busy worker_worker -->
+  <string name="busy_worker_title">Busy Worker</string>
   <string name="busy_worker_win">CONGRATS</string>
   <string name="busy_worker_score">Your Current Score:</string>
   <string name="busy_worker_time">Time Left:</string>
@@ -108,7 +109,10 @@
   <string name="time">Time Used: %d</string>
   <string name="score">Score: %d</string>
   <string name="back_to_map">Back to Map</string>
-
   <string name="play_again">play again</string>
   <string name="highest_score">highest score</string>
+
+  <!-- game map page -->
+  <string name="next_game_prmopt">Let us go to the next challenge.</string>
+  <string name="finish_all_challenges_prmopt">You saved the prince!</string>
 </resources>

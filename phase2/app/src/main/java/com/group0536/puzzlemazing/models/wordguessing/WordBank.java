@@ -40,16 +40,16 @@ public class WordBank {
     }
 
     /**
-     * Check if there is no more word that is not guessed
-     * @return a boolean to show whether there is more word or no
+     * Return true of there is no more word
+     * @return true of there is no more word
      */
-    public boolean noMoreWord(){
-        boolean moreWord = true;
+    public boolean hasNoMoreWord(){
+        boolean noMoreWord = true;
         for(Word word : vocabulary){
             if(!word.isGuessed()){
-                moreWord = false;
+                noMoreWord = false;
             }
         }
-        return moreWord;
+        return noMoreWord;
     }
 }

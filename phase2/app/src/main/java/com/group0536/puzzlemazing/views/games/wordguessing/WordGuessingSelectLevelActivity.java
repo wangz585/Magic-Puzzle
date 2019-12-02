@@ -17,12 +17,10 @@ public class WordGuessingSelectLevelActivity extends FluxActivity {
     private WordGuessingGameStore store;
     Button btnLevel1;
     Button btnLevel2;
-    private User currentPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        currentPlayer = getIntent().getParcelableExtra("player");
         setContentView(R.layout.activity_crazy_match_select_level);
         btnLevel1 = findViewById(getResources()
                 .getIdentifier("btn_level_1", "id", getPackageName()));

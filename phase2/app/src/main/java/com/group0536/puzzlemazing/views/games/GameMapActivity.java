@@ -1,8 +1,5 @@
 package com.group0536.puzzlemazing.views.games;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,15 +7,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.group0536.puzzlemazing.R;
-import com.group0536.puzzlemazing.actions.games.busyworker.BusyWorkerActionCreator;
 import com.group0536.puzzlemazing.stores.games.GameStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
-import com.group0536.puzzlemazing.views.games.busyworker.BusyWorkerActivity;
 import com.group0536.puzzlemazing.views.games.busyworker.BusyWorkerSelectLevelActivity;
-import com.group0536.puzzlemazing.views.games.crazymatch.CrazyMatchActivity;
 import com.group0536.puzzlemazing.views.games.crazymatch.CrazyMatchSelectLevelActivity;
-import com.group0536.puzzlemazing.views.games.wordguessing.WordGuessingActivity;
 import com.group0536.puzzlemazing.views.games.wordguessing.WordGuessingSelectLevelActivity;
+import com.group0536.puzzlemazing.views.menu.MenuActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,8 +21,8 @@ public class GameMapActivity extends FluxActivity {
     // Components
     Button btnEnter;
     TextView tvNextGame;
-
     GameStore store;
+    boolean hasMoreChallenges;
 
     List<Intent> gameActivities = new ArrayList<>();
 
@@ -36,9 +30,10 @@ public class GameMapActivity extends FluxActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_map);
+        registerGames();
+        hasMoreChallenges = store.getUser().getLevel() <= gameActivities.size();
         bindViews();
         addListeners();
-        registerGames();
     }
 
     @Override
@@ -74,8 +69,13 @@ public class GameMapActivity extends FluxActivity {
         btnEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = gameActivities.get(store.getUser().getLevel() - 1);
-                startActivity(intent);
+                if (hasMoreChallenges) {
+                    Intent intent = gameActivities.get(store.getUser().getLevel() - 1);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(GameMapActivity.this, MenuActivity.class);
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -83,5 +83,10 @@ public class GameMapActivity extends FluxActivity {
     private void bindViews() {
         btnEnter = findViewById(R.id.btnEnter);
         tvNextGame = findViewById(R.id.tvNextGame);
+        if (hasMoreChallenges) {
+            tvNextGame.setText(R.string.next_game_prmopt);
+        } else {
+            tvNextGame.setText(R.string.finish_all_challenges_prmopt);
+        }
     }
 }

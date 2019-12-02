@@ -32,6 +32,8 @@ public class WordGuessingGameStore extends GameStore implements WordGuessingActi
 
     private WordGuessingGameStore(Dispatcher dispatcher) {
         super(dispatcher);
+        user = GameStore.getInstance(dispatcher).getUser();
+
     }
 
     /**
@@ -66,7 +68,7 @@ public class WordGuessingGameStore extends GameStore implements WordGuessingActi
      */
     private void setGameOver() {
         gameOver = true;
-        getUser().setLevel(getUser().getLevel() + 1);
+        user.setLevel(getUser().getLevel() + 1);
     }
 
     /**
@@ -132,14 +134,19 @@ public class WordGuessingGameStore extends GameStore implements WordGuessingActi
             // if the answer is correct
             updateScore();
             currentWord.setGuessed(true);
-            if (wordBank.noMoreWord()) {
+            if (wordBank.hasNoMoreWord()) {
                 setGameOver();
+                addBonusScore();
             } else {
                 currentWord = getANewWord();
             }
         } else {
             currentWord.setCurrentState(currentWord.getInitialState());
         }
+    }
+
+    private void addBonusScore() {
+        score = score + 50;
     }
 
     /**

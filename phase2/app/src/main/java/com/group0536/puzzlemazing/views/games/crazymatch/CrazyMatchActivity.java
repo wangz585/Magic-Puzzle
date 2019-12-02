@@ -8,13 +8,13 @@ import android.widget.TextView;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.games.crazymatch.CrazyMatchActionCreator;
-import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.models.crazymatch.Animal;
 import com.group0536.puzzlemazing.models.crazymatch.Board;
 import com.group0536.puzzlemazing.stores.games.crazymatch.CrazyMatchStoreChangeEvent;
 import com.group0536.puzzlemazing.stores.games.crazymatch.CrazyMatchStore;
 import com.group0536.puzzlemazing.views.games.GameActivity;
 import com.group0536.puzzlemazing.views.games.GameFinishedActivity;
+import com.group0536.puzzlemazing.views.games.busyworker.BusyWorkerView;
 import com.squareup.otto.Subscribe;
 
 /**
@@ -34,20 +34,19 @@ public class CrazyMatchActivity extends GameActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        playPopupVideo();
         int currentLevel = getIntent().getIntExtra("level", 1);
         contentViewId = store.getContentView(currentLevel);
         setContentView(contentViewId);
-        bindViews();
-    }
-
-    private void playPopupVideo() {
-        findViewById(contentViewId).post(new Runnable() {
+        String layoutId = "layoutCrazyMatch" + currentLevel;
+        int res = getResources()
+                .getIdentifier(layoutId, "id", getPackageName());
+        findViewById(res).post(new Runnable() {
             @Override
             public void run() {
                 playIntro(R.raw.challenge3);
             }
         });
+        bindViews();
     }
 
     /**
@@ -102,7 +101,7 @@ public class CrazyMatchActivity extends GameActivity {
             public void onClick(View view) {
                 if (store.canFlip(row, col)) {
                     actionCreator.flip(row, col);
-                    actionCreator.updateScore(store.getPlayer().getToken(),
+                    actionCreator.updateScore(store.getUser().getToken(),
                             store.getUser().getLevel(), store.getScore());
                 }
 
