@@ -20,13 +20,10 @@ import com.group0536.puzzlemazing.views.appinit.AppInitializeActivity;
 public class GameFinishedActivity extends AppInitializeActivity {
     // Components
     private Button btnMenu;
-    private Button btnNext;
     private TextView txtScore;
-    private TextView txtTimeUsed;
 
     // Data
     private int score;
-    private int level;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,34 +38,23 @@ public class GameFinishedActivity extends AppInitializeActivity {
     private void loadData() {
         Intent intent = getIntent();
         score = intent.getIntExtra("score", 0);
-        level = intent.getIntExtra("challenge", 0);
     }
 
     /**
      * Initialize all the components on this activity
      */
     private void bindViews() {
-        txtTimeUsed = findViewById(R.id.txtTime);
         txtScore = findViewById(R.id.txtScore);
         txtScore.setText(getString(R.string.score, score));
         btnMenu = findViewById(R.id.btnMenu);
-        btnNext = findViewById(R.id.btnNextChallenge);
     }
 
     private void addListeners() {
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GameFinishedActivity.this, MenuActivity.class);
+                Intent intent = new Intent(GameFinishedActivity.this, GameMapActivity.class);
                 startActivity(intent);
-            }
-        });
-        btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent = new Intent(GameFinishedActivity.this, AnimationActivity.class);
-//                intent.putExtra("challenge", level);
-//                startActivity(intent);
             }
         });
     }
