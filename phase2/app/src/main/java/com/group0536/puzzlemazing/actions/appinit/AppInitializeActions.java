@@ -11,6 +11,7 @@ public interface AppInitializeActions {
     String LOG_IN = PREFIX + "login";
     String SKIP_LOG_IN = PREFIX + "skip-login";
     String REGISTER = PREFIX + "register";
+    String SEND_USER = PREFIX + "send-user";
 
     // keys
     String KEY_REQUIRE_UPDATE = "require-update";

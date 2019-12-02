@@ -23,6 +23,7 @@ import com.group0536.puzzlemazing.models.AppInitProgress;
 import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.stores.appinit.AppInitializeStore;
 import com.group0536.puzzlemazing.stores.appinit.AppInitializeStoreChangeEvent;
+import com.group0536.puzzlemazing.stores.games.GameStore;
 import com.group0536.puzzlemazing.utils.ActivityUtil;
 import com.group0536.puzzlemazing.views.FluxActivity;
 import com.group0536.puzzlemazing.views.games.VideoPopup;
@@ -41,6 +42,7 @@ public class AppInitializeActivity extends FluxActivity {
 
     // Flux
     AppInitializeStore store;
+    GameStore gameStore;
     AppInitializeActionCreator actionCreator;
 
     // Components
@@ -73,6 +75,7 @@ public class AppInitializeActivity extends FluxActivity {
     protected void onResume() {
         super.onResume();
         registerStore(store);
+        registerStore(gameStore);
         actionCreator.startInitialization();
     }
 
@@ -80,6 +83,7 @@ public class AppInitializeActivity extends FluxActivity {
     protected void onPause() {
         super.onPause();
         unregisterStore(store);
+        unregisterStore(gameStore);
     }
 
     private boolean isEmpty(String text) {
@@ -135,6 +139,7 @@ public class AppInitializeActivity extends FluxActivity {
             @Override
             public void onDismiss() {
                 openMenu();
+                actionCreator.sendUser(store.getCurrentUser());
             }
         });
     }

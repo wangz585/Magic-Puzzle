@@ -8,7 +8,7 @@
     android:background="@drawable/app_select_level_background">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnEnter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
@@ -17,10 +17,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.499"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNextGame" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tvNextGame"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/clouds"

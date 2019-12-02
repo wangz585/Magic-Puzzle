@@ -1,12 +1,13 @@
 package com.group0536.puzzlemazing.stores.games;
 
 import com.group0536.puzzlemazing.actions.Action;
+import com.group0536.puzzlemazing.actions.appinit.AppInitializeActions;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
 
-public class GameStore extends Store {
+public class GameStore extends Store implements AppInitializeActions {
     private static GameStore instance;
 
     private User user;
@@ -29,6 +30,17 @@ public class GameStore extends Store {
 
     @Override
     public void onAction(Action action) {
-
+        switch (action.getType()) {
+            case SEND_USER:
+                extractUser(action);
+                break;
+        }
+        postChange();
     }
+
+    private void extractUser(Action action) {
+        user = (User) action.getPayloadEntry(KEY_CURRENT_USER);
+    }
+
+
 }

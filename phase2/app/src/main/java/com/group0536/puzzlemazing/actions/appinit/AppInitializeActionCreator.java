@@ -192,6 +192,13 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
         });
     }
 
+    public void sendUser(User user) {
+        Action action = new Action.ActionBuilder(SEND_USER)
+                .load(KEY_CURRENT_USER, user)
+                .build();
+        dispatcher.dispatch(action);
+    }
+
     public void clearUser() {
         Action action = new Action.ActionBuilder(CLEAR_CURRENT_USER)
                 .build();
