@@ -12,6 +12,10 @@ public class GameStore extends Store implements AppInitializeActions {
 
     private User user;
 
+    public User getUser() {
+        return user;
+    }
+
     protected GameStore(Dispatcher dispatcher) {
         super(dispatcher);
     }

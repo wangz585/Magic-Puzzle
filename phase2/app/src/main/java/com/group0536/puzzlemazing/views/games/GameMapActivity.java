@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.games.busyworker.BusyWorkerActionCreator;
+import com.group0536.puzzlemazing.stores.games.GameStore;
+import com.group0536.puzzlemazing.views.FluxActivity;
 import com.group0536.puzzlemazing.views.games.busyworker.BusyWorkerActivity;
 import com.group0536.puzzlemazing.views.games.crazymatch.CrazyMatchActivity;
 import com.group0536.puzzlemazing.views.games.wordguessing.WordGuessingActivity;
@@ -18,13 +20,14 @@ import com.group0536.puzzlemazing.views.games.wordguessing.WordGuessingActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameMapActivity extends AppCompatActivity {
+public class GameMapActivity extends FluxActivity {
     // Components
     Button btnEnter;
     TextView tvNextGame;
 
-    List<Intent> gameActivities = new ArrayList<Intent>() {
-    };
+    GameStore store;
+
+    List<Intent> gameActivities = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,23 @@ public class GameMapActivity extends AppCompatActivity {
         bindViews();
         addListeners();
         registerGames();
+    }
+
+    @Override
+    protected void initFluxComponents() {
+        store = GameStore.getInstance(dispatcher);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerStore(store);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterStore(store);
     }
 
     private void registerGames() {
@@ -51,7 +71,8 @@ public class GameMapActivity extends AppCompatActivity {
         btnEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = gameActivities.get(store.getUser().getLevel() - 1);
+                startActivity(intent);
             }
         });
     }
