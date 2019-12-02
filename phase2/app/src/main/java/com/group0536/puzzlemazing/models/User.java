@@ -3,6 +3,8 @@ package com.group0536.puzzlemazing.models;
 public class User {
     private String username;
     private String token;
+    private int level;
+    private int coins;
 
     public User() {
     }
@@ -26,5 +28,21 @@ public class User {
 
     public void setToken(String token) {
         this.token = token;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getCoins() {
+        return coins;
+    }
+
+    public void setCoins(int coins) {
+        this.coins = coins;
     }
 }
