@@ -68,6 +68,7 @@ public class AppInitializeActivity extends FluxActivity {
     @Override
     protected void initFluxComponents() {
         store = AppInitializeStore.getInstance(dispatcher);
+        gameStore = GameStore.getInstance(dispatcher);
         actionCreator = AppInitializeActionCreator.getInstance(dispatcher, getApplicationContext());
     }
 
