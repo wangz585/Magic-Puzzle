@@ -1,6 +1,5 @@
 package com.group0536.puzzlemazing.webapi;
 
-import android.util.JsonReader;
 
 import com.group0536.puzzlemazing.utils.HttpUtil;
 
@@ -56,5 +55,12 @@ public class ServerApi {
             e.printStackTrace();
         }
         HttpUtil.post(url, body, token, done);
+    }
+
+    public JSONObject getTop3PlayersWithScores(String scoreType, Callback callback) {
+        String url = getURL("/top-3-players" + scoreType);
+        JSONObject returnData = new JSONObject();
+//        JSONObject returnData = HttpUtil.get(url, callback);
+        return returnData;
     }
 }

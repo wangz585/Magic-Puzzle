@@ -10,6 +10,7 @@ import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.actions.games.wordguessing.WordGuessingActionCreator;
 import com.group0536.puzzlemazing.stores.games.wordguessing.WordGuessingGameStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
+import com.group0536.puzzlemazing.views.games.GameActivity;
 
 public class SelectLevelActivity extends FluxActivity {
 
@@ -31,7 +32,7 @@ public class SelectLevelActivity extends FluxActivity {
             public void onClick(View view) {
                 int level = 1;
                 actionCreator.initializeWordBank(level, getApplicationContext());
-                Intent intent = new Intent(SelectLevelActivity.this, GameActivity.class);
+                Intent intent = new Intent(SelectLevelActivity.this, WordGuessingActivity.class);
                 intent.putExtra("level", level);
                 startActivity(intent);
             }
@@ -43,7 +44,7 @@ public class SelectLevelActivity extends FluxActivity {
             public void onClick(View view) {
                 int level = 2;
                 actionCreator.initializeWordBank(level, getApplicationContext());
-                Intent intent = new Intent(SelectLevelActivity.this, GameActivity.class);
+                Intent intent = new Intent(SelectLevelActivity.this, WordGuessingActivity.class);
                 intent.putExtra("level", level);
                 startActivity(intent);
             }
