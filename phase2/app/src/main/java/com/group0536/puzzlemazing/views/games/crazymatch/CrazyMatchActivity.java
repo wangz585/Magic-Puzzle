@@ -23,30 +23,29 @@ import com.squareup.otto.Subscribe;
 public class CrazyMatchActivity extends GameActivity {
     private CrazyMatchStore store;
     private CrazyMatchActionCreator actionCreator;
-    private User player;
     // The id of the ball drawing
     private int ballDrawingInt;
-    private int level;
 
     // Components
     private ImageButton[][] btnBalls;
     private TextView txtScore;
+    private int contentViewId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        level = getIntent().getIntExtra("level",0);
-        player = getIntent().getParcelableExtra("player");
         playPopupVideo();
-        setContentView(store.getContentView(level));
+        int level = store.getUser().getLevel();
+        contentViewId = store.getContentView(level);
+        setContentView(contentViewId);
         bindViews();
     }
 
     private void playPopupVideo() {
-        findViewById(R.id.layoutWordGuessing).post(new Runnable() {
+        findViewById(contentViewId).post(new Runnable() {
             @Override
             public void run() {
-                playIntro(R.raw.challenge1);
+                playIntro(R.raw.challenge3);
             }
         });
     }
@@ -103,7 +102,8 @@ public class CrazyMatchActivity extends GameActivity {
             public void onClick(View view) {
                 if (store.canFlip(row, col)) {
                     actionCreator.flip(row, col);
-                    actionCreator.updateScore(store.getPlayer().getToken(), level, store.getScore());
+                    actionCreator.updateScore(store.getPlayer().getToken(),
+                            store.getUser().getLevel(), store.getScore());
                 }
 
             }
@@ -182,7 +182,6 @@ public class CrazyMatchActivity extends GameActivity {
         super.initFluxComponents();
         store = CrazyMatchStore.getInstance(dispatcher);
         actionCreator = new CrazyMatchActionCreator(dispatcher);
-        store.setPlayer(player);
     }
 
     @Override

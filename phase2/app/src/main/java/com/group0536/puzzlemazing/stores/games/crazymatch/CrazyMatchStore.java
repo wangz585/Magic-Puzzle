@@ -140,6 +140,10 @@ public class CrazyMatchStore extends GameStore implements CrazyMatchActions {
         return (int) levelData.get("ContentView");
     }
 
+    public User getUser() {
+        return GameStore.getInstance(dispatcher).getUser();
+    }
+
     /**
      * Flip the game_button according to the pay load entry of action
      *
