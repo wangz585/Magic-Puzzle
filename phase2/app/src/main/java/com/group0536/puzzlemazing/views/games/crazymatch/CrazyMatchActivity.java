@@ -35,8 +35,8 @@ public class CrazyMatchActivity extends GameActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         playPopupVideo();
-        int level = store.getUser().getLevel();
-        contentViewId = store.getContentView(level);
+        int currentLevel = getIntent().getIntExtra("level", 1);
+        contentViewId = store.getContentView(currentLevel);
         setContentView(contentViewId);
         bindViews();
     }
