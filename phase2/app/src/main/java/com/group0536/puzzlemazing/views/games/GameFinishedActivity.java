@@ -66,9 +66,9 @@ public class GameFinishedActivity extends AppInitializeActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GameFinishedActivity.this, AnimationActivity.class);
-                intent.putExtra("challenge", level);
-                startActivity(intent);
+//                Intent intent = new Intent(GameFinishedActivity.this, AnimationActivity.class);
+//                intent.putExtra("challenge", level);
+//                startActivity(intent);
             }
         });
     }
