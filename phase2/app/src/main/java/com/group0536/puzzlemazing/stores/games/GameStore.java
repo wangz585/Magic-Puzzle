@@ -6,10 +6,8 @@ import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
 
-public abstract class GameStore extends Store {
-
-    private User player;
-    private int score;
+public class GameStore extends Store {
+    private User user;
 
     protected GameStore(Dispatcher dispatcher) {
         super(dispatcher);
@@ -17,19 +15,11 @@ public abstract class GameStore extends Store {
 
     @Override
     protected StoreChangeEvent getChangeEvent() {
-        return null;
+        return new GameStoreChangeEvent();
     }
 
     @Override
     public void onAction(Action action) {
 
-    }
-
-    private void initScore(){
-
-    }
-
-    private void initPlayer(User player){
-        this.player = player;
     }
 }

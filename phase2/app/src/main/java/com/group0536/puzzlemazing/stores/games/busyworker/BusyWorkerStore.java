@@ -8,6 +8,7 @@ import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 import com.group0536.puzzlemazing.models.busyworker.Map;
 import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
+import com.group0536.puzzlemazing.stores.games.GameStore;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import java.util.HashMap;
 /**
  * This is a busy worker store responsible for handling the logics
  */
-public class BusyWorkerStore extends Store implements BusyWorkerActions {
+public class BusyWorkerStore extends GameStore implements BusyWorkerActions {
 
     private Map map;
     private static BusyWorkerStore instance;

@@ -11,6 +11,7 @@ import com.group0536.puzzlemazing.models.crazymatch.Animal;
 import com.group0536.puzzlemazing.models.crazymatch.Board;
 import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
+import com.group0536.puzzlemazing.stores.games.GameStore;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class CrazyMatchStore extends Store implements CrazyMatchActions {
+public class CrazyMatchStore extends GameStore implements CrazyMatchActions {
     private Board board;
     private int score;
     private Animal firstFlip;

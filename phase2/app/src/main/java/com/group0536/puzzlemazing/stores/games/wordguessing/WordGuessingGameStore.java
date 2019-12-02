@@ -10,6 +10,7 @@ import com.group0536.puzzlemazing.models.wordguessing.Word;
 import com.group0536.puzzlemazing.models.wordguessing.WordBank;
 import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
+import com.group0536.puzzlemazing.stores.games.GameStore;
 import com.squareup.otto.Subscribe;
 
 import java.io.BufferedReader;
@@ -22,7 +23,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * This is a word guessing game store. It is responsible for all the logic
  */
-public class WordGuessingGameStore extends Store implements WordGuessingActions {
+public class WordGuessingGameStore extends GameStore implements WordGuessingActions {
     private User player;
     private WordBank wordBank;
     private Word currentWord;

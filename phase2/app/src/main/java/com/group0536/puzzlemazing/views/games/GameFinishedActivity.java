@@ -18,8 +18,6 @@ import com.group0536.puzzlemazing.views.appinit.AppInitializeActivity;
  * @author Jimmy Lan
  */
 public class GameFinishedActivity extends AppInitializeActivity {
-    private int challenge;
-
     // Components
     private Button btnMenu;
     private Button btnNext;
@@ -69,7 +67,7 @@ public class GameFinishedActivity extends AppInitializeActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(GameFinishedActivity.this, AnimationActivity.class);
-                intent.putExtra("challenge", challenge);
+                intent.putExtra("challenge", level);
                 startActivity(intent);
             }
         });
