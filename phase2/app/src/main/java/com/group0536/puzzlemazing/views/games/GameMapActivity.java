@@ -14,8 +14,11 @@ import com.group0536.puzzlemazing.actions.games.busyworker.BusyWorkerActionCreat
 import com.group0536.puzzlemazing.stores.games.GameStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
 import com.group0536.puzzlemazing.views.games.busyworker.BusyWorkerActivity;
+import com.group0536.puzzlemazing.views.games.busyworker.BusyWorkerSelectLevelActivity;
 import com.group0536.puzzlemazing.views.games.crazymatch.CrazyMatchActivity;
+import com.group0536.puzzlemazing.views.games.crazymatch.CrazyMatchSelectLevelActivity;
 import com.group0536.puzzlemazing.views.games.wordguessing.WordGuessingActivity;
+import com.group0536.puzzlemazing.views.games.wordguessing.WordGuessingSelectLevelActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,11 +60,11 @@ public class GameMapActivity extends FluxActivity {
 
     private void registerGames() {
         Intent busyWorkerIntent = new Intent(GameMapActivity.this,
-                BusyWorkerActivity.class);
+                BusyWorkerSelectLevelActivity.class);
         Intent wordGuessingIntent = new Intent(GameMapActivity.this,
-                WordGuessingActivity.class);
+                WordGuessingSelectLevelActivity.class);
         Intent crazyMatchActivity = new Intent(GameMapActivity.this,
-                CrazyMatchActivity.class);
+                CrazyMatchSelectLevelActivity.class);
         gameActivities.add(busyWorkerIntent);
         gameActivities.add(wordGuessingIntent);
         gameActivities.add(crazyMatchActivity);

@@ -29,7 +29,7 @@ public class BusyWorkerActivity extends GameActivity {
         busyWorkerView.post(new Runnable() {
             @Override
             public void run() {
-                playIntro(R.raw.challenge2);
+                playIntro(R.raw.challenge1);
             }
         });
     }

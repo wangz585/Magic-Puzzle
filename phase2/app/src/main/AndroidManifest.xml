@@ -11,8 +11,8 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
-    <activity android:name=".views.games.GameMapActivity">
-      android:screenOrientation="sensorLandscape"
+    <activity android:name=".views.games.GameMapActivity"
+      android:screenOrientation="sensorLandscape">
     </activity>
     <activity
       android:name=".views.appinit.AppInitializeActivity"
@@ -42,7 +42,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".views.games.crazymatch.SelectLevelActivity"
+      android:name=".views.games.crazymatch.CrazyMatchSelectLevelActivity"
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -60,7 +60,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".views.games.busyworker.SelectLevelActivity"
+      android:name=".views.games.busyworker.BusyWorkerSelectLevelActivity"
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -96,7 +96,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".views.games.wordguessing.SelectLevelActivity"
+      android:name=".views.games.wordguessing.WordGuessingSelectLevelActivity"
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

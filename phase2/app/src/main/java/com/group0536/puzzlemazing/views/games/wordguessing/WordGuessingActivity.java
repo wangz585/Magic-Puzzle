@@ -43,7 +43,7 @@ public class WordGuessingActivity extends GameActivity {
         findViewById(R.id.layoutWordGuessing).post(new Runnable() {
             @Override
             public void run() {
-                playIntro(R.raw.challenge1);
+                playIntro(R.raw.challenge2);
             }
         });
     }

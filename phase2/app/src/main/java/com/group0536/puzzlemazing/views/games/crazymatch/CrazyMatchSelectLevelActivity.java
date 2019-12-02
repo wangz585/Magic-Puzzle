@@ -13,7 +13,7 @@ import com.group0536.puzzlemazing.views.FluxActivity;
 /**
  * This is an activity that prompts the user to select a game level
  */
-public class SelectLevelActivity extends FluxActivity {
+public class CrazyMatchSelectLevelActivity extends FluxActivity {
 
     private CrazyMatchActionCreator actionCreator;
     private CrazyMatchStore store;
@@ -48,7 +48,7 @@ public class SelectLevelActivity extends FluxActivity {
             public void onClick(View view) {
                 int level = 2;
                 actionCreator.initializeBoard(level);
-                Intent intent = new Intent(SelectLevelActivity.this, CrazyMatchActivity.class);
+                Intent intent = new Intent(CrazyMatchSelectLevelActivity.this, CrazyMatchActivity.class);
                 intent.putExtra("level", level);
                 startActivity(intent);
             }
@@ -66,7 +66,7 @@ public class SelectLevelActivity extends FluxActivity {
             public void onClick(View view) {
                 int level = 1;
                 actionCreator.initializeBoard(level);
-                Intent intent = new Intent(SelectLevelActivity.this, CrazyMatchActivity.class);
+                Intent intent = new Intent(CrazyMatchSelectLevelActivity.this, CrazyMatchActivity.class);
                 intent.putExtra("level", level);
                 startActivity(intent);
             }

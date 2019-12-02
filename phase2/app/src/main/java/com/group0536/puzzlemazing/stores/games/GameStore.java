@@ -6,6 +6,7 @@ import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
+import com.squareup.otto.Subscribe;
 
 public class GameStore extends Store implements AppInitializeActions {
     private static GameStore instance;
@@ -33,6 +34,7 @@ public class GameStore extends Store implements AppInitializeActions {
     }
 
     @Override
+    @Subscribe
     public void onAction(Action action) {
         switch (action.getType()) {
             case SEND_USER:
