@@ -10,6 +10,8 @@ import com.group0536.puzzlemazing.actions.ActionCreator;
 import com.group0536.puzzlemazing.actions.menu.MenuActionCreator;
 import com.group0536.puzzlemazing.stores.menu.MenuStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
+import com.group0536.puzzlemazing.views.games.GameActivity;
+import com.group0536.puzzlemazing.views.games.GameMapActivity;
 import com.group0536.puzzlemazing.views.global.PreferenceActivity;
 import com.group0536.puzzlemazing.views.global.ScoreBoardActivity;
 
@@ -90,9 +92,8 @@ public class MenuActivity extends FluxActivity {
                 // If the user just registered, play the animation and go to the page to choose game
 
                 // otherwise, go to the page to select game
-//                Intent intent = new Intent(MenuActivity.this, AnimationActivity.class);
-//                intent.putExtra("challenge", 0);
-//                startActivity(intent);
+                Intent intent = new Intent(MenuActivity.this, GameMapActivity.class);
+                startActivity(intent);
             }
         });
     }
