@@ -39,7 +39,7 @@ public class BusyWorkerSelectLevelActivity extends FluxActivity {
         btnLevel2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                actionCreator.initMap(2);
+                actionCreator.selectDifficulty(2);
                 Intent intent = new Intent(BusyWorkerSelectLevelActivity.this, BusyWorkerActivity.class);
                 startActivity(intent);
             }
@@ -55,7 +55,7 @@ public class BusyWorkerSelectLevelActivity extends FluxActivity {
         btnLevel1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                actionCreator.initMap(1);
+                actionCreator.selectDifficulty(1);
                 Intent intent = new Intent(BusyWorkerSelectLevelActivity.this, BusyWorkerActivity.class);
                 startActivity(intent);
             }

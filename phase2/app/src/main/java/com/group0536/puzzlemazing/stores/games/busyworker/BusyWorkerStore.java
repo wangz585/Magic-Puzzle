@@ -5,6 +5,7 @@ import android.graphics.Point;
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.games.busyworker.BusyWorkerActions;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
+import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.models.busyworker.Map;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
 import com.group0536.puzzlemazing.stores.games.GameStore;
@@ -42,10 +43,10 @@ public class BusyWorkerStore extends GameStore implements BusyWorkerActions {
     public void onAction(Action action) {
         switch (action.getType()) {
             case INIT:
-                initGame();
                 break;
             case SELECT_DIFFICULTY:
                 setDifficulty(action);
+                initGame();
                 break;
             case MOVE:
                 move(action);
@@ -217,6 +218,7 @@ public class BusyWorkerStore extends GameStore implements BusyWorkerActions {
 
     private void reactIfGameEnd() {
         if (isWon()) {
+            User user = GameStore.getInstance(dispatcher).getUser();
             user.setLevel(user.getLevel() + 1);
         }
         isGameOver = isWon() || isLose();

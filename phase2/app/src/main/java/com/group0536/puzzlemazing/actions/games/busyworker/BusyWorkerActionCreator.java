@@ -15,14 +15,14 @@ public class BusyWorkerActionCreator extends ActionCreator implements BusyWorker
 
     public void move(Point position){
         Action action = new Action.ActionBuilder(MOVE)
-                .load("position", position)
+                .load(KEY_POSITION, position)
                 .build();
         dispatcher.dispatch(action);
     }
 
-    public void initMap(int level){
-        Action action = new Action.ActionBuilder(INIT_MAP)
-                .load("level", level)
+    public void selectDifficulty(int level){
+        Action action = new Action.ActionBuilder(SELECT_DIFFICULTY)
+                .load(KEY_DIFFICULTY, level)
                 .build();
         dispatcher.dispatch(action);
     }

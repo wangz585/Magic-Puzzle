@@ -18,7 +18,7 @@ import com.group0536.puzzlemazing.dispatcher.Dispatcher;
  * @since 1.0
  */
 public abstract class Store {
-    private Dispatcher dispatcher;
+    protected Dispatcher dispatcher;
 
     protected Store(Dispatcher dispatcher) {
         this.dispatcher = dispatcher;
