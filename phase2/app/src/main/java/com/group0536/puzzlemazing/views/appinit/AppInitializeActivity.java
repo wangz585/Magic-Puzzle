@@ -25,6 +25,8 @@ import com.group0536.puzzlemazing.stores.appinit.AppInitializeStore;
 import com.group0536.puzzlemazing.stores.appinit.AppInitializeStoreChangeEvent;
 import com.group0536.puzzlemazing.utils.ActivityUtil;
 import com.group0536.puzzlemazing.views.FluxActivity;
+import com.group0536.puzzlemazing.views.games.VideoPopup;
+import com.group0536.puzzlemazing.views.menu.MenuActivity;
 import com.squareup.otto.Subscribe;
 
 /**
@@ -121,6 +123,23 @@ public class AppInitializeActivity extends FluxActivity {
     }
 
     private void transitToMenu() {
+        VideoPopup videoPopup = (VideoPopup) new VideoPopup.VideoPopupBuilder(this, getApplicationContext())
+                .allowSkip(true)
+                .videoResource(R.raw.intro)
+                .animationStyle(R.style.WindowFade)
+                .heightPercent(1.0)
+                .widthPercent(1.0)
+                .build();
+        videoPopup.show(Gravity.CENTER, 0, 0);
+        videoPopup.getPopupWindow().setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                openMenu();
+            }
+        });
+    }
+
+    private void openMenu() {
         AppInitializeActivity.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {

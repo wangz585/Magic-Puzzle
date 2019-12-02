@@ -91,9 +91,9 @@ public class MenuActivity extends FluxActivity {
                 // If the user just registered, play the animation and go to the page to choose game
 
                 // otherwise, go to the page to select game
-                Intent intent = new Intent(MenuActivity.this, AnimationActivity.class);
-                intent.putExtra("challenge", 0);
-                startActivity(intent);
+//                Intent intent = new Intent(MenuActivity.this, AnimationActivity.class);
+//                intent.putExtra("challenge", 0);
+//                startActivity(intent);
             }
         });
     }
