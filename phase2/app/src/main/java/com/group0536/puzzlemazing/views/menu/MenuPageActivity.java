@@ -32,7 +32,6 @@ public class MenuPageActivity extends FluxActivity {
         store = MenuStore.getInstance(dispatcher);
         setContentView(R.layout.activity_menu_page);
         actionCreator = new MenuPageActionCreator(dispatcher);
-
     }
 
     @Override
