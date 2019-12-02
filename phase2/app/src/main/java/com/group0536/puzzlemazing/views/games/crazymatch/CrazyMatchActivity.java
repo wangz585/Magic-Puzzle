@@ -8,11 +8,11 @@ import android.widget.TextView;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.games.crazymatch.CrazyMatchActionCreator;
+import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.models.crazymatch.Animal;
 import com.group0536.puzzlemazing.models.crazymatch.Board;
 import com.group0536.puzzlemazing.stores.games.crazymatch.CrazyMatchChangeEvent;
 import com.group0536.puzzlemazing.stores.games.crazymatch.CrazyMatchStore;
-import com.group0536.puzzlemazing.views.FluxActivity;
 import com.group0536.puzzlemazing.views.games.GameActivity;
 import com.group0536.puzzlemazing.views.games.GameFinishedActivity;
 import com.squareup.otto.Subscribe;
@@ -23,6 +23,7 @@ import com.squareup.otto.Subscribe;
 public class CrazyMatchActivity extends GameActivity {
     private CrazyMatchStore store;
     private CrazyMatchActionCreator actionCreator;
+    private User player;
     // The id of the ball drawing
     private int ballDrawingInt;
     private int level;
@@ -34,7 +35,8 @@ public class CrazyMatchActivity extends GameActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        level = getIntent().getIntExtra("level", 0);
+        level = getIntent().getIntExtra("level",0);
+        player = getIntent().getParcelableExtra("player");
         setContentView(store.getContentView(level));
         bindViews();
     }
@@ -91,6 +93,7 @@ public class CrazyMatchActivity extends GameActivity {
             public void onClick(View view) {
                 if (store.canFlip(row, col)) {
                     actionCreator.flip(row, col);
+                    actionCreator.updateScore(store.getPlayer().getToken(), level, store.getScore());
                 }
 
             }
@@ -168,6 +171,7 @@ public class CrazyMatchActivity extends GameActivity {
     protected void initFluxComponents() {
         store = CrazyMatchStore.getInstance(dispatcher);
         actionCreator = new CrazyMatchActionCreator(dispatcher);
+        store.setPlayer(player);
     }
 
     @Override

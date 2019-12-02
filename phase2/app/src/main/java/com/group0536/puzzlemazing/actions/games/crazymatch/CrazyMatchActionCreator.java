@@ -1,12 +1,23 @@
 package com.group0536.puzzlemazing.actions.games.crazymatch;
 
+import android.media.MediaSync;
+
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.ActionCreator;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
+import com.group0536.puzzlemazing.webapi.ServerApi;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class CrazyMatchActionCreator extends ActionCreator implements CrazyMatchActions {
+    private ServerApi serverApi;
     public CrazyMatchActionCreator(Dispatcher dispatcher) {
         super(dispatcher);
+        serverApi = ServerApi.getServerApi();
     }
     /**
      * A card at (row, col) is flipped
@@ -30,5 +41,19 @@ public class CrazyMatchActionCreator extends ActionCreator implements CrazyMatch
                 .load("level", level)
                 .build();
         dispatcher.dispatch(action);
+    }
+
+    public void updateScore(String token, int level, int score){
+        serverApi.performScoreUpdateCrazyMatch(token, level, score, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+            }
+        });
     }
 }

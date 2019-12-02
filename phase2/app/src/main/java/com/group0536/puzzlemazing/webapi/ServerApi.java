@@ -1,5 +1,7 @@
 package com.group0536.puzzlemazing.webapi;
 
+import android.util.JsonReader;
+
 import com.group0536.puzzlemazing.utils.HttpUtil;
 
 import org.json.JSONException;
@@ -38,6 +40,19 @@ public class ServerApi {
             body.put("level", currentLevel);
             body.put("score", score);
         } catch(JSONException e) {
+            e.printStackTrace();
+        }
+        HttpUtil.post(url, body, token, done);
+    }
+
+    public void performScoreUpdateCrazyMatch(String token, int currentLevel,
+                                             int score, Callback done){
+        String url = getURL("/crazy-match");
+        JSONObject body = new JSONObject();
+        try{
+            body.put("level", currentLevel);
+            body.put("score", score);
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         HttpUtil.post(url, body, token, done);
