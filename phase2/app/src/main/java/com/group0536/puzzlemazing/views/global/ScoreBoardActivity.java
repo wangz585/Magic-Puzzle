@@ -1,25 +1,20 @@
-package com.group0536.puzzlemazing.views.scoreboard;
+package com.group0536.puzzlemazing.views.global;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.group0536.puzzlemazing.R;
-import com.group0536.puzzlemazing.actions.scoreboard.ScoreBoardActionCreator;
-import com.group0536.puzzlemazing.stores.scoreboard.ScoreBoardStore;
+import com.group0536.puzzlemazing.actions.global.ScoreBoardActionCreator;
+import com.group0536.puzzlemazing.stores.global.ScoreBoardStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
 import com.group0536.puzzlemazing.views.menu.MenuPageActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ScoreBoardActivity extends FluxActivity implements AdapterView.OnItemSelectedListener {
     private ScoreBoardStore store;

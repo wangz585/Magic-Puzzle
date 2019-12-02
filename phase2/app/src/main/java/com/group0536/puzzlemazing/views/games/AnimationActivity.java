@@ -10,6 +10,7 @@ import android.widget.VideoView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.group0536.puzzlemazing.R;
+import com.group0536.puzzlemazing.views.global.ScoreBoardActivity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -49,7 +50,7 @@ public class AnimationActivity extends AppCompatActivity {
                 com.group0536.puzzlemazing.views.games.busyworker.SelectLevelActivity.class,
                 com.group0536.puzzlemazing.views.games.wordguessing.SelectLevelActivity.class,
                 com.group0536.puzzlemazing.views.games.crazymatch.SelectLevelActivity.class,
-                com.group0536.puzzlemazing.views.scoreboard.ScoreBoardActivity.class);
+                ScoreBoardActivity.class);
     }
 
     /**

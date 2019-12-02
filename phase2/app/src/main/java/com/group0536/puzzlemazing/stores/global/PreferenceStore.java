@@ -2,7 +2,7 @@ package com.group0536.puzzlemazing.stores.global;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.Action;
-import com.group0536.puzzlemazing.actions.preference.PreferenceActions;
+import com.group0536.puzzlemazing.actions.global.PreferenceActions;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;

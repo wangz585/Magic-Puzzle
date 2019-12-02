@@ -1,4 +1,4 @@
-package com.group0536.puzzlemazing.actions.scoreboard;
+package com.group0536.puzzlemazing.actions.global;
 
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.ActionCreator;

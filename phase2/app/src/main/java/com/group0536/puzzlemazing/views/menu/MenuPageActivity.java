@@ -11,8 +11,8 @@ import com.group0536.puzzlemazing.actions.menu.MenuPageActionCreator;
 import com.group0536.puzzlemazing.stores.menu.MenuStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
 import com.group0536.puzzlemazing.views.games.AnimationActivity;
-import com.group0536.puzzlemazing.views.preference.PreferenceActivity;
-import com.group0536.puzzlemazing.views.scoreboard.ScoreBoardActivity;
+import com.group0536.puzzlemazing.views.global.PreferenceActivity;
+import com.group0536.puzzlemazing.views.global.ScoreBoardActivity;
 
 import java.io.Serializable;
 

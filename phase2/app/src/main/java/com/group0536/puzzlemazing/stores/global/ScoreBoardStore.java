@@ -1,9 +1,9 @@
-package com.group0536.puzzlemazing.stores.scoreboard;
+package com.group0536.puzzlemazing.stores.global;
 
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 import com.group0536.puzzlemazing.stores.Store;
-import com.group0536.puzzlemazing.actions.scoreboard.ScoreBoardActions;
+import com.group0536.puzzlemazing.actions.global.ScoreBoardActions;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class ScoreBoardStore extends Store implements ScoreBoardActions {
 
     @Override
     protected StoreChangeEvent getChangeEvent() {
-        return null;
+        return new ScoreBoardStoreChangeEvent();
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.group0536.puzzlemazing.actions.preference;
+package com.group0536.puzzlemazing.actions.global;
 
 public interface PreferenceActions {
     String SET_SOUND = "play-sound";

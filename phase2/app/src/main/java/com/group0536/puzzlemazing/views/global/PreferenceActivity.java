@@ -1,4 +1,4 @@
-package com.group0536.puzzlemazing.views.preference;
+package com.group0536.puzzlemazing.views.global;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +9,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 import com.group0536.puzzlemazing.R;
-import com.group0536.puzzlemazing.actions.preference.PreferenceActionCreator;
+import com.group0536.puzzlemazing.actions.global.PreferenceActionCreator;
 import com.group0536.puzzlemazing.stores.global.PreferenceStore;
 import com.group0536.puzzlemazing.utils.MusicPlayer;
 import com.group0536.puzzlemazing.views.FluxActivity;
