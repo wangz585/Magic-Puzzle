@@ -12,3 +12,5 @@ in our documentation: https://v2.puzzlemazing.online.
 
 You can also find copies of our team schedule, server documentation, etc in the
 above URL.
+
+Start from welcome activity.
