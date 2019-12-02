@@ -183,8 +183,9 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
                     dispatcher.dispatch(action);
                     return;
                 }
-                String errorPrefix = context.getString(R.string.app_init_login_error);
-                String errorMessage = errorPrefix + response.message();
+                String errorPrefix = context.getString(R.string.app_init_register_error);
+                String errorMessage = String.format(errorPrefix,
+                        Parser.retrieveErrorMessage(response));
                 dispatchErrorAction(LOG_IN, errorMessage);
             }
         });

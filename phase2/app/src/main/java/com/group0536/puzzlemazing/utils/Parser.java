@@ -33,6 +33,23 @@ public final class Parser {
         return new JSONObject(bodyString);
     }
 
+    /**
+     * Retrieve error message from an error response.
+     * @param response error response with an attribute "error".
+     * @return the error message if one was found, empty string if error attribute
+     * does not exist.
+     */
+    public static String retrieveErrorMessage(Response response) {
+        String errorMessage = "";
+        try {
+            JSONObject res = parseResponseBody(response);
+            errorMessage = res.getString("error");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return errorMessage;
+    }
+
 
     /**
      * get JSON attribute and return its value
