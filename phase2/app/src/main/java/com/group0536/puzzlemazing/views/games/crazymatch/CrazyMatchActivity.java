@@ -34,9 +34,19 @@ public class CrazyMatchActivity extends GameActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        playPopupVideo();
         level = getIntent().getIntExtra("level", 0);
         setContentView(store.getContentView(level));
         bindViews();
+    }
+
+    private void playPopupVideo() {
+        findViewById(R.id.layoutWordGuessing).post(new Runnable() {
+            @Override
+            public void run() {
+                playIntro(R.raw.challenge1);
+            }
+        });
     }
 
     /**
