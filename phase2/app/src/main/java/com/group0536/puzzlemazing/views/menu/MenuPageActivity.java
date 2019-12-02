@@ -10,7 +10,7 @@ import com.group0536.puzzlemazing.actions.ActionCreator;
 import com.group0536.puzzlemazing.actions.menu.MenuPageActionCreator;
 import com.group0536.puzzlemazing.stores.menu.MenuStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
-import com.group0536.puzzlemazing.views.animation.AnimationActivity;
+import com.group0536.puzzlemazing.views.games.AnimationActivity;
 import com.group0536.puzzlemazing.views.preference.PreferenceActivity;
 import com.group0536.puzzlemazing.views.scoreboard.ScoreBoardActivity;
 
