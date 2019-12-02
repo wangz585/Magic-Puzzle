@@ -25,7 +25,7 @@ public class GameView extends FluxView {
 
     private BusyWorkerStore store;
     private BusyWorkerActionCreator actionCreator;
-    private int CellWidth;
+    private int cellWidth;
 
     public GameView(Context context) {
         super(context);
@@ -80,14 +80,16 @@ public class GameView extends FluxView {
         Paint linePaint = new Paint();
         linePaint.setColor(Color.BLACK);
         int maxRow = store.getMap().getWidth();
-        for (int row = 0; row <= maxRow; row++)
-            canvas.drawLine(0, row * CellWidth,
-                    getWidth(), row * CellWidth, linePaint);
-        int maxCol = getWidth()/CellWidth;
-        for (int column = 0; column <= maxCol; column++)
-            canvas.drawLine(column * CellWidth, 0,
-                    column * CellWidth,
-                    maxRow * CellWidth, linePaint);
+        for (int row = 0; row <= maxRow; row++) {
+            canvas.drawLine(0, row * cellWidth,
+                    getWidth(), row * cellWidth, linePaint);
+        }
+        int maxCol = getWidth() / cellWidth;
+        for (int column = 0; column <= maxCol; column++) {
+            canvas.drawLine(column * cellWidth, 0,
+                    column * cellWidth,
+                    maxRow * cellWidth, linePaint);
+        }
     }
 
     /**
@@ -172,8 +174,8 @@ public class GameView extends FluxView {
         txtPaint.setColor(Color.BLACK);
         txtPaint.setTextSize(100.0f);
         canvas.drawText(getContext().getString(R.string.busy_worker_time),
-                3 * CellWidth, 15 * CellWidth, txtPaint);
-        canvas.drawText(String.valueOf(store.getTimeUsed()), 5 * CellWidth, 16 * CellWidth, txtPaint);
+                3 * cellWidth, 15 * cellWidth, txtPaint);
+        canvas.drawText(String.valueOf(store.getTimeUsed()), 5 * cellWidth, 16 * cellWidth, txtPaint);
     }
 
     /**
@@ -186,15 +188,15 @@ public class GameView extends FluxView {
         txtPaint.setColor(Color.RED);
         txtPaint.setTextSize(100.0f);
         canvas.drawText(getContext().getString(R.string.busy_worker_score),
-                1 * CellWidth, 18 * CellWidth, txtPaint);
-        canvas.drawText(String.valueOf(store.getScore()), 5 * CellWidth, 19 * CellWidth, txtPaint);
+                cellWidth, 18 * cellWidth, txtPaint);
+        canvas.drawText(String.valueOf(store.getScore()), 5 * cellWidth, 19 * cellWidth, txtPaint);
     }
 
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() != MotionEvent.ACTION_DOWN) return true;
-        Point position = new Point((int) event.getX() / CellWidth, (int) event.getY() / CellWidth);
+        Point position = new Point((int) event.getX() / cellWidth, (int) event.getY() / cellWidth);
         actionCreator.move(position);
         return true;
     }
@@ -202,18 +204,11 @@ public class GameView extends FluxView {
     @Override
     protected void onSizeChanged(int newWidth, int newHeight, int oldWidth, int oldHeight) {
         super.onSizeChanged(newWidth, newHeight, oldWidth, oldHeight);
-        CellWidth = newHeight / store.getMap().getHeight();
+        cellWidth = newHeight / store.getMap().getHeight();
     }
 
     @Subscribe
-    public void update(BusyWorkerChangeEvent e) {
-        updateUI();
-    }
-
-    /**
-     * Update the UI
-     */
-    private void updateUI() {
+    public void onBusyWorkerStoreChange(BusyWorkerChangeEvent e) {
         postInvalidate();
     }
 
@@ -225,10 +220,10 @@ public class GameView extends FluxView {
      * @return the rectangle whose left up corner is (x,y) and side length of 1
      */
     private Rect getRect(int x, int y) {
-        int left = x * CellWidth;
-        int top = y * CellWidth;
-        int right = (x + 1) * CellWidth;
-        int bottom = (y + 1) * CellWidth;
+        int left = x * cellWidth;
+        int top = y * cellWidth;
+        int right = (x + 1) * cellWidth;
+        int bottom = (y + 1) * cellWidth;
         return new Rect(left, top, right, bottom);
     }
 }

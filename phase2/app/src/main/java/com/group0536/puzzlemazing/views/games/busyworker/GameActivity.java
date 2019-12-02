@@ -32,12 +32,10 @@ public class GameActivity extends FluxActivity {
     }
 
     @Subscribe
-    public void update(BusyWorkerChangeEvent e) {
-        updateUI();
-    }
-
-    private void updateUI() {
-        checkGameFinished();
+    public void onBusyWorkerStoreChange(BusyWorkerChangeEvent e) {
+        if (store.checkWin() || store.checkLose()) {
+            showGameResult();
+        }
     }
 
     @Override
@@ -53,14 +51,13 @@ public class GameActivity extends FluxActivity {
     }
 
     /**
-     * Check if the game is finished
+     * Show an activity informing the user about the game result.
      */
-    private void checkGameFinished(){
-        if (store.checkWin() || store.checkLose()){
-            Intent intent = new Intent(GameActivity.this, GameFinishedActivity.class);
-            intent.putExtra("score", store.getScore());
-            intent.putExtra("challenge", 1);
-            startActivity(intent);
-        }
+    private void showGameResult(){
+        Intent intent = new Intent(GameActivity.this, GameFinishedActivity.class);
+        // TODO Remove the following two lines
+        intent.putExtra("score", store.getScore());
+        intent.putExtra("challenge", 1);
+        startActivity(intent);
     }
 }
