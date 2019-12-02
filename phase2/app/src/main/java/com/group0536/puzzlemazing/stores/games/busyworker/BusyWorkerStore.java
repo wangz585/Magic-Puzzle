@@ -6,10 +6,8 @@ import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.games.busyworker.BusyWorkerActions;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 import com.group0536.puzzlemazing.models.busyworker.Map;
-import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
 import com.group0536.puzzlemazing.stores.games.GameStore;
-import com.group0536.puzzlemazing.views.games.VideoPopup;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
@@ -25,10 +23,11 @@ public class BusyWorkerStore extends GameStore implements BusyWorkerActions {
     private int score;
     private Point currentWorkerPosition;
     private Point currentBoxPosition;
-    private int timeUsed;
+    private int difficultyLevel;
     private BusyWorkerInitController initController = new BusyWorkerInitController();
+    private boolean isGameOver;
 
-    protected BusyWorkerStore(Dispatcher dispatcher) {
+    private BusyWorkerStore(Dispatcher dispatcher) {
         super(dispatcher);
     }
 
@@ -42,20 +41,29 @@ public class BusyWorkerStore extends GameStore implements BusyWorkerActions {
     @Override
     public void onAction(Action action) {
         switch (action.getType()) {
-            case MOVE:
-                Point touchPosition = (Point) action.getPayloadEntry("position");
-                move(touchPosition);
-                updateScore();
-                postChange();
+            case INIT:
+                initGame();
                 break;
-            case INIT_MAP:
-                int level = (int) action.getPayloadEntry("level");
-                initMap(level);
-                initCurrentPosition();
-                initScore();
-                postChange();
+            case SELECT_DIFFICULTY:
+                setDifficulty(action);
+                break;
+            case MOVE:
+                move(action);
+                updateScore();
+                reactIfGameEnd();
                 break;
         }
+        postChange();
+    }
+
+    private void initGame() {
+        initMap();
+        initCurrentPosition();
+        initScore();
+    }
+
+    private void setDifficulty(Action action) {
+        difficultyLevel = (int) action.getPayloadEntry(KEY_DIFFICULTY);
     }
 
     private void initScore() {
@@ -68,16 +76,13 @@ public class BusyWorkerStore extends GameStore implements BusyWorkerActions {
      */
     private void updateScore() {
         score--;
-
     }
 
     /**
      * Initialize the game map of the given level
-     *
-     * @param level the level of the game
      */
-    private void initMap(int level) {
-        HashMap<Object, String[]> levelData = initController.getLevelData(level);
+    private void initMap() {
+        HashMap<Object, String[]> levelData = initController.getLevelData(difficultyLevel);
         String[] rawMap = levelData.get("ContentView");
         this.map = new Map();
         initLabels(rawMap);
@@ -207,12 +212,19 @@ public class BusyWorkerStore extends GameStore implements BusyWorkerActions {
         map.setHeight(rawMap.length);
     }
 
+    private void reactIfGameEnd() {
+        if (isWon()) {
+            user.setLevel(user.getLevel() + 1);
+        }
+        isGameOver = isWon() || isLose();
+    }
+
     /**
      * Check whether the player has win the game
      *
      * @return whether win the game or not
      */
-    public boolean checkWin() {
+    private boolean isWon() {
         return currentBoxPosition.equals(map.getFlagPosition());
     }
 
@@ -221,7 +233,7 @@ public class BusyWorkerStore extends GameStore implements BusyWorkerActions {
      *
      * @return whether lose the game or can not move
      */
-    public boolean checkLose() {
+    private boolean isLose() {
         for (Point deadPostion : map.getDeadPositions()) {
             if (deadPostion.equals(currentBoxPosition)) return true;
         }
@@ -232,9 +244,10 @@ public class BusyWorkerStore extends GameStore implements BusyWorkerActions {
      * Make the worker move and push the box at the same time(if possible)
      * when a user touch the screen
      *
-     * @param touchPosition where the user touch the screen
+     * @param action the action that triggers the move.
      */
-    private void move(Point touchPosition) {
+    private void move(Action action) {
+        Point touchPosition = (Point) action.getPayloadEntry(KEY_POSITION);
         String HorizontalDirection = checkHorizontalPosition(touchPosition);
         String VerticalDirection = checkVerticalPosition(touchPosition);
         switch (HorizontalDirection) {
@@ -536,14 +549,5 @@ public class BusyWorkerStore extends GameStore implements BusyWorkerActions {
      */
     public int getScore() {
         return score;
-    }
-
-    /**
-     * Get total time used in the game
-     *
-     * @return amount of time used in the game
-     */
-    public int getTimeUsed() {
-        return timeUsed;
     }
 }

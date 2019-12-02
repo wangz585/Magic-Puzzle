@@ -71,7 +71,6 @@ public class MenuActivity extends FluxActivity {
     private void initializeSettingButton() {
         btnSetting = findViewById(R.id.btnSetting);
         btnSetting.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MenuActivity.this, PreferenceActivity.class);

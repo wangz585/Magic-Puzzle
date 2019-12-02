@@ -11,7 +11,7 @@ import com.squareup.otto.Subscribe;
 public class GameStore extends Store implements AppInitializeActions {
     private static GameStore instance;
 
-    private User user;
+    protected User user;
 
     public User getUser() {
         return user;
