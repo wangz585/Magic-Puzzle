@@ -40,7 +40,7 @@ public class SelectLevelActivity extends FluxActivity {
             @Override
             public void onClick(View view) {
                 actionCreator.initMap(2);
-                Intent intent = new Intent(SelectLevelActivity.this, GameActivity.class);
+                Intent intent = new Intent(SelectLevelActivity.this, BusyWorkerActivity.class);
                 startActivity(intent);
             }
         });
@@ -56,7 +56,7 @@ public class SelectLevelActivity extends FluxActivity {
             @Override
             public void onClick(View view) {
                 actionCreator.initMap(1);
-                Intent intent = new Intent(SelectLevelActivity.this, GameActivity.class);
+                Intent intent = new Intent(SelectLevelActivity.this, BusyWorkerActivity.class);
                 startActivity(intent);
             }
         });

@@ -9,9 +9,9 @@ import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.actions.games.wordguessing.WordGuessingActionCreator;
 import com.group0536.puzzlemazing.stores.games.wordguessing.WordGuessingGameStore;
-import com.group0536.puzzlemazing.views.FluxActivity;
+import com.group0536.puzzlemazing.views.games.GameActivity;
 
-public class SelectLevelActivity extends FluxActivity {
+public class SelectLevelActivity extends GameActivity {
 
     private WordGuessingActionCreator actionCreator;
     private WordGuessingGameStore store;

@@ -48,7 +48,7 @@ public class SelectLevelActivity extends FluxActivity {
             public void onClick(View view) {
                 int level = 2;
                 actionCreator.initializeBoard(level);
-                Intent intent = new Intent(SelectLevelActivity.this, GameActivity.class);
+                Intent intent = new Intent(SelectLevelActivity.this, CrazyMatchActivity.class);
                 intent.putExtra("level", level);
                 startActivity(intent);
             }
@@ -66,7 +66,7 @@ public class SelectLevelActivity extends FluxActivity {
             public void onClick(View view) {
                 int level = 1;
                 actionCreator.initializeBoard(level);
-                Intent intent = new Intent(SelectLevelActivity.this, GameActivity.class);
+                Intent intent = new Intent(SelectLevelActivity.this, CrazyMatchActivity.class);
                 intent.putExtra("level", level);
                 startActivity(intent);
             }

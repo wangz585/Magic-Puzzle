@@ -21,13 +21,13 @@ import com.squareup.otto.Subscribe;
 /**
  * This is a game view class responsible for drawing elements in the game
  */
-public class GameView extends FluxView {
+public class BusyWorkerView extends FluxView {
 
     private BusyWorkerStore store;
     private BusyWorkerActionCreator actionCreator;
     private int cellWidth;
 
-    public GameView(Context context) {
+    public BusyWorkerView(Context context) {
         super(context);
         BitMap.initBitmaps(getResources());
     }

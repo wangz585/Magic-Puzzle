@@ -13,13 +13,14 @@ import com.group0536.puzzlemazing.models.crazymatch.Board;
 import com.group0536.puzzlemazing.stores.games.crazymatch.CrazyMatchChangeEvent;
 import com.group0536.puzzlemazing.stores.games.crazymatch.CrazyMatchStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
+import com.group0536.puzzlemazing.views.games.GameActivity;
 import com.group0536.puzzlemazing.views.games.GameFinishedActivity;
 import com.squareup.otto.Subscribe;
 
 /**
  * This is an activity for the crazy match game
  */
-public class GameActivity extends FluxActivity {
+public class CrazyMatchActivity extends GameActivity {
     private CrazyMatchStore store;
     private CrazyMatchActionCreator actionCreator;
     // The id of the ball drawing
@@ -107,7 +108,7 @@ public class GameActivity extends FluxActivity {
      */
     private void checkGameOver() {
         if (store.isGameOver()) {
-            Intent intent = new Intent(GameActivity.this, GameFinishedActivity.class);
+            Intent intent = new Intent(CrazyMatchActivity.this, GameFinishedActivity.class);
             intent.putExtra("score", store.getScore());
             intent.putExtra("challenge", 3);
             startActivity(intent);
@@ -128,7 +129,7 @@ public class GameActivity extends FluxActivity {
     private void updateScore() {
         int score = store.getScore();
         final String scoreText = getString(R.string.display_score, score);
-        GameActivity.this.runOnUiThread(new Runnable() {
+        CrazyMatchActivity.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 txtScore.setText(scoreText);
@@ -151,7 +152,7 @@ public class GameActivity extends FluxActivity {
                     int animalSide = board.getAnimal(i, j).getAnimalSide();
                     btn.setImageResource(animalSide);
                 } else {
-                    GameActivity.this.runOnUiThread(new Runnable() {
+                    CrazyMatchActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             btn.setImageResource(ballDrawingInt);

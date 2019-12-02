@@ -7,28 +7,27 @@ import com.group0536.puzzlemazing.actions.games.busyworker.BusyWorkerActionCreat
 import com.group0536.puzzlemazing.stores.games.busyworker.BusyWorkerChangeEvent;
 import com.group0536.puzzlemazing.stores.games.busyworker.BusyWorkerStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
+import com.group0536.puzzlemazing.views.games.GameActivity;
 import com.group0536.puzzlemazing.views.games.GameFinishedActivity;
 import com.squareup.otto.Subscribe;
 
 /**
  * This is an activity for the busy worker game
  */
-public class GameActivity extends FluxActivity {
+public class BusyWorkerActivity extends GameActivity {
 
     private BusyWorkerStore store;
-    private BusyWorkerActionCreator actionCreator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        GameView gameView = new GameView(this);
-        setContentView(gameView);
+        BusyWorkerView busyWorkerView = new BusyWorkerView(this);
+        setContentView(busyWorkerView);
     }
 
     @Override
     protected void initFluxComponents() {
         store = BusyWorkerStore.getInstance(dispatcher);
-        actionCreator = new BusyWorkerActionCreator(dispatcher);
     }
 
     @Subscribe
@@ -54,7 +53,7 @@ public class GameActivity extends FluxActivity {
      * Show an activity informing the user about the game result.
      */
     private void showGameResult(){
-        Intent intent = new Intent(GameActivity.this, GameFinishedActivity.class);
+        Intent intent = new Intent(BusyWorkerActivity.this, GameFinishedActivity.class);
         // TODO Remove the following two lines
         intent.putExtra("score", store.getScore());
         intent.putExtra("challenge", 1);
