@@ -9,7 +9,6 @@ import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.models.crazymatch.Animal;
 import com.group0536.puzzlemazing.models.crazymatch.Board;
-import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
 import com.group0536.puzzlemazing.stores.games.GameStore;
 import com.squareup.otto.Subscribe;
@@ -58,7 +57,7 @@ public class CrazyMatchStore extends GameStore implements CrazyMatchActions {
 
     @Override
     protected StoreChangeEvent getChangeEvent() {
-        return new CrazyMatchChangeEvent();
+        return new CrazyMatchStoreChangeEvent();
     }
 
     @Override

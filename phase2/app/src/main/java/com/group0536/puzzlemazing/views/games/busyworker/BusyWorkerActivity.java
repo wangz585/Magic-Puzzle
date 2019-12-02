@@ -2,11 +2,14 @@ package com.group0536.puzzlemazing.views.games.busyworker;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.Gravity;
+import android.widget.PopupWindow;
 
+import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.games.busyworker.BusyWorkerActionCreator;
 import com.group0536.puzzlemazing.stores.games.busyworker.BusyWorkerChangeEvent;
 import com.group0536.puzzlemazing.stores.games.busyworker.BusyWorkerStore;
-import com.group0536.puzzlemazing.views.FluxActivity;
 import com.group0536.puzzlemazing.views.games.GameActivity;
 import com.group0536.puzzlemazing.views.games.GameFinishedActivity;
 import com.squareup.otto.Subscribe;
@@ -23,10 +26,17 @@ public class BusyWorkerActivity extends GameActivity {
         super.onCreate(savedInstanceState);
         BusyWorkerView busyWorkerView = new BusyWorkerView(this);
         setContentView(busyWorkerView);
+        busyWorkerView.post(new Runnable() {
+            @Override
+            public void run() {
+                playIntro(R.raw.challenge2);
+            }
+        });
     }
 
     @Override
     protected void initFluxComponents() {
+        super.initFluxComponents();
         store = BusyWorkerStore.getInstance(dispatcher);
     }
 
