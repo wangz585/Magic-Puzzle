@@ -19,7 +19,7 @@ import java.io.Serializable;
 /**
  * This is a main menu activity
  */
-public class MenuPageActivity extends FluxActivity {
+public class MenuActivity extends FluxActivity {
     // Components
     private Button btnEnter;
     private Button btnSetting;
@@ -58,8 +58,8 @@ public class MenuPageActivity extends FluxActivity {
         btnScoreBoard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MenuPageActivity.this, ScoreBoardActivity.class);
-                MenuPageActivity.this.startActivity(intent);
+                Intent intent = new Intent(MenuActivity.this, ScoreBoardActivity.class);
+                MenuActivity.this.startActivity(intent);
             }
         });
     }
@@ -73,9 +73,9 @@ public class MenuPageActivity extends FluxActivity {
 
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MenuPageActivity.this, PreferenceActivity.class);
-                intent.putExtra("User", (Serializable) store.getPlayer());
-                MenuPageActivity.this.startActivity(intent);
+                Intent intent = new Intent(MenuActivity.this, PreferenceActivity.class);
+                intent.putExtra("User", (Serializable) store.getUser());
+                MenuActivity.this.startActivity(intent);
 
             }
         });
@@ -92,7 +92,7 @@ public class MenuPageActivity extends FluxActivity {
                 // If the user just registered, play the animation and go to the page to choose game
 
                 // otherwise, go to the page to select game
-                Intent intent = new Intent(MenuPageActivity.this, AnimationActivity.class);
+                Intent intent = new Intent(MenuActivity.this, AnimationActivity.class);
                 intent.putExtra("challenge", 0);
                 startActivity(intent);
             }

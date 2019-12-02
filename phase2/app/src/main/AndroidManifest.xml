@@ -113,7 +113,7 @@
       </intent-filter>
     </activity>
     <activity
-        android:name=".views.menu.MenuPageActivity"
+        android:name=".views.menu.MenuActivity"
         android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.group0536.puzzlemazing.R;
-import com.group0536.puzzlemazing.views.menu.MenuPageActivity;
+import com.group0536.puzzlemazing.views.menu.MenuActivity;
 import com.group0536.puzzlemazing.views.appinit.AppInitializeActivity;
 
 /**
@@ -59,7 +59,7 @@ public class GameFinishedActivity extends AppInitializeActivity {
         btnMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GameFinishedActivity.this, MenuPageActivity.class);
+                Intent intent = new Intent(GameFinishedActivity.this, MenuActivity.class);
                 startActivity(intent);
             }
         });

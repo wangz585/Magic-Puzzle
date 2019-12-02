@@ -14,7 +14,7 @@ import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.global.ScoreBoardActionCreator;
 import com.group0536.puzzlemazing.stores.global.ScoreBoardStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
-import com.group0536.puzzlemazing.views.menu.MenuPageActivity;
+import com.group0536.puzzlemazing.views.menu.MenuActivity;
 
 public class ScoreBoardActivity extends FluxActivity implements AdapterView.OnItemSelectedListener {
     private ScoreBoardStore store;
@@ -67,7 +67,7 @@ public class ScoreBoardActivity extends FluxActivity implements AdapterView.OnIt
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(ScoreBoardActivity.this,
-                        MenuPageActivity.class);
+                        MenuActivity.class);
                 startActivity(intent);
             }
         });

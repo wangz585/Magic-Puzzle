@@ -29,7 +29,7 @@ public class AnimationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
-        setContentView(R.layout.activity_animation);
+        setContentView(R.layout.popup_video);
         bindViews();
     }
 

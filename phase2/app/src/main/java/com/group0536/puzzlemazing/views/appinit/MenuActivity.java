@@ -7,7 +7,6 @@ import android.content.pm.ActivityInfo;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Menu;
 import android.widget.VideoView;
 
 import com.group0536.puzzlemazing.R;
