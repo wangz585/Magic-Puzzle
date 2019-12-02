@@ -35,12 +35,11 @@ public class ServerApi {
         String url = getURL("/word-guessing");
         JSONObject body = new JSONObject();
         try {
-            body.put("token", token);
             body.put("level", currentLevel);
             body.put("score", score);
         } catch(JSONException e) {
             e.printStackTrace();
         }
-        HttpUtil.post(url, body, done);
+        HttpUtil.post(url, body, token, done);
     }
 }
