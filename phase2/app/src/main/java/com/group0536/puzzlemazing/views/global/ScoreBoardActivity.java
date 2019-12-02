@@ -15,8 +15,10 @@ import android.widget.TextView;
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.global.ScoreBoardActionCreator;
 import com.group0536.puzzlemazing.stores.global.ScoreBoardStore;
+import com.group0536.puzzlemazing.stores.global.ScoreBoardStoreChangeEvent;
 import com.group0536.puzzlemazing.views.FluxActivity;
 import com.group0536.puzzlemazing.views.menu.MenuActivity;
+import com.squareup.otto.Subscribe;
 
 import java.util.List;
 
@@ -82,38 +84,37 @@ public class ScoreBoardActivity extends FluxActivity implements AdapterView.OnIt
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         String scoreType = adapterView.getItemAtPosition(i).toString();
         actionCreator.chooseScoreType(scoreType);
-        upDateUI(scoreType);
     }
 
-    private void upDateUI(String scoreType) {
+    @Subscribe
+    public void update(ScoreBoardStoreChangeEvent e){
+        upDateUI();
+    }
+    private void upDateUI() {
         table.removeViews(1, table.getChildCount()-1);
         List<List> usersWithScoresData = store.getUsersWithScores();
-//        for(int row = 0; row < 3; row++){
-//            List currentUser = usersWithScoresData.get(row);
-//            usersWithScores.get(row).get(0).setText((String) currentUser.get(0));
-//            usersWithScores.get(row).get(1).setText((Integer) currentUser.get(1));
-//        }
-//        for(int i = 0; i < usersWithScoresData.size(); i++){
-//            TableRow row = new TableRow(this);
-//            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
-//            lp.weight=1f;
-//            row.setLayoutParams(lp);
-//            row.setWeightSum(2);
-//            TextView userName = new TextView(this);
-//            userName.setGravity(Gravity.CENTER);
-//            userName.setText((String) usersWithScoresData.get(i).get(0));
-//            userName.setWidth(10);
-//            userName.setLayoutParams(lp);
-//            TextView userScore = new TextView(this);
-//            userScore.setGravity(Gravity.CENTER);
-//            userScore.setText(String.valueOf(usersWithScoresData.get(i).get(1)));
-//            userScore.setLayoutParams(lp);
-//            row.addView(userName);
-//            row.addView(userScore);
-//            table.addView(row);
-//
-//        }
-        String txtIdScoreType = scoreType.substring(8);
+
+        for(int i = 0; i < usersWithScoresData.size(); i++){
+            TableRow row = new TableRow(this);
+            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT);
+            lp.weight=1f;
+            row.setLayoutParams(lp);
+            row.setWeightSum(2);
+            TextView userName = new TextView(this);
+            userName.setGravity(Gravity.CENTER);
+            userName.setText((String) usersWithScoresData.get(i).get(0));
+            userName.setWidth(10);
+            userName.setLayoutParams(lp);
+            TextView userScore = new TextView(this);
+            userScore.setGravity(Gravity.CENTER);
+            userScore.setText(String.valueOf(usersWithScoresData.get(i).get(1)));
+            userScore.setLayoutParams(lp);
+            row.addView(userName);
+            row.addView(userScore);
+            table.addView(row);
+
+        }
+        String txtIdScoreType = store.getScoreType().substring(8);
         tableScoreType.setText(txtIdScoreType);
     }
 

@@ -3,6 +3,7 @@ package com.group0536.puzzlemazing.webapi;
 
 import com.group0536.puzzlemazing.utils.HttpUtil;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -57,9 +58,10 @@ public class ServerApi {
         HttpUtil.post(url, body, token, done);
     }
 
-    public JSONObject getTop3PlayersWithScores(String scoreType, Callback callback) {
+    public JSONArray getTop3PlayersWithScores(String scoreType, Callback callback) {
         String url = getURL("/top-3-players" + scoreType);
-        JSONObject returnData = new JSONObject();
+        JSONArray returnData = new JSONArray();
+//         TODO : Change this when server is changed
 //        JSONObject returnData = HttpUtil.get(url, callback);
         return returnData;
     }

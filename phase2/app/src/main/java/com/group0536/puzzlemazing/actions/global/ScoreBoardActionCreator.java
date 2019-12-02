@@ -5,6 +5,7 @@ import com.group0536.puzzlemazing.actions.ActionCreator;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 import com.group0536.puzzlemazing.webapi.ServerApi;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class ScoreBoardActionCreator extends ActionCreator implements ScoreBoard
     }
 
     public void chooseScoreType(String scoreType){
-        JSONObject top3PlayersWithScores = serverApi.getTop3PlayersWithScores(scoreType, new Callback(){
+        JSONArray top3PlayersWithScores = serverApi.getTop3PlayersWithScores(scoreType, new Callback(){
 
             @Override
             public void onFailure(Call call, IOException e) {
