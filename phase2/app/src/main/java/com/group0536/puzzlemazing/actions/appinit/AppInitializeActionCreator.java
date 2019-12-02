@@ -9,6 +9,7 @@ import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.ActionCreator;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 import com.group0536.puzzlemazing.models.User;
+import com.group0536.puzzlemazing.webapi.AuthApi;
 import com.group0536.puzzlemazing.webapi.ServerApi;
 import com.group0536.puzzlemazing.utils.Parser;
 
@@ -24,12 +25,12 @@ import okhttp3.Response;
 public class AppInitializeActionCreator extends ActionCreator implements AppInitializeActions {
     private static AppInitializeActionCreator instance;
 
-    private ServerApi serverApi;
+    private AuthApi authApi;
     private Context context;
 
     private AppInitializeActionCreator(Dispatcher dispatcher, Context context) {
         super(dispatcher);
-        serverApi = ServerApi.getServerApi();
+        authApi = AuthApi.getAuthApi();
         this.context = context;
     }
 
@@ -96,7 +97,7 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
     }
 
     public void checkUpdate() {
-        serverApi.performUpdateCheck(new Callback() {
+        authApi.performUpdateCheck(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 dispatchNetworkErrorAction(CHECK_UPDATE);
@@ -121,7 +122,7 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
     }
 
     public void verifyToken(String token) {
-        serverApi.performTokenValidation(token, new Callback() {
+        authApi.performTokenValidation(token, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 dispatchNetworkErrorAction(LOAD_SAVED_TOKEN);
@@ -144,7 +145,7 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
     }
 
     public void logIn(String username, String password) {
-        serverApi.performLogIn(username, password, new Callback() {
+        authApi.performLogIn(username, password, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 dispatchNetworkErrorAction(LOG_IN);
@@ -167,7 +168,7 @@ public class AppInitializeActionCreator extends ActionCreator implements AppInit
     }
 
     public void register(String username, String password) {
-        serverApi.performRegister(username, password, new Callback() {
+        authApi.performRegister(username, password, new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
                 dispatchNetworkErrorAction(REGISTER);
