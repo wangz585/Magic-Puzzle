@@ -37,9 +37,23 @@ public class CrazyMatchStore extends GameStore implements CrazyMatchActions {
     protected CrazyMatchStore(Dispatcher dispatcher) {
         super(dispatcher);
         populateAnimalDrawables();
-        // TODO: pass in a player
-//        this.player = player;
         setLevelToDimension();
+    }
+
+    /**
+     * Get the current player
+     * @return current player
+     */
+    public User getPlayer() {
+        return player;
+    }
+
+    /**
+     * Set the current player
+     * @param player current player
+     */
+    public void setPlayer(User player) {
+        this.player = player;
     }
 
     /**

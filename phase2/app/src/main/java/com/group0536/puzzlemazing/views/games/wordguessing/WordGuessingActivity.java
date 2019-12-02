@@ -27,8 +27,9 @@ public class WordGuessingActivity extends GameActivity {
     // Components
     private ImageButton btnNext;
     private EditText txtPuzzle;
-    private TextView txtEmoji;
+    private TextView txtHint;
     private TextView countDownTimeLeft;
+    private int currentLevel;
 
     public WordGuessingActivity() {
     }
@@ -37,6 +38,7 @@ public class WordGuessingActivity extends GameActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_guessing);
+        this.currentLevel = getIntent().getIntExtra("level", 1);
         bindViews();
         findViewById(R.id.layoutWordGuessing).post(new Runnable() {
             @Override
@@ -52,7 +54,7 @@ public class WordGuessingActivity extends GameActivity {
     private void bindViews() {
         initializeNextButton();
         initializeAnswerText();
-        initializeEmojiText();
+        initializeHintText();
         initializeTimeLeft();
     }
 
@@ -64,6 +66,7 @@ public class WordGuessingActivity extends GameActivity {
                 if (store.isGameStarted()) {
                     String userAnswer = txtPuzzle.getText().toString();
                     actionCreator.submitAnswer(userAnswer);
+                    actionCreator.updateScore(currentLevel, store.getScore(), store.getPlayer().getToken());
                 }
                 else {
                     actionCreator.startGame();
@@ -74,7 +77,6 @@ public class WordGuessingActivity extends GameActivity {
         });
 
     }
-
     private CountDownTimer countDownTimer = new CountDownTimer(120000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
@@ -104,8 +106,8 @@ public class WordGuessingActivity extends GameActivity {
         txtPuzzle = findViewById(R.id.txt_word);
     }
 
-    private void initializeEmojiText() {
-        txtEmoji = findViewById(R.id.txt_emoji);
+    private void initializeHintText() {
+        txtHint = findViewById(R.id.txt_hint);
     }
 
 
@@ -142,9 +144,11 @@ public class WordGuessingActivity extends GameActivity {
 
     private void updateUI() {
         updatePuzzle();
-        updateScore();
     }
 
+    /**
+     * Update the word for guessing
+     */
     private void updatePuzzle() {
         StringBuilder myPuzzle = new StringBuilder();
         List<Character> puzzle = store.getPuzzle();
@@ -153,11 +157,7 @@ public class WordGuessingActivity extends GameActivity {
         }
         txtPuzzle.setText("");
         txtPuzzle.setHint(myPuzzle);
-        txtEmoji.setText(store.getHint());
+        txtHint.setText(store.getHint());
 
-    }
-
-    private void updateScore() {
-        //TODO
     }
 }

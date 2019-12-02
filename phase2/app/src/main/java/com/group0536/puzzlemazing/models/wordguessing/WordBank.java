@@ -6,10 +6,18 @@ import java.util.Random;
 public class WordBank {
     private List<Word> vocabulary;
 
+    /**
+     * Initialize a word bank
+     * @param vocabulary a list of word for the word bank
+     */
     public WordBank(List<Word> vocabulary) {
         this.vocabulary = vocabulary;
     }
 
+    /**
+     * Return the vocabulary
+     * @return vocabulary
+     */
     public List<Word> getVocabulary() {
         return vocabulary;
     }
@@ -31,6 +39,10 @@ public class WordBank {
         return newWordForGuessing;
     }
 
+    /**
+     * Check if there is no more word that is not guessed
+     * @return a boolean to show whether there is more word or no
+     */
     public boolean noMoreWord(){
         boolean moreWord = true;
         for(Word word : vocabulary){
