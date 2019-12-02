@@ -57,7 +57,6 @@ public class BusyWorkerView extends FluxView {
         drawSurface(canvas);
         drawGameBoard(canvas);
         drawScore(canvas);
-        drawTime(canvas);
     }
 
     /**
@@ -162,20 +161,6 @@ public class BusyWorkerView extends FluxView {
                 BitMap.getFlagBitmap().getWidth(), BitMap.getFlagBitmap().getHeight());
         canvas.drawBitmap(BitMap.getFlagBitmap(),
                 srcRect, destRect, null);
-    }
-
-    /**
-     * Draw the time in the game map of BusyWorker
-     *
-     * @param canvas the canvas we draw on
-     */
-    private void drawTime(Canvas canvas) {
-        Paint txtPaint = new Paint();
-        txtPaint.setColor(Color.BLACK);
-        txtPaint.setTextSize(100.0f);
-        canvas.drawText(getContext().getString(R.string.busy_worker_time),
-                3 * cellWidth, 15 * cellWidth, txtPaint);
-        canvas.drawText(String.valueOf(store.getTimeUsed()), 5 * cellWidth, 16 * cellWidth, txtPaint);
     }
 
     /**

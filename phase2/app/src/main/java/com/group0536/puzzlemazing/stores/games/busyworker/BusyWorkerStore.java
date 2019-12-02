@@ -70,6 +70,9 @@ public class BusyWorkerStore extends GameStore implements BusyWorkerActions {
         score = 100;
     }
 
+    public boolean isGameOver() {
+        return isGameOver;
+    }
 
     /**
      * Update the score of the player

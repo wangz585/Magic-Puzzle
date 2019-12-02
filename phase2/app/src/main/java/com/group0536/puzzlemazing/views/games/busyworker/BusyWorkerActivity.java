@@ -42,7 +42,7 @@ public class BusyWorkerActivity extends GameActivity {
 
     @Subscribe
     public void onBusyWorkerStoreChange(BusyWorkerChangeEvent e) {
-        if (store.checkWin() || store.checkLose()) {
+        if (store.isGameOver()) {
             showGameResult();
         }
     }
