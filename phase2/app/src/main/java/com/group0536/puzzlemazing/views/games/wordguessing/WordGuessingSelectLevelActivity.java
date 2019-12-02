@@ -65,7 +65,6 @@ public class WordGuessingSelectLevelActivity extends FluxActivity {
     @Override
     protected void initFluxComponents() {
         store = WordGuessingGameStore.getInstance(dispatcher);
-        store.setPlayer(currentPlayer);
         actionCreator = new WordGuessingActionCreator(dispatcher);
     }
 }

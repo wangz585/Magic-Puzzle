@@ -66,7 +66,7 @@ public class WordGuessingActivity extends GameActivity {
                 if (store.isGameStarted()) {
                     String userAnswer = txtPuzzle.getText().toString();
                     actionCreator.submitAnswer(userAnswer);
-                    actionCreator.updateScore(currentLevel, store.getScore(), store.getPlayer().getToken());
+                    actionCreator.updateScore(currentLevel, store.getScore(), store.getUser().getToken());
                 }
                 else {
                     actionCreator.startGame();

@@ -8,7 +8,6 @@ import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.models.wordguessing.Word;
 import com.group0536.puzzlemazing.models.wordguessing.WordBank;
-import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
 import com.group0536.puzzlemazing.stores.games.GameStore;
 import com.squareup.otto.Subscribe;
@@ -24,7 +23,6 @@ import java.util.concurrent.ThreadLocalRandom;
  * This is a word guessing game store. It is responsible for all the logic
  */
 public class WordGuessingGameStore extends GameStore implements WordGuessingActions {
-    private User player;
     private WordBank wordBank;
     private Word currentWord;
     private boolean gameOver;
@@ -32,7 +30,7 @@ public class WordGuessingGameStore extends GameStore implements WordGuessingActi
     private boolean gameStart;
     private static com.group0536.puzzlemazing.stores.games.wordguessing.WordGuessingGameStore instance;
 
-    protected WordGuessingGameStore(Dispatcher dispatcher) {
+    private WordGuessingGameStore(Dispatcher dispatcher) {
         super(dispatcher);
     }
 
@@ -68,6 +66,7 @@ public class WordGuessingGameStore extends GameStore implements WordGuessingActi
      */
     private void setGameOver() {
         gameOver = true;
+        getUser().setLevel(getUser().getLevel() + 1);
     }
 
     /**
@@ -288,15 +287,7 @@ public class WordGuessingGameStore extends GameStore implements WordGuessingActi
      * Get the current player
      * @return the current player
      */
-    public User getPlayer() {
-        return player;
-    }
-
-    /**
-     * Set the current player
-     * @param player current player
-     */
-    public void setPlayer(User player) {
-        this.player = player;
+    public User getUser() {
+        return GameStore.getInstance(dispatcher).getUser();
     }
 }
