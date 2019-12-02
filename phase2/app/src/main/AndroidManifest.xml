@@ -32,7 +32,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".views.crazymatch.GameActivity"
+      android:name=".views.games.crazymatch.GameActivity"
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -41,7 +41,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".views.crazymatch.SelectLevelActivity"
+      android:name=".views.games.crazymatch.SelectLevelActivity"
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -50,7 +50,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".views.wordguessing.GameActivity"
+      android:name=".views.games.wordguessing.GameActivity"
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -59,7 +59,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".views.busyworker.SelectLevelActivity"
+      android:name=".views.games.busyworker.SelectLevelActivity"
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -68,7 +68,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".views.busyworker.GameActivity"
+      android:name=".views.games.busyworker.GameActivity"
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -77,7 +77,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".views.GameFinishedActivity"
+      android:name=".views.games.GameFinishedActivity"
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -86,7 +86,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".views.scoreboard.ScoreBoardActivity"
+      android:name=".views.global.ScoreBoardActivity"
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -95,7 +95,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".views.wordguessing.SelectLevelActivity"
+      android:name=".views.games.wordguessing.SelectLevelActivity"
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -104,7 +104,7 @@
       </intent-filter>
     </activity>
     <activity
-        android:name=".views.preference.PreferenceActivity"
+        android:name=".views.global.PreferenceActivity"
         android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -113,7 +113,7 @@
       </intent-filter>
     </activity>
     <activity
-        android:name=".views.menu.MenuPageActivity"
+        android:name=".views.menu.MenuActivity"
         android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -122,7 +122,7 @@
       </intent-filter>
     </activity>
     <activity
-        android:name=".views.animation.AnimationActivity"
+        android:name=".views.games.AnimationActivity"
         android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
