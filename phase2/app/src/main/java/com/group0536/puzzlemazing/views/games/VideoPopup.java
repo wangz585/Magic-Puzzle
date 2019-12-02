@@ -34,7 +34,9 @@ public class VideoPopup extends Popup {
     private View.OnClickListener skipOnClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            popupWindow.dismiss();
+            if (allowSkip) {
+                popupWindow.dismiss();
+            }
         }
     };
 
@@ -53,6 +55,7 @@ public class VideoPopup extends Popup {
     private void bindViews() {
         vvBackground = popupWindowView.findViewById(R.id.vvBackground);
         btnSkip = popupWindowView.findViewById(R.id.btnSkip);
+        btnSkip.setEnabled(allowSkip);
     }
 
     private void setUpTransitionVideo(int rawResourceId) {
@@ -67,6 +70,12 @@ public class VideoPopup extends Popup {
                 popupWindow.dismiss();
             }
         });
+    }
+
+    @Override
+    public void show(int gravity, int x, int y) {
+        super.show(gravity, x, y);
+        vvBackground.start();
     }
 
     private void releaseTransitionVideo() {
@@ -105,6 +114,10 @@ public class VideoPopup extends Popup {
         public VideoPopupBuilder allowSkip(boolean allowSkip) {
             this.allowSkip = allowSkip;
             return this;
+        }
+
+        public VideoPopup build() {
+            return new VideoPopup(this);
         }
     }
 }

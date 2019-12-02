@@ -71,7 +71,7 @@ public class CrazyMatchStore extends GameStore implements CrazyMatchActions {
 
     @Override
     protected StoreChangeEvent getChangeEvent() {
-        return new CrazyMatchChangeEvent();
+        return new CrazyMatchStoreChangeEvent();
     }
 
     @Override

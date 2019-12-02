@@ -11,7 +11,7 @@ import com.group0536.puzzlemazing.actions.games.crazymatch.CrazyMatchActionCreat
 import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.models.crazymatch.Animal;
 import com.group0536.puzzlemazing.models.crazymatch.Board;
-import com.group0536.puzzlemazing.stores.games.crazymatch.CrazyMatchChangeEvent;
+import com.group0536.puzzlemazing.stores.games.crazymatch.CrazyMatchStoreChangeEvent;
 import com.group0536.puzzlemazing.stores.games.crazymatch.CrazyMatchStore;
 import com.group0536.puzzlemazing.views.games.GameActivity;
 import com.group0536.puzzlemazing.views.games.GameFinishedActivity;
@@ -101,7 +101,7 @@ public class CrazyMatchActivity extends GameActivity {
     }
 
     @Subscribe
-    public void update(CrazyMatchChangeEvent e) {
+    public void onCrazyMatchStoreChange(CrazyMatchStoreChangeEvent e) {
         updateUI();
         checkGameOver();
     }
@@ -169,6 +169,7 @@ public class CrazyMatchActivity extends GameActivity {
 
     @Override
     protected void initFluxComponents() {
+        super.initFluxComponents();
         store = CrazyMatchStore.getInstance(dispatcher);
         actionCreator = new CrazyMatchActionCreator(dispatcher);
         store.setPlayer(player);

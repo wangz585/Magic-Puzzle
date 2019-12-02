@@ -9,6 +9,7 @@ import com.group0536.puzzlemazing.models.busyworker.Map;
 import com.group0536.puzzlemazing.stores.Store;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
 import com.group0536.puzzlemazing.stores.games.GameStore;
+import com.group0536.puzzlemazing.views.games.VideoPopup;
 import com.squareup.otto.Subscribe;
 
 import java.util.ArrayList;
