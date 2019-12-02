@@ -91,9 +91,9 @@ public class WordGuessingGameStore extends GameStore implements WordGuessingActi
 
 
     /**
-     * Get the emoji hint of the current word being guessed
+     * Get the hint of the current word being guessed
      *
-     * @return the emoji hint of the current word being guessed
+     * @return the hint of the current word being guessed
      */
     public String getHint() {
         return currentWord.getHint();
@@ -154,9 +154,6 @@ public class WordGuessingGameStore extends GameStore implements WordGuessingActi
 
     private void updateScore() {
         score += 10;
-        // TODO: update the score to the server for this level of game
-        // one game has two levels, two different scores
-
     }
 
     /**

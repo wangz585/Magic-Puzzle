@@ -26,9 +26,9 @@ public class GameActivity extends FluxActivity {
     // Components
     private ImageButton btnNext;
     private EditText txtPuzzle;
-    private TextView txtEmoji;
+    private TextView txtHint;
     private TextView countDownTimeLeft;
-    private int currrentLevel;
+    private int currentLevel;
 
     public GameActivity() {
     }
@@ -37,7 +37,7 @@ public class GameActivity extends FluxActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_guessing);
-        this.currrentLevel = getIntent().getIntExtra("level", 1);
+        this.currentLevel = getIntent().getIntExtra("level", 1);
         bindViews();
     }
 
@@ -48,7 +48,7 @@ public class GameActivity extends FluxActivity {
     private void bindViews() {
         initializeNextButton();
         initializeAnswerText();
-        initializeEmojiText();
+        initializeHintText();
         initializeTimeLeft();
     }
 
@@ -60,7 +60,7 @@ public class GameActivity extends FluxActivity {
                 if (store.isGameStarted()) {
                     String userAnswer = txtPuzzle.getText().toString();
                     actionCreator.submitAnswer(userAnswer);
-                    actionCreator.updateScore(currrentLevel, store.getScore(), store.getPlayer().getToken());
+                    actionCreator.updateScore(currentLevel, store.getScore(), store.getPlayer().getToken());
                 }
                 else {
                     actionCreator.startGame();
@@ -71,7 +71,6 @@ public class GameActivity extends FluxActivity {
         });
 
     }
-
     private CountDownTimer countDownTimer = new CountDownTimer(120000, 1000) {
         @Override
         public void onTick(long millisUntilFinished) {
@@ -101,8 +100,8 @@ public class GameActivity extends FluxActivity {
         txtPuzzle = findViewById(R.id.txt_word);
     }
 
-    private void initializeEmojiText() {
-        txtEmoji = findViewById(R.id.txt_emoji);
+    private void initializeHintText() {
+        txtHint = findViewById(R.id.txt_hint);
     }
 
 
@@ -141,6 +140,9 @@ public class GameActivity extends FluxActivity {
         updatePuzzle();
     }
 
+    /**
+     * Update the word for guessing
+     */
     private void updatePuzzle() {
         StringBuilder myPuzzle = new StringBuilder();
         List<Character> puzzle = store.getPuzzle();
@@ -149,7 +151,7 @@ public class GameActivity extends FluxActivity {
         }
         txtPuzzle.setText("");
         txtPuzzle.setHint(myPuzzle);
-        txtEmoji.setText(store.getHint());
+        txtHint.setText(store.getHint());
 
     }
 }
