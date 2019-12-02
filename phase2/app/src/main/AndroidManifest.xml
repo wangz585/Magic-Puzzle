@@ -11,6 +11,7 @@
     android:roundIcon="@mipmap/ic_launcher_round"
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
+    <activity android:name=".GameMapActivity"></activity>
     <activity
       android:name=".views.appinit.AppInitializeActivity"
       android:screenOrientation="sensorLandscape">
@@ -102,8 +103,8 @@
       </intent-filter>
     </activity>
     <activity
-        android:name=".views.global.PreferenceActivity"
-        android:screenOrientation="sensorLandscape">
+      android:name=".views.global.PreferenceActivity"
+      android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
@@ -111,8 +112,8 @@
       </intent-filter>
     </activity>
     <activity
-        android:name=".views.menu.MenuActivity"
-        android:screenOrientation="sensorLandscape">
+      android:name=".views.menu.MenuActivity"
+      android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
 
