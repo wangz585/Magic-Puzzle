@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.wordguessing.WordGuessingActionCreator;
+import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.stores.wordguessing.WordGuessingGameStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
 
@@ -16,10 +17,12 @@ public class SelectLevelActivity extends FluxActivity {
     private WordGuessingGameStore store;
     Button btnLevel1;
     Button btnLevel2;
+    private User currentPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        currentPlayer = getIntent().getParcelableExtra("player");
         setContentView(R.layout.activity_crazy_match_select_level);
         btnLevel1 = findViewById(getResources()
                 .getIdentifier("btn_level_1", "id", getPackageName()));
@@ -29,6 +32,7 @@ public class SelectLevelActivity extends FluxActivity {
                 int level = 1;
                 actionCreator.initializeWordBank(level, getApplicationContext());
                 Intent intent = new Intent(SelectLevelActivity.this, GameActivity.class);
+                intent.putExtra("level", level);
                 startActivity(intent);
             }
         });
@@ -40,6 +44,7 @@ public class SelectLevelActivity extends FluxActivity {
                 int level = 2;
                 actionCreator.initializeWordBank(level, getApplicationContext());
                 Intent intent = new Intent(SelectLevelActivity.this, GameActivity.class);
+                intent.putExtra("level", level);
                 startActivity(intent);
             }
         });
@@ -60,6 +65,7 @@ public class SelectLevelActivity extends FluxActivity {
     @Override
     protected void initFluxComponents() {
         store = WordGuessingGameStore.getInstance(dispatcher);
+        store.setPlayer(currentPlayer);
         actionCreator = new WordGuessingActionCreator(dispatcher);
     }
 }

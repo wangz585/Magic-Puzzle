@@ -5,10 +5,19 @@ import android.content.Context;
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.ActionCreator;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
+import com.group0536.puzzlemazing.webapi.ServerApi;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 public class WordGuessingActionCreator extends ActionCreator implements WordGuessingActions {
+    private ServerApi serverApi;
     public WordGuessingActionCreator(Dispatcher dispatcher) {
         super(dispatcher);
+        serverApi = ServerApi.getServerApi();
     }
 
     public void submitAnswer(String word){
@@ -35,4 +44,19 @@ public class WordGuessingActionCreator extends ActionCreator implements WordGues
         Action action = new Action.ActionBuilder(TIME_OUT).build();
         dispatcher.dispatch(action);
     }
+
+    public void updateScore(int currentLevel, int score, String token) {
+        serverApi.performScoreUpdateWordGuessing(token, currentLevel, score, new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+
+            }
+        });
+    }
+
 }

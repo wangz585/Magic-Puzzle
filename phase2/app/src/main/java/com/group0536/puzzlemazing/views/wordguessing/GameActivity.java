@@ -28,6 +28,7 @@ public class GameActivity extends FluxActivity {
     private EditText txtPuzzle;
     private TextView txtEmoji;
     private TextView countDownTimeLeft;
+    private int currrentLevel;
 
     public GameActivity() {
     }
@@ -36,6 +37,7 @@ public class GameActivity extends FluxActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_guessing);
+        this.currrentLevel = getIntent().getIntExtra("level", 1);
         bindViews();
     }
 
@@ -58,6 +60,7 @@ public class GameActivity extends FluxActivity {
                 if (store.isGameStarted()) {
                     String userAnswer = txtPuzzle.getText().toString();
                     actionCreator.submitAnswer(userAnswer);
+                    actionCreator.updateScore(currrentLevel, store.getScore(), store.getPlayer().getToken());
                 }
                 else {
                     actionCreator.startGame();
@@ -136,7 +139,6 @@ public class GameActivity extends FluxActivity {
 
     private void updateUI() {
         updatePuzzle();
-        updateScore();
     }
 
     private void updatePuzzle() {
@@ -149,9 +151,5 @@ public class GameActivity extends FluxActivity {
         txtPuzzle.setHint(myPuzzle);
         txtEmoji.setText(store.getHint());
 
-    }
-
-    private void updateScore() {
-        //TODO
     }
 }

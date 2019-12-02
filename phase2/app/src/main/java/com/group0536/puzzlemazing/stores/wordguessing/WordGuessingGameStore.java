@@ -33,8 +33,6 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
 
     protected WordGuessingGameStore(Dispatcher dispatcher) {
         super(dispatcher);
-        // TODO: pass in a player
-//        this.player = player;
     }
 
     /**
@@ -286,5 +284,21 @@ public class WordGuessingGameStore extends Store implements WordGuessingActions 
      */
     public List<Character> getPuzzle() {
         return currentWord.getCurrentState();
+    }
+
+    /**
+     * Get the current player
+     * @return the current player
+     */
+    public User getPlayer() {
+        return player;
+    }
+
+    /**
+     * Set the current player
+     * @param player current player
+     */
+    public void setPlayer(User player) {
+        this.player = player;
     }
 }
