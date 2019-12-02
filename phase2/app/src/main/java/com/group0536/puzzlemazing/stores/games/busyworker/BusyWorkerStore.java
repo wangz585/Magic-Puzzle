@@ -59,6 +59,7 @@ public class BusyWorkerStore extends GameStore implements BusyWorkerActions {
     }
 
     private void initGame() {
+        isGameOver = false;
         initMap();
         initCurrentPosition();
         initScore();
