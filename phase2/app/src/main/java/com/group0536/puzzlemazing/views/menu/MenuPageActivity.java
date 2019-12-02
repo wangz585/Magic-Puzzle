@@ -7,7 +7,7 @@ import android.widget.Button;
 
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.ActionCreator;
-import com.group0536.puzzlemazing.actions.menu.MenuPageActionCreator;
+import com.group0536.puzzlemazing.actions.menu.MenuActionCreator;
 import com.group0536.puzzlemazing.stores.menu.MenuStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
 import com.group0536.puzzlemazing.views.games.AnimationActivity;
@@ -31,7 +31,7 @@ public class MenuPageActivity extends FluxActivity {
     protected void initFluxComponents() {
         store = MenuStore.getInstance(dispatcher);
         setContentView(R.layout.activity_menu_page);
-        actionCreator = new MenuPageActionCreator(dispatcher);
+        actionCreator = new MenuActionCreator(dispatcher);
     }
 
     @Override

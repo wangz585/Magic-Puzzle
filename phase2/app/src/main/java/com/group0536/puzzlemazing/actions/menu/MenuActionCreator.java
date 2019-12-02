@@ -5,21 +5,21 @@ import com.group0536.puzzlemazing.actions.ActionCreator;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 import com.group0536.puzzlemazing.models.User;
 
-public class MenuPageActionCreator extends ActionCreator implements MenuPageActions {
-    public MenuPageActionCreator(Dispatcher dispatcher) {
+public class MenuActionCreator extends ActionCreator implements MenuActions {
+    public MenuActionCreator(Dispatcher dispatcher) {
         super(dispatcher);
     }
 
-    public void chooseSelectPage(User player){
+    public void chooseSelectPage(User user){
         Action action = new Action.ActionBuilder(ENTER_SELECT_PAGE)
-                .load("player", player)
+                .load("user", user)
                 .build();
         dispatcher.dispatch(action);
     }
 
-    public void goToSettingPage(User player){
+    public void goToSettingPage(User user){
         Action action = new Action.ActionBuilder(ENTER_SETTING_PAGE)
-                .load("player", player)
+                .load("user", user)
                 .build();
         dispatcher.dispatch(action);
     }
