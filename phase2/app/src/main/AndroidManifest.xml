@@ -32,7 +32,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".views.games.crazymatch.GameActivity"
+      android:name=".views.games.crazymatch.CrazyMatchActivity"
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -50,7 +50,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".views.games.wordguessing.GameActivity"
+      android:name=".views.games.wordguessing.WordGuessingActivity"
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />
@@ -68,7 +68,7 @@
       </intent-filter>
     </activity>
     <activity
-      android:name=".views.games.busyworker.GameActivity"
+      android:name=".views.games.busyworker.BusyWorkerActivity"
       android:screenOrientation="sensorLandscape">
       <intent-filter>
         <action android:name="android.intent.action.MAIN" />

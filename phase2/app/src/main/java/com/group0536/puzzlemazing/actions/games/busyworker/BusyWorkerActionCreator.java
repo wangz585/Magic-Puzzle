@@ -26,6 +26,4 @@ public class BusyWorkerActionCreator extends ActionCreator implements BusyWorker
                 .build();
         dispatcher.dispatch(action);
     }
-
-
 }

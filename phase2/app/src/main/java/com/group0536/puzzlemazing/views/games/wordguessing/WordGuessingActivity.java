@@ -19,7 +19,7 @@ import com.squareup.otto.Subscribe;
 
 import java.util.List;
 
-public class GameActivity extends FluxActivity {
+public class WordGuessingActivity extends FluxActivity {
     private WordGuessingGameStore store;
     private WordGuessingActionCreator actionCreator;
 
@@ -29,7 +29,7 @@ public class GameActivity extends FluxActivity {
     private TextView txtEmoji;
     private TextView countDownTimeLeft;
 
-    public GameActivity() {
+    public WordGuessingActivity() {
     }
 
     @Override
@@ -76,7 +76,7 @@ public class GameActivity extends FluxActivity {
             String value = String.valueOf(timeLeft);
             countDownTimeLeft.setText(String.format("Remaining Time: %ss", value));
             if (timeLeft == 0) {
-                Intent intent = new Intent(GameActivity.this, GameFinishedActivity.class);
+                Intent intent = new Intent(WordGuessingActivity.this, GameFinishedActivity.class);
                 intent.putExtra("score", store.getScore());
                 intent.putExtra("challenge", 2);
                 startActivity(intent);
@@ -127,7 +127,7 @@ public class GameActivity extends FluxActivity {
         updateUI();
         if (store.isGameOver()) {
             System.out.println("Finished the game");
-            Intent intent = new Intent(GameActivity.this, GameFinishedActivity.class);
+            Intent intent = new Intent(WordGuessingActivity.this, GameFinishedActivity.class);
             intent.putExtra("score", store.getScore());
             intent.putExtra("challenge", 2);
             startActivity(intent);
