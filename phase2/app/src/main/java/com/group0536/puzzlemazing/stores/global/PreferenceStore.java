@@ -12,10 +12,10 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * A preference store. It handles the logic
+ * This is a preference store object that holds specific information relating to the
+ * preference of the user.
  */
 public class PreferenceStore extends Store implements PreferenceActions {
-    private String savedToken;
     private static PreferenceStore instance;
     private List<Integer> musicCollection;
     private int currentMusic;
@@ -46,7 +46,8 @@ public class PreferenceStore extends Store implements PreferenceActions {
     }
 
     /**
-     * Populate the list of possible background music
+     * Populate the list of possible background music. Each element corresponds to one radio
+     * button. The first element is null because the first radio button is no background music
      */
     private void initializeMusicCollection() {
         musicCollection = Arrays.asList(null, R.raw.jingle_bells, R.raw.alphabet_song);

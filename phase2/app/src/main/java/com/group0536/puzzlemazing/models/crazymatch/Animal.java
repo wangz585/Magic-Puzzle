@@ -3,7 +3,7 @@ package com.group0536.puzzlemazing.models.crazymatch;
 import androidx.annotation.Nullable;
 
 /**
- * An animal in the map
+ * An animal in the map. An animal has two sides: one is the ball the other is the animal side.
  */
 public class Animal {
     private boolean flipped;

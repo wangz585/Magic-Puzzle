@@ -13,6 +13,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is a store object that holds information relating to the scoreboard. It gets JSON objects
+ * from the server and parse them.
+ */
 public class ScoreBoardStore extends Store implements ScoreBoardActions {
     private List<List> usersWithScores;
     private static ScoreBoardStore instance;
@@ -80,7 +84,7 @@ public class ScoreBoardStore extends Store implements ScoreBoardActions {
         return scoreType;
     }
 
-    public void setUsersWithScores(List<List> usersWithScores) {
+    private void setUsersWithScores(List<List> usersWithScores) {
         this.usersWithScores = usersWithScores;
     }
 }

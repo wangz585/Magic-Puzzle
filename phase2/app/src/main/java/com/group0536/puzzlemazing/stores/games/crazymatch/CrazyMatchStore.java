@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * This is a store object that holds information relating to the crazy match game.
+ */
 public class CrazyMatchStore extends GameStore implements CrazyMatchActions {
     private Board board;
     private int score;

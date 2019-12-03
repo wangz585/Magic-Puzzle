@@ -1,9 +1,10 @@
 package com.group0536.puzzlemazing.models.crazymatch;
 
-import com.group0536.puzzlemazing.models.crazymatch.Animal;
-
 import java.util.List;
 
+/**
+ * This is a board object for the crazy match game. It holds all the animals on the board.
+ */
 public class Board {
     private List<List<Animal>> animals;
     private int row;

@@ -7,7 +7,8 @@ import com.group0536.puzzlemazing.R;
 import java.util.HashMap;
 
 /**
- * This is a class responsible for the initialization process of the crazy match game
+ * This is a class responsible for the information for each level in the crazy match game.
+ *
  */
 class CrazyMatchInitController {
     private SparseArray<HashMap<Object, Object>> initializationData = new SparseArray<>();

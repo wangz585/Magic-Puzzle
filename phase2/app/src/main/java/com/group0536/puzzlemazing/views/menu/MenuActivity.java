@@ -74,7 +74,6 @@ public class MenuActivity extends FluxActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MenuActivity.this, PreferenceActivity.class);
-                intent.putExtra("User", (Serializable) store.getUser());
                 MenuActivity.this.startActivity(intent);
             }
         });

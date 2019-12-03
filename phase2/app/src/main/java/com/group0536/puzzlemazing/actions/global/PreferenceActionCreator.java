@@ -4,6 +4,9 @@ import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.ActionCreator;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
 
+/**
+ * This class represents an action creator for the preferences.
+ */
 public class PreferenceActionCreator extends ActionCreator implements PreferenceActions {
     public PreferenceActionCreator(Dispatcher dispatcher) {
         super(dispatcher);

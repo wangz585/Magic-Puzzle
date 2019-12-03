@@ -3,6 +3,9 @@ package com.group0536.puzzlemazing.models.wordguessing;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * THis is a word object for the word guessing game.
+ */
 public class Word {
     private String spelling;
     private boolean guessed;
@@ -45,7 +48,7 @@ public class Word {
     /**
      * Set the word is guessed or not
      *
-     * @param guessed
+     * @param guessed return if the word is guessed or not
      */
     public void setGuessed(boolean guessed) {
         this.guessed = guessed;

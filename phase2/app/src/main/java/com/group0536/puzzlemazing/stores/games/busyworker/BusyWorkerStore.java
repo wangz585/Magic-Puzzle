@@ -5,7 +5,6 @@ import android.graphics.Point;
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.games.busyworker.BusyWorkerActions;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
-import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.models.busyworker.Map;
 import com.group0536.puzzlemazing.stores.StoreChangeEvent;
 import com.group0536.puzzlemazing.stores.games.GameStore;
@@ -79,9 +78,13 @@ public class BusyWorkerStore extends GameStore implements BusyWorkerActions {
 
     /**
      * Update the score of the player
+     * The number of maximum steps you can take is 100, if you take more than
+     * 100 steps to finish the game, you will get zero point.
      */
     private void updateScore() {
-        score--;
+        if (score > 0) {
+            score--;
+        }
     }
 
     /**
@@ -241,7 +244,10 @@ public class BusyWorkerStore extends GameStore implements BusyWorkerActions {
      */
     private boolean isLose() {
         for (Point deadPostion : map.getDeadPositions()) {
-            if (deadPostion.equals(currentBoxPosition)) return true;
+            if (deadPostion.equals(currentBoxPosition)){
+                score = 0;
+                return true;
+            }
         }
         return false;
     }
