@@ -71,6 +71,7 @@ public class GameMapActivity extends FluxActivity {
             public void onClick(View view) {
                 if (hasMoreChallenges) {
                     Intent intent = gameActivities.get(store.getUser().getLevel() - 1);
+                    intent.putExtra("challenge", store.getUser().getLevel());
                     startActivity(intent);
                 } else {
                     Intent intent = new Intent(GameMapActivity.this, MenuActivity.class);

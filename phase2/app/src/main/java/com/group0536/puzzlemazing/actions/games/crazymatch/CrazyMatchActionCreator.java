@@ -1,7 +1,5 @@
 package com.group0536.puzzlemazing.actions.games.crazymatch;
 
-import android.media.MediaSync;
-
 import com.group0536.puzzlemazing.actions.Action;
 import com.group0536.puzzlemazing.actions.ActionCreator;
 import com.group0536.puzzlemazing.dispatcher.Dispatcher;
@@ -33,16 +31,26 @@ public class CrazyMatchActionCreator extends ActionCreator implements CrazyMatch
     }
 
     /**
-     * A match board is initialized based on the game level
-     * @param level game level
+     * Initialize the game base on the level that the user selected and the tells the store
+     * which challenge it is
+     * @param level the game level the user selected
+     * @param challenge the sequence of the crazy match game in all games
+     *
      */
-    public void initializeBoard(int level){
-        Action action = new Action.ActionBuilder(INITIALIZE_BOARD)
+    public void initializeGame(int level, int challenge){
+        Action action = new Action.ActionBuilder(INITIALIZE_GAME)
                 .load("level", level)
+                .load("challenge", challenge)
                 .build();
         dispatcher.dispatch(action);
     }
 
+    /**
+     * Update the score to the server
+     * @param token the token, which maps to a specific user
+     * @param level the current level of the user
+     * @param score the score of this game
+     */
     public void updateScore(String token, int level, int score){
         serverApi.performScoreUpdateCrazyMatch(token, level, score, new Callback() {
             @Override

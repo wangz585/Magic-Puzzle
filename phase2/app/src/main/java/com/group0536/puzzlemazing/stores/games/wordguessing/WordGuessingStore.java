@@ -22,15 +22,15 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * This is a word guessing game store. It is responsible for all the logic
  */
-public class WordGuessingGameStore extends GameStore implements WordGuessingActions {
+public class WordGuessingStore extends GameStore implements WordGuessingActions {
     private WordBank wordBank;
     private Word currentWord;
     private boolean gameOver;
     private int score;
     private boolean gameStart;
-    private static com.group0536.puzzlemazing.stores.games.wordguessing.WordGuessingGameStore instance;
+    private static WordGuessingStore instance;
 
-    private WordGuessingGameStore(Dispatcher dispatcher) {
+    private WordGuessingStore(Dispatcher dispatcher) {
         super(dispatcher);
         user = GameStore.getInstance(dispatcher).getUser();
 
@@ -42,9 +42,9 @@ public class WordGuessingGameStore extends GameStore implements WordGuessingActi
      * @param dispatcher the dispatcher associated
      * @return an instance of this store
      */
-    public static WordGuessingGameStore getInstance(Dispatcher dispatcher) {
+    public static WordGuessingStore getInstance(Dispatcher dispatcher) {
         if (instance == null) {
-            instance = new WordGuessingGameStore(dispatcher);
+            instance = new WordGuessingStore(dispatcher);
         }
         return instance;
     }
@@ -68,7 +68,7 @@ public class WordGuessingGameStore extends GameStore implements WordGuessingActi
      */
     private void setGameOver() {
         gameOver = true;
-        user.setLevel(getUser().getLevel() + 1);
+        user.setLevel(getChallenge() + 1);
     }
 
     /**
@@ -117,9 +117,10 @@ public class WordGuessingGameStore extends GameStore implements WordGuessingActi
                 checkAnswer(wordGuessed);
                 postChange();
                 break;
-            case INITIALIZE_WORDBANK:
+            case INITIALIZE_GAME:
                 initializeWordBank((int) action.getPayloadEntry("level"),
                         (Context) action.getPayloadEntry("context"));
+                setChallenge((int) action.getPayloadEntry("challenge"));
                 break;
         }
     }

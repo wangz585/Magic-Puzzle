@@ -10,7 +10,7 @@ import com.squareup.otto.Subscribe;
 
 public class GameStore extends Store implements AppInitializeActions {
     private static GameStore instance;
-
+    private int challenge;
     protected User user;
 
     public User getUser() {
@@ -48,5 +48,11 @@ public class GameStore extends Store implements AppInitializeActions {
         user = (User) action.getPayloadEntry(KEY_CURRENT_USER);
     }
 
+    protected void setChallenge(int challenge) {
+        this.challenge = challenge;
+    }
 
+    protected int getChallenge() {
+        return challenge;
+    }
 }

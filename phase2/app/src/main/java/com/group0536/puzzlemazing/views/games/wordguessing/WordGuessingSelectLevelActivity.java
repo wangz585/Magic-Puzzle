@@ -6,15 +6,14 @@ import android.view.View;
 import android.widget.Button;
 
 import com.group0536.puzzlemazing.R;
-import com.group0536.puzzlemazing.models.User;
 import com.group0536.puzzlemazing.actions.games.wordguessing.WordGuessingActionCreator;
-import com.group0536.puzzlemazing.stores.games.wordguessing.WordGuessingGameStore;
+import com.group0536.puzzlemazing.stores.games.wordguessing.WordGuessingStore;
 import com.group0536.puzzlemazing.views.FluxActivity;
 
 public class WordGuessingSelectLevelActivity extends FluxActivity {
 
     private WordGuessingActionCreator actionCreator;
-    private WordGuessingGameStore store;
+    private WordGuessingStore store;
     Button btnLevel1;
     Button btnLevel2;
 
@@ -28,8 +27,9 @@ public class WordGuessingSelectLevelActivity extends FluxActivity {
             @Override
             public void onClick(View view) {
                 int level = 1;
-                actionCreator.initializeWordBank(level, getApplicationContext());
-                Intent intent = new Intent(WordGuessingSelectLevelActivity.this, WordGuessingActivity.class);
+                actionCreator.initializeGame(level, getApplicationContext(), getChallenge());
+                Intent intent = new Intent(WordGuessingSelectLevelActivity.this,
+                        WordGuessingActivity.class);
                 intent.putExtra("level", level);
                 startActivity(intent);
             }
@@ -40,12 +40,23 @@ public class WordGuessingSelectLevelActivity extends FluxActivity {
             @Override
             public void onClick(View view) {
                 int level = 2;
-                actionCreator.initializeWordBank(level, getApplicationContext());
-                Intent intent = new Intent(WordGuessingSelectLevelActivity.this, WordGuessingActivity.class);
+                actionCreator.initializeGame(level, getApplicationContext(), getChallenge());
+                Intent intent = new Intent(WordGuessingSelectLevelActivity.this,
+                        WordGuessingActivity.class);
                 intent.putExtra("level", level);
                 startActivity(intent);
             }
         });
+    }
+
+    /**
+     * Get the order of the word guessing game
+     * @return the challenge number, which is the order of the word guessing game relative to all
+     * games
+     */
+    private int getChallenge() {
+        Intent mIntent = getIntent();
+        return mIntent.getIntExtra("challenge", 1);
     }
 
     @Override
@@ -62,7 +73,7 @@ public class WordGuessingSelectLevelActivity extends FluxActivity {
 
     @Override
     protected void initFluxComponents() {
-        store = WordGuessingGameStore.getInstance(dispatcher);
+        store = WordGuessingStore.getInstance(dispatcher);
         actionCreator = new WordGuessingActionCreator(dispatcher);
     }
 }

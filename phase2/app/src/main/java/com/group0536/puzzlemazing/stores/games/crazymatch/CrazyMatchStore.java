@@ -68,8 +68,9 @@ public class CrazyMatchStore extends GameStore implements CrazyMatchActions {
             case FLIP:
                 flipButtons(action);
                 break;
-            case INITIALIZE_BOARD:
+            case INITIALIZE_GAME:
                 initializeBoard((int) action.getPayloadEntry("level"));
+                setChallenge((int) action.getPayloadEntry("challenge"));
                 postChange();
                 break;
         }
@@ -200,7 +201,7 @@ public class CrazyMatchStore extends GameStore implements CrazyMatchActions {
      */
     public boolean isGameOver() {
         if (board.getNumberOfAnimalsLeft() == 0) {
-            user.setLevel(user.getLevel() + 1);
+            user.setLevel(getChallenge() + 1);
             return true;
         }
         return false;

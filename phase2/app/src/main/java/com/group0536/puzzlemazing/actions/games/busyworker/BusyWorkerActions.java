@@ -6,7 +6,7 @@ public interface BusyWorkerActions extends GameCommonActions {
     String PREFIX = "busy-worker-";
     String MOVE = PREFIX + "move";
     String INIT_MAP = PREFIX + "init-map";
-    String SELECT_DIFFICULTY = PREFIX + "difficulty";
+    String INITIALIZE_GAME = PREFIX + "difficulty";
 
     String KEY_DIFFICULTY = "difficulty";
     String KEY_POSITION = "position";

@@ -12,8 +12,7 @@ import android.widget.TextView;
 import com.group0536.puzzlemazing.R;
 import com.group0536.puzzlemazing.actions.games.wordguessing.WordGuessingActionCreator;
 import com.group0536.puzzlemazing.stores.games.wordguessing.WordGuessingChangeEvent;
-import com.group0536.puzzlemazing.stores.games.wordguessing.WordGuessingGameStore;
-import com.group0536.puzzlemazing.views.FluxActivity;
+import com.group0536.puzzlemazing.stores.games.wordguessing.WordGuessingStore;
 import com.group0536.puzzlemazing.views.games.GameActivity;
 import com.group0536.puzzlemazing.views.games.GameFinishedActivity;
 import com.squareup.otto.Subscribe;
@@ -21,7 +20,7 @@ import com.squareup.otto.Subscribe;
 import java.util.List;
 
 public class WordGuessingActivity extends GameActivity {
-    private WordGuessingGameStore store;
+    private WordGuessingStore store;
     private WordGuessingActionCreator actionCreator;
 
     // Components
@@ -108,7 +107,7 @@ public class WordGuessingActivity extends GameActivity {
     @Override
     protected void initFluxComponents() {
         super.initFluxComponents();
-        store = WordGuessingGameStore.getInstance(dispatcher);
+        store = WordGuessingStore.getInstance(dispatcher);
         actionCreator = new WordGuessingActionCreator(dispatcher);
     }
 

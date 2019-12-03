@@ -39,8 +39,9 @@ public class BusyWorkerSelectLevelActivity extends FluxActivity {
         btnLevel2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                actionCreator.selectDifficulty(2);
-                Intent intent = new Intent(BusyWorkerSelectLevelActivity.this, BusyWorkerActivity.class);
+                actionCreator.initializeGame(2, getChallenge());
+                Intent intent = new Intent(BusyWorkerSelectLevelActivity.this,
+                        BusyWorkerActivity.class);
                 startActivity(intent);
             }
         });
@@ -55,11 +56,22 @@ public class BusyWorkerSelectLevelActivity extends FluxActivity {
         btnLevel1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                actionCreator.selectDifficulty(1);
-                Intent intent = new Intent(BusyWorkerSelectLevelActivity.this, BusyWorkerActivity.class);
+                actionCreator.initializeGame(1, getChallenge());
+                Intent intent = new Intent(BusyWorkerSelectLevelActivity.this,
+                        BusyWorkerActivity.class);
                 startActivity(intent);
             }
         });
+    }
+
+    /**
+     * Get the order of the busy worker  game
+     * @return the challenge number, which is the order of the busy worker game relative to all
+     * games
+     */
+    private int getChallenge() {
+        Intent mIntent = getIntent();
+        return mIntent.getIntExtra("challenge", 1);
     }
 
     @Override

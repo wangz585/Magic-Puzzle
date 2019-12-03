@@ -20,9 +20,10 @@ public class BusyWorkerActionCreator extends ActionCreator implements BusyWorker
         dispatcher.dispatch(action);
     }
 
-    public void selectDifficulty(int level){
-        Action action = new Action.ActionBuilder(SELECT_DIFFICULTY)
+    public void initializeGame(int level, int challenge){
+        Action action = new Action.ActionBuilder(INITIALIZE_GAME)
                 .load(KEY_DIFFICULTY, level)
+                .load("challenge", challenge)
                 .build();
         dispatcher.dispatch(action);
     }

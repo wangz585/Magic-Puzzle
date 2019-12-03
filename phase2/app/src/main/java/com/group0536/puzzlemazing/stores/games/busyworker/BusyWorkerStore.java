@@ -44,8 +44,9 @@ public class BusyWorkerStore extends GameStore implements BusyWorkerActions {
         switch (action.getType()) {
             case INIT:
                 break;
-            case SELECT_DIFFICULTY:
+            case INITIALIZE_GAME:
                 setDifficulty(action);
+                setChallenge((int) action.getPayloadEntry("challenge"));
                 initGame();
                 break;
             case MOVE:
@@ -221,9 +222,12 @@ public class BusyWorkerStore extends GameStore implements BusyWorkerActions {
         map.setHeight(rawMap.length);
     }
 
+    /**
+     * Set things to be done when game is finished
+     */
     private void reactIfGameEnd() {
         if (isWon()) {
-            user.setLevel(user.getLevel() + 1);
+            user.setLevel(getChallenge() + 1);
         }
         isGameOver = isWon() || isLose();
     }

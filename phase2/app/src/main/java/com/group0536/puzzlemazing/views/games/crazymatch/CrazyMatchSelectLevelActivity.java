@@ -47,7 +47,7 @@ public class CrazyMatchSelectLevelActivity extends FluxActivity {
             @Override
             public void onClick(View view) {
                 int level = 2;
-                actionCreator.initializeBoard(level);
+                actionCreator.initializeGame(level, getChallenge());
                 Intent intent = new Intent(CrazyMatchSelectLevelActivity.this, CrazyMatchActivity.class);
                 intent.putExtra("level", level);
                 startActivity(intent);
@@ -65,12 +65,21 @@ public class CrazyMatchSelectLevelActivity extends FluxActivity {
             @Override
             public void onClick(View view) {
                 int level = 1;
-                actionCreator.initializeBoard(level);
+                actionCreator.initializeGame(level, getChallenge());
                 Intent intent = new Intent(CrazyMatchSelectLevelActivity.this, CrazyMatchActivity.class);
                 intent.putExtra("level", level);
                 startActivity(intent);
             }
         });
+    }
+
+    /**
+     * Get the order of the crazy match game
+     * @return the challenge number, which is the order of the crazy match game relative to all games
+     */
+    private int getChallenge() {
+        Intent mIntent = getIntent();
+        return mIntent.getIntExtra("challenge", 1);
     }
 
     @Override

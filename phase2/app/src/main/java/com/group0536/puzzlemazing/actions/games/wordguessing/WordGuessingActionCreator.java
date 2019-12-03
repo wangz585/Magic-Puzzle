@@ -44,10 +44,11 @@ public class WordGuessingActionCreator extends ActionCreator implements WordGues
      * @param level chosen game level
      * @param context game context
      */
-    public void initializeWordBank(int level, Context context){
-        Action action = new Action.ActionBuilder(INITIALIZE_WORDBANK)
+    public void initializeGame(int level, Context context, int challenge){
+        Action action = new Action.ActionBuilder(INITIALIZE_GAME)
                 .load("level", level)
                 .load("context", context)
+                .load("challenge", challenge)
                 .build();
         dispatcher.dispatch(action);
     }
