@@ -1,0 +1,42 @@
+Dear group_0536
+
+This semester, we talked about MVP, the Model-View-Presenter architecture. It has many advantages, particularly when working with Android. As you can see from your project, your activity classes have methods that are specific to Android. If you encapsulate the rest of your code sufficiently, it is possible to port it to another platform simply by creating a new UI (for example, a website).
+
+Encapsulation can take on many forms. You can package your View classes together. You can ensure that your dependencies go one-way, towards the inner more abstract layers. You can incorporate SOLID principles as much as possible and design patterns where they make sense.
+Here is feedback that is specific to your project:
+
+You made good use of…
++ JavaDocs and Comments: Most methods were commented at a sufficient level.
++ Architecture Patterns: The choice to research and switch to a new architecture is commendable!
++ Nice presentation and UML diagrams!
++ Visibility of variables and methods: Your variables and methods were mostly private or protected with proper getters and setters.
++ Following naming conventions: Your variables, classes, and methods perfectly followed Java naming conventions!
++ Nice and meaningful packaging: You had a good rationale behind your packaging! 
++ Using more advanced databases such as MongoDB.
++ Using HTTP APIs for handling a lot of back-end functionalities. 
++ Very nice online documentation.
+
+The user sees…
++ Very polished and cohesive UI. It was obvious a lot of attention was put into this game!
++ Nice additional features such as animations and sound effects.
++ A nice introduction and instructions page.
++ The feature to remember the user.
++ Two games (Moving Blocks, Word Guessing)
++ Two levels with the ability to customize the games.
++ A scoreboard with multiple users, and the ability to sort.
++ Multiple levels for each game.
+
+A good next step would be to…
++ Consider if the Flux architecture was absolutely necessary. During the presentation, it was mentioned that the unidirectional data flow was the main motivation to use Flux over MVP since group members were unable to come to a conclusion regarding where to place methods in MVP. This was not a convincing reason to abandon MVP, and it was unclear how unidirectional data flow would have solved this dispute. Instead, a better way to motivate Flux would have been to present a case where bi-directional data flow and a lack of source of truth actually caused issues in the app.
++ Use Object-Oriented Programming. Inspection of most classes revealed no abstraction of functionality or encapsulation. For example, in the BusyWorker game, none of the entities were represented using separate classes, and were instead kept as instance variables within one class. If more game objects needed to be added, the only method to do this would be to duplicate all existing code for in-game entities.
++ Remove code duplication. In Busy Worker, many methods such as those responsible for object movement and collision could have been extracted and refactored into better methods. Refer to the previous FishTank assignment for how movement updates could have all been done with just one method. Another instance where code duplication can be reduced is in drawing methods.
++ Note that the above points also apply to other games, too. It appeared that few classes existed outside those classes required by the  Flux architecture. It is unlikely that a clean code implementation could be accomplished with just a couple of classes per game, given the complexity of the project.
++ Refactor classes with SOLID and encapsulation in mind. It appeared each game class was responsible for many functionalities. Separating these classes which are only responsible for one task will adhere to SOLID principles, and make the code more encapsulated in functionality.
++ Consider whether Singleton patterns were necessary. It did not appear that lazy initialization was necessary, and singleton was instead used as a global variable. This will hinder testability in the future.
++ Use more design patterns and software design principles in general.
+
+We hope that you enjoyed working on this project and found it a useful learning experience.
+
+Cheers,
+The CSC207 Instructional Team
+
